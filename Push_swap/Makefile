@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 
-SOURCES = ft_printf.c ft_putchar.c ft_putstr.c  ft_putnbr.c ft_putnbr_base_unsigned.c ft_putpointer.c ft_base_len.c
+SOURCES =
 
 OBJECTS = $(SOURCES:.c=.o)
 
