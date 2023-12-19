@@ -1,0 +1,37 @@
+
+Peusdo Code V1
+
+1: Push 2 numbers to stack B --> Pour avoir un maximum (c puis d)
+2: On calcule cb d'opérations cela prendrait de placer le chiffre dans b
+3: Si a contient 3 elements ou moins --> On s'arrête
+4: On ordonne a 
+5: Push back b dans a 
+    5.1 A chaque push on vérifie que le numéro est à la bonne position sinon on rotate_a jusqu'à ce que la bonne position soit trouvée
+6: S'assurer que le minimum est haut de la pile a
+
+-----------------------------
+
+Peusdo Code V2
+
+if stack_a > 3
+    push node_a to b 2 fois 
+while(a >= 3)
+    push a nodes to b (in desceding order)
+    1: Find target nodes   
+        if (pushed_node has no closest smaller number its target is the max)
+    2: Count_operations / Cost analysis
+        find the "cheapest" node to push --> 
+            x operations to bring node_a on top + x operations to bring node_a_target on top = push_cost
+
+sort stack of 3 nodes
+    make sur max number is on the bottom, if not do sa()
+
+Push back b to a 
+    1: Find target nodes   
+        if (pushed_node has no closest bigger number its target is the min)
+    2: The median 
+        if target node is above the media do ra()
+        else do rra()
+        
+Check that min is on top Rotate if not
+        
