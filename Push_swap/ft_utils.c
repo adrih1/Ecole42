@@ -1,67 +1,67 @@
 #include "push_swap.h"
 
-//Functions to handle errors
-ft_error_syntax(char *argv);
-ft_error_duplicate(t_stack_node *a, int nbr);
-ft_free_errors(t_stack_node *a);
-
-//Stack length
-int ft_stack_len(t_stack_node *stack)
+void    ft_current_index(t_stack_node *stack)
 {
-    
-}
-//Init Stacks
-void    ft_init_stack(t_stack_node **a, char **argv)
-{
-    long    nbr;
-    int     i;
+    int i;
+    int median; 
 
     i = 0;
-    while(argv[i])
-    {
-        if(ft_error_syntax(argv[i]))
-            ft_free_errors(a);
-        nbr = ft_atoi(argv[i]);
-        if(ft_error_duplicate(*a, (int)nbr))
-            ft_free_errors(a);
-        ft_append_node(a, (int)nbr);
-        i++;
-    }
-}
-
-//Append Nodes to Stack 
-void    ft_append_node(t_stack_node **stack, int n)
-{
-    t_stack_node    *node;
-    t_stack_node    *last_node; 
-
     if (!stack)
         return;
-    node = malloc(sizeof(t_stack_node));
-    if (!node)
-        return;
-    node->next = NULL;
-    node->nbr = n;
-    if (!(*stack))
+    median = ft_stack_len(stack) / 2;
+    while(stack)
     {
-        *stack = node;
-        node->prev = NULL;
+        stack->index = i;
+        if (i <= median)
+            stack->above_median = true;
+        else
+            stack->above_median = false;
+        stack = stack->next;
+        ++i;
     }
-    else
-    {
-        last_node = ft_find_last_node(*stack);
-        last_node->next = node;
-        node->prev = last_node;
-    }
-
+    
 }
 
+void    ft_set_target_a(t_stack_node *a, t_stack_node *b)
+{
+    t_stack_node    *current_b;
+    t_stack_node    *target_node;
+    long            best_match_index;
 
-//Find the last node 
-ft_find_last_node(t_stack_node *stack);
+    while(a)
+    {
+        best_match_index = LONG_MIN;
+        current_b = b;
+        while (current_b)
+        {
+            if((current_b->nbr < a->nbr) 
+            && (current_b->nbr > best_match_index))
+            {
+                best_match_index = current_b ->nbr;
+                target_node = current_b;
+            }
+            current_b = current_b->next;
+        }
+        if(best_match_index == LONG_MIN)
+            a->target_node = ft_find_max(b);
+        else
+            a->target_node = target_node;
+        a = a->next;
+    }
+}
 
-//Min and max nodes
-ft_find_max(t_stack_node *a);
+void    ft_cost_analaysis(t_stack_node  *a; t_stack_node *b)
+{
+    int len_a;
+    int len_b;
 
-ft_find_min(t_stack_node *a);
+    len_a = ft_stack_len(a);
+    len_b = ft_stack_len(b);
+    while(a)
+    {
+        a->push_cost = a->index:
+        if(!(a->above_median))
+            a->push_cost = len_a - (a->index);
 
+    }
+}
