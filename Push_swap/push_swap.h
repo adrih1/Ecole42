@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2023/12/19 18:09:58 by adrienhors       ###   ########.fr       */
+/*   Updated: 2023/12/19 18:30:42 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ typedef struct s_stack_node
 //Handle Errors
 
 //Stack initiation
+void    ft_init_stack(t_stack_node **c, char **argv);
 
 //Nodes initiation
+
 
 //Stack utils
 char	**ft_split(char const *s, char c);
