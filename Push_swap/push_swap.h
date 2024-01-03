@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2023/12/20 15:18:20 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/03 13:38:46 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ ft_error_duplicate(t_stack_node *a, int nbr);
 ft_free_errors(t_stack_node *a);
 
 //Stack initiation
-void    ft_init_stack(t_stack_node **a, char **argv)
+void    ft_init_stack(t_stack_node **a, char **argv);
 
 //Nodes Initiation 
-void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b)
+void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b);
 
 //Nodes Append
 void    ft_append_node(t_stack_node **stack, int n);
 
 //Cost Analysis
-void    ft_cost_analaysis(t_stack_node  *a; t_stack_node *b)
+void    ft_cost_analaysis(t_stack_node  *a; t_stack_node *b);
 
 //Find Tools
 int ft_stack_len(t_stack_node *stack);
