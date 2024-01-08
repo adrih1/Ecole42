@@ -80,7 +80,18 @@ void    ft_set_cheapest(t_stack_node *stack)
     cheapest_value = LONG_MAX;
     while(stack)
     {
-        
+        if(stack->push_cost < cheapest_value)
+        {
+            cheapest_value = stack->push_cost;
+            cheapest_node = stack; 
+        }
+        stack = stack->next; 
     }
+    cheapest_node -> cheapest = true; 
 
+}
+
+void    ft_move_a_to_b(t_stack_node **a, t_stack_node **b)
+{
+    t_stack_node *cheapest_node; 
 }

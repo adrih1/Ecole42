@@ -1,7 +1,17 @@
+#include "push_swap.h"
+
 //Stack length
 int ft_stack_len(t_stack_node *stack)
 {
-    
+    int i;
+
+    i = 0;
+    while (*stack -> next)
+    {
+        *stack = *stack -> next; 
+        i++;
+    }
+    return (i);
 }
 
 //Find the last node 
