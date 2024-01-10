@@ -62,7 +62,6 @@ void    ft_move_b_to_a(t_stack_node **a, t_stack_node **b)
     pa(a, b, false);
 }
 
-
 void    ft_min_on_top(t_stack_node **a)
 {
     while((*a) -> nbr != ft_find_min(*a) -> nbr)

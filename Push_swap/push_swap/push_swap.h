@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/10 10:01:08 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/10 10:22:08 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 ---------------------------------------------------------------------------------
 */
 
-// Partie Bonus
 typedef struct s_stack_node
 {
 	int	nbr;
@@ -49,7 +48,7 @@ ft_error_syntax(char *argv);
 ft_error_duplicate(t_stack_node *a, int nbr);
 ft_free_errors(t_stack_node *a);
 
-//Stack initiation
+//Stack Initiation
 void    ft_init_stack(t_stack_node **a, char **argv);
 int		ft_atoi(char *str);
 
@@ -57,6 +56,7 @@ int		ft_atoi(char *str);
 void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b);
 void    ft_current_index(t_stack_node *stack); 
 void    ft_set_target_a(t_stack_node *a, t_stack_node *b); 
+void    ft_set_target_b(t_stack_node *a, t_stack_node *b); 
 void    ft_cost_analaysis(t_stack_node  *a, t_stack_node *b);
 void    ft_set_cheapest(t_stack_node *stack); 
 
@@ -71,7 +71,7 @@ int ft_stack_len(t_stack_node *stack);
 ft_find_last_node(t_stack_node *stack);
 ft_find_max(t_stack_node *a);
 ft_find_min(t_stack_node *a);
-ft_get_cheapest(t_stack_node *a); // A coder 
+ft_get_cheapest(t_stack_node *a);
 
 //Stack utils
 char	**ft_split(char const *s, char c);
