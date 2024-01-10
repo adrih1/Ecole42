@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/10 11:03:56 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/10 11:32:53 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ typedef struct s_stack_node
 	struct s_stack_node	*next;
 	struct s_stack_node	*prev;
 } t_stack_node;
+
+//Commands
+//Push
+void	push(t_stack_node **dst, t_stack_node **src);
+void	pa(t_stack_node **a, t_stack_node **b, bool print);
+void	pb(t_stack_node **b, t_stack_node **a, bool print);
+//Rotate
+static void	rotate(t_stack_node **stack);
+void	ra(t_stack_node **a, bool print);
+void	rb(t_stack_node **b, bool print);
+void	rr(t_stack_node **a, t_stack_node **b, bool print);
 
 //Handle Errors
 int 	ft_error_syntax(char *argv);

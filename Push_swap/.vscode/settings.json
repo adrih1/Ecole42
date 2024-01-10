@@ -2,7 +2,8 @@
     "files.associations": {
         "push_swap.h": "c",
         "stdio.h": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "stdbool.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

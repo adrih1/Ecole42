@@ -1,6 +1,6 @@
 #include "../push_swap/push_swap.h"
 
-static void	push(t_stack_node **dst, t_stack_node **src) //Define a function that pushes a top node, from one stack to another's top node
+void	push(t_stack_node **dst, t_stack_node **src) //Define a function that pushes a top node, from one stack to another's top node
 {
 	t_stack_node	*push_node; //Used to store the pointer to the node to be pushed
 
