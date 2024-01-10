@@ -29,6 +29,13 @@ void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b)
     ft_cost_analaysis(a, b);
     ft_set_cheapest(a);
 }
+//Init Nodes
+void    ft_init_nodes_b(t_stack_node *a, t_stack_node *b)
+{
+    ft_current_index(a);
+    ft_current_index(b);
+    ft_set_target_a(a, b);
+}
 
 //Append Nodes to Stack 
 void    ft_append_node(t_stack_node **stack, int n)

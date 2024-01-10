@@ -26,7 +26,7 @@ void    ft_sort_three(t_stack_node **a)
         sa(a, false);
 }
 
-void    ft_sort_stacks(t_struct_node **a, t_stack_node **b)
+void    ft_sort_stacks(t_stack_node **a, t_stack_node **b)
 {
     int len_a;
 
@@ -40,4 +40,13 @@ void    ft_sort_stacks(t_struct_node **a, t_stack_node **b)
         ft_init_nodes_a(*a, *b);
         ft_move_a_to_b(a, b);
     }
+    ft_sort_three(a);
+    while (*b)
+    {
+        ft_init_nodes_b(*a, *b);
+        ft_move_b_to_a(a, b);
+    }
+    ft_current_index(*a);
+    ft_min_on_top(a);
+
 }

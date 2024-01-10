@@ -1,54 +1,5 @@
 #include "push_swap.h"
 
-void    ft_current_index(t_stack_node *stack)
-{
-    int i;
-    int median; 
-
-    i = 0;
-    if (!stack)
-        return;
-    median = ft_stack_len(stack) / 2;
-    while(stack)
-    {
-        stack->index = i;
-        if (i <= median)
-            stack->above_median = true;
-        else
-            stack->above_median = false;
-        stack = stack->next;
-        ++i;
-    }
-    
-}
-
-void    ft_set_target_a(t_stack_node *a, t_stack_node *b)
-{
-    t_stack_node    *current_b;
-    t_stack_node    *target_node;
-    long            best_match_index;
-
-    while(a)
-    {
-        best_match_index = LONG_MIN;
-        current_b = b;
-        while (current_b)
-        {
-            if((current_b->nbr < a->nbr) 
-            && (current_b->nbr > best_match_index))
-            {
-                best_match_index = current_b ->nbr;
-                target_node = current_b;
-            }
-            current_b = current_b->next;
-        }
-        if(best_match_index == LONG_MIN)
-            a->target_node = ft_find_max(b);
-        else
-            a->target_node = target_node;
-        a = a->next;
-    }
-}
 
 void    ft_cost_analaysis(t_stack_node  *a, t_stack_node *b)
 {
@@ -83,7 +34,7 @@ void    ft_set_cheapest(t_stack_node *stack)
         if(stack->push_cost < cheapest_value)
         {
             cheapest_value = stack->push_cost;
-            cheapest_node = stack; 
+            cheapest_node = stack;
         }
         stack = stack->next; 
     }
@@ -94,4 +45,31 @@ void    ft_set_cheapest(t_stack_node *stack)
 void    ft_move_a_to_b(t_stack_node **a, t_stack_node **b)
 {
     t_stack_node *cheapest_node; 
+
+    cheapest_node = ft_get_cheapest(*a);
+    if(cheapest_node -> above_median && cheapest_node -> target_node -> above_median)
+        ft_rotate_both(a, b, cheapest_node);
+    else if (!(cheapest_node -> above_median) && !(cheapest_node -> target_node -> above_median))
+        ft_rev_rotate_both(a, b, cheapest_node);
+    ft_prep_for_push(a, cheapest_node, 'a');
+    ft_prep_for_push(b, cheapest_node->target_node, 'b');
+    pb(b, a, false);
+}
+
+void    ft_move_b_to_a(t_stack_node **a, t_stack_node **b)
+{
+    ft_prep_for_push(a, (*b) -> target_node, 'a');
+    pa(a, b, false);
+}
+
+
+void    ft_min_on_top(t_stack_node **a)
+{
+    while((*a) -> nbr != ft_find_min(*a) -> nbr)
+    {
+        if(ft_find_min(*a) -> above_median)
+            ra(a, false);
+        else
+            rra(a, false);
+    }
 }

@@ -18,6 +18,14 @@ int ft_stack_len(t_stack_node *stack)
 ft_find_last_node(t_stack_node *stack);
 
 //Min and max nodes
-ft_find_max(t_stack_node *a);
+ft_find_max(t_stack_node *b)
+{
 
-ft_find_min(t_stack_node *a);
+}
+
+ft_find_min(t_stack_node *a)
+{
+
+}
+
+ft_get_cheapest(); 
