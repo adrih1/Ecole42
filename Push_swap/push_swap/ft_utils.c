@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 void    ft_cost_analaysis(t_stack_node  *a, t_stack_node *b)
 {
     int len_a;

@@ -12,7 +12,7 @@ void    ft_init_stack(t_stack_node **a, char **argv)
         if(ft_error_syntax(argv[i]))
             ft_free_errors(a);
         nbr = ft_atoi(argv[i]);
-        if (n > INT_MAX || n < INT_MIN)
+        if (nbr > INT_MAX || nbr < INT_MIN)
             ft_free_errors(a);
         if(ft_error_duplicate(*a, (int)nbr))
             ft_free_errors(a);

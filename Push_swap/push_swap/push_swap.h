@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/10 10:22:08 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/10 11:03:56 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct s_stack_node
 } t_stack_node;
 
 //Handle Errors
-ft_error_syntax(char *argv);
-ft_error_duplicate(t_stack_node *a, int nbr);
-ft_free_errors(t_stack_node *a);
+int 	ft_error_syntax(char *argv);
+int		ft_error_duplicate(t_stack_node *a, int n);
+void	ft_free_errors(t_stack_node **a);
 
 //Stack Initiation
 void    ft_init_stack(t_stack_node **a, char **argv);
@@ -68,10 +68,10 @@ void    ft_cost_analaysis(t_stack_node  *a, t_stack_node *b);
 
 //Find Tools
 int ft_stack_len(t_stack_node *stack);
-ft_find_last_node(t_stack_node *stack);
-ft_find_max(t_stack_node *a);
-ft_find_min(t_stack_node *a);
-ft_get_cheapest(t_stack_node *a);
+t_stack_node    ft_find_last_node(t_stack_node *stack);
+t_stack_node	*ft_find_max(t_stack_node *stack);
+t_stack_node	*ft_find_min(t_stack_node *stack);
+t_stack_node    ft_get_cheapest(t_stack_node *stack);
 
 //Stack utils
 char	**ft_split(char const *s, char c);
