@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../header/push_swap.h"
 
 static char	*ft_cpy_words(const char *str, char c)
 {

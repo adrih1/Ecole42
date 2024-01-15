@@ -1,4 +1,4 @@
-#include "../push_swap/push_swap.h"
+#include "../header/push_swap.h"
 
 static void	rotate(t_stack_node **stack) //Define a function that rotates the stack's top node to the bottom of the stack
 {
@@ -18,14 +18,14 @@ void	ra(t_stack_node **a, bool print) //Rotate the top `a` node to the bottom of
 {
 	rotate(a);
 	if (!print)
-		ft_printf("ra\n");
+		write(1, "ra\n", 3);
 }
 
 void	rb(t_stack_node **b, bool print) //Rotate the top `b` node to the bottom of the stack, and print the instruction
 {
 	rotate(b);
 	if (!print)
-		ft_printf("rb\n");
+		write(1, "rb\n", 3);
 }
 
 void	rr(t_stack_node **a, t_stack_node **b, bool print) //Stimultaneously rotate both the top `a` and `b` nodes to the bottom of the stack, and print the instruction
@@ -33,5 +33,5 @@ void	rr(t_stack_node **a, t_stack_node **b, bool print) //Stimultaneously rotate
 	rotate(a);
 	rotate(b);
 	if (!print)
-		ft_printf("rr\n");
+		write(1, "rr\n", 3);
 }

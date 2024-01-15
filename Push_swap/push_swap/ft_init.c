@@ -1,6 +1,6 @@
-#include "push_swap.h"
+#include "../header/push_swap.h"
 
-//Init Stacks
+//Init Stack
 void    ft_init_stack(t_stack_node **a, char **argv)
 {
     long    nbr;
@@ -19,22 +19,6 @@ void    ft_init_stack(t_stack_node **a, char **argv)
         ft_append_node(a, (int)nbr);
         i++;
     }
-}
-//Init Nodes
-void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b)
-{
-    ft_current_index(a);
-    ft_current_index(b);
-    ft_set_target_a(a, b);
-    ft_cost_analaysis(a, b);
-    ft_set_cheapest(a);
-}
-//Init Nodes
-void    ft_init_nodes_b(t_stack_node *a, t_stack_node *b)
-{
-    ft_current_index(a);
-    ft_current_index(b);
-    ft_set_target_a(a, b);
 }
 
 //Append Nodes to Stack 
@@ -61,5 +45,23 @@ void    ft_append_node(t_stack_node **stack, int n)
         last_node->next = node;
         node->prev = last_node;
     }
-
 }
+
+
+//Init Nodes A 
+void    ft_init_nodes_a(t_stack_node *a, t_stack_node *b)
+{
+    ft_current_index(a);
+    ft_current_index(b);
+    ft_set_target_a(a, b);
+    ft_cost_analysis(a, b);
+    ft_set_cheapest(a);
+}
+//Init Nodes B
+void    ft_init_nodes_b(t_stack_node *a, t_stack_node *b)
+{
+    ft_current_index(a);
+    ft_current_index(b);
+    ft_set_target_a(a, b);
+}
+

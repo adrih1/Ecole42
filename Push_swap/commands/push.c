@@ -1,4 +1,4 @@
-#include "../push_swap/push_swap.h"
+#include "../header/push_swap.h"
 
 void	push(t_stack_node **dst, t_stack_node **src) //Define a function that pushes a top node, from one stack to another's top node
 {
@@ -28,12 +28,12 @@ void	pa(t_stack_node **a, t_stack_node **b, bool print) //Push on top of `b`, th
 {
 	push(a, b); 
 	if (!print) 
-		ft_printf("pa\n");
+		write(1, "pa\n", 3);
 }
 
 void	pb(t_stack_node **b, t_stack_node **a, bool print) //Push on top of `a`, the top `b` and print the instruction
 {
 	push(b, a);
 	if (!print)
-		ft_printf("pb\n");
+		write(1, "pb\n", 3);
 }

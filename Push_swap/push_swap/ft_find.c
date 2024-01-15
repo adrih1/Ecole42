@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../header/push_swap.h"
 
 //Stack Length
 int ft_stack_len(t_stack_node *stack)
@@ -17,7 +17,7 @@ int ft_stack_len(t_stack_node *stack)
 }
 
 //Find the last node 
-t_stack_node    ft_find_last_node(t_stack_node *stack)
+t_stack_node    *ft_find_last_node(t_stack_node *stack)
 {
     if(!stack)
         return (NULL);
@@ -25,6 +25,7 @@ t_stack_node    ft_find_last_node(t_stack_node *stack)
         stack = stack -> next;
     return(stack);
 }
+
 
 //Min and Max Nodes
 t_stack_node	*ft_find_max(t_stack_node *stack)
@@ -71,10 +72,8 @@ t_stack_node	*ft_find_min(t_stack_node *stack)
 
 
 //Cheapest Node
-t_stack_node    ft_get_cheapest(t_stack_node *stack)
+t_stack_node    *ft_get_cheapest(t_stack_node *stack)
 {
-    t_stack_node    *cheapest_node; 
-
     if(!stack)
         return(NULL);
     while(stack)

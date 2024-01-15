@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../header/push_swap.h"
 
 //Functions to handle errors
 int ft_error_syntax(char *argv)
@@ -27,10 +27,29 @@ int	ft_error_duplicate(t_stack_node *a, int n)
 	return (0);
 }
 
+void	ft_free_stack(t_stack_node **stack)
+{
+	t_stack_node	*tmp;
+	t_stack_node	*current;
+
+	if (!stack)
+		return ;
+	current = *stack;
+	while (current)
+	{
+		tmp = current->next;
+		current->nbr = 0;
+		free(current);
+		current = tmp;
+	}
+	*stack = NULL;
+}
+
 void	ft_free_errors(t_stack_node **a)
 {
-	free_stack(a);
-	ft_printf("Error\n");
+	ft_free_stack(a);
+	// ft_printf("Error\n");
+	write(1, "Error\n", 6);
 	exit(1);
 }
 

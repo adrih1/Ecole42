@@ -1,4 +1,18 @@
-#include "push_swap.h"
+#include "../header/push_swap.h"
+#include <stdio.h>
+
+void printStackNodes(t_stack_node *head) {
+    t_stack_node *current = head;
+
+    // Parcours de la liste chaînée
+    while (current != NULL) {
+        // Imprimer les informations du nœud actuel
+        printf("%d\n", current->nbr);
+
+        // Passer au nœud suivant dans la liste
+        current = current->next;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -8,7 +22,7 @@ int main(int argc, char **argv)
     a = NULL;
     b = NULL;
 
-    if(argc == 1 || argc == 2 && !argv[1][0])
+    if(argc == 1 || (argc == 2 && !argv[1][0]))
         return (1);
     else if (argc == 2)
         argv = ft_split(argv[1], ' ');
@@ -22,6 +36,7 @@ int main(int argc, char **argv)
         else
             ft_sort_stacks(&a, &b);
     }
+    printStackNodes(a);
     ft_free_stack(&a);
     return (0);
 }
