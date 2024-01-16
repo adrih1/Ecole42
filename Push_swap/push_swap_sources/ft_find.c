@@ -1,86 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_find.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 14:17:44 by ahors             #+#    #+#             */
+/*   Updated: 2024/01/16 14:18:07 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/push_swap.h"
 
-//Stack Length
-int ft_stack_len(t_stack_node *stack)
+// Stack Length
+int	ft_stack_len(t_stack_node *stack)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!stack) 
+	i = 0;
+	if (!stack)
 		return (0);
-    while (stack)
-    {
-        stack = stack -> next;
-        i++;
-    }
-    return (i);
+	while (stack)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }
 
-//Find the last node 
-t_stack_node    *ft_find_last_node(t_stack_node *stack)
+// Find the last node
+t_stack_node	*ft_find_last_node(t_stack_node *stack)
 {
-    if(!stack)
-        return (NULL);
-    while (stack -> next)
-        stack = stack -> next;
-    return(stack);
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
 }
 
-
-//Min and Max Nodes
+// Min and Max Nodes
 t_stack_node	*ft_find_max(t_stack_node *stack)
 {
-    long    max;
-    t_stack_node    *max_node;
+	long			max;
+	t_stack_node	*max_node;
 
-    if(!stack)
-        return (NULL);
-    max = LONG_MIN;
-    while(stack)
-    {
-        if(stack->nbr > max)
-        {
-            max = stack->nbr;
-            max_node = stack;
-        }
-        stack = stack->next;
-    }
-    return(max_node);
-
+	if (!stack)
+		return (NULL);
+	max = LONG_MIN;
+	while (stack)
+	{
+		if (stack->nbr > max)
+		{
+			max = stack->nbr;
+			max_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (max_node);
 }
 
 t_stack_node	*ft_find_min(t_stack_node *stack)
 {
-    long    min;
-    t_stack_node    *min_node;
+	long			min;
+	t_stack_node	*min_node;
 
-    if(!stack)
-        return (NULL);
-    min = LONG_MAX;
-    while(stack)
-    {
-        if(stack->nbr < min)
-        {
-            min = stack->nbr;
-            min_node = stack;
-        }
-        stack = stack->next;
-    }
-    return(min_node);
-
+	if (!stack)
+		return (NULL);
+	min = LONG_MAX;
+	while (stack)
+	{
+		if (stack->nbr < min)
+		{
+			min = stack->nbr;
+			min_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (min_node);
 }
 
-
-//Cheapest Node
-t_stack_node    *ft_get_cheapest(t_stack_node *stack)
+// Cheapest Node
+t_stack_node	*ft_get_cheapest(t_stack_node *stack)
 {
-    if(!stack)
-        return(NULL);
-    while(stack)
-    {
-        if(stack -> cheapest)
-            return(stack);
-        stack = stack -> next; 
-    }
-    return (NULL);
+	if (!stack)
+		return (NULL);
+	while (stack)
+	{
+		if (stack->cheapest)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
 }
