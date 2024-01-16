@@ -19,8 +19,10 @@ SRCS = 	commands/push.c \
 		push_swap_sources/ft_utils.c \
 		push_swap_sources/push_swap.c \
 
+SRCS_BONUS= bonus/
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = 
 
 all: $(NAME)
 
@@ -30,6 +32,9 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(OBJS) $(OBJS_BONUS)
+	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
+
 clean:
 	$(RM) $(OBJS)
 
@@ -38,4 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

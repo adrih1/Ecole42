@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:17:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:17:38 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/16 18:39:43 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 // Functions to handle errors
 int	ft_error_syntax(char *argv)
 {
+	// int i = 0;
+
+	// if argv[i] == + ou -
+	// i++
+	// if qartgv == 0 
+	// 	return (0);
+	// while (argv[i])
+	// 	if !is digit (argv[]i)
+	// 		return(0);
+	// 	i++;
+	// return 1
+
 	if (!(*argv == '+' || *argv == '-' || (*argv >= '0' && *argv <= '9')))
 		return (1);
 	if ((*argv == '+' || *argv == '-') && !(argv[1] >= '0' && argv[1] <= '9'))
