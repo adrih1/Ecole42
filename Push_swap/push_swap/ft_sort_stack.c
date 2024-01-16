@@ -16,7 +16,7 @@ void    ft_move_a_to_b(t_stack_node **a, t_stack_node **b)
 
 void    ft_move_b_to_a(t_stack_node **a, t_stack_node **b)
 {
-    ft_prep_for_push(a, (*b) -> target_node, 'a');
+    ft_prep_for_push(a, (*b)->target_node, 'a');
     pa(a, b, false);
 }
 
@@ -24,7 +24,7 @@ void    ft_min_on_top(t_stack_node **a)
 {
     while((*a) -> nbr != ft_find_min(*a) -> nbr)
     {
-        if(ft_find_min(*a) -> above_median)
+        if(ft_find_min(*a)->above_median)
             ra(a, false);
         else
             rra(a, false);

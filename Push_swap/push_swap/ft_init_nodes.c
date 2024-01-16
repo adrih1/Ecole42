@@ -34,8 +34,7 @@ void    ft_set_target_a(t_stack_node *a, t_stack_node *b)
         current_b = b;
         while (current_b)
         {
-            if((current_b->nbr < a->nbr) 
-            && (current_b->nbr > best_match_index))
+            if((current_b->nbr < a->nbr) && (current_b->nbr > best_match_index))
             {
                 best_match_index = current_b ->nbr;
                 target_node = current_b;
@@ -62,7 +61,7 @@ void    ft_set_target_b(t_stack_node *a, t_stack_node *b)
         current_a = a;
         while (current_a)
         {
-            if((current_a->nbr < a->nbr) && (current_a->nbr > best_match_index))
+            if (current_a->nbr > b->nbr  && current_a->nbr < best_match_index) 
             {
                 best_match_index = current_a ->nbr;
                 target_node = current_a;
