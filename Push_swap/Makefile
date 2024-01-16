@@ -1,27 +1,40 @@
 NAME = push_swap
-
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
+CC = gcc -g
 RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-SOURCES =
+SRCS = 	commands/push.c \
+		commands/rev_rotate.c \
+		commands/rotate.c \
+		commands/swap.c \
+       	push_swap/ft_atoi.c \
+		push_swap/ft_errors.c \
+		push_swap/ft_find.c \
+		push_swap/ft_init_nodes.c \
+		push_swap/ft_init.c \
+		push_swap/ft_rotate_rules.c \
+		push_swap/ft_sort_stacks.c \
+		push_swap/ft_sort_three.c \
+		push_swap/ft_split.c \
+		push_swap/ft_utils.c \
+		push_swap/push_swap.c \
 
-OBJECTS = $(SOURCES:.c=.o)
+
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-$(NAME): $(OBJECTS)
-		$(AR) $@ $^
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) ft_*.o
+	$(RM) $(OBJS)
 
-fclean: clean 
-	$(RM) $(NAME)		
+fclean: clean
+	$(RM) $(NAME)
 
 re: fclean all
 
