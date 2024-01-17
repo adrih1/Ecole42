@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/17 09:27:27 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/17 10:42:58 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void					ft_free_stack(t_stack_node **stack);
 // Stack Initiation
 void					ft_init_stack(t_stack_node **a, char **argv);
 void					ft_append_node(t_stack_node **stack, int n);
-int						ft_atoi(char *str);
+long 					ft_atol(char *str);
 
 // Nodes Initiation
 void					ft_init_nodes_a(t_stack_node *a, t_stack_node *b);

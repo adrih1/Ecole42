@@ -7,7 +7,7 @@ SRCS = 	commands/push.c \
 		commands/rev_rotate.c \
 		commands/rotate.c \
 		commands/swap.c \
-       	push_swap_sources/ft_atoi.c \
+       	push_swap_sources/ft_atol.c \
 		push_swap_sources/ft_errors.c \
 		push_swap_sources/ft_find.c \
 		push_swap_sources/ft_init_nodes.c \
