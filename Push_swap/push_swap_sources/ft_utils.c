@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:25:48 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/17 09:27:19 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		new_string[i++] = s[start++];
 	new_string[i] = '\0';
 	return (new_string);
+}
+
+
+void ft_free_argv(char **argv) {
+    if (argv == NULL) {
+        return;
+    }
+    int i = 0;
+    while (argv[i] != NULL) {
+        free(argv[i]);
+        i++;
+    }
+    free(argv);
 }

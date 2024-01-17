@@ -1,6 +1,0 @@
-Appeller get_next_line sur fd = 0 9lire ce qu'om ecrit dans le terminal 
-Operer les actions sur la stack 
-Puis lancer mon stack sorted a la fin 
-    If true cela a fonctionner
-
-
