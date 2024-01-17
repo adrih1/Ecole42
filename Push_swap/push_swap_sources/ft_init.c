@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:18:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/17 10:27:54 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/17 17:40:15 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_init_stack(t_stack_node **a, char **argv)
 	{
 		if (ft_error_syntax(argv[i]))
 			ft_free_errors(a);
-		nbr = ft_atoi(argv[i]);
+		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 			ft_free_errors(a);
 		if (ft_error_duplicate(*a, (int)nbr))

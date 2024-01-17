@@ -6,92 +6,84 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:26 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/17 09:57:43 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/17 18:02:09 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
 
-static char	*ft_cpy_words(const char *str, char c)
+static int	ft_count_words(char *string, char delimeter)
 {
-	size_t	count;
-	char	*ptr;
-	size_t	i;
-	size_t	j;
+	int		count;
+	bool	inside_word;
 
-	i = 0;
-	j = 0;
 	count = 0;
-	if (!str)
-		return (NULL);
-	while (str[i] && str[i] == c)
+	while (*string)
 	{
-		i++;
-		j++;
-	}
-	while (str[j] && str[j] != c)
-	{
-		count++;
-		j++;
-	}
-	ptr = ft_substr(str, i, count);
-	return (ptr);
-}
-
-static int	ft_count_word(const char *str, char c)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i] == c && str[i])
-		i++;
-	while (str[i])
-	{
-		if ((str[i] == c && str[i + 1] != c) || (str[i + 1] == '\0'))
-			count++;
-		i++;
+		inside_word = false;
+		while (*string == delimeter)
+			++string;
+		while (*string != delimeter && *string)
+		{
+			if (!inside_word)
+			{
+				++count;
+				inside_word = true;
+			}
+			++s;
+		}
 	}
 	return (count);
 }
 
-static void	ft_free(char **s)
+static char	*ft_get_next_word(char *s, char delimeter)
 {
-	size_t	i;
+	static int	cursor;
+	char		*next_word;
+	int			len;
+	int			i;
 
+	len = 0;
 	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
+	cursor = 0;
+	while (s[cursor] == delimeter)
+		++cursor;
+	while ((s[cursor + len] != delimeter) && s[cursor + len])
+		++len;
+	next_word = malloc((size_t)len * sizeof(char) + 1);
+	if (!next_word)
+		return (NULL);
+	while ((s[cursor] != delimeter) && s[cursor]) 
+		next_word[i++] = s[cursor++];
+	next_word[i] = '\0';
+	return (next_word);
 }
 
-char	**ft_split(char const *s, char c)
+char **ft_split(char *string, char delimeter)
 {
-	char	**ptrs;
-	size_t	i;
+	int		words_count;
+	char	**result_array;
+	int		i;
 
 	i = 0;
-	if (!s)
+	words_count = ft_count_words(string, delimeter);
+	if (!words_count)
+		exit(1);
+	result_array = malloc(sizeof(char *) * (size_t)(words_count + 2)); //Allocate memory for the result_array based on the number of words (words_count) plus two additional slots to account for the null terminator at the end of the last string, and to null terminate the entire array
+	if (!result_array) //Check for unsuccessful memory allocation
 		return (NULL);
-	ptrs = malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
-	if (!ptrs)
-		return (NULL);
-	while (*s)
+	while (words_count-- >= 0) //Iterates through the words to be split all words have been processed
 	{
-		if ((*s != c || *s == '\0'))
+		if (i == 0) //Check if the first character of the input string is the delimiter
 		{
-			ptrs[i] = ft_cpy_words(s, c);
-			if (ptrs[i] == NULL)
-				ft_free(ptrs);
-			s = s + ft_strlen(ptrs[i] + 1);
-			i++;
+			result_array[i] = malloc(sizeof(char)); //Allocate memory for an empty string (a single null terminator)
+			if (!result_array[i]) ////Check for unsuccessful memory allocation
+				return (NULL);
+			result_array[i++][0] = '\0'; //Include in the result array as distinct elements
+			continue ;
 		}
-		s++;
+		result_array[i++] = ft_get_next_word(string, delimeter); //If the first character of the string is not a delimeter, extract the substring and copy it into the result array
 	}
-	ptrs[i] = NULL;
-	return (ptrs);
+	result_array[i] = NULL; //Properly null terminate the array
+	return (result_array);
 }
