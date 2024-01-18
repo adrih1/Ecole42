@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/18 15:28:06 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 15:44:19 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../get_next_line/get_next_line.h"
 
 /*
 ---------------------------------------------------------------------------------
@@ -110,7 +109,4 @@ char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
 void 					ft_free_argv(char **argv);
 
-
-//Bonus
-void	ft_check(t_stack_node **stack_a, t_stack_node **stack_b, char *line);
 #endif
