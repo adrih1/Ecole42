@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/17 17:41:10 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/18 09:25:38 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_stack_node			*ft_find_max(t_stack_node *stack);
 t_stack_node			*ft_find_min(t_stack_node *stack);
 
 // Stack utils
-char					**ft_split(char *s, char c);
+char 					**ft_split(char *s, char c) ;
 bool					ft_stack_sorted(t_stack_node *stack);
 int						ft_stack_len(t_stack_node *stack);
 

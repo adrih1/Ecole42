@@ -6,11 +6,12 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:18:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/17 17:40:15 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/18 09:23:54 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
+
 
 // Init Stack
 void	ft_init_stack(t_stack_node **a, char **argv)
@@ -76,3 +77,5 @@ void	ft_init_nodes_b(t_stack_node *a, t_stack_node *b)
 	ft_current_index(b);
 	ft_set_target_b(a, b);
 }
+
+
