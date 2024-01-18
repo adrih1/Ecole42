@@ -1,49 +1,39 @@
-NAME = checker
-NAME2 = push_swap
-CC = gcc -g
-RM = rm -f
+
+NAME = push_swap
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
+SRC_DIR = srcs
+SRC = $(shell find $(SRC_DIR) -name '*.c')
+OBJ = $(SRC:.c=.o)
 
-PUSHSWAPFD = push_swap/
-CHECKERFD = checker/
-COMMONFD = common/
 
-SRCSFD = srcs/
+# NAMEBONUS= checker
+# SRC_BONUS_DIR = srcs_bonus
+# SRC_BONUS = $(shell find $(SRC_BONUS_DIR) -name '*.c')
+# OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-SRCS = 	commands/push.c \
-		commands/rev_rotate.c \
-		commands/rotate.c \
-		commands/swap.c \
-       	push_swap_sources/ft_atol.c \
-		push_swap_sources/ft_errors.c \
-		push_swap_sources/ft_find.c \
-		push_swap_sources/ft_init_nodes.c \
-		push_swap_sources/ft_init.c \
-		push_swap_sources/ft_rotate_rules.c \
-		push_swap_sources/ft_sort_stacks.c \
-		push_swap_sources/ft_sort_three.c \
-		push_swap_sources/ft_split.c \
-		push_swap_sources/ft_utils.c \
-		push_swap_sources/push_swap.c \
+RM = rm -f
 
-SRC_CHECKER = checker/checker.c
 
-OBJS = $(SRCS:.c=.o)
-OBJS_CHECKER = $(SRC_CHECKER:.c=.o)
+all: $(NAME) $(NAMEBONUS)
 
-all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+
+
+
+bonus:$(OBJ_BONUS)
+	$(CC) $(CFLAGS) -o $(NAMEBONUS) $(OBJ_BONUS)
+
+
+# $(NAMEBONUS): bonus
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJS) $(OBJS_BONUS)
-	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
-
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	$(RM) $(NAME)

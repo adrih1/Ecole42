@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:36:24 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:36:37 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:57:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 static void	swap(t_stack_node **head)
 {

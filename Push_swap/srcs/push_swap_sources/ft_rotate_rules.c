@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:41 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:19:47 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:56:30 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 void	ft_rotate_both(t_stack_node **a, t_stack_node **b,
 		t_stack_node *cheapest_node)

@@ -1,6 +1,0 @@
-
-
-Appeller push_swap
-Get_next_line sur les instructions affichées
-Executer ces instructions sur la pile 
-Lorsqu'il n'y a plus d'instructions --> Stack sorted ? 

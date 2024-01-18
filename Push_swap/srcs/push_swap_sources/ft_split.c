@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:26 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/18 09:28:43 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/01/18 14:56:46 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
+
+
+static void	ft_free_split(char **s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+}
 
 
 static int	count_words(char *s, char delimiter) 
@@ -70,8 +84,12 @@ char **ft_split(char *s, char delimiter)
 	if (!words_count) 
 		exit(1);
 	result_array = malloc(sizeof(char *) * (size_t)(words_count + 2)); 
-	if (!result_array) 
+	if (!result_array)
+	{
+		ft_free_split(result_array);
 		return (NULL);
+	} 
+		
 	while (words_count-- >= 0) 
 	{
 		if (i == 0) 

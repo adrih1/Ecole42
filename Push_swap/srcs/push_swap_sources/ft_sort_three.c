@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:20:49 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:21:37 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:56:42 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 void	ft_sort_three(t_stack_node **a)
 {

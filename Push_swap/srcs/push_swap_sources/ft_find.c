@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:17:44 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:18:07 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:56:17 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 // Stack Length
 int	ft_stack_len(t_stack_node *stack)

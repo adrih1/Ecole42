@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:33:33 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 14:33:42 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:57:22 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 static void	rev_rotate(t_stack_node **stack)
 {

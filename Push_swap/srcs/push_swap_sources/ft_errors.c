@@ -6,11 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:17:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/16 18:39:43 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:55:52 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
+#include "../../header/push_swap.h"
 
 // Functions to handle errors
 int	ft_error_syntax(char *argv)
