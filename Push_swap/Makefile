@@ -1,7 +1,14 @@
-NAME = push_swap
+NAME = checker
+NAME2 = push_swap
 CC = gcc -g
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
+
+PUSHSWAPFD = push_swap/
+CHECKERFD = checker/
+COMMONFD = common/
+
+SRCSFD = srcs/
 
 SRCS = 	commands/push.c \
 		commands/rev_rotate.c \
@@ -19,10 +26,10 @@ SRCS = 	commands/push.c \
 		push_swap_sources/ft_utils.c \
 		push_swap_sources/push_swap.c \
 
-SRCS_BONUS= bonus/
+SRC_CHECKER = checker/checker.c
 
 OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = 
+OBJS_CHECKER = $(SRC_CHECKER:.c=.o)
 
 all: $(NAME)
 
