@@ -1,3 +1,4 @@
-*.o
+srcs/commands/*.o
+srcs/push_swap_sources/*.o
 checker_Mac
 checker_linux
