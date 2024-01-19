@@ -7,8 +7,9 @@
 */
 
 
-#include <stdlib.h>
 #include "mlx/mlx.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /*
 ---------------------------------------------------------------------------------
@@ -17,7 +18,11 @@
 */
 
 
-
+typedef struct s_data
+{
+	void *mlx_ptr;
+	void *win_ptr;
+} t_data;
 
 
 #endif
