@@ -1,0 +1,14 @@
+
+Récupère un fichier .ber --> contient la map du jeu 
+
+Parser la carte 
+    Vérifier qu'elle contient 
+        1 sortie (E)
+        1 position de départ (P)
+        Au moins 1 item (C)
+    Vérifier qu'elle soit de forme rectangulaire
+    Vérifier qu'elle est fermée par des murs (valeur 1) sinon return une erreur.
+    Vous devez vérifier s’il existe un chemin valide (i.e. qu’il est possible d’emprunter) dans la carte.
+
+Si une erreur de configuration est détectée, le programme doit quitter proprement et retourner "Error\n"
+suivi d’un message d’erreur explicite de votre choix
