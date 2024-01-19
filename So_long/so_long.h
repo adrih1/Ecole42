@@ -10,10 +10,9 @@
 #include "mlx/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 /*
 ---------------------------------------------------------------------------------
-|                                    FONCTIONS                                  |
+|                                    STRUCTURES                                  |
 ---------------------------------------------------------------------------------
 */
 
@@ -41,6 +40,29 @@ typedef struct s_map_info
     int player_row;
     int player_col;
 } t_map_info;
+
+/*
+---------------------------------------------------------------------------------
+|                                    FONCTIONS                                  |
+---------------------------------------------------------------------------------
+*/
+
+// MAP VALIDATION
+//Free
+void ft_free_map(t_map *map);
+//Walls
+int ft_validate_columns(const t_map *map);
+int ft_validate_rows(const t_map *map);
+int ft_validate_walls(const t_map *map); 
+// Start and Exit
+int ft_check_exit(const char *line);
+int ft_check_start(const char *line);
+
+
+// FONCTIONS INTERFACE
+void    *ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
+int     on_destroy(t_data *data);
+int     on_keypress(int keysym, t_data *data);
 
 
 #endif
