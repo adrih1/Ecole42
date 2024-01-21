@@ -28,24 +28,21 @@ void *ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height)
 int main(void)
 {
     t_data data;
-	int img_width, img_height;
 	void *img_ptr;
-	t_map map;
-    t_map_info map_info;
+	int img_width, img_height;
 
-    if (ft_parse_map("example.ber", &map, &map_info) == 0)
-    {
-        fprintf(stderr, "Error: Failed to parse the map.\n");
-        return 1;
-    }
+	char	*filename = "map.ber";
+	int fd;
 
-    if (ft_validate_map(&map, &map_info) == 0)
-    {
-        fprintf(stderr, "Error: Invalid map.\n");
-        ft_free_map(&map);
-        return 1;
-    }
-
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Probleme pour pour ouvrir le fichier");
+		return (1);
+	}
+    printf("CHECK_MAP : %d\n", ft_check_map(fd, filename));
+	close(fd);
+    
 	// Initialise la connexion avec le serveur graphique
     data.mlx_ptr = mlx_init();
     if (!data.mlx_ptr)

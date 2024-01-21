@@ -1,7 +1,15 @@
 HEADER_DIR = ./mlx/
 MLX_DIR = ./mlx/
 
-SRCS = so_long.c
+SRCS =	so_long.c \
+		ft_map.c \
+		ft_map_dimensions.c \
+		ft_map_walls.c \
+		ft_map_checks.c \
+		ft_utils.c \
+		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c
+	
 OBJS = $(SRCS:.c=.o)
 
 CC = cc

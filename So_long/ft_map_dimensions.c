@@ -1,33 +1,46 @@
 #include "so_long.h"
 
-void    ft_get_map_width(const char *file, t_map *map)
+int ft_check_map_end(const char *line)
 {
-    char    *line; 
+    int i;
 
-    line = get_next_line(file);
-    if (line != NULL)
+    i = 0;
+    while (line[i] != '\0')
     {
-        map->width = ft_strlen(line);
-        free(line);
+        if(line[i] == '\0')
+            return(1);
+        i++;
     }
-    else
-    {
-        free(line);
-    }
+    return(0);
 
 }
 
-void ft_get_map_height(const char *file, t_map *map)
+void    ft_get_map_width(t_map *map)
+{
+    map->width = strlen(map->grid[0]);
+}
+
+void ft_parse_map(t_map *map, int fd, char *filename)
 {
     int count;
     char *line;
+    int i;
 
     count = 0; 
-    while ((line = get_next_line(file)) != NULL)
+    while ((line = get_next_line(fd)) && line[0] != '\0')
     {
         count++;
         free(line);
     }
-
     map->height = count;
+    map->grid = (char **)malloc(map->height * sizeof(char *));
+    ft_close_file(fd);
+    fd = ft_open_file(filename);
+    i = 0;
+    while ((line = get_next_line(fd)) && line[0] != '\0')
+    {
+        map->grid[i] = strdup(line);
+        i++;
+    }
+    close(fd);
 }
