@@ -63,10 +63,11 @@ void ft_free_map(t_map *map);
 int ft_validate_columns(t_map *map);
 int ft_validate_rows(t_map *map);
 int ft_validate_walls(t_map *map); 
-// Start, Exit and Item
+// Start, Exit, Item and Rectangular
 void ft_check_exit(t_map *map, t_map_info *map_info);
 void ft_check_start(t_map *map, t_map_info *map_info);
 void ft_check_items(t_map *map, t_map_info *map_info);
+int     ft_check_rectangular(t_map *map);
 //Dimensions
 void    ft_parse_map(t_map *map, int fd, char *filename);
 void    ft_get_map_width(t_map *map);

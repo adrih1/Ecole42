@@ -17,6 +17,8 @@ int ft_check_map_end(const char *line)
 
 void    ft_get_map_width(t_map *map)
 {
+    if(!map)
+        ft_free_map(map);
     map->width = strlen(map->grid[0]);
 }
 

@@ -16,6 +16,7 @@ suivi d’un message d’erreur explicite de votre choix
 
 
 
+LOGIQUE DU JEU 
 
 
 
