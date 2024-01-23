@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:17:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/18 14:55:52 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/23 11:33:16 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,6 @@
 // Functions to handle errors
 int	ft_error_syntax(char *argv)
 {
-	// int i = 0;
-
-	// if argv[i] == + ou -
-	// i++
-	// if qartgv == 0 
-	// 	return (0);
-	// while (argv[i])
-	// 	if !is digit (argv[]i)
-	// 		return(0);
-	// 	i++;
-	// return 1
-
 	if (!(*argv == '+' || *argv == '-' || (*argv >= '0' && *argv <= '9')))
 		return (1);
 	if ((*argv == '+' || *argv == '-') && !(argv[1] >= '0' && argv[1] <= '9'))
