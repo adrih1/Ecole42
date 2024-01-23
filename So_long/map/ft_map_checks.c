@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../so_long.h"
 
 void ft_check_exit(t_map *map, t_map_info *map_info)
 {
