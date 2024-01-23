@@ -1,10 +1,12 @@
 #include "so_long.h"
 
+int keypress_count = 0;
 
 int on_keypress(int keysym, t_data *data)
 {
 	(void)data;
-	printf("Pressed key: %d\n", keysym);
+    keypress_count++; 
+	printf("Key Press Count: %d\n", keypress_count);
 	return (0);
 }
 
