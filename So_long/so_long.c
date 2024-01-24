@@ -3,7 +3,7 @@
 //Compteur Mouvements
 int keypress_count = 0;
 
-int on_keypress(int keysym, t_data *data)
+int on_keypress(t_data *data)
 {
 	(void)data;
     keypress_count++; 
@@ -32,7 +32,8 @@ int main(void)
 {
     t_data data;
 	void *img_ptr;
-	int img_width, img_height;
+	int img_width = 30;
+    int img_height = 10;
 
 	char	*filename = "map.ber";
 	int fd;
@@ -43,7 +44,7 @@ int main(void)
 		printf("Probleme pour pour ouvrir le fichier");
 		return (1);
 	}
-    printf("CHECK_MAP : %d\n", ft_check_map(fd, filename));
+    ft_check_map(fd, filename);
 
 
 	close(fd);
@@ -60,14 +61,14 @@ int main(void)
         return (1);
     }
 
-    img_ptr = ft_load_image(data.mlx_ptr, "assets/Tiles.xpm", &img_width, &img_height);
+    img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
     if (!img_ptr)
     {
 		on_destroy(&data);
 		return(0);
     }
 
-    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, 100, 100);
+    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, 0, 0);
 
     // Hooks touches appuyées et fermeture de la fenêtre
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, &data);

@@ -1,11 +1,11 @@
 #include "../so_long.h"
 
-void ft_check_exit(t_map *map, t_map_info *map_info)
+void ft_check_exit(t_map *map)
 {
     int i;
     int j;
 
-    if (map == NULL || map_info == NULL)
+    if (map == NULL)
         return;
     i = 0;
     while (i < map->height)
@@ -14,7 +14,7 @@ void ft_check_exit(t_map *map, t_map_info *map_info)
         while (j < map->width)
         {
             if (map->grid[i][j] == 'E')
-                map_info->exit_count++;
+                map->exit_count++;
             j++; 
         }
         i++;
@@ -22,12 +22,12 @@ void ft_check_exit(t_map *map, t_map_info *map_info)
 }
 
 
-void ft_check_start(t_map *map, t_map_info *map_info)
+void ft_check_start(t_map *map)
 {
     int i;
     int j;
 
-    if (map == NULL || map_info == NULL)
+    if (map == NULL)
         return;
     i = 0;
     while (i < map->height)
@@ -36,19 +36,19 @@ void ft_check_start(t_map *map, t_map_info *map_info)
         while (j < map->width)
         {
             if (map->grid[i][j] == 'P')
-                map_info->start_count++;
+                map->start_count++;
             j++; 
         }
         i++;
     }
 }
 
-void ft_check_items(t_map *map, t_map_info *map_info)
+void ft_check_items(t_map *map)
 {
     int i;
     int j;
 
-    if (map == NULL || map_info == NULL)
+    if (map == NULL)
         return;
     i = 0;
     while (i < map->height)
@@ -57,7 +57,7 @@ void ft_check_items(t_map *map, t_map_info *map_info)
         while (j < map->width)
         {
             if (map->grid[i][j] == 'C')
-                map_info->item_count++;
+                map->item_count++;
             j++; 
         }
         i++;

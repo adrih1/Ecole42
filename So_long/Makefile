@@ -13,14 +13,13 @@ SRCS =	so_long.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-RM = rm -f
+RM = rm -rf
 
 CFLAGS = -Wall -Wextra  -I$(HEADER_DIR)
 
 MAKE_MLX = make -C $(MLX_DIR)
 MLX_A = $(MLX_DIR)libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
 NAME = so_long
 
