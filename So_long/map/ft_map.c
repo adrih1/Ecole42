@@ -47,6 +47,7 @@ void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, i
 	img_ptr = ft_load_image(data.mlx_ptr, filename, &img_width, &img_height);
     if (!img_ptr)
     {
+        free(img_ptr);
         printf("Pas d'image\n");
     }
     mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);

@@ -64,15 +64,6 @@ int main(void)
 
     ft_map_generate(map, data);
 
-    // img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
-    // if (!img_ptr)
-    // {
-	// 	on_destroy(&data);
-	// 	return(0);
-    // }
-
-    // mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, 0, 0);
-
     // Hooks touches appuyées et fermeture de la fenêtre
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, &data);
 	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &data);
@@ -80,8 +71,6 @@ int main(void)
     // Boucle pour attendre des événements (fenêtre ouverte)
     mlx_loop(data.mlx_ptr);
 
-	//Libère les ressources
-    // mlx_destroy_image(data.mlx_ptr, img_ptr);
    	on_destroy(&data);
     return (0);
 }
