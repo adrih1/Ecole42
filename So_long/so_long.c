@@ -32,9 +32,7 @@ int main(void)
 {
     t_data data;
     t_map   *map;
-	void *img_ptr;
-	int img_width = 30;
-    int img_height = 10;
+	// void *img_ptr;
 
 	char	*filename = "map.ber";
 	int fd;
@@ -56,7 +54,7 @@ int main(void)
     if (!data.mlx_ptr)
         return (1);
 
-    data.win_ptr = mlx_new_window(data.mlx_ptr, 700, 400, "Mon premier jeu !");
+    data.win_ptr = mlx_new_window(data.mlx_ptr, 1500, 400, "Mon premier jeu !");
     if (!data.win_ptr)
     {
         free(data.mlx_ptr);
@@ -82,7 +80,7 @@ int main(void)
     mlx_loop(data.mlx_ptr);
 
 	//Libère les ressources
-    mlx_destroy_image(data.mlx_ptr, img_ptr);
+    // mlx_destroy_image(data.mlx_ptr, img_ptr);
    	on_destroy(&data);
     return (0);
 }

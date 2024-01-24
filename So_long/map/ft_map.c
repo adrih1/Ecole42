@@ -41,24 +41,24 @@ int ft_check_map(int fd, char *filename, t_map *map)
     return (1);
 }
 
-void	ft_render_texture(t_data *data, char *filename, int img_width, int img_height)
+void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, int img_height, int j, int i)
 {
-	void *img_ptr;
+    void *img_ptr;
 
-	img_ptr = ft_load_image(data->mlx_ptr, filename, &img_width, &img_height);
+	img_ptr = ft_load_image(data.mlx_ptr, filename, &img_width, &img_height);
     if (!img_ptr)
     {
-		on_destroy(&data);
+        printf("Pas d'image\n");
     }
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, 0, 0);
+    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);
 }
 
 void    ft_map_generate(t_map *map, t_data data)
 {
     int i;
     int j;
-    int img_width = 50;
-    int img_height = 50;
+    int img_width=32;
+    int img_height=32;
     void    *img_ptr;
 
     
@@ -69,9 +69,10 @@ void    ft_map_generate(t_map *map, t_data data)
         j = 0;
         while(map->grid[i][j])
         {
-            if(map->grid[i][j] == '0')
+            if(map->grid[i][j] == '0' || map->grid[i][j] == 'E')
             {
-                printf("Empty Space\n");
+                printf("Floor\n");
+                ft_render_texture(map, data, "assets/floor.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == '1')
             {
@@ -80,12 +81,12 @@ void    ft_map_generate(t_map *map, t_data data)
                 {
                     printf("Pas d'image\n");
                 }
-                mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*50, i*50);
+                mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);
             }
             if(map->grid[i][j] == 'C')
             {
-                //Afficher texture Item
                 printf("Collectable\n");
+                ft_render_texture(map, data, "assets/coin-bag.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == 'P')
             {

@@ -72,7 +72,7 @@ void    ft_map_generate(t_map *map, t_data data);
 // FONCTIONS INTERFACE
 
 //Render Texture 
-void		ft_render_texture(t_data *data, char *filename, int img_width, int img_height);
+void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, int img_height, int j, int i);
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
 int			on_destroy(t_data *data);
 int			on_keypress(t_data *data);
