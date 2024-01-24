@@ -57,6 +57,9 @@ void    ft_map_generate(t_map *map, t_data data)
 {
     int i;
     int j;
+    int img_width = 50;
+    int img_height = 50;
+    void    *img_ptr;
 
     
     i = 0;
@@ -66,16 +69,29 @@ void    ft_map_generate(t_map *map, t_data data)
         j = 0;
         while(map->grid[i][j])
         {
-            if(map->grid[i][j] == "0")
+            if(map->grid[i][j] == '0')
             {
-                
+                printf("Empty Space\n");
             }
-            if(map->grid[i][j] == "1")
-                //Afficher texture mur 
-            if(map->grid[i][j] == "C")
+            if(map->grid[i][j] == '1')
+            {
+                img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
+                if (!img_ptr)
+                {
+                    printf("Pas d'image\n");
+                }
+                mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*50, i*50);
+            }
+            if(map->grid[i][j] == 'C')
+            {
                 //Afficher texture Item
-            if(map->grid[i][j] == "P")
+                printf("Collectable\n");
+            }
+            if(map->grid[i][j] == 'P')
+            {
                 //Definir map->player row et player colommn a lindex de grid 
+                printf("Player\n");
+            } 
             j++;
         }
         i++;

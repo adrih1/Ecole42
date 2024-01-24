@@ -49,7 +49,6 @@ int main(void)
     if (map == NULL)
         return 0;
     ft_check_map(fd, filename, map);
-    ft_map_generate(map, data);
 	close(fd);
     
 	// Initialise la connexion avec le serveur graphique
@@ -64,14 +63,16 @@ int main(void)
         return (1);
     }
 
-    img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
-    if (!img_ptr)
-    {
-		on_destroy(&data);
-		return(0);
-    }
+    ft_map_generate(map, data);
 
-    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, 0, 0);
+    // img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
+    // if (!img_ptr)
+    // {
+	// 	on_destroy(&data);
+	// 	return(0);
+    // }
+
+    // mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, 0, 0);
 
     // Hooks touches appuyées et fermeture de la fenêtre
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, &data);
