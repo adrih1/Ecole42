@@ -48,7 +48,7 @@ typedef struct s_map
 */
 
 // MAP VALIDATION
-int			ft_check_map(int fd, char *filename);
+int			ft_check_map(int fd, char *filename, t_map *map);
 // Free
 void		ft_free_map(t_map *map);
 // Init Map
@@ -66,12 +66,14 @@ int			ft_check_rectangular(t_map *map);
 void		ft_parse_map(t_map *map, int fd, char *filename);
 void		ft_get_map_width(t_map *map);
 // Genarate Textures
-void		ft_map_generate(t_map *map);
+void    ft_map_generate(t_map *map, t_data data);
 
 
 // FONCTIONS INTERFACE
-void		*ft_load_image(void *mlx_ptr, char *file_path, int *width,
-				int *height);
+
+//Render Texture 
+void		ft_render_texture(t_data *data, char *filename, int img_width, int img_height);
+void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
 int			on_destroy(t_data *data);
 int			on_keypress(t_data *data);
 

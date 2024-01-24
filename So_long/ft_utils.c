@@ -17,3 +17,4 @@ int    ft_open_file(char *filename)
 	}
 	return (fd);
 }
+ 

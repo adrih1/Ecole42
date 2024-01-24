@@ -31,6 +31,7 @@ void *ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height)
 int main(void)
 {
     t_data data;
+    t_map   *map;
 	void *img_ptr;
 	int img_width = 30;
     int img_height = 10;
@@ -44,9 +45,11 @@ int main(void)
 		printf("Probleme pour pour ouvrir le fichier");
 		return (1);
 	}
-    ft_check_map(fd, filename);
-
-
+    map = (t_map *)malloc(sizeof(t_map));
+    if (map == NULL)
+        return 0;
+    ft_check_map(fd, filename, map);
+    ft_map_generate(map, data);
 	close(fd);
     
 	// Initialise la connexion avec le serveur graphique
