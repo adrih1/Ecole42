@@ -3,10 +3,11 @@
 //Compteur Mouvements
 int keypress_count = 0;
 
-int on_keypress(t_data *data)
+int on_keypress(int keynum, t_data *data)
 {
 	(void)data;
-    keypress_count++; 
+    if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
+        keypress_count++;
 	printf("Key Press Count: %d\n", keypress_count);
 	return (0);
 }

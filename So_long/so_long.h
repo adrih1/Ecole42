@@ -75,7 +75,7 @@ void    ft_map_generate(t_map *map, t_data data);
 void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, int img_height, int j, int i);
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
 int			on_destroy(t_data *data);
-int			on_keypress(t_data *data);
+int			on_keypress(int keynum, t_data *data);
 
 // Utils
 void		ft_close_file(int fd);

@@ -13,7 +13,6 @@ void ft_free_map(t_map *map)
     free(map->grid);
 }
 
-
 void    ft_init_map(t_map *map)
 {
     map->width = 0;
@@ -76,12 +75,8 @@ void    ft_map_generate(t_map *map, t_data data)
             }
             if(map->grid[i][j] == '1')
             {
-                img_ptr = ft_load_image(data.mlx_ptr, "assets/wall.xpm", &img_width, &img_height);
-                if (!img_ptr)
-                {
-                    printf("Pas d'image\n");
-                }
-                mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);
+                printf("Wall\n");
+                ft_render_texture(map, data, "assets/wall.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == 'C')
             {
@@ -90,7 +85,9 @@ void    ft_map_generate(t_map *map, t_data data)
             }
             if(map->grid[i][j] == 'P')
             {
-                //Definir map->player row et player colommn a lindex de grid 
+                map->player_col = j * img_width;
+                map->player_row = i * img_height;
+                ft_render_texture(map, data, "assets/front.xpm", img_width, img_height, j, i);
                 printf("Player\n");
             } 
             j++;
