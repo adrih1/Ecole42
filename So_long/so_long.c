@@ -1,5 +1,6 @@
 #include "so_long.h"
 
+//Compteur Mouvements
 int keypress_count = 0;
 
 int on_keypress(int keysym, t_data *data)
