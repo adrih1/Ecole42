@@ -19,6 +19,7 @@ void ft_check_exit(t_map *map)
         }
         i++;
     }
+    printf("Exit Count : %d\n", map->exit_count);
 }
 
 
@@ -41,6 +42,7 @@ void ft_check_start(t_map *map)
         }
         i++;
     }
+    printf("Start Count : %d\n", map->start_count);
 }
 
 void ft_check_items(t_map *map)
@@ -62,6 +64,7 @@ void ft_check_items(t_map *map)
         }
         i++;
     }
+    printf("Item Count: %d\n", map->item_count);
 }
 
 int ft_check_rectangular(t_map *map)
@@ -79,6 +82,10 @@ int ft_check_rectangular(t_map *map)
     }
     i--;
     if(len != strlen(map->grid[i]) + 1)
+    {
+        printf("Map is not rectangular\n");
         return (0);
+    }
+    printf("Map is rectangular\n");
     return (1);
 }

@@ -7,7 +7,7 @@
 */
 
 # include "get_next_line/get_next_line.h"
-# include "mlx-mac/mlx.h"
+# include "mlx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,6 +26,7 @@ typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		random_num;
 }			t_data;
 
 // Structure pour représenter la carte
@@ -39,6 +40,7 @@ typedef struct s_map
 	int		item_count;
 	int		player_row;
 	int		player_col;
+	t_data	*data;
 }			t_map;
 
 /*
@@ -66,7 +68,7 @@ int			ft_check_rectangular(t_map *map);
 void		ft_parse_map(t_map *map, int fd, char *filename);
 void		ft_get_map_width(t_map *map);
 // Genarate Textures
-void    ft_map_generate(t_map *map, t_data data);
+void    ft_map_generate(t_map *map, t_data *data);
 
 
 // FONCTIONS INTERFACE || GAME
@@ -76,11 +78,11 @@ void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
 void		ft_render_texture(t_data data, char *filename, int img_width, int img_height, int j, int i);
 //Hooks
 int			on_destroy(t_data *data);
-int			on_keypress(int keynum, t_data *data, t_map *map);
+int			on_keypress(int keynum, t_map *map);
 
-
+ 
 //Mobility
-void		ft_get_player_coordinate(data, map, keynum);
+void ft_get_player_coordinate(t_map *map, int keynum);
 
 // Utils
 void		ft_close_file(int fd);

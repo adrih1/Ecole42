@@ -3,15 +3,17 @@
 //Compteur Mouvements
 int keypress_count = 0;
 
-int on_keypress(int keynum, t_data *data, t_map *map)
+int on_keypress(int keynum, t_map *map)
 {
-	(void)data;
     if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
+    {
         keypress_count++;
-	printf("Key Press Count: %d\n", keypress_count);
-    ft_get_player_coordinate(data, map, keynum);
-	return (0);
+        printf("Keypress Count: %d\n", keypress_count);
+    }
+    ft_get_player_coordinate(map, keynum);
+    return keynum;
 }
+
 
 int	on_destroy(t_data *data)
 {
@@ -34,6 +36,7 @@ int main(void)
 {
     t_data data;
     t_map   *map;
+    int pressed_key;
 	// void *img_ptr;
 
 	char	*filename = "map.ber";
@@ -56,18 +59,20 @@ int main(void)
     if (!data.mlx_ptr)
         return (1);
 
-    data.win_ptr = mlx_new_window(data.mlx_ptr, 1500, 400, "Mon premier jeu !");
+    data.win_ptr = mlx_new_window(data.mlx_ptr, 1000, 400, "Mon premier jeu !");
     if (!data.win_ptr)
     {
         free(data.mlx_ptr);
         return (1);
     }
-
-    ft_map_generate(map, data);
+    map->data = &data;
+    map->data->random_num = 6;
+    ft_map_generate(map, map->data);
 
 
     // Hooks touches appuyées et fermeture de la fenêtre
-    mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, &data);
+    mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, map);
+
     //Si W, S, A D appuyés 
         // Incremente Moove Count
         // ft_get_player_coordinate : Get Player Coordinate (map-> map->player_col et map->player_row)
@@ -86,6 +91,7 @@ int main(void)
 
      // Hooks fermeture de la fenêtre
 	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &data);
+  
 
     // Boucle pour attendre des événements (fenêtre ouverte)
     mlx_loop(data.mlx_ptr);
