@@ -8,7 +8,7 @@ int on_keypress(int keynum, t_map *map)
     if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
     {
         keypress_count++;
-        printf("Keypress Count: %d\n", keypress_count);
+        printf("Keypress Count: %d\n", keynum);
     }
     ft_get_player_coordinate(map, keynum);
     return keynum;
