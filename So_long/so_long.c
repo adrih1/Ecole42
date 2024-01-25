@@ -5,7 +5,10 @@ int keypress_count = 0;
 
 int on_keypress(int keynum, t_map *map)
 {
-    if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
+    //Linux
+    // if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
+    //Mac Avant || Derriere || Droite || Gauche
+    if(keynum == 14 || keynum == 2 || keynum == 3 || keynum == 1)
     {
         keypress_count++;
         printf("Keypress Count: %d\n", keynum);

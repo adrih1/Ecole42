@@ -91,15 +91,30 @@ void ft_get_player_coordinate(t_map *map, int keynum)
 
     i = map->player_col / 32;
     j = map->player_row / 32;
-    if (keynum == 119) // W
+    //Linux
+    // if (keynum == 119) // W
+    //     ft_move_up(map, i, j);
+
+    // if (keynum == 115) // S
+    //     ft_move_down(map, i, j);
+
+    // if (keynum == 97)  // A
+    //     ft_move_left(map, i, j);
+
+    // if (keynum == 100) // D
+    //     ft_move_right(map, i, j);
+
+    // Mac
+    if (keynum == 14) // W
         ft_move_up(map, i, j);
 
-    if (keynum == 115) // S
+    if (keynum == 2) // S
         ft_move_down(map, i, j);
 
-    if (keynum == 97)  // A
+    if (keynum == 1)  // A
         ft_move_left(map, i, j);
 
-    if (keynum == 100) // D
+    if (keynum == 3) // D
         ft_move_right(map, i, j);
+
 }

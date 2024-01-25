@@ -1,8 +1,6 @@
 .DS_Store
 *.o
 a.out
-mlx
 *.gch
 .vscode
 so_long
-mlxmac

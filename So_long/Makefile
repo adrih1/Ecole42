@@ -20,7 +20,12 @@ CFLAGS = -Wall -Wextra  -I$(HEADER_DIR)
 
 MAKE_MLX = make -C $(MLX_DIR)
 MLX_A = $(MLX_DIR)libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
+# Linux
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
+
+#Mac
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
 
 
 NAME = so_long
