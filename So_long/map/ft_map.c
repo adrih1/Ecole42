@@ -67,29 +67,18 @@ void    ft_map_generate(t_map *map, t_data *data)
         j = 0;
         while(map->grid[i][j])
         {
-            if(map->grid[i][j] == '0' || map->grid[i][j] == 'E')
-            {
-                // printf("Floor\n");
+            if(map->grid[i][j] == '0')
                 ft_render_texture(*data, "assets/floor.xpm", img_width, img_height, j, i);
-            }
             if(map->grid[i][j] == '1')
-            {
-                // printf("Wall\n");
                 ft_render_texture(*data, "assets/wall.xpm", img_width, img_height, j, i);
-            }
             if(map->grid[i][j] == 'C')
-            {
-                // printf("Collectable\n");
                 ft_render_texture(*data, "assets/coin-bag.xpm", img_width, img_height, j, i);
-            }
+            if(map->grid[i][j]== 'E')
+                ft_render_texture(*data, "assets/open-exit.xpm", img_width, img_height, j, i);
             if(map->grid[i][j] == 'P')
             {
                 map->player_col = j * img_width;
                 map->player_row = i * img_height;
-                printf("Player Row at start: %d\n", map->player_row);
-                printf("Player Col at start: %d\n", map->player_col);
-
-
                 ft_render_texture(*data, "assets/front.xpm", img_width, img_height, j, i);
                 // printf("Player\n");
             } 

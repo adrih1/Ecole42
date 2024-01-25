@@ -59,7 +59,7 @@ int main(void)
     if (!data.mlx_ptr)
         return (1);
 
-    data.win_ptr = mlx_new_window(data.mlx_ptr, 1000, 400, "Mon premier jeu !");
+    data.win_ptr = mlx_new_window(data.mlx_ptr, 1250, 400, "Mon premier jeu !");
     if (!data.win_ptr)
     {
         free(data.mlx_ptr);
