@@ -80,7 +80,6 @@ void    ft_map_generate(t_map *map, t_data *data)
                 map->player_col = j * img_width;
                 map->player_row = i * img_height;
                 ft_render_texture(*data, "assets/front.xpm", img_width, img_height, j, i);
-                // printf("Player\n");
             } 
             j++;
         }

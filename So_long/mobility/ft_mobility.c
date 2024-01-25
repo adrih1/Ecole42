@@ -16,19 +16,71 @@ int    ft_check_movement_possible(char c, t_map *map)
 }
 
 
-int ft_check_game_finish(char c, t_map *map)
+int ft_move_game_finish(char c, t_map *map)
 {
-    int result = ft_check_movement_possible(c, map);  // Appel de ft_check_movement_possible
+    int result = ft_check_movement_possible(c, map);
 
     if (result == 3)
     {
-        free(map->data->mlx_ptr);
-        // Autres actions à effectuer en cas de fin de jeu
+        on_destroy(map->data);
     }
+    return result;
+}
 
-    // Autres conditions ou actions en fonction du résultat de ft_check_movement_possible
+void ft_move_up(t_map *map, int i, int j)
+{
+    int new_i = i;
+    int new_j = j - 1;
+    
+    if (new_j >= 0 && ft_move_game_finish(map->grid[new_j][new_i], map))
+    {
+        map->grid[j][i] = '0';
+        map->grid[new_j][new_i] = 'P';
+        map->player_row -= 32;
+        ft_map_generate(map, map->data);
+    }
+}
 
-    return result;  // Vous pouvez également retourner le résultat pour une utilisation future si nécessaire
+void ft_move_down(t_map *map, int i, int j)
+{
+    int new_i = i;
+    int new_j = j + 1;
+
+    if (new_j >= 0 && ft_move_game_finish(map->grid[new_j][new_i], map))
+    {
+        map->grid[j][i] = '0';
+        map->grid[new_j][new_i] = 'P';
+        map->player_row += 32;
+        ft_map_generate(map, map->data);
+    }
+}
+
+void ft_move_left(t_map *map, int i, int j)
+{
+    int new_i = i - 1;
+    int new_j = j;
+
+    if (new_i >= 0 && ft_move_game_finish(map->grid[new_j][new_i], map))
+    {
+        map->grid[j][i] = '0';
+        map->grid[new_j][new_i] = 'P';
+        map->player_col -= 32;
+        ft_map_generate(map, map->data);
+    }
+}
+
+void ft_move_right(t_map *map, int i, int j)
+{
+    int new_i = i + 1;
+    int new_j = j;
+
+    if (new_i >= 0 && ft_move_game_finish(map->grid[new_j][new_i], map))
+    {
+        map->grid[j][i] = '0';
+        map->grid[new_j][new_i] = 'P';
+        map->player_col += 32;
+        ft_map_generate(map, map->data);
+    }
 }
 
 // Explication du calcul 
@@ -36,64 +88,18 @@ void ft_get_player_coordinate(t_map *map, int keynum)
 {
     int i;
     int j;
-    int new_i;
-    int new_j;
 
     i = map->player_col / 32;
     j = map->player_row / 32;
-    // if W --> Player row - 1
-    if (keynum == 119)
-    {
-        new_i = i;
-        new_j = j - 1;
-        if (new_j >= 0 && ft_check_movement_possible(map->grid[new_j][new_i], map))
-        {
-            map->grid[j][i] = '0';
-            map->grid[new_j][new_i] = 'P';
-            map->player_row -= 32;
-            ft_map_generate(map, map->data);
-        }
-    }
+    if (keynum == 119) // W
+        ft_move_up(map, i, j);
 
-    // if S --> Player row + 1
-    if(keynum == 115)
-    {
-        new_i = i;
-        new_j = j + 1;
-        if (new_j >= 0 && ft_check_movement_possible(map->grid[new_j][new_i], map))
-        {
-            map->grid[j][i] = '0';
-            map->grid[new_j][new_i] = 'P';
-            map->player_row += 32;
-            ft_map_generate(map, map->data);
-        }
-    }
+    if (keynum == 115) // S
+        ft_move_down(map, i, j);
 
-    // if A --> Play Col - 1
-    if(keynum == 97)
-    {
-        new_i = i - 1;
-        new_j = j;
-        if (new_i >= 0 && ft_check_movement_possible(map->grid[new_j][new_i], map))
-        {
-            map->grid[j][i] = '0';
-            map->grid[new_j][new_i] = 'P';
-            map->player_col -= 32;
-            ft_map_generate(map, map->data);
-        }
-    }
+    if (keynum == 97)  // A
+        ft_move_left(map, i, j);
 
-    // if D --> Player Col + 1
-    if(keynum == 100)
-    {
-        new_i = i + 1;
-        new_j = j;
-        if (new_i >= 0 && ft_check_movement_possible(map->grid[new_j][new_i], map))
-        {
-            map->grid[j][i] = '0';
-            map->grid[new_j][new_i] = 'P';
-            map->player_col += 32;
-            ft_map_generate(map, map->data);
-        }
-    }
+    if (keynum == 100) // D
+        ft_move_right(map, i, j);
 }

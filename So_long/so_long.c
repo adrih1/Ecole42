@@ -32,13 +32,12 @@ void *ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height)
 }
 
 
+
 int main(void)
 {
     t_data data;
     t_map   *map;
     int pressed_key;
-	// void *img_ptr;
-
 	char	*filename = "map.ber";
 	int fd;
 
@@ -51,10 +50,10 @@ int main(void)
     map = (t_map *)malloc(sizeof(t_map));
     if (map == NULL)
         return 0;
+        
     ft_check_map(fd, filename, map);
 	close(fd);
     
-	// Initialise la connexion avec le serveur graphique
     data.mlx_ptr = mlx_init();
     if (!data.mlx_ptr)
         return (1);
@@ -73,26 +72,9 @@ int main(void)
     // Hooks touches appuyées et fermeture de la fenêtre
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, map);
 
-    //Si W, S, A D appuyés 
-        // Incremente Moove Count
-        // ft_get_player_coordinate : Get Player Coordinate (map-> map->player_col et map->player_row)
-            // if W --> Player row + 1 
-            // if S --> Player row - 1
-            // if A --> Play Col - 1
-            // if D --> Player Col + 1
-        // Check if Movement possible (conséquence des nouvelles coordonnées)
-            //If same coordinate as collectable --> Re-render with character only
-            //If same coordinate as wall --> Do not move (no re-render)
-            //If valid coordinate 
-                // Update Grid function : swap the character and floor coordinates
-                // Ft_map generate 
-
-
-
-     // Hooks fermeture de la fenêtre
+    // Hooks fermeture de la fenêtre
 	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &data);
   
-
     // Boucle pour attendre des événements (fenêtre ouverte)
     mlx_loop(data.mlx_ptr);
 

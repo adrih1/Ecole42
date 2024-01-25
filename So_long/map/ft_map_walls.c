@@ -4,7 +4,6 @@ int ft_validate_columns(t_map *map)
 {
     int i;
 
-    // Première colonne
     i = 0;
     while (i < map->height)
     {
@@ -12,8 +11,6 @@ int ft_validate_columns(t_map *map)
             return 0;
         i++;
     }
-
-    // Dernière colonne
     i = 0;
     while (i < map->height)
     {
@@ -30,7 +27,7 @@ int ft_validate_columns(t_map *map)
 int ft_validate_rows(t_map *map)
 {
     int i = 0;
-    // Première ligne
+
     map->width -=2;
     while (i < map->width)
     {
@@ -38,8 +35,6 @@ int ft_validate_rows(t_map *map)
             return 0;
         i++;
     }
-
-    // Dernière ligne
     i = 0;
     while (i < map->width)
     {
