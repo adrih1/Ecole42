@@ -3,12 +3,13 @@
 //Compteur Mouvements
 int keypress_count = 0;
 
-int on_keypress(int keynum, t_data *data)
+int on_keypress(int keynum, t_data *data, t_map *map)
 {
 	(void)data;
     if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
         keypress_count++;
 	printf("Key Press Count: %d\n", keypress_count);
+    ft_get_player_coordinate(data, map, keynum);
 	return (0);
 }
 
@@ -64,8 +65,26 @@ int main(void)
 
     ft_map_generate(map, data);
 
+
     // Hooks touches appuyées et fermeture de la fenêtre
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, &data);
+    //Si W, S, A D appuyés 
+        // Incremente Moove Count
+        // ft_get_player_coordinate : Get Player Coordinate (map-> map->player_col et map->player_row)
+            // if W --> Player row + 1 
+            // if S --> Player row - 1
+            // if A --> Play Col - 1
+            // if D --> Player Col + 1
+        // Check if Movement possible (conséquence des nouvelles coordonnées)
+            //If same coordinate as collectable --> Re-render with character only
+            //If same coordinate as wall --> Do not move (no re-render)
+            //If valid coordinate 
+                // Update Grid function : swap the character and floor coordinates
+                // Ft_map generate 
+
+
+
+     // Hooks fermeture de la fenêtre
 	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &data);
 
     // Boucle pour attendre des événements (fenêtre ouverte)

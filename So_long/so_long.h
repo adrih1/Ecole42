@@ -7,7 +7,7 @@
 */
 
 # include "get_next_line/get_next_line.h"
-# include "mlx/mlx.h"
+# include "mlx-mac/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -69,13 +69,18 @@ void		ft_get_map_width(t_map *map);
 void    ft_map_generate(t_map *map, t_data data);
 
 
-// FONCTIONS INTERFACE
+// FONCTIONS INTERFACE || GAME
 
 //Render Texture 
-void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, int img_height, int j, int i);
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
+void		ft_render_texture(t_data data, char *filename, int img_width, int img_height, int j, int i);
+//Hooks
 int			on_destroy(t_data *data);
-int			on_keypress(int keynum, t_data *data);
+int			on_keypress(int keynum, t_data *data, t_map *map);
+
+
+//Mobility
+void		ft_get_player_coordinate(data, map, keynum);
 
 // Utils
 void		ft_close_file(int fd);

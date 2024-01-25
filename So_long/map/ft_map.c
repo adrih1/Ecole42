@@ -40,7 +40,7 @@ int ft_check_map(int fd, char *filename, t_map *map)
     return (1);
 }
 
-void	ft_render_texture(t_map *map, t_data data, char *filename, int img_width, int img_height, int j, int i)
+void	ft_render_texture(t_data data, char *filename, int img_width, int img_height, int j, int i)
 {
     void *img_ptr;
 
@@ -59,37 +59,35 @@ void    ft_map_generate(t_map *map, t_data data)
     int j;
     int img_width=32;
     int img_height=32;
-    void    *img_ptr;
 
-    
     i = 0;
     j = 0;
-    while(map->grid[i])
+    while(map->grid[i] && (i <= map->height - 1))
     {     
         j = 0;
         while(map->grid[i][j])
         {
             if(map->grid[i][j] == '0' || map->grid[i][j] == 'E')
             {
-                printf("Floor\n");
-                ft_render_texture(map, data, "assets/floor.xpm", img_width, img_height, j, i);
+                // printf("Floor\n");
+                ft_render_texture(data, "assets/floor.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == '1')
             {
-                printf("Wall\n");
-                ft_render_texture(map, data, "assets/wall.xpm", img_width, img_height, j, i);
+                // printf("Wall\n");
+                ft_render_texture(data, "assets/wall.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == 'C')
             {
-                printf("Collectable\n");
-                ft_render_texture(map, data, "assets/coin-bag.xpm", img_width, img_height, j, i);
+                // printf("Collectable\n");
+                ft_render_texture(data, "assets/coin-bag.xpm", img_width, img_height, j, i);
             }
             if(map->grid[i][j] == 'P')
             {
                 map->player_col = j * img_width;
                 map->player_row = i * img_height;
-                ft_render_texture(map, data, "assets/front.xpm", img_width, img_height, j, i);
-                printf("Player\n");
+                ft_render_texture(data, "assets/front.xpm", img_width, img_height, j, i);
+                // printf("Player\n");
             } 
             j++;
         }
