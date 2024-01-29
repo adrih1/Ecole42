@@ -6,13 +6,13 @@
 ---------------------------------------------------------------------------------
 */
 
+# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 # include "mlx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "libft/libft.h" 
-#include "ft_printf/ft_printf.h"
 
 // TESTING TO BE DELETED
 # include <string.h>
@@ -42,7 +42,14 @@ typedef struct s_map
 	int		item_count;
 	int		player_row;
 	int		player_col;
+	void	*wall;
+	void	*exit;
+	void	*floor;
+	void	*player;
+	void	*collectable;
 	t_data	*data;
+	int		texture_width;
+	int		texture_height;
 }			t_map;
 
 /*
@@ -70,21 +77,28 @@ int			ft_check_rectangular(t_map *map);
 void		ft_parse_map(t_map *map, int fd, char *filename);
 void		ft_get_map_width(t_map *map);
 // Genarate Textures
-void    ft_map_generate(t_map *map, t_data *data);
-
+void		ft_map_generate(t_map *map, t_data *data);
 
 // FONCTIONS INTERFACE || GAME
 
-//Render Texture 
+// Render Texture
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
 void		ft_render_texture(t_data data, char *filename, int img_width, int img_height, int j, int i);
-//Hooks
+
+// New Version of Render
+void 		ft_put_textures(t_data *data, t_map *map);
+void		ft_load_textures(t_map *map, t_data *data);
+void		ft_load_first_layer(t_data *data, t_map *map);
+void		ft_load_second_layer(t_data *data, t_map *map);
+void		ft_load_third_layer(t_data *data, t_map *map);
+void		ft_free_textures(t_data *data, t_map *map);
+
+// Hooks
 int			on_destroy(t_data *data);
 int			on_keypress(int keynum, t_map *map);
 
- 
-//Mobility
-void ft_get_player_coordinate(t_map *map, int keynum);
+// Mobility
+void		ft_get_player_coordinate(t_map *map, int keynum);
 
 // Utils
 void		ft_close_file(int fd);

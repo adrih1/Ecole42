@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
+/*   Updated: 2024/01/29 16:26:45 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int keypress_count = 0;
@@ -39,7 +51,6 @@ int main(void)
 {
     t_data data;
     t_map   *map;
-    int pressed_key;
 	char	*filename = "map.ber";
 	int fd;
 
@@ -68,6 +79,8 @@ int main(void)
     }
     map->data = &data;
     map->data->random_num = 6;
+    map->texture_height = 32;
+    map->texture_width = 32;
     ft_map_generate(map, map->data);
 
 

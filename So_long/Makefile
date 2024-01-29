@@ -13,6 +13,8 @@ SRCS =	so_long.c \
 		map/ft_map_dimensions.c \
 		map/ft_map_walls.c \
 		map/ft_map_checks.c \
+		map/map_render/ft_layer.c \
+		map/map_render/ft_textures.c \
 		ft_utils.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \

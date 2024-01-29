@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
+/*   Updated: 2024/01/29 16:27:20 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void ft_free_map(t_map *map)
@@ -53,36 +65,42 @@ void	ft_render_texture(t_data data, char *filename, int img_width, int img_heigh
     mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);
 }
 
+// void    ft_map_generate(t_map *map, t_data *data)
+// {
+//     int i;
+//     int j;
+//     int img_width=32;
+//     int img_height=32;
+
+//     i = 0;
+//     j = 0;
+//     while(map->grid[i] && (i <= map->height - 1))
+//     {     
+//         j = 0;
+//         while(map->grid[i][j])
+//         {
+//             if(map->grid[i][j] == '0')
+//                 ft_render_texture(*data, "assets/floor.xpm", img_width, img_height, j, i);
+//             if(map->grid[i][j] == '1')
+//                 ft_render_texture(*data, "assets/wall.xpm", img_width, img_height, j, i);
+//             if(map->grid[i][j] == 'C')
+//                 ft_render_texture(*data, "assets/coin-bag.xpm", img_width, img_height, j, i);
+//             if(map->grid[i][j]== 'E')
+//                 ft_render_texture(*data, "assets/open-exit.xpm", img_width, img_height, j, i);
+//             if(map->grid[i][j] == 'P')
+//             {
+//                 map->player_col = j * img_width;
+//                 map->player_row = i * img_height;
+//                 ft_render_texture(*data, "assets/front.xpm", img_width, img_height, j, i);
+//             } 
+//             j++;
+//         }
+//         i++;
+//     }
+// }
+
 void    ft_map_generate(t_map *map, t_data *data)
 {
-    int i;
-    int j;
-    int img_width=32;
-    int img_height=32;
-
-    i = 0;
-    j = 0;
-    while(map->grid[i] && (i <= map->height - 1))
-    {     
-        j = 0;
-        while(map->grid[i][j])
-        {
-            if(map->grid[i][j] == '0')
-                ft_render_texture(*data, "assets/floor.xpm", img_width, img_height, j, i);
-            if(map->grid[i][j] == '1')
-                ft_render_texture(*data, "assets/wall.xpm", img_width, img_height, j, i);
-            if(map->grid[i][j] == 'C')
-                ft_render_texture(*data, "assets/coin-bag.xpm", img_width, img_height, j, i);
-            if(map->grid[i][j]== 'E')
-                ft_render_texture(*data, "assets/open-exit.xpm", img_width, img_height, j, i);
-            if(map->grid[i][j] == 'P')
-            {
-                map->player_col = j * img_width;
-                map->player_row = i * img_height;
-                ft_render_texture(*data, "assets/front.xpm", img_width, img_height, j, i);
-            } 
-            j++;
-        }
-        i++;
-    }
+	ft_load_textures(map, data);
+	ft_put_textures(data, map);
 }
