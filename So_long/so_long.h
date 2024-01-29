@@ -11,6 +11,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "libft/libft.h" 
+#include "ft_printf/ft_printf.h"
 
 // TESTING TO BE DELETED
 # include <string.h>

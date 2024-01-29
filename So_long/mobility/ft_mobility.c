@@ -6,7 +6,6 @@ int    ft_check_movement_possible(char c, t_map *map)
         map->item_count--;
     if (c == '1')
         return (0);
-    printf("Item Count: %d\n", map->item_count);
     if (map->item_count != 0 && c == 'E')
         return (0);
     if(map->item_count == 0 && c == 'E')

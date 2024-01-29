@@ -1,3 +1,10 @@
+NAME = so_long
+
+CC = cc
+RM = rm -f
+
+LIBFT = libft/libft.a
+PRINTF = ft_printf/libftprintf.a
 HEADER_DIR = ./mlx/
 MLX_DIR = ./mlx/
 
@@ -10,42 +17,50 @@ SRCS =	so_long.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 		mobility/ft_mobility.c
-	
+
 OBJS = $(SRCS:.c=.o)
 
-CC = cc
-RM = rm -f
-
 CFLAGS = -Wall -Wextra  -I$(HEADER_DIR)
-
 MAKE_MLX = make -C $(MLX_DIR)
 MLX_A = $(MLX_DIR)libmlx.a
-# Linux
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
-
-#Mac
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 
+UNAME := $(shell uname)
 
-NAME = so_long
-
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-
-$(NAME):	$(OBJS)
-	$(MAKE_MLX)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX_A) $(MLX_FLAGS) -lm -o $(NAME)
+ifeq ($(UNAME), Darwin) 
+   INCLUDES = -I./includes -I./libft -I./ft_printf -I./mlx
+   MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+else
+    INCLUDES = -I./includes -I./libft -I./ft_printf -I./mlx
+    MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
+endif
 
 
 all: $(NAME)
 
+$(NAME): $(LIBFT) $(PRINTF) $(OBJS)
+	$(MAKE_MLX)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(MLX_A) $(MLX_FLAGS) -lm -o $(NAME)
+
+
+$(LIBFT):
+	make -C ./libft
+
+$(PRINTF):
+	make -C ./ft_printf
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
 clean:
 	$(RM) $(OBJS)
-	$(MAKE_MLX) clean
+	make -C ./libft clean
+	make -C ./ft_printf clean
 
 fclean: clean
 	$(RM) $(NAME)
+	make -C ./libft clean
+	make -C ./ft_printf clean
 	$(MAKE_MLX) clean
 
 re: fclean all
