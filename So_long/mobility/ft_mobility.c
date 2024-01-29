@@ -1,6 +1,5 @@
 #include "../so_long.h"
 
-
 int    ft_check_movement_possible(char c, t_map *map)
 {
     if (c == 'C')
