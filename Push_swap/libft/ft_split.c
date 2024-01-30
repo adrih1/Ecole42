@@ -3,60 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 15:44:42 by ahors             #+#    #+#             */
-/*   Updated: 2023/11/20 18:54:22 by adrienhors       ###   ########.fr       */
+/*   Created: 2024/01/16 14:23:26 by ahors             #+#    #+#             */
+/*   Updated: 2024/01/30 10:40:20 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdbool.h>
 
-static char	*ft_cpy_words(const char *str, char c)
-{
-	size_t	count;
-	char	*ptr;
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	count = 0;
-	if (!str)
-		return (NULL);
-	while (str[i] && str[i] == c)
-	{
-		i++;
-		j++;
-	}
-	while (str[j] && str[j] != c)
-	{
-		count++;
-		j++;
-	}
-	ptr = ft_substr(str, i, count);
-	return (ptr);
-}
-
-static int	ft_count_word(const char *str, char c)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i] == c && str[i])
-		i++;
-	while (str[i])
-	{
-		if ((str[i] == c && str[i + 1] != c) || (str[i + 1] == '\0'))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static void	ft_free(char **s)
+static void	ft_free_split(char **s)
 {
 	size_t	i;
 
@@ -69,29 +26,83 @@ static void	ft_free(char **s)
 	free(s);
 }
 
-char	**ft_split(char const *s, char c)
+
+static int	count_words(char *s, char delimiter) 
 {
-	char	**ptrs;
-	size_t	i;
+	int		count; 
+	bool	inside_word; 
+
+	count = 0;
+	while (*s) 
+	{
+		inside_word = false; 
+		while (*s == delimiter) 
+			++s; 
+		while (*s != delimiter && *s) 
+		{
+			if (!inside_word) 
+			{
+				++count; 
+				inside_word = true; 
+			}
+			++s; 
+		}
+	}
+	return (count);
+}
+
+static char	*get_next_word(char *s, char delimiter) 
+{
+	static int	cursor = 0; 
+	char		*next_word; 
+	int			len; 
+	int			i; 
+
+	len = 0;
+	i = 0;
+	while (s[cursor] == delimiter) 
+		++cursor;
+	while ((s[cursor + len] != delimiter) && s[cursor + len]) 
+		++len;
+	next_word = malloc((size_t)len * sizeof(char) + 1); 
+	if (!next_word) 
+		return (NULL);
+	while ((s[cursor] != delimiter) && s[cursor]) 
+		next_word[i++] = s[cursor++]; 
+	next_word[i] = '\0'; 
+	return (next_word);
+}
+
+char **ft_split(char *s, char delimiter) 
+{
+	int		words_count; 
+	char	**result_array; 
+	int		i; 
 
 	i = 0;
-	if (!s)
-		return (NULL);
-	ptrs = malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
-	if (!ptrs)
-		return (NULL);
-	while (*s)
+	words_count = count_words(s, delimiter);
+	if (!words_count) 
+		exit(1);
+	result_array = malloc(sizeof(char *) * (size_t)(words_count + 2)); 
+	if (!result_array)
 	{
-		if ((*s != c || *s == '\0'))
+		ft_free_split(result_array);
+		return (NULL);
+	} 
+		
+	while (words_count-- >= 0) 
+	{
+		if (i == 0) 
 		{
-			ptrs[i] = ft_cpy_words(s, c);
-			if (ptrs[i] == NULL)
-				ft_free(ptrs);
-			s = s + ft_strlen(ptrs[i] + 1);
-			i++;
+			result_array[i] = malloc(sizeof(char)); 
+			if (!result_array[i]) 
+				return (NULL);
+			result_array[i++][0] = '\0'; 
+			continue ;
 		}
-		s++;
+		result_array[i++] = get_next_word(s, delimiter); 
 	}
-	ptrs[i] = NULL;
-	return (ptrs);
+	result_array[i] = NULL; 
+	return (result_array);
 }
+

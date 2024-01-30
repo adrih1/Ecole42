@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/29 13:58:34 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/30 10:35:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.a"
+# include "../get_next_line/get_next_line_bonus.h"
+# include "../libft/libft.h"
 
 /*
 ---------------------------------------------------------------------------------
@@ -100,12 +101,10 @@ t_stack_node			*ft_find_max(t_stack_node *stack);
 t_stack_node			*ft_find_min(t_stack_node *stack);
 
 // Stack utils
-char 					**ft_split(char *s, char c) ;
 bool					ft_stack_sorted(t_stack_node *stack);
 int						ft_stack_len(t_stack_node *stack);
 
 // Other Utils
-int						ft_strlen(char *str);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
 void 					ft_free_argv(char **argv);

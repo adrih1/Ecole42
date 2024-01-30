@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/18 15:24:14 by ahors            ###   ########.fr       */
+/*   Updated: 2024/01/30 10:23:27 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@ void	ft_prep_for_push(t_stack_node **stack, t_stack_node *top_node,
 				rrb(stack, false);
 		}
 	}
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

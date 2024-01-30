@@ -1,45 +1,47 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
+#    Updated: 2024/01/30 14:49:24 by ahors            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LIBFT = ./libft/libft.a
-SRC_DIR = srcs
-SRC = $(shell find $(SRC_DIR) -name '*.c')
-OBJ = $(SRC:.c=.o)
+CFLAGS = -Wall -Werror -Wextra
+LIBFT = libft/libft.a
 
+SRC_DIR = ./srcs
+SRC = $(SRC_DIR)/commands/*.c $(SRC_DIR)/push_swap_sources/*.c
+SRCM = $(SRC) $(SRC_DIR)/main_push_swap.c
 
-NAMEBONUS= checker
-SRC_BONUS_DIR = srcs_bonus
-SRC_BONUS = $(shell find $(SRC_BONUS_DIR) -name '*.c')
-OBJ_BONUS = $(SRC_BONUS:.c=.o)
+NAMEB = checker
+SRCB_DIR = ./srcs_bonus
+GNL_DIR = ./get_next_line
+SRCB = $(SRC) srcs_bonus/checker.c
 
-RM = rm -f
+all: $(NAME)
 
-
-all: $(NAME) $(NAMEBONUS)
-
-
-$(NAME): $(OBJ)
+$(NAME):
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -lm $(SRCM) $(LIBFT) -o $(NAME)
 
+bonus:
+	$(MAKE) -C ./libft
+	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) ./get_next_line/*.o -o $(NAMEB) -g
 
-
-bonus:$(OBJ_BONUS)
-	$(CC) $(CFLAGS) -o $(NAMEBONUS) $(OBJ_BONUS)
-
-
-$(NAMEBONUS): bonus
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAMEB): bonus
 
 clean:
-	$(RM) $(OBJ) $(OBJ_BONUS)
+	$(MAKE) fclean -C ./libft
+	$(MAKE) clean -C ./libft
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all bonus clean fclean re
