@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/30 10:35:38 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/05 11:00:43 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,4 @@ int						ft_stack_len(t_stack_node *stack);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
 void 					ft_free_argv(char **argv);
-
 #endif

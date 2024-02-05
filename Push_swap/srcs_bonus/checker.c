@@ -1,5 +1,14 @@
 #include "../header/push_swap.h"
 
+void	ft_free_errors_checker(t_stack_node **a, t_stack_node **b, char *line)
+{
+	write(1, "Error\n", 6);
+	free(line);
+	ft_free_stack(a);
+	ft_free_stack(b);
+	exit(1);
+}
+
 char	*ft_sub_check(char *line, t_stack_node **a, t_stack_node **b)
 {
 	if (ft_strncmp(line, "sa\n", 3) == 0 && line[3] == '\0')
@@ -25,16 +34,18 @@ char	*ft_sub_check(char *line, t_stack_node **a, t_stack_node **b)
 	else if (ft_strncmp(line, "rrr\n", 4) == 0 && line[4] == '\0')
 		rrr(a, b, false);
 	else
-		printf("Error");
+		ft_free_errors_checker(a, b, line);
 	return (get_next_line(0));
 }
+
 
 void	ft_check(t_stack_node **a, t_stack_node **b, char *line)
 {
 	char	*tmp;
 
-	while (line)
+	while (line && line[0] != '\0')
 	{
+		printf("line = %s\n", line);
 		tmp = line;
 		line = ft_sub_check(line, a, b);
 		free(tmp);

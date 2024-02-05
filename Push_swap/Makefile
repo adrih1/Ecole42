@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
+#    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/01/30 14:49:24 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/01 12:38:50 by adrienhors       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME):
 
 bonus:
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) ./get_next_line/*.o -o $(NAMEB) -g
+	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) ./get_next_line/*.c -o $(NAMEB) -g
 
 $(NAMEB): bonus
 
