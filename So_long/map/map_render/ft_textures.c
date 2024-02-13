@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/29 16:49:09 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/13 10:18:15 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,30 @@
 
 void    ft_load_textures(t_map *map, t_data *data)
 {
-
-    map->floor = mlx_xpm_file_to_image(data->mlx_ptr, "../../assets/floor.xpm", &map->texture_width, &map->texture_height);
+    map->floor = ft_load_image(data->mlx_ptr, "assets/floor.xpm", &map->texture_width, &map->texture_height);
     if(!(map->floor))
     {
-        ft_printf("Floor\n");
         ft_free_textures(data, map);
         exit(0);
     }
-    map->exit = mlx_xpm_file_to_image(data->mlx_ptr, "../../assets/open-exit.xpm", &map->texture_width, &map->texture_height);
+    map->exit =  ft_load_image(data->mlx_ptr, "assets/open-exit.xpm", &map->texture_width, &map->texture_height);
     if(!(map->exit))
     {
-        ft_printf("Exit\n");
         ft_free_textures(data, map);
         exit(0);
     }
-    map->wall = mlx_xpm_file_to_image(data->mlx_ptr, "../../assets/wall.xpm", &map->texture_width, &map->texture_height);
+    map->wall = ft_load_image(data->mlx_ptr, "assets/wall.xpm", &map->texture_width, &map->texture_height);
     if(!(map->wall))
     {
-        ft_printf("Wall\n");
         ft_free_textures(data, map);
         exit(0);
     }
-    map->player = mlx_xpm_file_to_image(data->mlx_ptr, "../../assets/front.xpm", &map->texture_width, &map->texture_height);
+    map->player = ft_load_image(data->mlx_ptr, "assets/front.xpm", &map->texture_width, &map->texture_height);
     if(!(map->player))
     {
-        ft_printf("Player\n");
         ft_free_textures(data, map);
         exit(0);
     }
-    
 }
 
 void ft_put_textures(t_data *data, t_map *map)

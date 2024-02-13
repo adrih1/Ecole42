@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/29 16:26:45 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/05 15:32:42 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int keypress_count = 0;
 int on_keypress(int keynum, t_map *map)
 {
     //Linux
-    if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
+    // if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
     //Mac Avant || Derriere || Droite || Gauche
-    // if(keynum == 14 || keynum == 2 || keynum == 3 || keynum == 1)
+    if(keynum == 14 || keynum == 2 || keynum == 3 || keynum == 1)
     {
         keypress_count++;
         ft_printf("Keypress Count: %d\n", keypress_count);
@@ -57,7 +57,7 @@ int main(void)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Probleme pour pour ouvrir le fichier");
+		ft_printf("Probleme pour ouvrir le fichier");
 		return (1);
 	}
     map = (t_map *)malloc(sizeof(t_map));

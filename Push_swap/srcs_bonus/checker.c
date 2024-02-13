@@ -43,9 +43,8 @@ void	ft_check(t_stack_node **a, t_stack_node **b, char *line)
 {
 	char	*tmp;
 
-	while (line && line[0] != '\0')
+	while (line)
 	{
-		printf("line = %s\n", line);
 		tmp = line;
 		line = ft_sub_check(line, a, b);
 		free(tmp);
@@ -56,6 +55,7 @@ void	ft_check(t_stack_node **a, t_stack_node **b, char *line)
 		ft_putstr_fd("OK\n", 1);
 	free(line);
 }
+
 
 
 int	main(int argc, char **argv)
