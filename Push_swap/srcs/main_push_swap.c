@@ -6,30 +6,17 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:12:21 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 13:32:08 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/13 15:18:17 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
 
-
-void	print_stack_nodes(t_stack_node *head)
-{
-	t_stack_node	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		printf("%d\n", current->nbr);
-		current = current->next;
-	}
-}
-
 int	main(int argc, char **argv)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
-	
+	t_stack_node *a;
+	t_stack_node *b;
+
 	a = NULL;
 	b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))

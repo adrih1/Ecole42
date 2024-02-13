@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 13:55:33 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/13 15:17:35 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (new_string);
 }
 
+void	ft_free_argv(char **argv)
+{
+	int	i;
 
-void ft_free_argv(char **argv) {
-    if (argv == NULL) {
-        return;
-    }
-    int i = 0;
-    while (argv[i] != NULL) {
-        free(argv[i]);
-        i++;
-    }
-    free(argv);
+	if (argv == NULL)
+	{
+		return ;
+	}
+	i = 0;
+	while (argv[i] != NULL)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
 }
