@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:12:21 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 15:18:17 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/13 15:22:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack_node *a;
-	t_stack_node *b;
+	t_stack_node	*a;
+	t_stack_node	*b;
 
 	a = NULL;
 	b = NULL;

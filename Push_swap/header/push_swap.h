@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/05 11:00:43 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/13 15:22:10 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 ---------------------------------------------------------------------------------
 */
 
+# include "../get_next_line/get_next_line_bonus.h"
+# include "../libft/libft.h"
 # include <limits.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../get_next_line/get_next_line_bonus.h"
-# include "../libft/libft.h"
 
 /*
 ---------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ void					ft_free_stack(t_stack_node **stack);
 // Stack Initiation
 void					ft_init_stack(t_stack_node **a, char **argv);
 void					ft_append_node(t_stack_node **stack, int n);
-long 					ft_atol(char *str);
+long					ft_atol(char *str);
 
 // Nodes Initiation
 void					ft_init_nodes_a(t_stack_node *a, t_stack_node *b);
@@ -107,5 +107,5 @@ int						ft_stack_len(t_stack_node *stack);
 // Other Utils
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
-void 					ft_free_argv(char **argv);
+void					ft_free_argv(char **argv);
 #endif
