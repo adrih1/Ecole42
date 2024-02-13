@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_layer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:10:41 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 10:20:58 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/13 17:29:37 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void ft_load_first_layer(t_data *data, t_map *map)
 	int x;
 
 	y = 0;
-	while (y < map->height - 1)
+	while (y < map->height)
 	{
 		x = 0;
-		while (x < map->width)
+		while (x < map->width - 1)
 		{
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->floor, x * map->texture_width, y * map->texture_height);
 			x++;
@@ -39,7 +39,7 @@ void ft_load_second_layer(t_data *data, t_map *map)
 	int x;
 
 	y = 0;
-	while (y < map->height - 1)
+	while (y < map->height)
 	{
 		x = 0;
 		while (x < map->width)
@@ -59,7 +59,7 @@ void ft_load_third_layer(t_data *data, t_map *map)
 	int x;
 
 	y = 0;
-	while (y < map->height - 1)
+	while (y < map->height)
 	{
 		x = 0;
 		while (x < map->width)
@@ -68,7 +68,7 @@ void ft_load_third_layer(t_data *data, t_map *map)
                 mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->collectable, x * map->texture_width, y * map->texture_height);
             else if(map->grid[y][x]== 'E')
                 mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->exit, x * map->texture_width, y * map->texture_height);
-            else if (map->grid[y][x] == 'P')
+            else if (map->grid[y][x] == 'P' && map->player_row == 0)
                 mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->player, x * map->texture_width, y * map->texture_height);
 			x++;
 		}

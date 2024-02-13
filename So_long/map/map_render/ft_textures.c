@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 10:18:15 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/13 13:07:33 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void    ft_load_textures(t_map *map, t_data *data)
     }
     map->player = ft_load_image(data->mlx_ptr, "assets/front.xpm", &map->texture_width, &map->texture_height);
     if(!(map->player))
+    {
+        ft_free_textures(data, map);
+        exit(0);
+    }
+    map->collectable = ft_load_image(data->mlx_ptr, "assets/coin-bag.xpm", &map->texture_width, &map->texture_height);
+    if(!(map->collectable))
     {
         ft_free_textures(data, map);
         exit(0);

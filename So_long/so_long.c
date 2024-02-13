@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/05 15:32:42 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/13 13:24:50 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int keypress_count = 0;
 
 int on_keypress(int keynum, t_map *map)
 {
-    //Linux
-    // if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
     //Mac Avant || Derriere || Droite || Gauche
-    if(keynum == 14 || keynum == 2 || keynum == 3 || keynum == 1)
+    // if(keynum == 14 || keynum == 2 || keynum == 3 || keynum == 1)
+    //Linux
+    if(keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
     {
         keypress_count++;
         ft_printf("Keypress Count: %d\n", keypress_count);
