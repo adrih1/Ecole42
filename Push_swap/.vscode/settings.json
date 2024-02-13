@@ -7,7 +7,8 @@
         "stddef.h": "c",
         "limits": "c",
         "get_next_line.h": "c",
-        "get_next_line_bonus.h": "c"
+        "get_next_line_bonus.h": "c",
+        "libft.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

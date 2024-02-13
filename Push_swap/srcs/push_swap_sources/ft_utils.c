@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/30 10:23:27 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/13 13:55:33 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	ft_stack_sorted(t_stack_node *stack)
 	while (stack->next)
 	{
 		if (stack->nbr > stack->next->nbr)
-			return (false);
+			return (0);
 		stack = stack->next;
 	}
-	return (true);
+	return (1);
 }
 
 void	ft_prep_for_push(t_stack_node **stack, t_stack_node *top_node,

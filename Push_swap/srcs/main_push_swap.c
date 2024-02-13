@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_push_swap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:12:21 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/05 11:06:13 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/13 13:32:08 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int argc, char **argv)
 		else
 			ft_sort_stacks(&a, &b);
 	}
-    print_stack_nodes(a);
 	ft_free_stack(&a);
 	ft_free_stack(&b);
 	return (0);
