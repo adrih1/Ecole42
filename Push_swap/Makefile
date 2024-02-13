@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
+#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/01 12:38:50 by adrienhors       ###   ########.fr        #
+#    Updated: 2024/02/13 16:28:27 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,10 @@ clean:
 	$(MAKE) fclean -C ./libft
 	$(MAKE) clean -C ./libft
 	/bin/rm -f $(OBJ)
+	
 
 fclean: clean
 	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAMEB)
 
 re: fclean all
