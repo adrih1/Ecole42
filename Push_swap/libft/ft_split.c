@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:23:26 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/14 15:19:45 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/14 15:37:43 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*get_next_word(char *s, char c)
 	return (next_word);
 }
 
-char	**split(char *s, char c)
+char	**ft_split(char *s, char c)
 {
 	int		words_count;
 	char	**result_array;
