@@ -31,17 +31,11 @@ void ft_move_up(t_map *map, int i, int j)
 {
     int new_i = i;
     int new_j = j - 1;
-    ft_printf("Entered in Move Up\n");
     if (new_j >= 0 && ft_move_game_finish(map->grid[new_j][new_i], map))
     {
         map->grid[j][i] = '0';
         map->grid[new_j][new_i] = 'P';
-        ft_printf("Player Row: %d\n", map->player_row);
         map->player_row -= 32;
-        // ft_map_generate(map, map->data);
-        ft_printf("Player Col: %d\n", map->player_col);
-        ft_printf("Player Row: %d\n", map->player_row);
-        ft_printf("Changed position of P in grid\n");
         ft_put_textures(map->data, map);
     }
 }
@@ -56,10 +50,6 @@ void ft_move_down(t_map *map, int i, int j)
         map->grid[j][i] = '0';
         map->grid[new_j][new_i] = 'P';
         map->player_row += 32;
-        printf("Move Down\n");
-        printf("Player Row: %d\n", map->player_row);
-        printf("Player Col: %d\n", map->player_col);
-        // ft_map_generate(map, map->data);
         ft_put_textures(map->data, map);
     }
 }
@@ -74,10 +64,6 @@ void ft_move_left(t_map *map, int i, int j)
         map->grid[j][i] = '0';
         map->grid[new_j][new_i] = 'P';
         map->player_col -= 32;
-        printf("Move Left\n");
-        printf("Player Row: %d\n", map->player_row);
-        printf("Player Col: %d\n", map->player_col);
-        // ft_map_generate(map, map->data);
         ft_put_textures(map->data, map);
     }
 }
@@ -92,10 +78,6 @@ void ft_move_right(t_map *map, int i, int j)
         map->grid[j][i] = '0';
         map->grid[new_j][new_i] = 'P';
         map->player_col += 32;
-        printf("Move Right\n");
-        printf("Player Row: %d\n", map->player_row);
-        printf("Player Col: %d\n", map->player_col);
-        // ft_map_generate(map, map->data);
         ft_put_textures(map->data, map);
     }
 }
