@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/14 14:51:29 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/14 16:08:34 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,10 @@ SRCM = $(SRC) $(SRC_DIR)/push_swap.c
 NAMEB = checker
 SRCB_DIR = ./srcs_bonus
 GNL_DIR = ./get_next_line
-SRCB = $(SRC) srcs_bonus/checker.c
+SRCB = 	$(SRC) \
+		$(SRCB_DIR)/checker.c \
+		$(GNL_DIR)/get_next_line_bonus.c \
+		$(GNL_DIR)/get_next_line_utils_bonus.c
 
 all: $(NAME)
 
@@ -45,7 +48,8 @@ $(NAME):
 
 bonus:
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) ./get_next_line/*.c -o $(NAMEB) -g
+	
+	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) -o $(NAMEB) -g
 
 $(NAMEB): bonus
 
