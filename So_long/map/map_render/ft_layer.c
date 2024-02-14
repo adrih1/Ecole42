@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_layer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:10:41 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/14 12:01:02 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/14 14:09:08 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void ft_load_third_layer(t_data *data, t_map *map)
 		while (x < map->width)
 		{
             if(map->grid[y][x] == 'C')
-                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->collectable, x * map->texture_width, y * map->texture_height);
+                mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->collectable, x * map->texture_width, y * map->texture_height);				
             else if(map->grid[y][x]== 'E')
                 mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->exit, x * map->texture_width, y * map->texture_height);
-            else if (map->grid[y][x] == 'P' && map->player_row == 0)
+            else if (map->grid[y][x] == 'P')
 			{
 				printf("Entered player else if\n");
 				map->player_col = x * map->texture_width;
