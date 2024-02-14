@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/13 13:07:33 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/14 10:51:48 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void    ft_load_textures(t_map *map, t_data *data)
 
 void ft_put_textures(t_data *data, t_map *map)
 {
+    ft_printf("Enterint Put Textures\n");
 	ft_load_first_layer(data, map);
 	ft_load_second_layer(data, map);
 	ft_load_third_layer(data, map);
