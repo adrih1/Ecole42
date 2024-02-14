@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/13 16:28:27 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/14 14:51:29 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,21 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft/libft.a
 
 SRC_DIR = ./srcs
-SRC = $(SRC_DIR)/commands/*.c $(SRC_DIR)/push_swap_sources/*.c
-SRCM = $(SRC) $(SRC_DIR)/main_push_swap.c
+SRC = 	$(SRC_DIR)/commands/push.c  \
+		$(SRC_DIR)/commands/rev_rotate.c \
+		$(SRC_DIR)/commands/rotate.c \
+		$(SRC_DIR)/commands/swap.c \
+ 		$(SRC_DIR)/push_swap_sources/ft_atol.c \
+		$(SRC_DIR)/push_swap_sources/ft_errors.c \
+		$(SRC_DIR)/push_swap_sources/ft_find.c \
+		$(SRC_DIR)/push_swap_sources/ft_init_nodes.c \
+		$(SRC_DIR)/push_swap_sources/ft_init.c \
+		$(SRC_DIR)/push_swap_sources/ft_rotate_rules.c \
+		$(SRC_DIR)/push_swap_sources/ft_sort_stacks.c \
+		$(SRC_DIR)/push_swap_sources/ft_sort_three.c \
+		$(SRC_DIR)/push_swap_sources/ft_utils.c \
+		
+SRCM = $(SRC) $(SRC_DIR)/push_swap.c
 
 NAMEB = checker
 SRCB_DIR = ./srcs_bonus

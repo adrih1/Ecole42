@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:08:14 by ahors             #+#    #+#             */
-/*   Updated: 2023/11/20 16:01:17 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/14 15:19:36 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-// int	main()
-// {
-// 	char src[] = "Hello, World!";
-// 	char dest[] = "Welcome to the World!";
-// 	ft_memmove(dest + 7, dest, 13);
-// }
