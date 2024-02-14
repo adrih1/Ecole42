@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/14 16:08:34 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/14 16:35:58 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ $(NAME):
 
 bonus:
 	$(MAKE) -C ./libft
-	
 	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) -o $(NAMEB) -g
 
 $(NAMEB): bonus
@@ -63,4 +62,4 @@ fclean: clean
 	/bin/rm -f $(NAME)
 	/bin/rm -f $(NAMEB)
 
-re: fclean all
+re: fclean all bonus
