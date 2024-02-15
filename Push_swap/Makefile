@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/14 16:35:58 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/15 15:17:47 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,16 +46,15 @@ $(NAME):
 	$(MAKE) -C ./libft
 	$(CC) $(CFLAGS) -lm $(SRCM) $(LIBFT) -o $(NAME)
 
-bonus:
+$(NAMEB):
 	$(MAKE) -C ./libft
 	$(CC) $(CFLAGS) -lm $ $(SRCB) $(LIBFT) -o $(NAMEB) -g
 
-$(NAMEB): bonus
+bonus: $(NAME) $(NAMEB)
 
 clean:
 	$(MAKE) fclean -C ./libft
-	$(MAKE) clean -C ./libft
-	/bin/rm -f $(OBJ)
+	/bin/rm -f $(SRCB_DIR)/checker.o
 	
 
 fclean: clean
