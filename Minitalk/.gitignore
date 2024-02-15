@@ -1,0 +1,4 @@
+.vscode/
+header/minitalk.h.gch
+ft_printf/*.o
+srcs/*.o
