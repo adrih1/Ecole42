@@ -6,35 +6,48 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:57:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/15 18:46:45 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/15 19:14:28 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-void	handler(int num)
-{
-	write(STDOUT_FILENO, "Hello\n", 6);
-}
 
-void	handler_sigusr1(int num)
+void	ft_handler(int signal)
 {
-	write(STDOUT_FILENO, "Sig User 1\n", 6);
-}
+	static int	bit;
+	static int	i;
 
-void	handler_sigusr2(int num)
-{
-	write(STDOUT_FILENO, "Sig User 2\n", 6);
-}
-
-int	main(void)
-{
-	signal(SIGUSR1, handler_sigusr1);
-	signal(SIGUSR2, handler_sigusr2);
-	while(1)
+	if (signal == SIGUSR1)
+		i |= (0x01 << bit);
+	bit++;
+	if (bit == 8)
 	{
-		ft_printf("L'ID du client est: %d\n", getpid());
-		sleep(1);	
+		ft_printf("%c", i);
+		bit = 0;
+		i = 0;
 	}
-	return(0);
+}
+
+int	main(int argc, char **argv)
+{
+	int	pid;
+
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("\033[91mError: wrong format.\033[0m\n");
+		ft_printf("\033[33mTry: ./server\033[0m\n");
+		return (0);
+	}
+	pid = getpid();
+	ft_printf("PID->%d\n", pid);
+	ft_printf("\033[90mWaiting for a message...\033[0m\n");
+	while (argc == 1)
+	{
+		signal(SIGUSR1, ft_handler);
+		signal(SIGUSR2, ft_handler);
+		pause ();
+	}
+	return (0);
 }
