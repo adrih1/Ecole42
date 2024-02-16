@@ -3,51 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:57:46 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/15 19:09:36 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/16 13:59:45 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-void	ft_send_sginal(int pid, char *str)
+void	ft_send_signal(int pid, char *str)
 {
 	int	i;
-    int j;
     int bit;
 
 	i = 0;
-    printf("PID: %d\n", pid);
 	while (str[i])
 	{
-        j = 7;
-        while (j >= 0)
+        bit = 0;
+        while (bit < 8)
         {
-            bit = (str[i] >> j) & 1;
-            if(bit == 1)
-                kill(pid, 30);
-            else if (bit == 0)
-                kill(pid, 31);
-            printf("%d", bit);
-            j--;
+            if ((str[i] & (0x01 << bit)) != 0)
+			    kill(pid, SIGUSR1);
+		    else
+			    kill(pid, SIGUSR2);
+            usleep(100);
+            bit++;
         }
 		i++;
     }
-    usleep(42000000);
-
 }
-
 
 int	main(int ac, char **av)
 {
     int pid;
 
-    pid = atoi(av[1]);
     if (ac == 3)
-	    ft_send_sginal(pid, av[2]);
+    {
+        pid = atoi(av[1]);
+        ft_send_signal(pid, av[2]);
+    }
     else
-        printf("No string provided\n");
+	{
+		ft_printf("\033[91mError: wrong format.\033[0m\n");
+		ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
+		return (1);
+	}
+    ft_send_signal(pid, "\n");
     return (0);
 }

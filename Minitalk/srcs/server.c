@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:57:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/15 19:14:28 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/16 14:00:18 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
-
 
 void	ft_handler(int signal)
 {
@@ -36,8 +35,8 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 1)
 	{
-		ft_printf("\033[91mError: wrong format.\033[0m\n");
-		ft_printf("\033[33mTry: ./server\033[0m\n");
+		ft_printf("Error: wrong format.\n");
+		ft_printf("Try: ./server\n");
 		return (0);
 	}
 	pid = getpid();
