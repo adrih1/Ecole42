@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:57:46 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/19 17:05:11 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/19 16:48:40 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,20 @@ void	ft_send_signal(int pid, char *str)
     }
 }
 
-
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
     int pid;
-
     if (ac == 3)
     {
         pid = atoi(av[1]);
         ft_send_signal(pid, av[2]);
     }
     else
-	{
-		ft_printf("\033[91mError: wrong format.\033[0m\n");
-		ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
-		return (1);
-	}
+    {
+        ft_printf("\033[91mError: wrong format.\033[0m\n");
+        ft_printf("\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n");
+        return (1);
+    }
     ft_send_signal(pid, "\n");
-    return (0);
+    return 0;
 }

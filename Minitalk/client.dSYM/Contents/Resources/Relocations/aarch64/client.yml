@@ -1,9 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     client
-relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _ft_send_signal, symObjAddr: 0x0, symBinAddr: 0x1000033F8, symSize: 0xF0 }
-  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _ft_send_signal, symObjAddr: 0x0, symBinAddr: 0x1000033F8, symSize: 0xF0 }
-  - { offsetInCU: 0x8F, offset: 0x8F, size: 0x8, addend: 0x0, symName: _ft_send_bits, symObjAddr: 0xF0, symBinAddr: 0x1000034E8, symSize: 0x94 }
-  - { offsetInCU: 0xCF, offset: 0xCF, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x184, symBinAddr: 0x10000357C, symSize: 0x9C }
-...
