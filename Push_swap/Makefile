@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/15 15:17:47 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/20 16:57:46 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,3 +62,5 @@ fclean: clean
 	/bin/rm -f $(NAMEB)
 
 re: fclean all bonus
+
+.PHONY: all clean fclean re bonus

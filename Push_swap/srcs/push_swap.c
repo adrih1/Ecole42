@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:25:58 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/14 15:45:40 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/20 16:58:07 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@
 // 	}
 // }
 
+int length_of_char_array(char **av) {
+    int length = 0;
+    
+    while (av[length] != NULL) {
+        length++;
+    }
+    
+    return length;
+}
+
+void	ft_free_array(char **argv)
+{
+	int i;
+	int len;
+
+	i = 0;
+	len = length_of_char_array(argv);
+	printf("len of argv: %d\n", len);
+	while(i < len)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
@@ -33,6 +59,8 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
+	if(argc == 2)
+		ft_free_argv(argv);
 	else if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	ft_init_stack(&a, argv + 1);
