@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/20 16:12:06 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/20 18:15:14 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_philosopher
 	pthread_t		thread;
 	int				id;
 	int				eating;
-	// int				status; Pas sur d'en avoir besoin
 	int				meals_eaten;
 	size_t			last_meal;
 	size_t			time_to_die;
