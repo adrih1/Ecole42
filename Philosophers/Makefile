@@ -6,30 +6,29 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/02/23 15:38:04 by ahors            ###   ########.fr        #
+#    Updated: 2024/02/23 16:41:15 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-FT_PRINTF = ft_printf/libftprintf.a
 
 SRC_DIR = ./philo_test/srcs
 SRCS =	$(SRC_DIR)/main.c \
 		$(SRC_DIR)/ft_errors.c \
+		$(SRC_DIR)/ft_atoi.c \
+	
 
 $(NAME):
-	$(MAKE) -C ./ft_printf
-	$(CC) $(CFLAGS) -lm $(SRCS) $(FT_PRINTF) -o $(NAME)
+	$(CC) $(CFLAGS) -lm $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
 clean:
-	$(MAKE) fclean -C ./ft_printf
-	
+		
 fclean: clean
-		/bin/rm -f $(NAME)
+		/bin/rm -f philo
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/23 15:38:32 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/23 16:40:40 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 
 # include <pthread.h>
-# include "../../ft_printf/ft_printf.h"
+# include <stdio.h>
 
 /*
 ---------------------------------------------------------------------------------
@@ -59,5 +59,6 @@ typedef struct s_program
 }					t_program;
 
 int ft_check_args(char **av);
+int	ft_atoi(const char *str);
 
 #endif

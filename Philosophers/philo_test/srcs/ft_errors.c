@@ -18,10 +18,10 @@ int ft_check_args(char **av)
     int j;
 
     len = ft_length_of_char_array(av);
-    i = 0;
-    j = 0;
-    while(i <= len)
+    i = 1;
+    while(i < len)
     {
+        j = 0;
         while(av[i][j])
         {
             if(av[i][j] < '0' || av[i][j] > '9')
@@ -29,6 +29,11 @@ int ft_check_args(char **av)
             j++;
         }
         i++;
+    }
+    if(av[5] && ft_atoi(av[5]) > 200)
+    {
+        printf("Meals should not be superior to 200\n");
+        return (0);
     }
     return (1);
 
