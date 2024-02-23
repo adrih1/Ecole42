@@ -1,2 +1,0 @@
-// Only numbers, they should all be bigger than 0 except the number of meals each philo needs to eat (edge case). 
-// We should not test with more than 200 philos --> set the limit not to be more than 200.

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/20 18:15:14 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/23 15:38:32 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 */
 
 # include <pthread.h>
+# include "../../ft_printf/ft_printf.h"
 
 /*
 ---------------------------------------------------------------------------------
@@ -56,5 +57,7 @@ typedef struct s_program
 	pthread_mutex_t	write_lock;
 	t_philosopher	*philos;
 }					t_program;
+
+int ft_check_args(char **av);
 
 #endif
