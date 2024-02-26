@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/23 16:45:35 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:21:11 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int main(int ac, char **av)
     if(ac == 5 || ac == 6)
     {   
         if(ft_check_args(av))
+        {   
 	        printf("Correct\n");
-        else
-        {  
-	        printf("\033[91mError: Use only digits amd melas should not exceed 200.\033[0m\n");       
-            return (0);
+            //Initier la logique du programme
         }
+        else
+            return (0);
     }
-    else 
+    else
         printf("\033[91mError: Not the valid nummber of arguments.\033[0m\n");       
     return (0);
 }
