@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/23 16:40:40 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/27 16:58:29 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,22 @@
 ---------------------------------------------------------------------------------
 */
 
-# include <pthread.h>
-# include <stdio.h>
+# include <stdio.h> // Printf
+# include <stdlib.h> //malloc, free
+# include <unistd.h> // write, sleep
+# include <stdbool.h>
+# include <pthread.h> // mutex : init destroy lock unlock
+						//threads : create join detach
+# include <sys/time.h>
+# include <limits.h>
+
+# define PHILO_MAX 200
+# define RED     "\033[91m"
+# define GREEN   "\033[92m"
+# define YELLOW  "\033[93m"
+# define PURPLE  "\033[94m"
+# define WHITE   "\033[97m"
+# define RESET   "\033[0m"
 
 /*
 ---------------------------------------------------------------------------------
@@ -27,38 +41,67 @@
 ---------------------------------------------------------------------------------
 */
 
+typedef pthread_mutex_t t_mtx;
+typedef struct s_program t_program;
+
+typedef struct s_fork
+{
+	t_mtx	fork;
+	int		fork_id;
+} t_fork;
+
 
 typedef struct s_philosopher
 {
-	pthread_t		thread;
 	int				id;
-	int				eating;
-	int				meals_eaten;
-	size_t			last_meal;
-	size_t			time_to_die;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
-	size_t			start_time;
-	int				num_of_philos;
-	int				num_times_to_eat;
-	int				*dead;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*meal_lock;
+	long			meals_eaten;
+	bool			full;
+	long			last_meal_time;
+	t_fork			*l_fork;
+	t_fork			*r_fork;
+	pthread_t		thread_id; 
+	t_program		*program;
 }					t_philosopher;
+
 
 typedef struct s_program
 {
-	int				dead_flag;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
+	long	philo_nbr; 
+	long	time_to_die; 
+	long	time_to_eat; 
+	long	time_to_sleep; 
+	long	nb_limit_meals; 
+	long	start_simulation; 
+	bool		end_simulation; 
+	t_fork 			*forks; 
 	t_philosopher	*philos;
 }					t_program;
 
+
+
+// Errors Checks
+int ft_is_digit(char *str);
+int ft_is_valid_arg(char *arg); 
+int ft_is_valid_nb_meals(char **av, int index);
+int ft_is_valid_range(char **av, int len);
 int ft_check_args(char **av);
-int	ft_atoi(const char *str);
+
+//Parsing
+void    ft_parse_input(t_program *program, char **av);
+
+//Init 
+void    ft_data_init(t_program *program);
+
+
+
+// Utils
+long	ft_atol(const char *str);
+size_t	get_current_time(void);
+int ft_length_of_char_array(char **av);
+void	*ft_safe_malloc(size_t bytes);
+
+// Display
+void	ft_error_exit(const char *error);
+
 
 #endif

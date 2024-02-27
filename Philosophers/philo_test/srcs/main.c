@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/26 10:21:11 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/27 15:29:42 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int main(int ac, char **av)
 {
-    if(ac == 5 || ac == 6)
-    {   
-        if(ft_check_args(av))
-        {   
-	        printf("Correct\n");
-            //Initier la logique du programme
-        }
-        else
-            return (0);
-    }
+    t_program		program;
+
+    if(ac != 5 && ac != 6)
+        printf(RED "Error: Not the valid nummber of arguments.\n" RESET);
     else
-        printf("\033[91mError: Not the valid nummber of arguments.\033[0m\n");       
+    {
+        //Parse Input --> Error checks and Filling program
+        ft_parse_input(&program, av);
+        //Data Init
+        // ft_data_init(&program);
+        // //Simu Start
+        // ft_simu_start(&program);
+        // //Clean --> Philos are all full || A philo is dead 
+        // ft_clean_program(&program);     
+    }
     return (0);
 }

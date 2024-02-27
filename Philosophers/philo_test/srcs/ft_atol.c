@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:40:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/23 16:40:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/02/27 15:23:11 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../header/philo.h"
 
 static int	ft_isspace(char c)
 {
@@ -17,11 +19,11 @@ static int	ft_isspace(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
-	int	i;
-	int	res;
-	int	sign;
+	long	i;
+	long	res;
+	long	sign;
 
 	i = 0;
 	res = 0;
