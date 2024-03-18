@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/03/18 11:29:45 by ahors            ###   ########.fr       */
+/*   Updated: 2024/03/18 12:23:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ typedef struct s_program
 ---------------------------------------------------------------------------------
 */
 
-
-
-
 // Errors Checks
 int ft_is_digit(char *str);
 int ft_is_valid_arg(char *arg); 
@@ -119,6 +116,8 @@ void    ft_parse_input(t_program *program, char **av);
 //Init 
 void    ft_data_init(t_program *program);
 
+//Simu Start
+void 	ft_simu_start(t_program *program);
 
 // Protect
 void	*ft_safe_malloc(size_t bytes);
@@ -127,8 +126,9 @@ void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 
 // Utils
 long	ft_atol(const char *str);
-size_t	get_current_time(void);
 int ft_length_of_char_array(char **av);
+long get_current_timestamp();
+
 
 
 // Display

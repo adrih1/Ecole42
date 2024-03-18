@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/02/27 16:59:13 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/03/18 13:22:10 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,25 @@ void	ft_error_exit(const char *error)
 {
 	printf(RED"🚨 %s 🚨\n"RESET, error);
 	exit(EXIT_FAILURE);
+}
+
+void print_timestamp(long timestamp_ms) {
+    time_t timestamp_sec = timestamp_ms / 1000; // Convertir le timestamp en secondes
+    struct tm *local_time = localtime(&timestamp_sec);
+
+    char time_str[100];
+    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", local_time);
+    
+    printf("Date et heure correspondantes: %s\n", time_str);
+}
+
+
+long get_current_timestamp() 
+{
+    struct timeval current_time;
+    gettimeofday(&current_time, NULL);
+	printf("Time of the day: %ld\n", current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+	long timestamp_ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
+    print_timestamp(timestamp_ms);
+	return(current_time.tv_sec);
 }

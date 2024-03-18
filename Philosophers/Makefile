@@ -6,7 +6,7 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/03/18 10:51:39 by ahors            ###   ########.fr        #
+#    Updated: 2024/03/18 12:02:41 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =	$(SRC_DIR)/ft_atol.c \
 		$(SRC_DIR)/ft_init.c \
 		$(SRC_DIR)/ft_parsing.c \
 		$(SRC_DIR)/ft_protect.c \
+		$(SRC_DIR)/ft_simu.c \
 		$(SRC_DIR)/ft_utils.c \
 		$(SRC_DIR)/main.c \
 

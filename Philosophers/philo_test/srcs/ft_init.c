@@ -1,13 +1,11 @@
 #include "../header/philo.h"
 
-
 long    meals_eaten = 0; 
 pthread_mutex_t mutex; 
 
 void *philosopher_thread(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    printf("Philosopher %d is thinking || ", philosopher->id);
-    printf("Philosopher %d has eaten %ld meals ||", philosopher->id, philosopher->meals_eaten);
+    printf("Philosopher %d is thinking || Philosopher %d has eaten %ld meals || Last meal time %ld || ", philosopher->id, philosopher->id, philosopher->meals_eaten, philosopher->last_meal_time);
     if (philosopher->full == 0)
         printf("Philosopher %d is not full\n", philosopher->id);   
     // pthread_mutex_lock(&mutex);
@@ -18,9 +16,10 @@ void *philosopher_thread(void *arg) {
 
 void ft_philo_init(t_philosopher *philosopher, int i)
 {
-   philosopher->id = i;
-   philosopher->meals_eaten = 0;
-   philosopher->full = false;
+    philosopher->id = i;
+    philosopher->meals_eaten = 0;
+    philosopher->full = false;
+    // philosopher->last_meal_time = get_current_timestamp();
 }
 
 void    ft_data_init(t_program *program)
@@ -32,22 +31,16 @@ void    ft_data_init(t_program *program)
     pthread_t threads[program->philo_nbr];
     while (i < program->philo_nbr) 
     {
-        program->philos[i].id = i;
         ft_philo_init(&program->philos[i], i);
-        if (pthread_create(&threads[i], NULL, philosopher_thread, (void *)&program->philos[i]) != 0) {
-            perror("pthread_create");
-            exit(EXIT_FAILURE);
-        }
+        if (pthread_create(&threads[i], NULL, philosopher_thread, (void *)&program->philos[i]) != 0) 
+            ft_error_exit("Error during thread creation");
         i++;
     }
     i = 0;
     while (i < program->philo_nbr) 
     {
         if (pthread_join(threads[i], NULL) != 0) 
-        {
-            perror("pthread_join");
-            exit(EXIT_FAILURE);
-        }
+            ft_error_exit("Error during thread joining");
         i++;
     }
     pthread_mutex_destroy(&mutex);

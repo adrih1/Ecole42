@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/03/18 11:41:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/03/18 12:02:12 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int main(int ac, char **av)
         //Data Init
         ft_data_init(&program);
         // Simu Start
-        // ft_simu_start(&program);
-        // //Clean --> Philos are all full || A philo is dead 
+        ft_simu_start(&program);
+        // Clean --> Philos are all full || A philo is dead 
         // ft_clean_program(&program);     
     }
     return (0);
