@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/27 16:58:29 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/02/28 14:43:25 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <unistd.h> // write, sleep
 # include <stdbool.h>
 # include <pthread.h> // mutex : init destroy lock unlock
-						//threads : create join detach
 # include <sys/time.h>
 # include <limits.h>
 
@@ -35,9 +34,28 @@
 # define WHITE   "\033[97m"
 # define RESET   "\033[0m"
 
+
 /*
 ---------------------------------------------------------------------------------
-|                                    FONCTIONS                                  |
+|                                    CODES                                  |
+---------------------------------------------------------------------------------
+*/
+
+typedef enum e_opcode
+{
+	LOCK, 
+	UNLOCK, 
+	INIT, 
+	DESTROY, 
+	CREATE, 
+	JOIN,
+	DETACH,
+}	t_opcode;
+
+
+/*
+---------------------------------------------------------------------------------
+|                                    STRUCTURES                                  |
 ---------------------------------------------------------------------------------
 */
 
@@ -78,6 +96,14 @@ typedef struct s_program
 }					t_program;
 
 
+/*
+---------------------------------------------------------------------------------
+|                                    FONCTIONS                                  |
+---------------------------------------------------------------------------------
+*/
+
+
+
 
 // Errors Checks
 int ft_is_digit(char *str);
@@ -93,12 +119,16 @@ void    ft_parse_input(t_program *program, char **av);
 void    ft_data_init(t_program *program);
 
 
+// Protect
+void	*ft_safe_malloc(size_t bytes);
+void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
+
 
 // Utils
 long	ft_atol(const char *str);
 size_t	get_current_time(void);
 int ft_length_of_char_array(char **av);
-void	*ft_safe_malloc(size_t bytes);
+
 
 // Display
 void	ft_error_exit(const char *error);
