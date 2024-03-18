@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/28 14:43:25 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/03/18 11:13:21 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h> // Printf
 # include <stdlib.h> //malloc, free
 # include <unistd.h> // write, sleep
+# include <stddef.h>
 # include <stdbool.h>
 # include <pthread.h> // mutex : init destroy lock unlock
 # include <sys/time.h>
@@ -77,7 +78,7 @@ typedef struct s_philosopher
 	long			last_meal_time;
 	t_fork			*l_fork;
 	t_fork			*r_fork;
-	pthread_t		thread_id; 
+	pthread_t		*thread_id; 
 	t_program		*program;
 }					t_philosopher;
 

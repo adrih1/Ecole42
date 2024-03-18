@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/28 16:49:16 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/03/18 11:14:27 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
 
 int main(int ac, char **av)
 {
@@ -24,7 +25,7 @@ int main(int ac, char **av)
         ft_parse_input(&program, av);
     
         //Data Init
-        // ft_data_init(&program);
+        ft_data_init(&program);
         // Simu Start
         // ft_simu_start(&program);
         // //Clean --> Philos are all full || A philo is dead 
