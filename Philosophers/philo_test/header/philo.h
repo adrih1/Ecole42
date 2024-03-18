@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/03/18 11:13:21 by ahors            ###   ########.fr       */
+/*   Updated: 2024/03/18 11:29:45 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_philosopher
 	long			last_meal_time;
 	t_fork			*l_fork;
 	t_fork			*r_fork;
-	pthread_t		*thread_id; 
+	pthread_t		*thread_id;
 	t_program		*program;
 }					t_philosopher;
 

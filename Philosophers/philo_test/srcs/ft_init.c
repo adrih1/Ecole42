@@ -6,11 +6,21 @@ pthread_mutex_t mutex;
 
 void *philosopher_thread(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
-    printf("Philosopher %d is thinking\n", philosopher->id);
-    pthread_mutex_lock(&mutex);
+    printf("Philosopher %d is thinking || ", philosopher->id);
+    printf("Philosopher %d has eaten %ld meals ||", philosopher->id, philosopher->meals_eaten);
+    if (philosopher->full == 0)
+        printf("Philosopher %d is not full\n", philosopher->id);   
+    // pthread_mutex_lock(&mutex);
     meals_eaten++;
-    pthread_mutex_unlock(&mutex);
+    // pthread_mutex_unlock(&mutex);
     return NULL;
+}
+
+void ft_philo_init(t_philosopher *philosopher, int i)
+{
+   philosopher->id = i;
+   philosopher->meals_eaten = 0;
+   philosopher->full = false;
 }
 
 void    ft_data_init(t_program *program)
@@ -23,6 +33,7 @@ void    ft_data_init(t_program *program)
     while (i < program->philo_nbr) 
     {
         program->philos[i].id = i;
+        ft_philo_init(&program->philos[i], i);
         if (pthread_create(&threads[i], NULL, philosopher_thread, (void *)&program->philos[i]) != 0) {
             perror("pthread_create");
             exit(EXIT_FAILURE);
