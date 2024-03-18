@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/03/18 13:22:10 by ahors            ###   ########.fr       */
+/*   Updated: 2024/03/18 14:06:41 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int ft_length_of_char_array(char **av)
 {
     int length = 0;
     
-    while (av[length] != NULL) 
+    while (av[length] != NULL)
         length++;
     return length;
 }
@@ -53,13 +53,12 @@ void print_timestamp(long timestamp_ms) {
     printf("Date et heure correspondantes: %s\n", time_str);
 }
 
-
 long get_current_timestamp() 
 {
+	long timestamp_ms;
     struct timeval current_time;
-    gettimeofday(&current_time, NULL);
-	printf("Time of the day: %ld\n", current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
-	long timestamp_ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
-    print_timestamp(timestamp_ms);
-	return(current_time.tv_sec);
+    
+	gettimeofday(&current_time, NULL);
+	timestamp_ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
+	return(timestamp_ms);
 }

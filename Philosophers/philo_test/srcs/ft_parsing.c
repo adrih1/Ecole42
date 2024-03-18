@@ -13,6 +13,6 @@ void    ft_parse_input(t_program *program, char **av)
         else 
             program->nb_limit_meals = -1;
     }
-    else    
+    else
         ft_error_exit("Some arguments were incorrect, please check everything");
 }
