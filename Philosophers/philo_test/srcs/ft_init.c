@@ -13,8 +13,9 @@ void ft_fork_init(t_fork *fork, t_program *program, int i)
     fork->fork_id = i;
     program->philos[i].l_fork = &program->forks[i];
     program->philos[i].r_fork = &program->forks[(i + 1) % program->philo_nbr];
-    // pthread_mutex_init(&program->philos[i].l_fork->fork, NULL);
-    // pthread_mutex_init(&program->philos[i].r_fork->fork, NULL);
+    pthread_mutex_init(&program->philos[i].l_fork->fork, NULL);
+    pthread_mutex_init(&program->philos[i].r_fork->fork, NULL);
+
 }
 
 void    ft_data_init(t_program *program)

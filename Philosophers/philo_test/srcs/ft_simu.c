@@ -4,10 +4,25 @@
 void *philosopher_thread(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
 
+    while (1) {
+        if(!pthread_mutex_lock(&philosopher->l_fork->fork))
+            printf("Philosopher %d has taken a fork\n", philosopher->id);
+        if (pthread_mutex_trylock(&philosopher->r_fork->fork) == 0) 
+        {
+            printf("Philosopher %d has taken a fork\n", philosopher->id);
+            break; // Si les deux fourchettes sont disponibles, sortir de la boucle
+        } else {
+            pthread_mutex_unlock(&philosopher->l_fork->fork); // Relâcher la fourchette gauche si la droite est prise
+        }
+    }
+
     // Manger
     philosopher->meals_eaten++;
     printf("Philosopher %d is eating\n", philosopher->id);
 
+    // Libérer les fourchettes après avoir mangé
+    pthread_mutex_unlock(&philosopher->l_fork->fork);
+    pthread_mutex_unlock(&philosopher->r_fork->fork);
     return NULL;
 }
 
