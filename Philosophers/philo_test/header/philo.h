@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/03/18 12:23:38 by ahors            ###   ########.fr       */
+/*   Updated: 2024/04/10 15:32:53 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <unistd.h> // write, sleep
 # include <stddef.h>
 # include <stdbool.h>
-# include <pthread.h> // mutex : init destroy lock unlock
+# include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
+#include <errno.h>
 
 # define PHILO_MAX 200
 # define RED     "\033[91m"

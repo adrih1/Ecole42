@@ -1,6 +1,5 @@
 #include "../header/philo.h"
 
-
 void *philosopher_thread(void *arg) {
     t_philosopher *philosopher = (t_philosopher *)arg;
 
@@ -32,7 +31,6 @@ void    ft_simu_start(t_program *program)
     pthread_t threads[program->philo_nbr];
 
     program->start_simulation = get_current_timestamp();
-    printf(GREEN "Simulation has started at: %ld\n" RESET, program->start_simulation); 
     i = 0;
     while (i < program->philo_nbr)
     {

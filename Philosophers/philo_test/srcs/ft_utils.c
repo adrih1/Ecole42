@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/03/18 14:06:41 by ahors            ###   ########.fr       */
+/*   Updated: 2024/04/10 12:19:35 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ void print_timestamp(long timestamp_ms) {
     time_t timestamp_sec = timestamp_ms / 1000; // Convertir le timestamp en secondes
     struct tm *local_time = localtime(&timestamp_sec);
 
+    // Convertir chaque composante de temps en format de chaîne
     char time_str[100];
-    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", local_time);
+    snprintf(time_str, sizeof(time_str), "%04d-%02d-%02d %02d:%02d:%02d",
+             local_time->tm_year + 1900, local_time->tm_mon + 1, local_time->tm_mday,
+             local_time->tm_hour, local_time->tm_min, local_time->tm_sec);
     
-    printf("Date et heure correspondantes: %s\n", time_str);
+    printf("La simulation a commencée le: %s\n", time_str);
 }
 
 long get_current_timestamp() 

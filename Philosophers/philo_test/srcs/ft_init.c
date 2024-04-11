@@ -18,11 +18,13 @@ void ft_fork_init(t_fork *fork, t_program *program, int i)
 
 }
 
-void    ft_data_init(t_program *program)
+// OLD
+void    ft_data_init_old(t_program *program)
 {
     int i;
 
     i = 0;
+    
     program->philos = ft_safe_malloc(program->philo_nbr * sizeof(t_philosopher));
     while (i < program->philo_nbr) 
     {
@@ -34,6 +36,22 @@ void    ft_data_init(t_program *program)
     while (i < program->philo_nbr) 
     {
         ft_fork_init(&program->forks[i], program, i);
+        i++;
+    }
+}
+
+
+void    ft_data_init(t_program *program)
+{
+    int i;
+
+    program->end_simulation = false;
+    program->philos = ft_safe_malloc(sizeof(t_philosopher) * program->philo_nbr);
+    program->forks = ft_safe_malloc(sizeof(t_fork) * program->philo_nbr);
+    i = 0;
+    while (i < program->philo_nbr) 
+    {
+        ft_philo_init(&program->philos[i], i);
         i++;
     }
 }
