@@ -51,7 +51,7 @@ void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 
 // THREADS
 // Thread Error Handle 
-static void	ft_thread_error_handle(int status, t_opcode opcode)
+void	ft_thread_error_handle(int status, t_opcode opcode)
 {
 	if (0 == status)
 		return ;

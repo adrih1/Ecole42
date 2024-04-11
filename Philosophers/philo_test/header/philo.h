@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/10 15:32:53 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/11 17:19:45 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_philosopher
 	long			meals_eaten;
 	bool			full;
 	long			last_meal_time;
-	t_fork			*l_fork;
-	t_fork			*r_fork;
+	t_fork			*first_fork;
+	t_fork			*second_fork;
 	pthread_t		*thread_id;
 	t_program		*program;
 }					t_philosopher;
@@ -122,7 +122,10 @@ void 	ft_simu_start(t_program *program);
 
 // Protect
 void	*ft_safe_malloc(size_t bytes);
+void	ft_mutex_error_handle(int status, t_opcode opcode);
 void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
+void	ft_thread_error_handle(int status, t_opcode opcode);
+void	ft_safe_thread_handle(pthread_t *thread, void *(* foo)(void *), void *data, t_opcode opcode); 
 
 
 // Utils
