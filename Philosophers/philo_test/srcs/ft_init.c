@@ -1,38 +1,5 @@
 #include "../header/philo.h"
 
-// OLD
-void ft_philo_init_old(t_philosopher *philosopher, int i)
-{
-    philosopher->id = i;
-    philosopher->meals_eaten = 0;
-    philosopher->full = false;
-}
-
-void    ft_data_init_old(t_program *program)
-{
-    int i;
-
-    i = 0;
-    
-    program->philos = ft_safe_malloc(program->philo_nbr * sizeof(t_philosopher));
-    while (i < program->philo_nbr) 
-    {
-        ft_philo_init_old(&program->philos[i], i);
-        i++;
-    }
-    i = 0;
-    program->forks = ft_safe_malloc(program->philo_nbr * sizeof(t_fork));
-    while (i < program->philo_nbr) 
-    {
-        ft_fork_init(&program->forks[i], program, i);
-        i++;
-    }
-}
-
-
-
-
-//NEW
 // Si philo impair --> first fork is the left 
 // Si philo pair --> first fork is the right
 void    ft_assign_forks(t_philosopher *philo, t_fork *forks, int philo_position)
@@ -61,7 +28,6 @@ void ft_philo_init(t_program *program)
         philo->id = i + 1; 
         philo->meals_eaten = 0; 
         philo->program = program; 
-         
         ft_assign_forks(philo, program->philos, i);
     }
 }
@@ -71,6 +37,7 @@ void    ft_data_init(t_program *program)
     int i;
 
     program->end_simulation = false;
+    program->all_threads_ready = false;
     program->philos = ft_safe_malloc(sizeof(t_philosopher) * program->philo_nbr);
     program->forks = ft_safe_malloc(sizeof(t_fork) * program->philo_nbr);
     i = 0;

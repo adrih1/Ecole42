@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/11 17:19:45 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/12 14:35:27 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ typedef struct s_program
 	long	time_to_sleep; 
 	long	nb_limit_meals; 
 	long	start_simulation; 
-	bool		end_simulation; 
+	bool	end_simulation; 
+	bool	all_threads_ready; 
 	t_fork 			*forks; 
 	t_philosopher	*philos;
 }					t_program;
@@ -117,8 +118,6 @@ void    ft_parse_input(t_program *program, char **av);
 //Init 
 void    ft_data_init(t_program *program);
 
-//Simu Start
-void 	ft_simu_start(t_program *program);
 
 // Protect
 void	*ft_safe_malloc(size_t bytes);
@@ -128,11 +127,15 @@ void	ft_thread_error_handle(int status, t_opcode opcode);
 void	ft_safe_thread_handle(pthread_t *thread, void *(* foo)(void *), void *data, t_opcode opcode); 
 
 
+//Simulation
+void    *ft_simulation(void *data); 
+void 	ft_simulation_start(t_program *program);
+
+
 // Utils
 long	ft_atol(const char *str);
 int ft_length_of_char_array(char **av);
 long get_current_timestamp();
-
 
 
 // Display
