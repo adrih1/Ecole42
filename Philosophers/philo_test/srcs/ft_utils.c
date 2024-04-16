@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/04/10 12:19:35 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/16 15:24:13 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,42 @@ void	ft_free_double_array(char **argv)
 	free(argv);
 }
 
-void	ft_error_exit(const char *error)
+long ft_get_time(t_time_code time_code) 
 {
-	printf(RED"🚨 %s 🚨\n"RESET, error);
-	exit(EXIT_FAILURE);
+    struct timeval current_time; 
+    
+	if(gettimeofday(&current_time, NULL))
+        ft_error_exit("Gettimeofday failed.\n");
+    if (SECOND == time_code)
+        return(current_time.tv_sec + (current_time.tv_usec / 1e6));
+    else if (MILISECOND == time_code)
+        return(current_time.tv_sec * 1e3 + (current_time.tv_usec / 1e3));
+    else if (MICROSECOND == time_code)
+        return(current_time.tv_sec * 1e6 + current_time.tv_usec );
+    else 
+        ft_error_exit ("Wrong input for gettime.\n");
+    return(263);
 }
 
-void print_timestamp(long timestamp_ms) {
-    time_t timestamp_sec = timestamp_ms / 1000; // Convertir le timestamp en secondes
-    struct tm *local_time = localtime(&timestamp_sec);
-
-    // Convertir chaque composante de temps en format de chaîne
-    char time_str[100];
-    snprintf(time_str, sizeof(time_str), "%04d-%02d-%02d %02d:%02d:%02d",
-             local_time->tm_year + 1900, local_time->tm_mon + 1, local_time->tm_mday,
-             local_time->tm_hour, local_time->tm_min, local_time->tm_sec);
-    
-    printf("La simulation a commencée le: %s\n", time_str);
-}
-
-long get_current_timestamp() 
+void	ft_precise_usleep(long usec, t_program *program)
 {
-	long timestamp_ms;
-    struct timeval current_time;
-    
-	gettimeofday(&current_time, NULL);
-	timestamp_ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
-	return(timestamp_ms);
+	long start; 
+	long elapsed; 
+	long rem; 
+
+	start = ft_get_time(MICROSECOND);
+	while(ft_get_time(MICROSECOND) - start < usec)
+	{
+		if (ft_simulation_finished(program))
+			break;
+		elapsed = ft_get_time(MICROSECOND) - start; 
+		rem = usec - elapsed;
+		if ((rem / 2) > 1e3)
+			usleep(usec / 2);
+		else
+		{
+			while(ft_get_time(MICROSECOND) - start < usec)
+				;
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/12 14:35:27 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/16 15:35:10 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 ---------------------------------------------------------------------------------
 */
 
+// MUTEX AND THREADS
 typedef enum e_opcode
 {
 	LOCK, 
@@ -53,6 +54,25 @@ typedef enum e_opcode
 	JOIN,
 	DETACH,
 }	t_opcode;
+
+// TIME CODE
+typedef enum e_time_code
+{
+	SECOND, 
+	MILISECOND,
+	MICROSECOND,
+}	t_time_code;
+
+// PHILO STATUS
+typedef enum e_philo_status
+{
+	EATING, 
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED, 
+}	t_philo_status;
 
 
 /*
@@ -94,6 +114,8 @@ typedef struct s_program
 	long	start_simulation; 
 	bool	end_simulation; 
 	bool	all_threads_ready; 
+	t_mtx	program_mtx; //Avoid Races
+	t_mtx	write_mutex; 
 	t_fork 			*forks; 
 	t_philosopher	*philos;
 }					t_program;
@@ -126,6 +148,15 @@ void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 void	ft_thread_error_handle(int status, t_opcode opcode);
 void	ft_safe_thread_handle(pthread_t *thread, void *(* foo)(void *), void *data, t_opcode opcode); 
 
+//Getters and Setters
+void    ft_set_bool(t_mtx *mutex, bool *dest, bool value);
+bool    ft_get_bool(t_mtx *mutex, bool *value);
+void    ft_set_long(t_mtx *mutex, long *dest, long value);
+bool    ft_get_long(t_mtx *mutex, long *value);
+bool    ft_simulation_finished(t_program *program);
+
+//Synchro Utils
+void     ft_wait_all_threads(t_program *program);
 
 //Simulation
 void    *ft_simulation(void *data); 
@@ -135,7 +166,8 @@ void 	ft_simulation_start(t_program *program);
 // Utils
 long	ft_atol(const char *str);
 int ft_length_of_char_array(char **av);
-long get_current_timestamp();
+long ft_get_time(t_time_code time_code);
+void	ft_precise_usleep(long usec, t_program *program);
 
 
 // Display
