@@ -5,6 +5,11 @@
 // 2) Eat : write eating, update last meal, uodate meals counter and usleep the amount of time and eventually bool full 
 // Release the forks 
 
+void    ft_thinking(t_philosopher *philo)
+{
+    ft_write_status(THINKING, philo, DEBUG_MODE);
+}
+
 void    ft_eat(t_philosopher *philo)
 {
     ft_safe_mutex_handle(&philo->first_fork->fork, LOCK);
@@ -44,7 +49,7 @@ void    *ft_simulation(void *data)
         ft_precise_usleep(philo->program->time_to_sleep, philo->program);        
 
         //Think
-   
+        ft_thinking(philo);
     }
     return (NULL);
 }
