@@ -1,16 +1,28 @@
 #include "../header/philo.h"
 
+// Eat Routine
+// 1) Grab the forks : here first & second fork 
+// 2) Eat : write eating, update last meal, uodate meals counter and usleep the amount of time and eventually bool full 
+// Release the forks 
 
-//if no meals 
-        // return
-    //if only one philosopher 
-        // ad hoc function
-    //If valid 
-        //Create threads, all philos 
-        // Create a monitor thread --> Searching for philosophers dead
-        // Synchronize the beginning of the simulation
-        // JOIN everyone
- 
+void    ft_eat(t_philosopher *philo)
+{
+    ft_safe_mutex_handle(&philo->first_fork->fork, LOCK);
+    ft_write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
+    ft_safe_mutex_handle(&philo->second_fork->fork, LOCK);
+    ft_write_status(TAKE_SECOND_FORK, philo, DEBUG_MODE);
+
+    ft_set_long(&philo->philo_mutex, &philo->last_meal_time, ft_get_time(MILISECOND));
+    philo->meals_eaten++;
+    ft_write_status(EATING, philo, DEBUG_MODE);
+    ft_precise_usleep(philo->program->time_to_eat, philo->program);
+    if(philo->program->nb_limit_meals > 0 && (philo->meals_eaten == philo->program->nb_limit_meals))
+        ft_set_bool(&philo->philo_mutex, &philo->full, true);
+    ft_safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
+    ft_safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
+}
+
+
 void    *ft_simulation(void *data)
 {
     t_philosopher *philo; 
@@ -22,18 +34,18 @@ void    *ft_simulation(void *data)
     //Set last meal time
     while (!ft_simulation_finished(philo->program))
     {
-        if (philo->full) // Maybe not safe ?
+        if (philo->full)
             break; 
         //Eat 
-
+        ft_eat(philo);
 
         //Sleep
-        
+        ft_write_status(SLEEPING, philo, DEBUG_MODE);
+        ft_precise_usleep(philo->program->time_to_sleep, philo->program);        
 
         //Think
-        
+   
     }
-
     return (NULL);
 }
 

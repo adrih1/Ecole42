@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/16 15:35:10 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/17 15:13:53 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@
 #include <errno.h>
 
 # define PHILO_MAX 200
+# define DEBUG_MODE 0 // Write function macro
 # define RED     "\033[91m"
 # define GREEN   "\033[92m"
 # define YELLOW  "\033[93m"
 # define PURPLE  "\033[94m"
 # define WHITE   "\033[97m"
 # define RESET   "\033[0m"
+
+
+
 
 
 /*
@@ -100,6 +104,7 @@ typedef struct s_philosopher
 	t_fork			*first_fork;
 	t_fork			*second_fork;
 	pthread_t		*thread_id;
+	t_mtx			philo_mutex; //Useful to avoid race conditions with the monitor when updating the lasts_meal_time
 	t_program		*program;
 }					t_philosopher;
 
@@ -114,7 +119,7 @@ typedef struct s_program
 	long	start_simulation; 
 	bool	end_simulation; 
 	bool	all_threads_ready; 
-	t_mtx	program_mtx; //Avoid Races
+	t_mtx	program_mtx;
 	t_mtx	write_mutex; 
 	t_fork 			*forks; 
 	t_philosopher	*philos;
@@ -172,6 +177,8 @@ void	ft_precise_usleep(long usec, t_program *program);
 
 // Display
 void	ft_error_exit(const char *error);
+void    ft_write_status(t_philo_status status, t_philosopher *philo, bool debug);
+void	ft_write_status_debug(t_philo_status status, t_philosopher *philo, long elapsed);
 
 
 #endif
