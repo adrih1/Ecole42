@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/17 15:13:53 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/17 16:10:17 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_philosopher
 	long			last_meal_time;
 	t_fork			*first_fork;
 	t_fork			*second_fork;
-	pthread_t		*thread_id;
+	pthread_t		thread_id;
 	t_mtx			philo_mutex; //Useful to avoid race conditions with the monitor when updating the lasts_meal_time
 	t_program		*program;
 }					t_philosopher;

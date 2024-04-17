@@ -58,14 +58,18 @@ void    ft_simulation_start(t_program *program)
 {
     int i; 
 
-    i = 0; 
+    i = -1; 
     if (program->nb_limit_meals == 0)
         return; 
     else if (program->philo_nbr == 1)
         ; // TODO
     else
-        while (i < program ->philo_nbr)
-            ft_safe_thread_handle(program->philos[i].thread_id, ft_simulation, &program->philos[i], CREATE);
+        while (++i < program ->philo_nbr)
+        {
+            ft_safe_thread_handle(&program->philos[i].thread_id, ft_simulation, &program->philos[i], CREATE);
+            printf("Arrivé ici.\n");
+        }
+            
    
     //Start of Simulation 
     program->start_simulation = ft_get_time(MILISECOND);
@@ -76,7 +80,7 @@ void    ft_simulation_start(t_program *program)
     //Wait for everyone
     i = -1; 
     while (++i < program->philo_nbr)
-        ft_safe_thread_handle(program->philos[i].thread_id, NULL, NULL, JOIN);
+        ft_safe_thread_handle(&program->philos[i].thread_id, NULL, NULL, JOIN);
 
     //Si on arrive ici les philos sont full
 }

@@ -41,16 +41,14 @@ void    ft_data_init(t_program *program)
     program->end_simulation = false;
     program->all_threads_ready = false;
     program->philos = ft_safe_malloc(sizeof(t_philosopher) * program->philo_nbr);
-    ft_safe_mutex_handle(&program->program_mtx, INIT);
-    ft_safe_mutex_handle(&program->write_mutex, INIT);
     program->forks = ft_safe_malloc(sizeof(t_fork) * program->philo_nbr);
-    i = 0;
-    while (i < program->philo_nbr) 
+    ft_safe_mutex_handle(&program->write_mutex, INIT);
+    ft_safe_mutex_handle(&program->program_mtx, INIT);
+    i = -1;
+    while (++i < program->philo_nbr) 
     {
         ft_safe_mutex_handle(&program->forks[i].fork, INIT);
         program->forks[i].fork_id = i; 
-        i++;
     }
     ft_philo_init(program);
-}
     
