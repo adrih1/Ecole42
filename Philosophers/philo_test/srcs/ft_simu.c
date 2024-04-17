@@ -65,10 +65,7 @@ void    ft_simulation_start(t_program *program)
         ; // TODO
     else
         while (++i < program ->philo_nbr)
-        {
             ft_safe_thread_handle(&program->philos[i].thread_id, ft_simulation, &program->philos[i], CREATE);
-            printf("Arrivé ici.\n");
-        }
             
    
     //Start of Simulation 

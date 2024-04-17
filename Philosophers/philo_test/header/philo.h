@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/17 16:10:17 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/17 16:14:16 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #include <errno.h>
 
 # define PHILO_MAX 200
-# define DEBUG_MODE 0 // Write function macro
+# define DEBUG_MODE 1 // Write function macro
 # define RED     "\033[91m"
 # define GREEN   "\033[92m"
 # define YELLOW  "\033[93m"

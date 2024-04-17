@@ -51,4 +51,4 @@ void    ft_data_init(t_program *program)
         program->forks[i].fork_id = i; 
     }
     ft_philo_init(program);
-    
+}
