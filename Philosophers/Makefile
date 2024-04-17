@@ -6,7 +6,7 @@
 #    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/04/15 15:34:02 by adrienhors       ###   ########.fr        #
+#    Updated: 2024/04/17 15:32:20 by adrienhors       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./philo_test/srcs
 SRCS =	$(SRC_DIR)/ft_atol.c \
+		$(SRC_DIR)/ft_display.c \
 		$(SRC_DIR)/ft_errors.c \
 		$(SRC_DIR)/ft_getters_setters.c \
 		$(SRC_DIR)/ft_init.c \

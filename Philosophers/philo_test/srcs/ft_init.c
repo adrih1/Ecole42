@@ -26,10 +26,11 @@ void ft_philo_init(t_program *program)
     {
         philo = program->philos + i; 
         philo->id = i + 1; 
+        philo->full = false; 
         philo->meals_eaten = 0; 
-        philo->program = program; 
-        ft_assign_forks(philo, program->philos, i);
         ft_safe_mutex_handle(&philo->philo_mutex, INIT);
+        philo->program = program;
+        ft_assign_forks(philo, program->forks, i);
     }
 }
 

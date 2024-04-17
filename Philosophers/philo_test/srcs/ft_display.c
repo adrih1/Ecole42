@@ -8,15 +8,15 @@ void	ft_error_exit(const char *error)
 
 void	ft_write_status_debug(t_philo_status status, t_philosopher *philo, long elapsed)
 {
-	if (TAKE_FIRST_FORK == status && !simulation_finished(philo->program))
+	if (TAKE_FIRST_FORK == status && !ft_simulation_finished(philo->program))
         printf("%6ld %d has taken the 1st fork 🍽\t\t\tn°[%d]\n", elapsed, philo->id, philo->first_fork->fork_id);
-	else if (TAKE_SECOND_FORK == status && !simulation_finished(philo->program))
+	else if (TAKE_SECOND_FORK == status && !ft_simulation_finished(philo->program))
 		printf("%6ld %d has taken the 2nd fork 🍽\t\t\tn°[%d]\n", elapsed, philo->id, philo->second_fork->fork_id);
-	else if (EATING == status && !simulation_finished(philo->program))
+	else if (EATING == status && !ft_simulation_finished(philo->program))
 		printf("%6ld %d is eating 🍝\t\t\t[🍝 %ld 🍝]\n", elapsed, philo->id, philo->meals_eaten);
-	else if (SLEEPING == status && !simulation_finished(philo->program))
+	else if (SLEEPING == status && !ft_simulation_finished(philo->program))
 		printf("%6ld %d is sleeping 😴\n", elapsed, philo->id);
-	else if (THINKING == status && !simulation_finished(philo->program))
+	else if (THINKING == status && !ft_simulation_finished(philo->program))
 		printf("%6ld %d is thinking 🤔\n", elapsed, philo->id);
 	else if (DIED == status)
 		printf("💀💀💀 %6ld %d died   💀💀💀\n", elapsed, philo->id);
@@ -24,7 +24,6 @@ void	ft_write_status_debug(t_philo_status status, t_philosopher *philo, long ela
 
 void    ft_write_status(t_philo_status status, t_philosopher *philo, bool debug)
 {
-
     long elapsed; 
 
     elapsed = ft_get_time(MILISECOND) - philo->program->start_simulation; 

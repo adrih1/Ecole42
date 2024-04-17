@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/03/18 16:44:36 by ahors            ###   ########.fr       */
+/*   Updated: 2024/04/17 15:33:20 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char **av)
         //Data Init
         ft_data_init(&program);
         // Simu Start
-        ft_simu_start(&program);
+        ft_simulation_start(&program);
         // Clean --> Philos are all full || A philo is dead 
         // ft_clean_program(&program);     
     }

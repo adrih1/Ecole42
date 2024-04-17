@@ -56,18 +56,18 @@ void	ft_thread_error_handle(int status, t_opcode opcode)
 	if (0 == status)
 		return ;
 	if (EAGAIN == status)
-		error_exit("No resources to create another thread");
+		ft_error_exit("No resources to create another thread");
 	else if (EPERM == status)
-		error_exit("The caller does not have appropriate permission\n");
+		ft_error_exit("The caller does not have appropriate permission\n");
 	else if (EINVAL == status && CREATE == opcode)
-		error_exit("The value specified by attr is invalid.");
+		ft_error_exit("The value specified by attr is invalid.");
 	else if (EINVAL == status && (JOIN == opcode || DETACH == opcode))
-		error_exit("The value specified by thread is not joinable\n");
+		ft_error_exit("The value specified by thread is not joinable\n");
 	else if (ESRCH == status)
-		error_exit("No thread could be found corresponding to that"
+		ft_error_exit("No thread could be found corresponding to that"
 			"specified by the given thread ID, thread.");
 	else if (EDEADLK == status)
-		error_exit("A deadlock was detected or the value of"
+		ft_error_exit("A deadlock was detected or the value of"
 			"thread specifies the calling thread.");
 }
 
