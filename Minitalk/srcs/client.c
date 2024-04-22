@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:57:46 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/20 17:01:35 by ahors            ###   ########.fr       */
+/*   Updated: 2024/04/22 14:19:39 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_send_signal(int pid, char *str)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			usleep(100);
+			usleep(200);
 			bit++;
 		}
 		i++;
