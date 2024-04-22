@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/14 13:40:11 by ahors            ###   ########.fr       */
+/*   Updated: 2024/04/22 14:33:52 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	on_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free(data->mlx_ptr);
+    free(data->random_num);
+    free(data->win_ptr);
 	exit(0);
 	return (0);
 }
@@ -42,7 +44,7 @@ void *ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height)
     void *img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_path, width, height);
     if (!img_ptr)
         return NULL;
-    return img_ptr;
+    return (img_ptr);
 }
 
 
