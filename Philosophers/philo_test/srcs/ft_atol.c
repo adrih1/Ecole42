@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:40:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/27 15:23:11 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/22 15:01:12 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_isspace(char c)
 
 long	ft_atol(const char *str)
 {
-	long	i;
-	long	res;
-	long	sign;
+	long i;
+	long res;
+	long sign;
 
 	i = 0;
 	res = 0;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
+#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/04/18 14:21:27 by adrienhors       ###   ########.fr        #
+#    Updated: 2024/04/22 14:39:33 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,14 @@ SRCS =	$(SRC_DIR)/ft_atol.c \
 		$(SRC_DIR)/ft_errors.c \
 		$(SRC_DIR)/ft_getters_setters.c \
 		$(SRC_DIR)/ft_init.c \
-		$(SRC_DIR)/ft_monitor.c \
 		$(SRC_DIR)/ft_parsing.c \
 		$(SRC_DIR)/ft_protect.c \
 		$(SRC_DIR)/ft_simu.c \
 		$(SRC_DIR)/ft_synchro_utils.c \
 		$(SRC_DIR)/ft_utils.c \
 		$(SRC_DIR)/main.c \
+		
+# $(SRC_DIR)/ft_monitor.c 
 
 	
 
