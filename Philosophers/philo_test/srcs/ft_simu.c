@@ -1,9 +1,5 @@
 #include "../header/philo.h"
 
-// Eat Routine
-// 1) Grab the forks : here first & second fork 
-// 2) Eat : write eating, update last meal, uodate meals counter and usleep the amount of time and eventually bool full 
-// Release the forks 
 
 void    ft_thinking(t_philosopher *philo)
 {
@@ -36,6 +32,9 @@ void    *ft_simulation(void *data)
     //Spinlock
     ft_wait_all_threads(philo->program);
 
+    //Synchro with Monitor
+    
+
     //Set last meal time
     while (!ft_simulation_finished(philo->program))
     {
@@ -66,8 +65,10 @@ void    ft_simulation_start(t_program *program)
     else
         while (++i < program ->philo_nbr)
             ft_safe_thread_handle(&program->philos[i].thread_id, ft_simulation, &program->philos[i], CREATE);
-            
-   
+    
+    //Monitor 
+    ft_safe_thread_handle(&program->monitor, monitor_simumlation, program, CREATE);
+
     //Start of Simulation 
     program->start_simulation = ft_get_time(MILISECOND);
 

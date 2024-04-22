@@ -2,6 +2,7 @@
 
 // Si philo impair --> first fork is the left 
 // Si philo pair --> first fork is the right
+// Even philosopher takes the 1st fork
 void    ft_assign_forks(t_philosopher *philo, t_fork *forks, int philo_position)
 {
     int philo_nbr; 
@@ -40,6 +41,7 @@ void    ft_data_init(t_program *program)
 
     program->end_simulation = false;
     program->all_threads_ready = false;
+    program->nbr_threads_running = 0;
     program->philos = ft_safe_malloc(sizeof(t_philosopher) * program->philo_nbr);
     program->forks = ft_safe_malloc(sizeof(t_fork) * program->philo_nbr);
     ft_safe_mutex_handle(&program->write_mutex, INIT);

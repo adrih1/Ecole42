@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/04/16 15:24:13 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/19 16:11:32 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_precise_usleep(long usec, t_program *program)
 {
 	long start; 
 	long elapsed; 
-	long rem; 
+	long rem;
 
 	start = ft_get_time(MICROSECOND);
 	while(ft_get_time(MICROSECOND) - start < usec)
@@ -68,7 +68,7 @@ void	ft_precise_usleep(long usec, t_program *program)
 		elapsed = ft_get_time(MICROSECOND) - start; 
 		rem = usec - elapsed;
 		if ((rem / 2) > 1e3)
-			usleep(usec / 2);
+			usleep(rem / 2);
 		else
 		{
 			while(ft_get_time(MICROSECOND) - start < usec)

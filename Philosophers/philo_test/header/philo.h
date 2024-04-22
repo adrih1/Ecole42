@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/17 16:14:16 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/04/19 15:09:08 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct s_program
 	long	start_simulation; 
 	bool	end_simulation; 
 	bool	all_threads_ready; 
+	long	nbr_threads_running; 
+	pthread_t	monitor; 
 	t_mtx	program_mtx;
 	t_mtx	write_mutex; 
 	t_fork 			*forks; 
