@@ -94,7 +94,7 @@ void		ft_load_third_layer(t_data *data, t_map *map);
 void		ft_free_textures(t_data *data, t_map *map);
 
 // Hooks
-int			on_destroy(t_data *data);
+int			on_destroy(t_map *map);
 int			on_keypress(int keynum, t_map *map);
 
 // Mobility
@@ -103,4 +103,8 @@ void		ft_get_player_coordinate(t_map *map, int keynum);
 // Utils
 void		ft_close_file(int fd);
 int			ft_open_file(char *filename);
+
+// Cleaning
+void ft_free_all(t_map *map);
+
 #endif

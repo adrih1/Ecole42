@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/22 14:33:52 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 17:43:04 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@ int on_keypress(int keynum, t_map *map)
 }
 
 
-int	on_destroy(t_data *data)
+int	on_destroy(t_map *map)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	free(data->mlx_ptr);
-    free(data->random_num);
-    free(data->win_ptr);
+	ft_free_all(map);
 	exit(0);
 	return (0);
 }
@@ -63,12 +60,18 @@ int main(void)
 		return (1);
 	}
     map = (t_map *)malloc(sizeof(t_map));
-    if (map == NULL)
-        return 0;
-        
-    ft_check_map(fd, filename, map);
-	close(fd);
-    
+    if (!map)
+    {
+        ft_free_all(map);
+        exit(1);        
+    }
+    if (ft_check_map(fd, filename, map) == 0)
+    {
+        close(fd);
+        exit(1);        
+
+    }
+    close(fd);
     data.mlx_ptr = mlx_init();
     if (!data.mlx_ptr)
         return (1);
@@ -90,11 +93,11 @@ int main(void)
     mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, map);
 
     // Hooks fermeture de la fenêtre
-	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &data);
+	mlx_hook(data.win_ptr, 17, 1L<<4, on_destroy, &map);
   
     // Boucle pour attendre des événements (fenêtre ouverte)
     mlx_loop(data.mlx_ptr);
 
-   	on_destroy(&data);
+   	on_destroy(map);
     return (0);
 }

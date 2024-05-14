@@ -20,7 +20,7 @@ int ft_move_game_finish(char c, t_map *map)
 
     if (result == 3)
     {
-        on_destroy(map->data);
+        on_destroy(map);
     }
     return result;
 }

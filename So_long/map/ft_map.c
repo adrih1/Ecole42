@@ -6,24 +6,13 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/02/14 14:11:30 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 17:42:56 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void ft_free_map(t_map *map)
-{
-    int i;
 
-    i = 0;
-    while (i < map->height)
-    {
-        free(map->grid[i]);
-        i++;
-    }
-    free(map->grid);
-}
 
 void    ft_init_map(t_map *map)
 {
@@ -45,8 +34,7 @@ int ft_check_map(int fd, char *filename, t_map *map)
     ft_check_items(map);
     if(map->start_count > 1 || map->exit_count > 1 || map->item_count < 1 || !ft_validate_walls(map) || !ft_check_rectangular(map))
     {
-        ft_free_map(map);
-        //Afficher Erreur 
+        ft_free_all(map);
         return (0);
     }
     return (1);
@@ -58,10 +46,7 @@ void	ft_render_texture(t_data data, char *filename, int img_width, int img_heigh
 
 	img_ptr = ft_load_image(data.mlx_ptr, filename, &img_width, &img_height);
     if (!img_ptr)
-    {
-        free(img_ptr);
         ft_printf("L'image n'existe pas.\n");
-    }
     mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j*img_width, i*img_height);
 }
 

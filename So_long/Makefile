@@ -1,6 +1,6 @@
 NAME = so_long
 
-CC = cc
+CC = cc -g
 RM = rm -f
 
 LIBFT = libft/libft.a
