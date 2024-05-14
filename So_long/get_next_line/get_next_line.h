@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/01/21 21:35:54 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/05/14 18:45:33 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 ---------------------------------------------------------------------------------
 */
 
+# include <fcntl.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 /*
 ---------------------------------------------------------------------------------
@@ -41,6 +41,6 @@ char	*ft_join_free(char *buffer, char *buf);
 char	*ft_create_line(char *buffer);
 char	*ft_clean_stash(char *buffer);
 char	*ft_read(int fd, char *buffer);
-char	*get_next_line(int fd); 
+char	*get_next_line(int fd);
 
 #endif

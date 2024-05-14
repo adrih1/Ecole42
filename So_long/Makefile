@@ -19,6 +19,7 @@ SRCS =	so_long.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 		mobility/ft_mobility.c \
+		mobility/ft_check_game.c \
 		ft_clean.c
 
 OBJS = $(SRCS:.c=.o)

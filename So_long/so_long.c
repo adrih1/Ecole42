@@ -6,19 +6,19 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:23:07 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:52:37 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	keypress_count = 0;
+int	g_keypress_count = 0;
 
 int	on_keypress(int keynum, t_map *map)
 {
 	if (keynum == 119 || keynum == 97 || keynum == 100 || keynum == 115)
 	{
-		keypress_count++;
+		g_keypress_count++;
 		ft_printf("Keypress Count: %d\n", keypress_count);
 	}
 	ft_get_player_coordinate(map, keynum);

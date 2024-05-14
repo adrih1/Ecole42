@@ -6,36 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:11:05 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:11:07 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:49:25 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-int	ft_check_movement_possible(char c, t_map *map)
-{
-	if (c == 'C')
-		map->item_count--;
-	if (c == '1')
-		return (0);
-	if (map->item_count != 0 && c == 'E')
-		return (0);
-	if (map->item_count == 0 && c == 'E')
-		return (3);
-	return (1);
-}
-
-int	ft_move_game_finish(char c, t_map *map)
-{
-	int	result;
-
-	result = ft_check_movement_possible(c, map);
-	if (result == 3)
-	{
-		on_destroy(map);
-	}
-	return (result);
-}
 
 void	ft_move_up(t_map *map, int i, int j)
 {
@@ -101,34 +76,21 @@ void	ft_move_right(t_map *map, int i, int j)
 	}
 }
 
-// Explication du calcul
 void	ft_get_player_coordinate(t_map *map, int keynum)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
 	i = map->player_col / 32;
 	j = ((map->player_row) / 32);
-	// Linux
-	if (keynum == 119) // W
+	if (keynum == 119)
 		ft_move_up(map, i, j);
-	if (keynum == 115) // S
+	if (keynum == 115)
 		ft_move_down(map, i, j);
-	if (keynum == 97) // A
+	if (keynum == 97)
 		ft_move_left(map, i, j);
-	if (keynum == 100) // D
+	if (keynum == 100)
 		ft_move_right(map, i, j);
-	// Mac
-	// if (keynum == 14) // E
-	//     ft_move_up(map, i, j);
-	// if (keynum == 2) // S
-	//     ft_move_down(map, i, j);
-
-	// if (keynum == 1)  // F
-	//     ft_move_left(map, i, j);
-
-	// if (keynum == 3) // D
-	//     ft_move_right(map, i, j);
 }
