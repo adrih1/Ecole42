@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:33:59 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:41:37 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,28 @@ int	ft_find_map_height(int fd)
 	return (count);
 }
 
-void	ft_parse_map(t_map *map, int fd, char *filename)
+void	ft_parse_line(t_map *map, int fd)
 {
 	int		i;
 	char	*line;
+	char	*temp;
 
+	i = 0;
+	line = get_next_line(fd);
+	while (line && line[0] != '\0')
+	{
+		temp = line;
+		map->grid[i] = strdup(line);
+		line = get_next_line(fd);
+		free(temp);
+		i++;
+	}
+	free(line);
+	close(fd);
+}
+
+void	ft_parse_map(t_map *map, int fd, char *filename)
+{
 	map->height = ft_find_map_height(fd);
 	map->grid = (char **)malloc(map->height * sizeof(char *));
 	if (!(map->grid))
@@ -64,12 +81,5 @@ void	ft_parse_map(t_map *map, int fd, char *filename)
 	fd = ft_open_file(filename);
 	if (fd == 1)
 		ft_free_all(map);
-	i = 0;
-	while ((line = get_next_line(fd)) && line[0] != '\0')
-	{
-		map->grid[i] = strdup(line);
-		free(line);
-		i++;
-	}
-	close(fd);
+	ft_parse_line(map, fd);
 }
