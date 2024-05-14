@@ -87,7 +87,8 @@ void		ft_render_texture(t_data data, char *filename, int img_width, int img_heig
 
 // New Version of Render
 void 		ft_put_textures(t_data *data, t_map *map);
-void		ft_load_textures(t_map *map, t_data *data);
+void		ft_load_textures1(t_map *map, t_data *data);
+void		ft_load_textures2(t_map *map, t_data *data);
 void		ft_load_first_layer(t_data *data, t_map *map);
 void		ft_load_second_layer(t_data *data, t_map *map);
 void		ft_load_third_layer(t_data *data, t_map *map);

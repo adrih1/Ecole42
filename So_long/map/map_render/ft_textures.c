@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:10:38 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:24:08 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height)
 	return (img_ptr);
 }
 
-void	ft_load_textures(t_map *map, t_data *data)
+void	ft_load_textures1(t_map *map, t_data *data)
 {
 	map->floor = ft_load_image(data->mlx_ptr, "assets/floor.xpm",
 			&map->texture_width, &map->texture_height);
@@ -38,6 +38,10 @@ void	ft_load_textures(t_map *map, t_data *data)
 		ft_free_textures(data, map);
 		exit(0);
 	}
+}
+
+void	ft_load_textures2(t_map *map, t_data *data)
+{
 	map->wall = ft_load_image(data->mlx_ptr, "assets/wall.xpm",
 			&map->texture_width, &map->texture_height);
 	if (!(map->wall))

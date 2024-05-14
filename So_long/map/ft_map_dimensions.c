@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:10:44 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:33:59 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_get_map_width(t_map *map)
 		ft_free_all(map);
 	map->width = strlen(map->grid[0]);
 }
+
 int	ft_find_map_height(int fd)
 {
 	char	*line;
