@@ -6,10 +6,10 @@
 ---------------------------------------------------------------------------------
 */
 
-# include "ft_printf/ft_printf.h"
-# include "get_next_line/get_next_line.h"
-# include "libft/libft.h"
-# include "mlx/mlx.h"
+# include "../ft_printf/ft_printf.h"
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -82,11 +82,13 @@ void		ft_map_generate(t_map *map, t_data *data);
 // FONCTIONS INTERFACE || GAME
 
 // Render Texture
-void		*ft_load_image(void *mlx_ptr, char *file_path, int *width, int *height);
-void		ft_render_texture(t_data data, char *filename, int img_width, int img_height, int j, int i);
+void		*ft_load_image(void *mlx_ptr, char *file_path, int *width,
+				int *height);
+void		ft_render_texture(t_data data, char *filename, int img_width,
+				int img_height, int j, int i);
 
 // New Version of Render
-void 		ft_put_textures(t_data *data, t_map *map);
+void		ft_put_textures(t_data *data, t_map *map);
 void		ft_load_textures1(t_map *map, t_data *data);
 void		ft_load_textures2(t_map *map, t_data *data);
 void		ft_load_first_layer(t_data *data, t_map *map);
@@ -100,12 +102,13 @@ int			on_keypress(int keynum, t_map *map);
 
 // Mobility
 void		ft_get_player_coordinate(t_map *map, int keynum);
+int			ft_move_game_finish(char c, t_map *map);
 
 // Utils
 void		ft_close_file(int fd);
 int			ft_open_file(char *filename);
 
 // Cleaning
-void ft_free_all(t_map *map);
+void		ft_free_all(t_map *map);
 
 #endif

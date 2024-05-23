@@ -5,22 +5,22 @@ RM = rm -f
 
 LIBFT = libft/libft.a
 PRINTF = ft_printf/libftprintf.a
-HEADER_DIR = ./mlx/
-MLX_DIR = ./mlx/
+HEADER_DIR = mlx/
+MLX_DIR = mlx/
 
-SRCS =	so_long.c \
-		map/ft_map.c \
-		map/ft_map_dimensions.c \
-		map/ft_map_walls.c \
-		map/ft_map_checks.c \
-		map/map_render/ft_layer.c \
-		map/map_render/ft_textures.c \
-		ft_utils.c \
+SRCS =	srcs/so_long.c \
+		srcs/map/ft_map.c \
+		srcs/map/ft_map_dimensions.c \
+		srcs/map/ft_map_walls.c \
+		srcs/map/ft_map_checks.c \
+		srcs/map/map_render/ft_layer.c \
+		srcs/map/map_render/ft_textures.c \
+		srcs/ft_utils.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
-		mobility/ft_mobility.c \
-		mobility/ft_check_game.c \
-		ft_clean.c
+		srcs/mobility/ft_mobility.c \
+		srcs/mobility/ft_check_game.c \
+		srcs/ft_clean.c
 
 OBJS = $(SRCS:.c=.o)
 
