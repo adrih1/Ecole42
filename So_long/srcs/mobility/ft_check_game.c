@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:46:49 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 14:27:13 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/23 17:22:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	ft_move_game_finish(char c, t_map *map)
 		printf("Keypress Count: %d\n", g_keypress_count);
 	}
 	if (result == 3)
-	{
 		on_destroy(map);
-	}	
 	return (result);
 }

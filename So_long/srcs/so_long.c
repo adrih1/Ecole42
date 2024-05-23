@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 17:12:05 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/23 17:21:46 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 	map->texture_width = 32;
 	ft_map_generate(map, map->data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, map);
-	mlx_hook(data.win_ptr, 17, 1L << 4, on_destroy, &map);
+	mlx_hook(data.win_ptr, 17, 1L << 4, on_destroy, map);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }
