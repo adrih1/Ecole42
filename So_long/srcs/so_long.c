@@ -6,13 +6,11 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 14:19:42 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/23 17:12:05 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 int	on_keypress(int keynum, t_map *map)
 {
@@ -23,9 +21,9 @@ int	on_keypress(int keynum, t_map *map)
 
 int	on_destroy(t_map *map)
 {
+	printf("coucou\n");
 	ft_free_all(map);
 	exit(0);
-	return (0);
 }
 
 int	main(int ac, char **av)
@@ -75,6 +73,5 @@ int	main(int ac, char **av)
 	mlx_hook(data.win_ptr, 2, 1L << 0, on_keypress, map);
 	mlx_hook(data.win_ptr, 17, 1L << 4, on_destroy, &map);
 	mlx_loop(data.mlx_ptr);
-	on_destroy(map);
 	return (0);
 }
