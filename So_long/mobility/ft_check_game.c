@@ -6,11 +6,13 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:46:49 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:48:36 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/23 14:27:13 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+int	g_keypress_count = 0;
 
 int	ft_check_movement_possible(char c, t_map *map)
 {
@@ -30,9 +32,14 @@ int	ft_move_game_finish(char c, t_map *map)
 	int	result;
 
 	result = ft_check_movement_possible(c, map);
+	if(result != 0)	
+	{
+		g_keypress_count++;
+		printf("Keypress Count: %d\n", g_keypress_count);
+	}
 	if (result == 3)
 	{
 		on_destroy(map);
-	}
+	}	
 	return (result);
 }
