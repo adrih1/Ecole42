@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 10:51:11 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:06:08 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_check_exit(t_map *map)
 	while (i < map->height)
 	{
 		j = 0;
-		while (j < map->width)
+		while (map->grid[i][j] && j < map->width)
 		{
 			if (map->grid[i][j] == 'E')
 				map->exit_count++;
@@ -44,7 +44,7 @@ void	ft_check_start(t_map *map)
 	while (i < map->height)
 	{
 		j = 0;
-		while (j < map->width)
+		while (map->grid[i][j] && j < map->width)
 		{
 			if (map->grid[i][j] == 'P')
 				map->start_count++;
@@ -65,7 +65,7 @@ void	ft_check_items(t_map *map)
 	while (i < map->height)
 	{
 		j = 0;
-		while (j < map->width)
+		while (map->grid[i][j] && j < map->width)
 		{
 			if (map->grid[i][j] == 'C')
 				map->item_count++;
@@ -91,7 +91,7 @@ int	ft_check_rectangular(t_map *map)
 	i--;
 	if (len != strlen(map->grid[i]) + 1)
 	{
-		ft_printf("Chaque ligne doti faire la meme longueur.\n");
+		ft_printf("Chaque ligne doit faire la meme longueur.\n");
 		return (0);
 	}
 	return (1);
