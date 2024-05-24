@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:01:29 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 15:52:35 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,6 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 		return (0);
 	}
 	return (1);
-}
-
-void	ft_render_texture(t_data data, char *filename, int img_width,
-		int img_height, int j, int i)
-{
-	void	*img_ptr;
-
-	img_ptr = ft_load_image(data.mlx_ptr, filename, &img_width, &img_height);
-	if (!img_ptr)
-		ft_printf("L'image n'existe pas.\n");
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img_ptr, j * img_width,
-		i * img_height);
 }
 
 void	ft_map_generate(t_map *map, t_data *data)

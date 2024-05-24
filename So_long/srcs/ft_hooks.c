@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:45:10 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:45:47 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 15:49:23 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	on_keypress(int keynum, t_map *map)
 	{
 		ft_get_player_coordinate(map, keynum);
 	}
-	if(keynum == 65307)
-		on_destroy(map);	
+	if (keynum == 65307)
+		on_destroy(map);
 	return (keynum);
 }
 

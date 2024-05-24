@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 14:59:57 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 15:52:10 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void		ft_map_generate(t_map *map, t_data *data);
 // Render Texture
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width,
 				int *height);
-void		ft_render_texture(t_data data, char *filename, int img_width,
-				int img_height, int j, int i);
 // New Version of Render
 void		ft_put_textures(t_data *data, t_map *map);
 void		ft_load_textures1(t_map *map, t_data *data);
