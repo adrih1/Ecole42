@@ -6,10 +6,7 @@ static void	ft_flood_fill_util(t_map *map, int x, int y)
         return ;
 	map->visited[y][x] = true;
 	if (map->grid[y][x] == 'C')
-	{
-		printf("Map Item Count; %d\n", map->item_count);
 		map->item_count_flood_fill--;
-	}	
 	if (map->grid[y][x] == 'E')
 		map->exit_found = true;
 	ft_flood_fill_util(map, x + 1, y);

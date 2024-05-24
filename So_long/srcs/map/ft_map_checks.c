@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 14:14:53 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:34:01 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,6 @@ int	ft_check_rectangular(t_map *map)
 	}
 	i--;
 	if (len != strlen(map->grid[i]) + 1)
-	{
-		ft_printf("Chaque ligne doit faire la meme longueur.\n");
 		return (0);
-	}
 	return (1);
 }
