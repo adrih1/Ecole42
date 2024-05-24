@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:18 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 10:38:54 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 13:06:32 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_free_data(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+	free(data);
 
 }
 
@@ -38,24 +39,46 @@ void	ft_free_images(t_map *map)
 		mlx_destroy_image(map->data->mlx_ptr, map->collectable);
 }
 
+void	ft_free_visited(t_map *map)
+{
+	int i; 
+
+	i = 0;
+	while (i < map->height)
+	{
+		free(map->visited[i]);
+		i++;
+	}
+	free(map->visited);		
+}
+
+void	ft_free_grid(t_map *map)
+{
+	int i; 
+
+	i = 0;
+	while (i < map->height)
+	{
+		free(map->grid[i]);
+		i++;
+	}
+	free(map->grid);		
+
+}
+
 void	ft_free_all(t_map *map)
 {
 	int	i;
 
 	i = 0;
 	if (map->grid)
-	{
-		while (i < map->height)
-		{
-			free(map->grid[i]);
-			i++;
-		}
-	}
-	free(map->grid);
-	
+		ft_free_grid(map);
 	ft_free_images(map);
 	if (map->data)
 		ft_free_data(map->data);
+	free(map->data);
+	if(map->visited)
+		ft_free_visited(map);
 	if (map)
 		free(map);
 }

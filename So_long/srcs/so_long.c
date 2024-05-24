@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 10:45:31 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 13:10:35 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 	}
 	if (ft_check_map(fd, filename, map) == 0)
 	{
+		printf("Check Map a dit non\n");
 		ft_free_all(map);
 		exit(1);
 	}

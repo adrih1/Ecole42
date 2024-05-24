@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 11:44:29 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 13:29:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_map
 	t_data	*data;
 	int		texture_width;
 	int		texture_height;
-	// Check Route
 	bool	**visited;
 	bool	exit_found;
 }			t_map;
@@ -74,11 +73,6 @@ typedef struct s_map
 ---------------------------------------------------------------------------------
 */
 
-// MAP VALIDATION
-int			ft_check_map(int fd, char *filename, t_map *map);
-// Free
-void		ft_free_map(t_map *map);
-
 // MAP PARSING
 // Init Map
 void		ft_init_map(t_map *map);
@@ -87,20 +81,21 @@ void		ft_parse_map(t_map *map, int fd, char *filename);
 void		ft_get_map_width(t_map *map);
 
 // MAP CHECKS
+int			ft_check_map(int fd, char *filename, t_map *map);
 // Walls
 int			ft_validate_columns(t_map *map);
 int			ft_validate_rows(t_map *map);
 int			ft_validate_walls(t_map *map);
-// Start, Exit, Item and Rectangular
+// Start, Exit, Items and Rectangular
 void		ft_check_exit(t_map *map);
 void		ft_check_start(t_map *map);
 void		ft_check_items(t_map *map);
+void		ft_check_player(t_map *map);
 int			ft_check_rectangular(t_map *map);
 // Route
 bool		ft_check_path_exists(t_map *map);
 
-
-// Genarate Textures
+// Generate Textures
 void		ft_map_generate(t_map *map, t_data *data);
 // Render Texture
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width,
@@ -125,9 +120,11 @@ void		ft_get_player_coordinate(t_map *map, int keynum);
 int			ft_move_game_finish(char c, t_map *map);
 
 // Utils
-void		ft_close_file(int fd); // Pas utile je crois donc supprimer si utiliser nulle part
+void	ft_close_file(int fd);
+		// Pas utile je crois donc supprimer si utiliser nulle part
 int			ft_open_file(char *filename);
-
+// Free
+void		ft_free_map(t_map *map);
 // Cleaning
 void		ft_free_all(t_map *map);
 

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 11:06:08 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 13:29:41 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,30 @@ void	ft_check_items(t_map *map)
 		{
 			if (map->grid[i][j] == 'C')
 				map->item_count++;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_check_player(t_map *map)
+{
+	int	i;
+	int	j;
+
+	if (map == NULL)
+		return;
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (map->grid[i][j] && j < map->width)
+		{
+			if (map->grid[i][j] == 'P')
+			{
+				map->player_col	= j;
+				map->player_row = i;
+			}
 			j++;
 		}
 		i++;

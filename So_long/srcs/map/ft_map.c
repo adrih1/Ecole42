@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 11:45:13 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 13:29:54 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ void	ft_init_map(t_map *map)
 	map->width = 0;
 	map->height = 0;
 	map->grid = NULL;
+	map->start_count = 0;
 	map->exit_count = 0;
 	map->item_count = 0;
-	map->start_count = 0;
+	map->player_row = 0;
+	map->player_col = 0;
 	map->wall = NULL;
 	map->exit = NULL;
 	map->floor = NULL;
 	map->player = NULL;
 	map->collectable = NULL;
-	map->exit_found = false;
-	map->visited = NULL;
 	map->data = NULL;
+	map->visited = NULL;
+	map->exit_found = false;
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)
@@ -38,13 +40,14 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	ft_check_exit(map);
 	ft_check_start(map);
 	ft_check_items(map);
+	ft_check_player(map);
 	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1
 		|| !ft_validate_walls(map) || !ft_check_rectangular(map))
 	{
 		return (0);
 	}
-	if(!ft_check_path_exists(map))
-		return (0);	
+	if(ft_check_path_exists(map) == false)
+		return (0);			
 	return (1);
 }
 
