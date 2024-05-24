@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 13:10:35 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:22:14 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	on_keypress(int keynum, t_map *map)
 
 int	on_destroy(t_map *map)
 {
-	printf("coucou\n");
 	ft_free_all(map);
 	exit(0);
 }

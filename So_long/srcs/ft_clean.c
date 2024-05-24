@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:18 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 13:06:32 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:21:50 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	ft_free_data(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
-	free(data);
-
 }
 
 void	ft_free_images(t_map *map)
@@ -76,7 +74,6 @@ void	ft_free_all(t_map *map)
 	ft_free_images(map);
 	if (map->data)
 		ft_free_data(map->data);
-	free(map->data);
 	if(map->visited)
 		ft_free_visited(map);
 	if (map)
