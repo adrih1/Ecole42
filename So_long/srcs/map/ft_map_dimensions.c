@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 10:17:56 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 10:52:39 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_parse_line(t_map *map, int fd)
 	while (line && line[0] != '\0')
 	{
 		temp = line;
-		map->grid[i] = strdup(line);
+		map->grid[i] = ft_strdup(line);
 		line = get_next_line(fd);
 		free(temp);
 		i++;

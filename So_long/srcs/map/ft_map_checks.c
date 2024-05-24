@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:12:49 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 10:51:11 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_check_items(t_map *map)
 	int	j;
 
 	if (map == NULL)
-		return ;
+		return;
 	i = 0;
 	while (i < map->height)
 	{
