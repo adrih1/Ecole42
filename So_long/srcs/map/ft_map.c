@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 16:30:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 10:43:18 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	ft_init_map(t_map *map)
 	map->exit_count = 0;
 	map->item_count = 0;
 	map->start_count = 0;
+	map->wall = NULL;
+	map->exit = NULL;
+	map->floor = NULL;
+	map->player = NULL;
+	map->collectable = NULL;
+	map->data = NULL;
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)
@@ -30,10 +36,9 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	ft_check_exit(map);
 	ft_check_start(map);
 	ft_check_items(map);
-	if (map->start_count > 1 || map->exit_count > 1 || map->item_count < 1
+	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1
 		|| !ft_validate_walls(map) || !ft_check_rectangular(map))
 	{
-		ft_free_all(map);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:18 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 17:12:37 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 10:38:54 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_free_all(t_map *map)
 		}
 	}
 	free(map->grid);
+	
 	ft_free_images(map);
 	if (map->data)
 		ft_free_data(map->data);
