@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_route.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 15:01:53 by ahors             #+#    #+#             */
+/*   Updated: 2024/05/24 15:02:10 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 static void	ft_flood_fill_util(t_map *map, int x, int y)
 {
-	if (x < 0 || x >= map->width || y < 0 || y >= map->height || map->visited[y][x] || map->grid[y][x] == '1')
-        return ;
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height
+		|| map->visited[y][x] || map->grid[y][x] == '1')
+		return ;
 	map->visited[y][x] = true;
 	if (map->grid[y][x] == 'C')
 		map->item_count_flood_fill--;
@@ -17,11 +30,11 @@ static void	ft_flood_fill_util(t_map *map, int x, int y)
 
 bool	ft_check_path_exists(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	map->visited = (bool **)malloc(map->height * sizeof(bool *));
-	if(!(map->visited))
+	if (!(map->visited))
 		ft_free_all(map);
 	while (i < map->height)
 	{

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 14:36:05 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 15:01:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_init_map(t_map *map)
 	map->visited = NULL;
 	map->exit_found = false;
 }
+
 void	ft_display_map_errors(t_map *map)
 {
 	if (map->start_count > 1)
@@ -40,12 +41,11 @@ void	ft_display_map_errors(t_map *map)
 		ft_printf("Il n'y pas de sortie\n");
 	else if (map->item_count < 1)
 		ft_printf("Il n'y a aucun item a recuperer\n");
-	else if(!ft_validate_walls(map)) 
+	else if (!ft_validate_walls(map))
 		ft_printf("Il y a un probleme avec les murs\n");
-	else if(!ft_check_rectangular(map))
-		ft_printf("Toutes les lignes de la map doivent faire la meme longueur\n");
+	else if (!ft_check_rectangular(map))
+		ft_printf("Les lignes doivent faire la meme longueur\n");
 }
-
 
 int	ft_check_map(int fd, char *filename, t_map *map)
 {
@@ -62,10 +62,10 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 		ft_display_map_errors(map);
 		return (0);
 	}
-	if(ft_check_path_exists(map) == false)
+	if (ft_check_path_exists(map) == false)
 	{
 		ft_printf("Cette map est impossible\n");
-		return(0);
+		return (0);
 	}
 	return (1);
 }

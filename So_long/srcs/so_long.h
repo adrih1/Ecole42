@@ -6,16 +6,17 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 14:14:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:59:57 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
 /*
----------------------------------------------------------------------------------
-|                                    LIBRAIRIE                                  |
----------------------------------------------------------------------------------
+-------------------------------------------------------------
+|                       LIBRAIRIE                            |
+-------------------------------------------------------------
 */
 
 # include "../ft_printf/ft_printf.h"
@@ -31,9 +32,9 @@
 # include <string.h>
 
 /*
----------------------------------------------------------------------------------
-|                                    STRUCTURES                                  |
----------------------------------------------------------------------------------
+-------------------------------------------------------------
+|                       STRUCTURE                            |
+-------------------------------------------------------------
 */
 
 // Structure pour l'interface graphique
@@ -121,8 +122,8 @@ void		ft_get_player_coordinate(t_map *map, int keynum);
 int			ft_move_game_finish(char c, t_map *map);
 
 // Utils
-void	ft_close_file(int fd);
-		// Pas utile je crois donc supprimer si utiliser nulle part
+void		ft_close_file(int fd);
+// Pas utile je crois donc supprimer si utiliser nulle part
 int			ft_open_file(char *filename);
 // Free
 void		ft_free_map(t_map *map);

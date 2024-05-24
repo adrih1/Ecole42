@@ -8,7 +8,12 @@ PRINTF = ft_printf/libftprintf.a
 HEADER_DIR = mlx/
 MLX_DIR = mlx/
 
-SRCS =	srcs/so_long.c \
+SRCS = 	get_next_line/get_next_line_utils.c \
+		get_next_line/get_next_line.c \
+		srcs/so_long.c \
+		srcs/ft_hooks.c \
+		srcs/ft_utils.c \
+		srcs/ft_clean.c \
 		srcs/map/ft_map.c \
 		srcs/map/ft_check_route.c \
 		srcs/map/ft_map_dimensions.c \
@@ -16,12 +21,10 @@ SRCS =	srcs/so_long.c \
 		srcs/map/ft_map_checks.c \
 		srcs/map/map_render/ft_layer.c \
 		srcs/map/map_render/ft_textures.c \
-		srcs/ft_utils.c \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
 		srcs/mobility/ft_mobility.c \
 		srcs/mobility/ft_check_game.c \
-		srcs/ft_clean.c
+
+
 
 OBJS = $(SRCS:.c=.o)
 
