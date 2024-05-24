@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 13:29:54 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:14:32 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_init_map(t_map *map)
 	map->start_count = 0;
 	map->exit_count = 0;
 	map->item_count = 0;
+	map->item_count_flood_fill = 0;
 	map->player_row = 0;
 	map->player_col = 0;
 	map->wall = NULL;

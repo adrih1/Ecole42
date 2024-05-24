@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 13:29:41 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:14:53 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	ft_check_items(t_map *map)
 		while (map->grid[i][j] && j < map->width)
 		{
 			if (map->grid[i][j] == 'C')
+			{
 				map->item_count++;
+				map->item_count_flood_fill++;				
+			}
 			j++;
 		}
 		i++;

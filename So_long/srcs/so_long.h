@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 13:29:38 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 14:14:20 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_map
 	int		start_count;
 	int		exit_count;
 	int		item_count;
+	int		item_count_flood_fill;
 	int		player_row;
 	int		player_col;
 	void	*wall;

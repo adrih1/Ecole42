@@ -2,17 +2,13 @@
 
 static void	ft_flood_fill_util(t_map *map, int x, int y)
 {
-	if (x < 0 || x >= map->width || y < 0 || y >= map->height
-		|| map->visited[y][x] || map->grid[y][x] == '1')
-		{
-			printf("On est la dans le if du flood fill\n");
-			return ;
-		}
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height || map->visited[y][x] || map->grid[y][x] == '1')
+        return ;
 	map->visited[y][x] = true;
 	if (map->grid[y][x] == 'C')
 	{
 		printf("Map Item Count; %d\n", map->item_count);
-		map->item_count--;
+		map->item_count_flood_fill--;
 	}	
 	if (map->grid[y][x] == 'E')
 		map->exit_found = true;
@@ -35,7 +31,6 @@ bool	ft_check_path_exists(t_map *map)
 		map->visited[i] = ft_calloc(map->width, sizeof(bool));
 		i++;
 	}
-	printf("Player Row: %d\nPlayer Col: %d\n", map->player_row, map->player_col);
-	ft_flood_fill_util(map, map->player_row, map->player_col);
-	return (map->exit_found && (map->item_count == 0));
+	ft_flood_fill_util(map, map->player_col, map->player_row);
+	return (map->exit_found && (map->item_count_flood_fill == 0));
 }
