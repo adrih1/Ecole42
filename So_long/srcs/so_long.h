@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/23 16:27:30 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:44:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -62,6 +63,9 @@ typedef struct s_map
 	t_data	*data;
 	int		texture_width;
 	int		texture_height;
+	// Check Route
+	bool	**visited;
+	bool	exit_found;
 }			t_map;
 
 /*
@@ -74,8 +78,15 @@ typedef struct s_map
 int			ft_check_map(int fd, char *filename, t_map *map);
 // Free
 void		ft_free_map(t_map *map);
+
+// MAP PARSING
 // Init Map
 void		ft_init_map(t_map *map);
+// Dimensions
+void		ft_parse_map(t_map *map, int fd, char *filename);
+void		ft_get_map_width(t_map *map);
+
+// MAP CHECKS
 // Walls
 int			ft_validate_columns(t_map *map);
 int			ft_validate_rows(t_map *map);
@@ -85,20 +96,17 @@ void		ft_check_exit(t_map *map);
 void		ft_check_start(t_map *map);
 void		ft_check_items(t_map *map);
 int			ft_check_rectangular(t_map *map);
-// Dimensions
-void		ft_parse_map(t_map *map, int fd, char *filename);
-void		ft_get_map_width(t_map *map);
+// Route
+bool		ft_check_path_exists(t_map *map);
+
+
 // Genarate Textures
 void		ft_map_generate(t_map *map, t_data *data);
-
-// FONCTIONS INTERFACE || GAME
-
 // Render Texture
 void		*ft_load_image(void *mlx_ptr, char *file_path, int *width,
 				int *height);
 void		ft_render_texture(t_data data, char *filename, int img_width,
 				int img_height, int j, int i);
-
 // New Version of Render
 void		ft_put_textures(t_data *data, t_map *map);
 void		ft_load_textures1(t_map *map, t_data *data);
@@ -117,7 +125,7 @@ void		ft_get_player_coordinate(t_map *map, int keynum);
 int			ft_move_game_finish(char c, t_map *map);
 
 // Utils
-void		ft_close_file(int fd);
+void		ft_close_file(int fd); // Pas utile je crois donc supprimer si utiliser nulle part
 int			ft_open_file(char *filename);
 
 // Cleaning

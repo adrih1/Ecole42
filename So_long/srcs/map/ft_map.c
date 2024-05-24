@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 10:43:18 by ahors            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:45:13 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_init_map(t_map *map)
 	map->floor = NULL;
 	map->player = NULL;
 	map->collectable = NULL;
+	map->exit_found = false;
+	map->visited = NULL;
 	map->data = NULL;
 }
 
@@ -41,6 +43,8 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	{
 		return (0);
 	}
+	if(!ft_check_path_exists(map))
+		return (0);	
 	return (1);
 }
 

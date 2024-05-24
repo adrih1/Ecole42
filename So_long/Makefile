@@ -10,6 +10,7 @@ MLX_DIR = mlx/
 
 SRCS =	srcs/so_long.c \
 		srcs/map/ft_map.c \
+		srcs/map/ft_check_route.c \
 		srcs/map/ft_map_dimensions.c \
 		srcs/map/ft_map_walls.c \
 		srcs/map/ft_map_checks.c \
