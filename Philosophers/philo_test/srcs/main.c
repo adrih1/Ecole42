@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/22 15:01:41 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/10 16:17:46 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_program	program;
 
 	if (ac != 5 && ac != 6)
-		printf(RED "Error: Not the valid nummber of arguments.\n" RESET);
+		ft_error_exit("Wrong Input.\n");
 	else
 	{
 		// Parse Input --> Error checks and Filling program
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		// Simu Start
 		ft_simulation_start(&program);
 		// Clean --> Philos are all full || A philo is dead
-		// ft_clean_program(&program);
+		ft_clean_program(&program);
 	}
 	return (0);
 }

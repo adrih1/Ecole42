@@ -1,7 +1,7 @@
 #include "../header/philo.h"
 
-// Si philo impair --> first fork is the left
-// Si philo pair --> first fork is the right
+// Si philo impair --> first fork is the right
+// Si philo pair --> first fork is the left
 // Even philosopher takes the 1st fork
 void	ft_assign_forks(t_philosopher *philo, t_fork *forks, int philo_position)
 {
@@ -27,8 +27,8 @@ void	ft_philo_init(t_program *program)
 	{
 		philo = program->philos + i;
 		philo->id = i + 1;
-		philo->full = false;
 		philo->meals_eaten = 0;
+		philo->full = false;
 		ft_safe_mutex_handle(&philo->philo_mutex, INIT);
 		philo->program = program;
 		ft_assign_forks(philo, program->forks, i);

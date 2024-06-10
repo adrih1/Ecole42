@@ -38,7 +38,7 @@ bool	ft_get_long(t_mtx *mutex, long *value)
 	return (ret);
 }
 
-// Simulation Finished
+// Simulation Finished | Just a clearer more redeable function
 bool	ft_simulation_finished(t_program *program)
 {
 	return (ft_get_bool(&program->program_mtx, &program->end_simulation));

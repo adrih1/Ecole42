@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/22 15:01:08 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/10 16:20:44 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ typedef struct s_philosopher
 	t_fork					*first_fork;
 	t_fork					*second_fork;
 	pthread_t				thread_id;
-	t_mtx philo_mutex;
-		// Useful to avoid race conditions with the monitor when updating the lasts_meal_time
+	t_mtx 					philo_mutex;
 	t_program				*program;
 }							t_philosopher;
 
@@ -158,10 +157,13 @@ bool						ft_simulation_finished(t_program *program);
 
 // Synchro Utils
 void						ft_wait_all_threads(t_program *program);
+bool   						ft_all_threads_are_running(t_mtx *mutex, long *threads, long philo_nbr);
+void						ft_increase_long(t_mtx *mutex, long *value);
 
 // Simulation
 void						*ft_simulation(void *data);
 void						ft_simulation_start(t_program *program);
+void						*ft_monitor_simulation(void *data);
 
 // Utils
 long						ft_atol(const char *str);
@@ -173,6 +175,8 @@ void						ft_precise_usleep(long usec, t_program *program);
 void						ft_free_double_array(char **argv);
 void						ft_free_program(t_program *program);
 void						ft_free_philosopher(t_philosopher *philosopher);
+void						ft_clean_program(t_program *program); 
+
 
 // Display
 void						ft_error_exit(const char *error);
