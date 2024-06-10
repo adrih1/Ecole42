@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/10 16:20:44 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/10 16:26:17 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,6 @@ long						ft_get_time(t_time_code time_code);
 void						ft_precise_usleep(long usec, t_program *program);
 
 // Clean
-void						ft_free_double_array(char **argv);
-void						ft_free_program(t_program *program);
-void						ft_free_philosopher(t_philosopher *philosopher);
 void						ft_clean_program(t_program *program); 
 
 
