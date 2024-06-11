@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:13 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 14:34:39 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 11:30:06 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_validate_columns(t_map *map)
 	i = 0;
 	while (i < map->height)
 	{
-		if (map->grid[i][map->width - 2] != '1')
+		if (map->grid[i][map->width - 1] != '1')
 		{
 			return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:52:35 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 11:27:02 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	ft_display_map_errors(t_map *map)
 		ft_printf("Il n'y pas de sortie\n");
 	else if (map->item_count < 1)
 		ft_printf("Il n'y a aucun item a recuperer\n");
-	else if (!ft_validate_walls(map))
-		ft_printf("Il y a un probleme avec les murs\n");
 	else if (!ft_check_rectangular(map))
 		ft_printf("Les lignes doivent faire la meme longueur\n");
+	else if (!ft_validate_walls(map))
+		ft_printf("Il y a un probleme avec les murs\n");
+	
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)
