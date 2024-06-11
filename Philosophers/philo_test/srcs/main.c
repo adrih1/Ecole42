@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/10 16:17:46 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/11 10:26:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_program	program;
 
 	if (ac != 5 && ac != 6)
-		ft_error_exit("Wrong Input.\n");
+		ft_error_exit("Wrong Input.\nInputs should be: number_of_philosophers time_to_die time_to_eat time_to_sleep number_of_times_each_philosopher_must_eat");
 	else
 	{
 		// Parse Input --> Error checks and Filling program
