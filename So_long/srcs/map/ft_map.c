@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/11 11:27:02 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 12:59:09 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_display_map_errors(t_map *map)
 		ft_printf("Les lignes doivent faire la meme longueur\n");
 	else if (!ft_validate_walls(map))
 		ft_printf("Il y a un probleme avec les murs\n");
-	
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)

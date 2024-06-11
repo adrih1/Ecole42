@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/11 12:01:50 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 12:58:46 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ int	ft_check_rectangular(t_map *map)
 	while ((int)i < map->height - 1)
 	{
 		if (len != ft_str_len(map->grid[i]))
-			return (0);			
+			return (0);
 		i++;
 	}
 	if (len != (ft_str_len(map->grid[i]) + 1))
-		return (0);		
+		return (0);
 	return (1);
 }
