@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:13 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/11 11:30:06 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 11:37:19 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	ft_validate_columns(t_map *map)
 	while (i < map->height)
 	{
 		if (map->grid[i][map->width - 1] != '1')
-		{
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -40,6 +38,7 @@ int	ft_validate_rows(t_map *map)
 	int	i;
 
 	i = 0;
+	printf("Map Width: %d\n", map->width);
 	map->width -= 2;
 	while (i < map->width)
 	{
