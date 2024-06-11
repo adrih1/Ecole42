@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:24:08 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/11 13:11:52 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_put_textures(t_data *data, t_map *map)
 
 void	ft_free_textures(t_data *data, t_map *map)
 {
-	ft_printf("Free Textures\n");
 	if (map->wall)
 		mlx_destroy_image(data->mlx_ptr, map->wall);
 	if (map->floor)
