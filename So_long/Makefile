@@ -19,6 +19,7 @@ SRCS = 	get_next_line/get_next_line_utils.c \
 		srcs/map/ft_map_dimensions.c \
 		srcs/map/ft_map_walls.c \
 		srcs/map/ft_map_checks.c \
+		srcs/map/ft_map_check_unknown_chars.c \
 		srcs/map/map_render/ft_layer.c \
 		srcs/map/map_render/ft_textures.c \
 		srcs/mobility/ft_mobility.c \
