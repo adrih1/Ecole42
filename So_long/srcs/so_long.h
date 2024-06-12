@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:52:10 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/12 12:42:31 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		ft_check_start(t_map *map);
 void		ft_check_items(t_map *map);
 void		ft_check_player(t_map *map);
 int			ft_check_rectangular(t_map *map);
+int			ft_check_unknown_chars(t_map *map);
 // Route
 bool		ft_check_path_exists(t_map *map);
 

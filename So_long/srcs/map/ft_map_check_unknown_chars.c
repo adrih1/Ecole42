@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_unknown_chars.c                           :+:      :+:    :+:   */
+/*   ft_map_check_unknown_chars.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:54:35 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/12 12:05:49 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/12 12:41:59 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	ft_map_check_unknown_chars(t_map *map)
+int	ft_check_unknown_chars(t_map *map)
 {
 	int	i;
 	int	j;
 
 	if (map == NULL)
-		return ;
+		return (0);
 	i = 0;
 	while (i < map->height)
 	{
