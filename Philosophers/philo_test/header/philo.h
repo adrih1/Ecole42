@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/10 16:26:17 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/12 11:06:07 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,21 @@
 # include <sys/time.h>
 # include <unistd.h> // write, sleep
 
-# define PHILO_MAX 200
-# define DEBUG_MODE 0 // Write function macro
 # define RED "\033[91m"
 # define GREEN "\033[92m"
 # define YELLOW "\033[93m"
 # define PURPLE "\033[94m"
 # define WHITE "\033[97m"
 # define RESET "\033[0m"
+
+
+# ifndef PHILO_MAX
+#  define PHILO_MAX 200 
+# endif
+
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE 1
+# endif
 
 /*
 ---------------------------------------------------------------------------------

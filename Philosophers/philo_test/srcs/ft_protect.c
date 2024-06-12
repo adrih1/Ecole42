@@ -62,7 +62,7 @@ void	ft_thread_error_handle(int status, t_opcode opcode)
 	else if (EINVAL == status && (JOIN == opcode || DETACH == opcode))
 		ft_error_exit("The value specified by thread is not joinable\n");
 	else if (ESRCH == status)
-		ft_error_exit("No thread could be found corresponding to that"
+		ft_error_exit("No thread could be found corresponding to that "
 						"specified by the given thread ID, thread.");
 	else if (EDEADLK == status)
 		ft_error_exit("A deadlock was detected or the value of"

@@ -43,9 +43,7 @@ void	*ft_simulation(void *data)
 	philo = (t_philosopher *)data;
 	// Spinlock
 	ft_wait_all_threads(philo->program);
-
 	ft_set_long(&philo->philo_mutex, &philo->last_meal_time, ft_get_time(MILISECOND)); 
-
 	// Synchro with Monitor
 	ft_increase_long(&philo->program->program_mtx, &philo->program->nbr_threads_running);
 
@@ -53,7 +51,7 @@ void	*ft_simulation(void *data)
 	// Set last meal time
 	while (!ft_simulation_finished(philo->program))
 	{
-		if (philo->full)
+		if (ft_get_bool(&philo->philo_mutex, &philo->full))
 			break ;
 		// Eat
 		ft_eat(philo);

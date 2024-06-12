@@ -8,7 +8,6 @@ static bool ft_philo_died(t_philosopher *philo)
 
 	if(ft_get_bool(&philo->philo_mutex, &philo->full))
 		return (false); 
-
 	elapsed = ft_get_time(MILISECOND) - ft_get_long(&philo->philo_mutex, &philo->last_meal_time); 
 	time_to_die = philo->program->time_to_die / 1e3; 
 	if(elapsed > time_to_die)
@@ -26,9 +25,7 @@ void	*ft_monitor_simulation(void *data)
 	program = (t_program *)data;
 	//Make sure all philo running | Spinlock until they are
 	while (!ft_all_threads_are_running(&program->program_mtx, &program->nbr_threads_running, program->philo_nbr))
-	{
 		;
-	}
 	while(!ft_simulation_finished(program))
 	{
 		i = -1; 
