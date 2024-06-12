@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/12 12:45:35 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/12 13:30:56 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	ft_check_start(map);
 	ft_check_items(map);
 	ft_check_player(map);
-	ft_check_unknown_chars(map);
-	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1
-		|| !ft_validate_walls(map) || !ft_check_rectangular(map) || 
-		!ft_check_unknown_chars(map)
-		)
+	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1 || !ft_validate_walls(map) || !ft_check_rectangular(map) ||  !ft_check_unknown_chars(map))
 	{
 		ft_display_map_errors(map);
 		return (0);

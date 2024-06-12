@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/11 13:04:54 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/12 13:29:28 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	ft_parse_line(t_map *map, int fd)
 void	ft_parse_map(t_map *map, int fd, char *filename)
 {
 	map->height = ft_find_map_height(fd);
+	if(map->height == 0)
+	{
+		ft_free_all(map);
+		exit(1);
+	}
 	map->grid = (char **)malloc(map->height * sizeof(char *));
 	if (!(map->grid))
 		ft_free_all(map);
