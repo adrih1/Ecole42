@@ -28,7 +28,7 @@ void	ft_set_long(t_mtx *mutex, long *dest, long value)
 	ft_safe_mutex_handle(mutex, UNLOCK);
 }
 
-bool	ft_get_long(t_mtx *mutex, long *value)
+long	ft_get_long(t_mtx *mutex, long *value)
 {
 	long	ret;
 

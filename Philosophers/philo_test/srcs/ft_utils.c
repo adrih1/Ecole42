@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/06/10 16:24:34 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/12 17:20:28 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@ int	ft_length_of_char_array(char **av)
 	return (length);
 }
 
-long	ft_get_time(t_time_code time_code)
+long	ft_get_time(int time_code)
 {
-	struct timeval	current_time;
+	struct timeval	tv;
 
-	if (gettimeofday(&current_time, NULL))
+	if (gettimeofday(&tv, NULL))
 		ft_error_exit("Get time of day failed.\n");
-	if (SECOND == time_code)
-		return (current_time.tv_sec + (current_time.tv_usec / 1e6));
-	else if (MILISECOND == time_code)
-		return (current_time.tv_sec * 1e3 + (current_time.tv_usec / 1e3));
+	if (MILISECOND == time_code)
+		return (tv.tv_sec * 1e3 + tv.tv_usec / 1e3);
 	else if (MICROSECOND == time_code)
-		return (current_time.tv_sec * 1e6 + current_time.tv_usec);
+		return (tv.tv_sec * 1e6 + tv.tv_usec);
+	else if (SECOND == time_code)
+		return (tv.tv_sec + tv.tv_usec / 1e6);
 	else
-		ft_error_exit("Wrong input for gettime.\n");
-	return (263);
+		ft_error_exit("Wrong input to gettime:"
+			"use <MILLISECOND> <MICROSECOND> <SECONDS>");
+	return (1337);
 }
 
 void	ft_precise_usleep(long usec, t_program *program)
@@ -52,7 +53,7 @@ void	ft_precise_usleep(long usec, t_program *program)
 			break ;
 		elapsed = ft_get_time(MICROSECOND) - start;
 		rem = usec - elapsed;
-		if ((rem / 2) > 1e3)
+		if (rem > 1e4)
 			usleep(rem / 2);
 		else
 		{

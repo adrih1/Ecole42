@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/12 11:06:07 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:24:29 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,14 @@ void						ft_safe_thread_handle(pthread_t *thread,
 void						ft_set_bool(t_mtx *mutex, bool *dest, bool value);
 bool						ft_get_bool(t_mtx *mutex, bool *value);
 void						ft_set_long(t_mtx *mutex, long *dest, long value);
-bool						ft_get_long(t_mtx *mutex, long *value);
+long						ft_get_long(t_mtx *mutex, long *value); 
 bool						ft_simulation_finished(t_program *program);
 
 // Synchro Utils
 void						ft_wait_all_threads(t_program *program);
 bool   						ft_all_threads_are_running(t_mtx *mutex, long *threads, long philo_nbr);
 void						ft_increase_long(t_mtx *mutex, long *value);
+void						ft_desynchronize_philos(t_philosopher *philo);
 
 // Simulation
 void						*ft_simulation(void *data);
@@ -175,7 +176,7 @@ void						*ft_monitor_simulation(void *data);
 // Utils
 long						ft_atol(const char *str);
 int							ft_length_of_char_array(char **av);
-long						ft_get_time(t_time_code time_code);
+long						ft_get_time(int time_code);
 void						ft_precise_usleep(long usec, t_program *program);
 
 // Clean
@@ -188,5 +189,9 @@ void						ft_write_status(t_philo_status status,
 								t_philosopher *philo, bool debug);
 void						ft_write_status_debug(t_philo_status status,
 								t_philosopher *philo, long elapsed);
+
+
+// Making a more fair system 
+void						ft_thinking(t_philosopher *philo, bool pre_simulation); 
 
 #endif
