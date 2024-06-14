@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 14:09:03 by ahors             #+#    #+#             */
+/*   Updated: 2024/06/14 14:09:11 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo.h"
 
 void	ft_parse_input(t_program *program, char **av)
@@ -8,8 +20,9 @@ void	ft_parse_input(t_program *program, char **av)
 		program->time_to_die = ft_atol(av[2]) * 1e3;
 		program->time_to_eat = ft_atol(av[3]) * 1e3;
 		program->time_to_sleep = ft_atol(av[4]) * 1e3;
-		if(program->time_to_die < 6e4 || program->time_to_sleep < 6e4 || program->time_to_eat < 6e4)
-			ft_error_exit("Use timestamps superior than 60ms"); 
+		if (program->time_to_die < 6e4 || program->time_to_sleep < 6e4
+			|| program->time_to_eat < 6e4)
+			ft_error_exit("Use timestamps superior than 60ms");
 		if (av[(5)])
 			program->nb_limit_meals = ft_atol(av[(5)]);
 		else

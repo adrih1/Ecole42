@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/13 09:24:29 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/14 14:02:19 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@
 # define WHITE "\033[97m"
 # define RESET "\033[0m"
 
-
 # ifndef PHILO_MAX
-#  define PHILO_MAX 200 
+#  define PHILO_MAX 200
 # endif
 
 # ifndef DEBUG_MODE
@@ -82,9 +81,9 @@ typedef enum e_philo_status
 }							t_philo_status;
 
 /*
----------------------------------------------------------------------------------
-|                                    STRUCTURES                                  |
----------------------------------------------------------------------------------
+------------------------------------------------
+|                 STRUCTURES                   |
+------------------------------------------------
 */
 
 typedef pthread_mutex_t		t_mtx;
@@ -105,7 +104,7 @@ typedef struct s_philosopher
 	t_fork					*first_fork;
 	t_fork					*second_fork;
 	pthread_t				thread_id;
-	t_mtx 					philo_mutex;
+	t_mtx					philo_mutex;
 	t_program				*program;
 }							t_philosopher;
 
@@ -159,12 +158,13 @@ void						ft_safe_thread_handle(pthread_t *thread,
 void						ft_set_bool(t_mtx *mutex, bool *dest, bool value);
 bool						ft_get_bool(t_mtx *mutex, bool *value);
 void						ft_set_long(t_mtx *mutex, long *dest, long value);
-long						ft_get_long(t_mtx *mutex, long *value); 
+long						ft_get_long(t_mtx *mutex, long *value);
 bool						ft_simulation_finished(t_program *program);
 
 // Synchro Utils
 void						ft_wait_all_threads(t_program *program);
-bool   						ft_all_threads_are_running(t_mtx *mutex, long *threads, long philo_nbr);
+bool						ft_all_threads_are_running(t_mtx *mutex,
+								long *threads, long philo_nbr);
 void						ft_increase_long(t_mtx *mutex, long *value);
 void						ft_desynchronize_philos(t_philosopher *philo);
 
@@ -180,8 +180,7 @@ long						ft_get_time(int time_code);
 void						ft_precise_usleep(long usec, t_program *program);
 
 // Clean
-void						ft_clean_program(t_program *program); 
-
+void						ft_clean_program(t_program *program);
 
 // Display
 void						ft_error_exit(const char *error);
@@ -190,8 +189,8 @@ void						ft_write_status(t_philo_status status,
 void						ft_write_status_debug(t_philo_status status,
 								t_philosopher *philo, long elapsed);
 
-
-// Making a more fair system 
-void						ft_thinking(t_philosopher *philo, bool pre_simulation); 
+// Making a more fair system
+void						ft_thinking(t_philosopher *philo,
+								bool pre_simulation);
 
 #endif

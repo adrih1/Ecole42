@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 14:03:30 by ahors             #+#    #+#             */
+/*   Updated: 2024/06/14 14:04:03 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo.h"
 
 int	ft_is_digit(char *str)
@@ -56,8 +68,8 @@ int	ft_is_valid_range(char **av, int len)
 
 int	ft_check_args(char **av)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	len = ft_length_of_char_array(av);
 	i = 1;

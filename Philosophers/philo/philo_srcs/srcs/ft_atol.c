@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:40:19 by ahors             #+#    #+#             */
-/*   Updated: 2024/04/22 15:01:12 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/14 14:01:41 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_isspace(char c)
 
 long	ft_atol(const char *str)
 {
-	long i;
-	long res;
-	long sign;
+	long	i;
+	long	res;
+	long	sign;
 
 	i = 0;
 	res = 0;

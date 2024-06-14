@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_protect.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 14:04:10 by ahors             #+#    #+#             */
+/*   Updated: 2024/06/14 14:06:51 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo.h"
 
 void	*ft_safe_malloc(size_t bytes)
@@ -11,8 +23,8 @@ void	*ft_safe_malloc(size_t bytes)
 }
 
 // MUTEX
-// Les ft mutex retournent 0 si elles sont correctes.  Nous gérons ici les retours de erno (EINVAL,et autres)
-// Mutex Error Handle
+// Mutex retournent 0 si elles sont correctes.
+// Nous gérons ici les retours de erno (EINVAL,et autres)
 void	ft_mutex_error_handle(int status, t_opcode opcode)
 {
 	if (0 == status)
@@ -23,11 +35,13 @@ void	ft_mutex_error_handle(int status, t_opcode opcode)
 	else if (EINVAL == status && INIT == opcode)
 		ft_error_exit("The value specified by attr is invalid.\n");
 	else if (EDEADLK == status)
-		ft_error_exit("A deadlock would occur if the thread blocked waiting for mutex .\n");
+		ft_error_exit("A deadlock would occur if the thread blocked"
+			"waiting for mutex .\n");
 	else if (EPERM == status)
 		ft_error_exit("The current thread does not hold a lock on mutex.\n");
 	else if (ENOMEM == status)
-		ft_error_exit("The process cannot allocate enough memory to create another mutex.\n");
+		ft_error_exit("The process cannot allocate enough memory"
+			"to create another mutex.\n");
 	else if (EBUSY == status)
 		ft_error_exit("Mutex is locked.\n");
 }
@@ -63,10 +77,10 @@ void	ft_thread_error_handle(int status, t_opcode opcode)
 		ft_error_exit("The value specified by thread is not joinable\n");
 	else if (ESRCH == status)
 		ft_error_exit("No thread could be found corresponding to that "
-						"specified by the given thread ID, thread.");
+			"specified by the given thread ID, thread.");
 	else if (EDEADLK == status)
 		ft_error_exit("A deadlock was detected or the value of"
-						"thread specifies the calling thread.");
+			"thread specifies the calling thread.");
 }
 
 // Thread Safe
@@ -80,5 +94,6 @@ void	ft_safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 	else if (DETACH == opcode)
 		ft_thread_error_handle(pthread_detach(*thread), opcode);
 	else
-		ft_error_exit("Wrong opcode for thread handle.\n Use CREATE, JOIN or DETACH.");
+		ft_error_exit("Wrong opcode for thread handle.\n"
+			"Use CREATE, JOIN or DETACH.");
 }

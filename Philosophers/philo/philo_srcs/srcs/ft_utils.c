@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/06/12 17:20:28 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/06/14 14:10:12 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ long	ft_get_time(int time_code)
 
 void	ft_precise_usleep(long usec, t_program *program)
 {
-	long start;
-	long elapsed;
-	long rem;
+	long	start;
+	long	elapsed;
+	long	rem;
 
 	start = ft_get_time(MICROSECOND);
 	while (ft_get_time(MICROSECOND) - start < usec)
@@ -63,20 +63,19 @@ void	ft_precise_usleep(long usec, t_program *program)
 	}
 }
 
-
 void	ft_clean_program(t_program *program)
 {
-	t_philosopher *philo; 
-	int i; 
+	t_philosopher	*philo;
+	int				i;
 
-	i = -1; 
-	while(++i < program->philo_nbr)
+	i = -1;
+	while (++i < program->philo_nbr)
 	{
-		philo = program->philos + i; 
-		ft_safe_mutex_handle(&philo->philo_mutex, DESTROY); 
+		philo = program->philos + i;
+		ft_safe_mutex_handle(&philo->philo_mutex, DESTROY);
 	}
-	ft_safe_mutex_handle(&program->write_mutex, DESTROY); 
-	ft_safe_mutex_handle(&program->program_mtx, DESTROY); 
-	free(program->forks); 
-	free(program->philos); 
+	ft_safe_mutex_handle(&program->write_mutex, DESTROY);
+	ft_safe_mutex_handle(&program->program_mtx, DESTROY);
+	free(program->forks);
+	free(program->philos);
 }

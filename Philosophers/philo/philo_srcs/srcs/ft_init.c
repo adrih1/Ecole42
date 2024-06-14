@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
+/*   Updated: 2024/06/14 14:09:00 by ahors            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo.h"
 
 // Si philo impair --> first fork is the left
@@ -37,9 +49,9 @@ void	ft_philo_init(t_program *program)
 
 void	ft_data_init(t_program *program)
 {
-	int i;
+	int	i;
 
-	i = -1; 
+	i = -1;
 	program->end_simulation = false;
 	program->all_threads_ready = false;
 	program->nbr_threads_running = 0;
