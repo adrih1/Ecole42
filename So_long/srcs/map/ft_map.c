@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/12 13:30:56 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/19 15:23:59 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_display_map_errors(t_map *map)
 		ft_printf("Les lignes doivent faire la meme longueur\n");
 	else if (!ft_validate_walls(map))
 		ft_printf("Il y a un probleme avec les murs\n");
-	else if(!ft_check_unknown_chars(map))
-		ft_printf("Only use known characters\n");
+	else if (!ft_map_check_unknown_chars(map))
+		ft_printf("Il y a un caractere inconnu\n");
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)
@@ -58,7 +58,9 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	ft_check_start(map);
 	ft_check_items(map);
 	ft_check_player(map);
-	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1 || !ft_validate_walls(map) || !ft_check_rectangular(map) ||  !ft_check_unknown_chars(map))
+	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1
+		|| !ft_validate_walls(map) || !ft_check_rectangular(map)
+		|| !ft_map_check_unknown_chars(map))
 	{
 		ft_display_map_errors(map);
 		return (0);
