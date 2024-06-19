@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/19 15:00:02 by ahors            ###   ########.fr       */
+/*   Updated: 2024/06/19 18:22:07 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	init_mlx(t_data *data)
 	}
 }
 
-void	create_window(t_data *data)
+void	create_window(t_data *data, t_map *map)
 {
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1250, 400,
-			"Mon premier jeu !");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, ((map->width - 1) * 32),
+			(map->height * 32), "Mon premier jeu !");
 	if (!data->win_ptr)
 	{
 		free(data->win_ptr);
@@ -67,7 +67,7 @@ int	main(int ac, char **av)
 	check_map_file(&fd, filename, map);
 	close(fd);
 	init_mlx(&data);
-	create_window(&data);
+	create_window(&data, map);
 	map->data = &data;
 	map->data->random_num = 6;
 	map->texture_height = 32;
