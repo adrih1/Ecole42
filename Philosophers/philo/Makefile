@@ -6,12 +6,12 @@
 #    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/06/14 13:55:33 by ahors            ###   ########.fr        #
+#    Updated: 2024/07/11 15:42:37 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc
+CC = cc -fsanitize=address -g
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./philo_srcs/srcs
