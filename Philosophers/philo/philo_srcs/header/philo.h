@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:02:19 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 16:01:10 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # endif
 
 # ifndef DEBUG_MODE
-#  define DEBUG_MODE 1
+#  define DEBUG_MODE 0
 # endif
 
 /*
