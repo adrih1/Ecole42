@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:10:41 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/14 18:19:06 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:25:13 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,26 @@ void	ft_load_third_layer(t_data *data, t_map *map)
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					map->collectable, x * map->texture_width, y
 					* map->texture_height);
-			else if (map->grid[y][x] == 'E')
+			else if (map->item_count == 0)
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->exit,
-					x * map->texture_width, y * map->texture_height);
-			else if (map->grid[y][x] == 'P')
+					map->exit_x * map->texture_width, map->exit_y
+					* map->texture_height);
+		}
+	}
+}
+
+void	ft_load_fourth_layer(t_data *data, t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < map->height)
+	{
+		x = -1;
+		while (++x < map->width)
+		{
+			if (map->grid[y][x] == 'P')
 			{
 				map->player_col = x * map->texture_width;
 				map->player_row = y * map->texture_height;

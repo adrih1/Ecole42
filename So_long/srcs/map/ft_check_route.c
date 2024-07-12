@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:01:53 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:02:10 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 15:34:50 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,17 @@ static void	ft_flood_fill_util(t_map *map, int x, int y)
 	if (map->grid[y][x] == 'C')
 		map->item_count_flood_fill--;
 	if (map->grid[y][x] == 'E')
+	{
+		map->exit_x = x;
+		map->exit_y = y;
 		map->exit_found = true;
+	}
 	ft_flood_fill_util(map, x + 1, y);
 	ft_flood_fill_util(map, x - 1, y);
 	ft_flood_fill_util(map, x, y + 1);
 	ft_flood_fill_util(map, x, y - 1);
+	if (map->exit_found && map->item_count_flood_fill == 0)
+		return ;
 }
 
 bool	ft_check_path_exists(t_map *map)

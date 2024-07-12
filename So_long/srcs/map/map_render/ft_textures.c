@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/11 13:11:52 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:25:04 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_put_textures(t_data *data, t_map *map)
 	ft_load_first_layer(data, map);
 	ft_load_second_layer(data, map);
 	ft_load_third_layer(data, map);
+	ft_load_fourth_layer(data, map);
 }
 
 void	ft_free_textures(t_data *data, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/19 18:22:07 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:27:08 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	check_map_file(int *fd, char *filename, t_map *map)
 	}
 }
 
-void	init_mlx(t_data *data)
+void	init_mlx(t_data *data, t_map *map)
 {
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 	{
-		free(data->mlx_ptr);
+		ft_free_all(map);
 		exit(1);
 	}
 }
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 	init_map(&map);
 	check_map_file(&fd, filename, map);
 	close(fd);
-	init_mlx(&data);
+	init_mlx(&data, map);
 	create_window(&data, map);
 	map->data = &data;
 	map->data->random_num = 6;

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/12 12:01:31 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:42:59 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_map
 	int		texture_height;
 	bool	**visited;
 	bool	exit_found;
+	int		exit_y;
+	int		exit_x;
 }			t_map;
 
 /*
@@ -90,7 +92,6 @@ int			ft_validate_rows(t_map *map);
 int			ft_validate_walls(t_map *map);
 // Start, Exit, Items, Rectangular, Known chars
 void		ft_check_exit(t_map *map);
-void		ft_check_start(t_map *map);
 void		ft_check_items(t_map *map);
 void		ft_check_player(t_map *map);
 int			ft_check_rectangular(t_map *map);
@@ -111,6 +112,7 @@ void		ft_load_textures2(t_map *map, t_data *data);
 void		ft_load_first_layer(t_data *data, t_map *map);
 void		ft_load_second_layer(t_data *data, t_map *map);
 void		ft_load_third_layer(t_data *data, t_map *map);
+void		ft_load_fourth_layer(t_data *data, t_map *map);
 void		ft_free_textures(t_data *data, t_map *map);
 
 // Hooks

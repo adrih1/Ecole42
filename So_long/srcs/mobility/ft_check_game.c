@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_game.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:46:49 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:03:22 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/09 16:55:21 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_check_movement_possible(char c, t_map *map)
 	if (c == 'C')
 		map->item_count--;
 	if (c == '1')
-		return (0);
-	if (map->item_count != 0 && c == 'E')
 		return (0);
 	if (map->item_count == 0 && c == 'E')
 		return (3);

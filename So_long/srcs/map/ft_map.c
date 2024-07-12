@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/19 18:19:18 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:42:51 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	ft_display_map_errors(t_map *map)
 {
 	if (map->start_count > 1)
 		ft_printf("Un seul player a la fois\n");
-	else if (map->exit_count == 0)
-		ft_printf("Il n'y pas de sortie\n");
+	else if (map->start_count < 1)
+		ft_printf("Il n'y a pas de player\n");
+	else if (map->exit_count > 1)
+		ft_printf("Il doit y avoir une seule sortie\n");
+	else if (map->exit_count < 1)
+		ft_printf("Il n'y a pas de sortie\n");
 	else if (map->item_count < 1)
 		ft_printf("Il n'y a aucun item a recuperer\n");
 	else if (!ft_check_rectangular(map))
@@ -55,10 +59,9 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	ft_parse_map(map, fd, filename);
 	ft_get_map_width(map);
 	ft_check_exit(map);
-	ft_check_start(map);
 	ft_check_items(map);
 	ft_check_player(map);
-	if (map->start_count > 1 || map->exit_count == 0 || map->item_count < 1
+	if (map->start_count != 1 || (map->exit_count != 1) || map->item_count < 1
 		|| !ft_validate_walls(map) || !ft_check_rectangular(map)
 		|| !ft_map_check_unknown_chars(map))
 	{

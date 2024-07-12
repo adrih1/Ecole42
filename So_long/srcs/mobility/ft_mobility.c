@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:11:05 by ahors             #+#    #+#             */
-/*   Updated: 2024/05/24 15:02:40 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/11 14:25:45 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_move_up(t_map *map, int i, int j)
 		map->grid[new_j][new_i] = 'P';
 		map->player_row -= 32;
 		ft_put_textures(map->data, map);
+		map->grid[map->exit_y][map->exit_x] = 'E';
 	}
 }
 
@@ -41,6 +42,7 @@ void	ft_move_down(t_map *map, int i, int j)
 		map->grid[new_j][new_i] = 'P';
 		map->player_row += 32;
 		ft_put_textures(map->data, map);
+		map->grid[map->exit_y][map->exit_x] = 'E';
 	}
 }
 
@@ -57,6 +59,7 @@ void	ft_move_left(t_map *map, int i, int j)
 		map->grid[new_j][new_i] = 'P';
 		map->player_col -= 32;
 		ft_put_textures(map->data, map);
+		map->grid[map->exit_y][map->exit_x] = 'E';
 	}
 }
 
@@ -73,6 +76,7 @@ void	ft_move_right(t_map *map, int i, int j)
 		map->grid[new_j][new_i] = 'P';
 		map->player_col += 32;
 		ft_put_textures(map->data, map);
+		map->grid[map->exit_y][map->exit_x] = 'E';
 	}
 }
 
