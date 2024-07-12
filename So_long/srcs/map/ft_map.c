@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/11 14:42:51 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:15:07 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ void	ft_init_map(t_map *map)
 void	ft_display_map_errors(t_map *map)
 {
 	if (map->start_count > 1)
-		ft_printf("Un seul player a la fois\n");
+		ft_printf("One player at a time\n");
 	else if (map->start_count < 1)
-		ft_printf("Il n'y a pas de player\n");
+		ft_printf("There is no player\n");
 	else if (map->exit_count > 1)
-		ft_printf("Il doit y avoir une seule sortie\n");
+		ft_printf("There must be only one exit\n");
 	else if (map->exit_count < 1)
-		ft_printf("Il n'y a pas de sortie\n");
+		ft_printf("There is not exit\n");
 	else if (map->item_count < 1)
-		ft_printf("Il n'y a aucun item a recuperer\n");
+		ft_printf("There are no items to be collected\n");
 	else if (!ft_check_rectangular(map))
-		ft_printf("Les lignes doivent faire la meme longueur\n");
+		ft_printf("The map is not rectangular\n");
 	else if (!ft_validate_walls(map))
-		ft_printf("Il y a un probleme avec les murs\n");
+		ft_printf("There is an issue with the walls \n");
 	else if (!ft_map_check_unknown_chars(map))
-		ft_printf("Il y a un caractere inconnu\n");
+		ft_printf("There is an unknow character\n");
 }
 
 int	ft_check_map(int fd, char *filename, t_map *map)
@@ -70,7 +70,7 @@ int	ft_check_map(int fd, char *filename, t_map *map)
 	}
 	if (ft_check_path_exists(map) == false)
 	{
-		ft_printf("Cette map est impossible\n");
+		ft_printf("This map is impossible\n");
 		return (0);
 	}
 	return (1);

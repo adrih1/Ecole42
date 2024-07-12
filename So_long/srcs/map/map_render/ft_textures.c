@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/11 14:25:04 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:23:28 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ void	ft_load_textures1(t_map *map, t_data *data)
 			&map->texture_width, &map->texture_height);
 	if (!(map->floor))
 	{
-		ft_free_textures(data, map);
+		ft_printf("There was an issue with the floor texture\n");
+		ft_free_all(map);
 		exit(0);
 	}
 	map->exit = ft_load_image(data->mlx_ptr, "assets/open-exit.xpm",
 			&map->texture_width, &map->texture_height);
 	if (!(map->exit))
 	{
-		ft_free_textures(data, map);
+		ft_printf("There was an issue with the exit texture\n");
+		ft_free_all(map);
 		exit(0);
 	}
 }
@@ -46,21 +48,24 @@ void	ft_load_textures2(t_map *map, t_data *data)
 			&map->texture_width, &map->texture_height);
 	if (!(map->wall))
 	{
-		ft_free_textures(data, map);
+		ft_printf("There was an issue with the wall texture\n");
+		ft_free_all(map);		
 		exit(0);
 	}
 	map->player = ft_load_image(data->mlx_ptr, "assets/front.xpm",
 			&map->texture_width, &map->texture_height);
 	if (!(map->player))
 	{
-		ft_free_textures(data, map);
+		ft_printf("There was an issue with the player texture\n");
+		ft_free_all(map);
 		exit(0);
 	}
 	map->collectable = ft_load_image(data->mlx_ptr, "assets/coin-bag.xpm",
 			&map->texture_width, &map->texture_height);
 	if (!(map->collectable))
 	{
-		ft_free_textures(data, map);
+		ft_printf("There was an issue with the collectable texture\n");
+		ft_free_all(map);
 		exit(0);
 	}
 }
@@ -73,14 +78,3 @@ void	ft_put_textures(t_data *data, t_map *map)
 	ft_load_fourth_layer(data, map);
 }
 
-void	ft_free_textures(t_data *data, t_map *map)
-{
-	if (map->wall)
-		mlx_destroy_image(data->mlx_ptr, map->wall);
-	if (map->floor)
-		mlx_destroy_image(data->mlx_ptr, map->floor);
-	if (map->exit)
-		mlx_destroy_image(data->mlx_ptr, map->exit);
-	if (map->player)
-		mlx_destroy_image(data->mlx_ptr, map->player);
-}

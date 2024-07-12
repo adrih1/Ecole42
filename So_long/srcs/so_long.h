@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:27:29 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/11 14:42:59 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:23:50 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		ft_load_first_layer(t_data *data, t_map *map);
 void		ft_load_second_layer(t_data *data, t_map *map);
 void		ft_load_third_layer(t_data *data, t_map *map);
 void		ft_load_fourth_layer(t_data *data, t_map *map);
-void		ft_free_textures(t_data *data, t_map *map);
+void		ft_free_textures(t_map *map);
 
 // Hooks
 int			on_destroy(t_map *map);

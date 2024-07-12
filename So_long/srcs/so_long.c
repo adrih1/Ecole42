@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/11 14:27:08 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:17:53 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_mlx(t_data *data, t_map *map)
 void	create_window(t_data *data, t_map *map)
 {
 	data->win_ptr = mlx_new_window(data->mlx_ptr, ((map->width - 1) * 32),
-			(map->height * 32), "Mon premier jeu !");
+			(map->height * 32), "My first game !");
 	if (!data->win_ptr)
 	{
 		free(data->win_ptr);
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	int		fd;
 
 	if (ac != 2)
-		ft_printf("Veuillez renseigner un fichier .ber pour la map\n");
+		ft_printf("Please gove a .ber file for the map\n");
 	filename = av[1];
 	fd = ft_open_file(filename);
 	init_map(&map);

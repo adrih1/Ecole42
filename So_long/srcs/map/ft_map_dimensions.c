@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/19 15:17:44 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:14:37 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_parse_map(t_map *map, int fd, char *filename)
 	map->height = ft_find_map_height(fd);
 	if (map->height < 3)
 	{
-		ft_printf("Il faut au moins 3 lignes dans la map\n");
+		ft_printf("The map needs at list 3 lines\n");
 		ft_free_all(map);
 		exit(1);
 	}
