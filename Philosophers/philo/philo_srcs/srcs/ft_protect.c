@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:04:10 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:06:51 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/16 11:13:26 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ void	ft_mutex_error_handle(int status, t_opcode opcode)
 void	ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 {
 	if (LOCK == opcode)
+	{
 		ft_mutex_error_handle(pthread_mutex_lock(mutex), opcode);
+		usleep(10);		
+	}
 	else if (UNLOCK == opcode)
+	{
 		ft_mutex_error_handle(pthread_mutex_unlock(mutex), opcode);
+		usleep(10);		
+	}
 	else if (INIT == opcode)
 		ft_mutex_error_handle(pthread_mutex_init(mutex, NULL), opcode);
 	else if (DESTROY == opcode)
@@ -88,9 +94,15 @@ void	ft_safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode)
 {
 	if (CREATE == opcode)
+	{
 		ft_thread_error_handle(pthread_create(thread, NULL, foo, data), opcode);
+		usleep(10);
+	}
 	else if (JOIN == opcode)
+	{
 		ft_thread_error_handle(pthread_join(*thread, NULL), opcode);
+		usleep(10);		
+	}
 	else if (DETACH == opcode)
 		ft_thread_error_handle(pthread_detach(*thread), opcode);
 	else
