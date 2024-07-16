@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:04 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/12 17:17:53 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:19:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	int		fd;
 
 	if (ac != 2)
-		ft_printf("Please gove a .ber file for the map\n");
+		ft_printf("Please give a .ber file for the map\n");
 	filename = av[1];
 	fd = ft_open_file(filename);
 	init_map(&map);

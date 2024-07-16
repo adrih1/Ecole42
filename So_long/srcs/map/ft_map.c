@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/12 17:34:49 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:34:45 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_display_map_errors(t_map *map)
 	else if (map->exit_count < 1)
 		ft_printf("There is not exit 🚪❓\n");
 	else if (map->item_count < 1)
-		ft_printf("There are no items to be collected\n");
+		ft_printf("There are no items to be collected 🪙❓\n");
 	else if (!ft_check_rectangular(map))
 		ft_printf("The map is not rectangular ❌\n");
 	else if (!ft_validate_walls(map))

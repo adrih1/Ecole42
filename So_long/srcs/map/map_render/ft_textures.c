@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:48:51 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/12 17:33:40 by ahors            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:19:04 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_load_textures2(t_map *map, t_data *data)
 	if (!(map->wall))
 	{
 		ft_printf("There was an issue with the wall texture 🧱\n");
-		ft_free_all(map);		
+		ft_free_all(map);
 		exit(0);
 	}
 	map->player = ft_load_image(data->mlx_ptr, "assets/front.xpm",
@@ -77,4 +77,3 @@ void	ft_put_textures(t_data *data, t_map *map)
 	ft_load_third_layer(data, map);
 	ft_load_fourth_layer(data, map);
 }
-
