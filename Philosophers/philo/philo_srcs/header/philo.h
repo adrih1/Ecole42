@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/07/11 16:01:10 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/26 16:41:40 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ typedef struct s_program
 	long					nb_limit_meals;
 	long					start_simulation;
 	bool					end_simulation;
-	bool					all_threads_ready;
-	long					nbr_threads_running;
 	pthread_t				monitor;
 	t_mtx					program_mtx;
 	t_mtx					write_mutex;
