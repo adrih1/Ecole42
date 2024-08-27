@@ -3,111 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   ft_simu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:09:36 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/27 17:57:13 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	ft_thinking(t_philosopher *philo, bool pre_simulation)
+
+void    ft_philo_takes_forks(t_philosopher *philo)
 {
-	long	t_eat;
-	long	t_sleep;
-	long	t_think;
-
-	if (!pre_simulation)
-		ft_write_status(THINKING, philo, DEBUG_MODE);
-	if (philo->program->philo_nbr % 2 == 0)
-		return ;
-	t_eat = philo->program->time_to_eat;
-	t_sleep = philo->program->time_to_sleep;
-	t_think = (t_eat * 2) - t_sleep;
-	if (t_think < 0)
-		t_think = 0;
-	ft_precise_usleep(t_think * 0.42, philo->program);
-}
-
-void	*ft_lone_philo(void *data)
-{
-	t_philosopher	*philo;
-
-	philo = (t_philosopher *)data;
-	ft_wait_all_threads(philo->program);
-	ft_set_long(&philo->philo_mutex, &philo->last_meal_time,
-		ft_get_time(MILISECOND));
-	ft_increase_long(&philo->program->program_mtx,
-		&philo->program->nbr_threads_running);
-	ft_write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
-	while (!ft_simulation_finished(philo->program))
-		ft_precise_usleep(200, philo->program);
-	return (NULL);
-}
-
-void	ft_eat(t_philosopher *philo)
-{
-	ft_safe_mutex_handle(&philo->first_fork->fork, LOCK);
-	ft_write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
-	ft_safe_mutex_handle(&philo->second_fork->fork, LOCK);
-	ft_write_status(TAKE_SECOND_FORK, philo, DEBUG_MODE);
-	ft_set_long(&philo->philo_mutex, &philo->last_meal_time,
-		ft_get_time(MILISECOND));
-	philo->meals_eaten++;
-	ft_write_status(EATING, philo, DEBUG_MODE);
-	ft_precise_usleep(philo->program->time_to_eat, philo->program);
-	if (philo->program->nb_limit_meals > 0
-		&& (philo->meals_eaten == philo->program->nb_limit_meals))
-		ft_set_bool(&philo->philo_mutex, &philo->full, true);
-	ft_safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
-	ft_safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
-}
-
-void	*ft_simulation(void *data)
-{
-	t_philosopher	*philo;
-
-	philo = (t_philosopher *)data;
-	ft_wait_all_threads(philo->program);
-	ft_set_long(&philo->philo_mutex, &philo->last_meal_time,
-		ft_get_time(MILISECOND));
-	ft_increase_long(&philo->program->program_mtx,
-		&philo->program->nbr_threads_running);
-	ft_desynchronize_philos(philo);
-	while (!ft_simulation_finished(philo->program))
+    if (philo->first_fork->fork_id > philo->second_fork->fork_id)
+    {
+        pthread_mutex_lock(&philo->second_fork->fork);
+		pthread_mutex_lock(&philo->first_fork->fork);
+    }
+    else
 	{
-		if (ft_get_bool(&philo->philo_mutex, &philo->full))
-			break ;
-		ft_eat(philo);
-		ft_write_status(SLEEPING, philo, DEBUG_MODE);
-		ft_precise_usleep(philo->program->time_to_sleep, philo->program);
-		ft_thinking(philo, false);
+		pthread_mutex_lock(&philo->first_fork->fork);
+		pthread_mutex_lock(&philo->second_fork->fork);
 	}
-	return (NULL);
+	write_status(philo, "has taken a fork");
 }
 
-void	ft_simulation_start(t_program *program)
+void    ft_philo_puts_forks(t_philosopher *philo)
 {
-	int	i;
+    if (philo->first_fork->fork_id > philo->second_fork->fork_id)
+    {
+        pthread_mutex_unlock(&philo->first_fork->fork);
+		pthread_mutex_unlock(&philo->second_fork->fork);
+    }
+    else
+	{
+		pthread_mutex_unlock(&philo->second_fork->fork);
+		pthread_mutex_unlock(&philo->first_fork->fork);
+	}
+	write_status(philo, "has taken a fork");
+}
 
-	i = -1;
-	if (program->nb_limit_meals == 0)
-		return ;
-	else if (program->philo_nbr == 1)
-		ft_safe_thread_handle(&program->philos[0].thread_id, ft_lone_philo,
-			&program->philos[0], CREATE);
-	else
-		while (++i < program->philo_nbr)
-			ft_safe_thread_handle(&program->philos[i].thread_id, ft_simulation,
-				&program->philos[i], CREATE);
-	ft_safe_thread_handle(&program->monitor, ft_monitor_simulation, program,
-		CREATE);
-	program->start_simulation = ft_get_time(MILISECOND);
-	ft_set_bool(&program->program_mtx, &program->all_threads_ready, true);
-	i = -1;
-	while (++i < program->philo_nbr)
-		ft_safe_thread_handle(&program->philos[i].thread_id, NULL, NULL, JOIN);
-	ft_set_bool(&program->program_mtx, &program->end_simulation, true);
-	ft_safe_thread_handle(&program->monitor, NULL, NULL, JOIN);
+
+void    ft_philo_eats(t_philosopher *philo)
+{
+    pthread_mutex_lock(&philo->philo_mutex);
+    philo->last_meal_time = 0 ; //get_current_time_in_ms - TODO
+    philo->meals_eaten++; 
+    pthread_mutex_unlock(&philo->philo_mutex); 
+    ft_write_status(philo, "is eating", DEBUG_MODE);
+    usleep(philo->program->time_to_eat); 
+}
+
+int check_if_philo_is_dead(t_philosopher *philo)
+{
+	pthread_mutex_lock(&philo->program->dead_mutex);
+	if (philo->program->is_dead)
+	{
+		pthread_mutex_unlock(&philo->program->dead_mutex);
+		return 1;
+	}
+	pthread_mutex_unlock(&philo->program->dead_mutex);
+	return 0;
+}
+
+void *ft_dinner(void *arg)
+{
+    t_philosopher *philo = (t_philosopher *)arg;
+
+    // Si philo pair, usleep, cela permets d'éviter les races conditions
+    if (philo->id % 2 == 0)
+		usleep(10);
+
+    while (1)
+    {
+
+    // check philo died 
+        // break
+
+    if(philo->meals_eaten == philo->program->nb_limit_meals)
+        break; 
+    
+    ft_philo_takes_forks(philo); 
+    ft_philo_eats(philo);
+    ft_philo_puts_forks(philo); 
+
+    // check philo died 
+        // break
+
+
+    //philo sleep
+    //write status
+    }
+    printf("Coucou\n");
+    return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/26 16:41:40 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/27 17:56:44 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ typedef struct s_program
 	long					time_to_sleep;
 	long					nb_limit_meals;
 	long					start_simulation;
-	bool					end_simulation;
+	bool					is_dead; 
 	pthread_t				monitor;
-	t_mtx					program_mtx;
 	t_mtx					write_mutex;
+	t_mtx					dead_mutex;
 	t_fork					*forks;
 	t_philosopher			*philos;
 }							t_program;
@@ -141,7 +141,7 @@ int							ft_check_args(char **av);
 void						ft_parse_input(t_program *program, char **av);
 
 // Init
-void						ft_data_init(t_program *program);
+int							ft_data_init(t_program *program);
 
 // Protect
 void						*ft_safe_malloc(size_t bytes);
@@ -160,16 +160,16 @@ long						ft_get_long(t_mtx *mutex, long *value);
 bool						ft_simulation_finished(t_program *program);
 
 // Synchro Utils
-void						ft_wait_all_threads(t_program *program);
-bool						ft_all_threads_are_running(t_mtx *mutex,
-								long *threads, long philo_nbr);
-void						ft_increase_long(t_mtx *mutex, long *value);
-void						ft_desynchronize_philos(t_philosopher *philo);
+bool						ft_all_threads_are_running(t_mtx *mutex, long *threads, long philo_nbr);
 
 // Simulation
 void						*ft_simulation(void *data);
 void						ft_simulation_start(t_program *program);
 void						*ft_monitor_simulation(void *data);
+
+// NEW VERSION
+void						*ft_dinner(void *arg); 
+
 
 // Utils
 long						ft_atol(const char *str);
@@ -181,7 +181,7 @@ void						ft_precise_usleep(long usec, t_program *program);
 void						ft_clean_program(t_program *program);
 
 // Display
-void						ft_error_exit(const char *error);
+int							ft_error_exit(const char *error);
 void						ft_write_status(t_philo_status status,
 								t_philosopher *philo, bool debug);
 void						ft_write_status_debug(t_philo_status status,

@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:02:01 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:02:22 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/27 17:24:02 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	ft_error_exit(const char *error)
+int	ft_error_exit(const char *error)
 {
 	printf(RED "🚨 %s 🚨\n" RESET, error);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
-void	ft_write_status_debug(t_philo_status status, t_philosopher *philo,
-		long elapsed)
-{
-	if (TAKE_FIRST_FORK == status && !ft_simulation_finished(philo->program))
-		printf("%6ld %d has taken the 1st fork 🍽\t\t\tn°[%d]\n", elapsed,
-			philo->id, philo->first_fork->fork_id);
-	else if (TAKE_SECOND_FORK == status
-		&& !ft_simulation_finished(philo->program))
-		printf("%6ld %d has taken the 2nd fork 🍽\t\t\tn°[%d]\n", elapsed,
-			philo->id, philo->second_fork->fork_id);
-	else if (EATING == status && !ft_simulation_finished(philo->program))
-		printf("%6ld %d is eating 🍝\t\t\t[🍝 %ld 🍝]\n", elapsed, philo->id,
-			philo->meals_eaten);
-	else if (SLEEPING == status && !ft_simulation_finished(philo->program))
-		printf("%6ld %d is sleeping 😴\n", elapsed, philo->id);
-	else if (THINKING == status && !ft_simulation_finished(philo->program))
-		printf("%6ld %d is thinking 🤔\n", elapsed, philo->id);
-	else if (DIED == status)
-		printf("💀💀💀 %6ld %d died   💀💀💀\n", elapsed, philo->id);
-}
+// void	ft_write_status_debug(t_philo_status status, t_philosopher *philo,
+// 		long elapsed)
+// {
+// 	if (TAKE_FIRST_FORK == status && !ft_simulation_finished(philo->program))
+// 		printf("%6ld %d has taken the 1st fork 🍽\t\t\tn°[%d]\n", elapsed,
+// 			philo->id, philo->first_fork->fork_id);
+// 	else if (TAKE_SECOND_FORK == status
+// 		&& !ft_simulation_finished(philo->program))
+// 		printf("%6ld %d has taken the 2nd fork 🍽\t\t\tn°[%d]\n", elapsed,
+// 			philo->id, philo->second_fork->fork_id);
+// 	else if (EATING == status && !ft_simulation_finished(philo->program))
+// 		printf("%6ld %d is eating 🍝\t\t\t[🍝 %ld 🍝]\n", elapsed, philo->id,
+// 			philo->meals_eaten);
+// 	else if (SLEEPING == status && !ft_simulation_finished(philo->program))
+// 		printf("%6ld %d is sleeping 😴\n", elapsed, philo->id);
+// 	else if (THINKING == status && !ft_simulation_finished(philo->program))
+// 		printf("%6ld %d is thinking 🤔\n", elapsed, philo->id);
+// 	else if (DIED == status)
+// 		printf("💀💀💀 %6ld %d died   💀💀💀\n", elapsed, philo->id);
+// }
 
 void	ft_write_status(t_philo_status status, t_philosopher *philo, bool debug)
 {

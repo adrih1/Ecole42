@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:12:57 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/26 16:57:51 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int ac, char **av)
 	{
 		ft_parse_input(&program, av);
 		ft_data_init(&program);
-		ft_simulation_start(&program);
-		ft_clean_program(&program);
+		// ft_simulation_start(&program);
+		// ft_clean_program(&program);
 	}
 	return (0);
 }

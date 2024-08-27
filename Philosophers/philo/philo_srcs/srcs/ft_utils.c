@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/06/14 14:10:12 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/27 15:39:48 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,28 @@ long	ft_get_time(int time_code)
 	return (1337);
 }
 
-void	ft_precise_usleep(long usec, t_program *program)
-{
-	long	start;
-	long	elapsed;
-	long	rem;
+// void	ft_precise_usleep(long usec, t_program *program)
+// {
+// 	long	start;
+// 	long	elapsed;
+// 	long	rem;
 
-	start = ft_get_time(MICROSECOND);
-	while (ft_get_time(MICROSECOND) - start < usec)
-	{
-		if (ft_simulation_finished(program))
-			break ;
-		elapsed = ft_get_time(MICROSECOND) - start;
-		rem = usec - elapsed;
-		if (rem > 1e4)
-			usleep(rem / 2);
-		else
-		{
-			while (ft_get_time(MICROSECOND) - start < usec)
-				;
-		}
-	}
-}
+// 	start = ft_get_time(MICROSECOND);
+// 	while (ft_get_time(MICROSECOND) - start < usec)
+// 	{
+// 		if (ft_simulation_finished(program))
+// 			break ;
+// 		elapsed = ft_get_time(MICROSECOND) - start;
+// 		rem = usec - elapsed;
+// 		if (rem > 1e4)
+// 			usleep(rem / 2);
+// 		else
+// 		{
+// 			while (ft_get_time(MICROSECOND) - start < usec)
+// 				;
+// 		}
+// 	}
+// }
 
 void	ft_clean_program(t_program *program)
 {
@@ -74,8 +74,8 @@ void	ft_clean_program(t_program *program)
 		philo = program->philos + i;
 		ft_safe_mutex_handle(&philo->philo_mutex, DESTROY);
 	}
-	ft_safe_mutex_handle(&program->write_mutex, DESTROY);
-	ft_safe_mutex_handle(&program->program_mtx, DESTROY);
+	pthread_mutex_destroy(&program->write_mutex);
+	pthread_mutex_destroy(&program->dead_philo);
 	free(program->forks);
 	free(program->philos);
 }

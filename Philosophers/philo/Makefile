@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
+#    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/07/16 11:07:42 by ahors            ###   ########.fr        #
+#    Updated: 2024/08/27 17:35:08 by adrienhors       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,10 @@ SRC_DIR = ./philo_srcs/srcs
 SRCS =	$(SRC_DIR)/ft_atol.c \
 		$(SRC_DIR)/ft_display.c \
 		$(SRC_DIR)/ft_errors.c \
-		$(SRC_DIR)/ft_getters_setters.c \
 		$(SRC_DIR)/ft_init.c \
 		$(SRC_DIR)/ft_monitor.c \
 		$(SRC_DIR)/ft_parsing.c \
-		$(SRC_DIR)/ft_protect.c \
 		$(SRC_DIR)/ft_simu.c \
-		$(SRC_DIR)/ft_synchro_utils.c \
 		$(SRC_DIR)/ft_utils.c \
 		$(SRC_DIR)/main.c \
 		

@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:03 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:09:11 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/26 16:57:47 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+// Fonction d'affichage
+// void	ft_printf_args(t_program *program)
+// {
+// 	printf("Philo Nbr: %ld\n", program->philo_nbr);
+// 	printf("Time to die: %ld\n", program->time_to_die); 
+// 	printf("Time to eat: %ld\n", program->time_to_eat); 
+// 	printf("Time to sleep: %ld\n", program->time_to_sleep); 
+// }
 
 void	ft_parse_input(t_program *program, char **av)
 {
@@ -30,4 +39,5 @@ void	ft_parse_input(t_program *program, char **av)
 	}
 	else
 		ft_error_exit("Some arguments were incorrect, please check everything");
+	// ft_printf_args(program);
 }

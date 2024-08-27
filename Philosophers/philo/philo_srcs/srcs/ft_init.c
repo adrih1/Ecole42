@@ -3,67 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/06/14 14:09:00 by ahors            ###   ########.fr       */
+/*   Updated: 2024/08/27 17:56:56 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
+
+int ft_init_forks(t_fork *forks, int nb_philo)
+{
+	int i; 
+	
+	i = 0;  
+	while (i < nb_philo)
+	{
+		if (pthread_mutex_init(&forks[i].fork, NULL) != 0)
+		{
+			ft_error_exit("Initializing fork mutex");
+		}
+		forks[i].fork_id = i + 1;
+		i++;
+	}
+	return (0);
+}
+
 // Si philo impair --> first fork is the left
 // Si philo pair --> first fork is the right
-// Even philosopher takes the 1st fork
-void	ft_assign_forks(t_philosopher *philo, t_fork *forks, int philo_position)
-{
-	int	philo_nbr;
-
-	philo_nbr = philo->program->philo_nbr;
-	philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
-	philo->second_fork = &forks[philo_position];
-	if (philo->id % 2 == 0)
-	{
-		philo->first_fork = &forks[philo_position];
-		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
-	}
-}
-
-void	ft_philo_init(t_program *program)
+void	ft_init_philosophers(t_philosopher *philos, t_fork *forks, t_program *program)
 {
 	int				i;
-	t_philosopher	*philo;
 
-	i = -1;
-	while (++i < program->philo_nbr)
+	i = 0;
+	while (i < program->philo_nbr)
 	{
-		philo = program->philos + i;
-		philo->id = i + 1;
-		philo->meals_eaten = 0;
-		philo->full = false;
-		ft_safe_mutex_handle(&philo->philo_mutex, INIT);
-		philo->program = program;
-		ft_assign_forks(philo, program->forks, i);
+		philos[i].id = i + 1;
+		philos[i].meals_eaten = 0;
+		philos[i].last_meal_time = 0; // get_current_time_in_ms() TODO
+		philos[i].first_fork = &forks[i];
+		philos[i].second_fork = &forks[(i + 1) % program->philo_nbr];
+		philos[i].program = program;
+		pthread_mutex_init(&philos[i].philo_mutex, NULL); 
+		i++;
 	}
 }
-
-void	ft_data_init(t_program *program)
+int ft_create_philosopher_threads(t_philosopher *philos, int nb_philo)
 {
-	int	i;
+	int i;
 
-	i = -1;
-	program->end_simulation = false;
-	program->all_threads_ready = false;
-	program->nbr_threads_running = 0;
-	program->philos = ft_safe_malloc(sizeof(t_philosopher)
-			* program->philo_nbr);
-	program->forks = ft_safe_malloc(sizeof(t_fork) * program->philo_nbr);
-	ft_safe_mutex_handle(&program->write_mutex, INIT);
-	ft_safe_mutex_handle(&program->program_mtx, INIT);
-	while (++i < program->philo_nbr)
+	i = 0; 
+	while (i < nb_philo)
 	{
-		ft_safe_mutex_handle(&program->forks[i].fork, INIT);
-		program->forks[i].fork_id = i;
+		if (pthread_create(&philos[i].thread_id, NULL, ft_dinner, &philos[i]) != 0)
+			return ft_error_exit("creating thread for philosopher");
+		i++;
 	}
-	ft_philo_init(program);
+	return 0;
+}
+
+
+
+int	ft_data_init(t_program *program)
+{
+
+	if (pthread_mutex_init(&program->write_mutex, NULL) != 0)
+		return ft_error_exit("Initializing program write mutex");
+
+	if (pthread_mutex_init(&program->dead_mutex, NULL) != 0)
+		return ft_error_exit("Initializing dead philo mutex");
+		
+	program->forks = malloc(sizeof(t_fork) * program->philo_nbr);
+	if (!program->forks)
+		return ft_error_exit("Allocating memory for forks");
+
+	if (ft_init_forks(program->forks, program->philo_nbr) != 0)
+		return (1);
+
+	program->philos = malloc(sizeof(t_philosopher) * program->philo_nbr);
+	if (!program->philos)
+		return ft_error_exit("Allocating memory for philosophers");
+
+	ft_init_philosophers(program->philos, program->forks, program);
+	if (program->philo_nbr == 1)
+	{
+		// ft_single_philosopher_simulation(&table->philos[0]); -- TODO 
+		return (0);
+	}
+	if (ft_create_philosopher_threads(program->philos, program->philo_nbr) != 0)
+		return 1;
+	return (0); 
 }
