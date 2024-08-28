@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/27 17:56:56 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:29:22 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_init_philosophers(t_philosopher *philos, t_fork *forks, t_program *progr
 	{
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
-		philos[i].last_meal_time = 0; // get_current_time_in_ms() TODO
+		philos[i].last_meal_time = ft_get_current_time_in_ms();
 		philos[i].first_fork = &forks[i];
 		philos[i].second_fork = &forks[(i + 1) % program->philo_nbr];
 		philos[i].program = program;
@@ -63,8 +63,7 @@ int ft_create_philosopher_threads(t_philosopher *philos, int nb_philo)
 	return 0;
 }
 
-
-
+ 
 int	ft_data_init(t_program *program)
 {
 

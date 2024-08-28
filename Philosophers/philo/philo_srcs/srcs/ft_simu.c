@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/27 17:57:13 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:38:12 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    ft_philo_puts_forks(t_philosopher *philo)
 void    ft_philo_eats(t_philosopher *philo)
 {
     pthread_mutex_lock(&philo->philo_mutex);
-    philo->last_meal_time = 0 ; //get_current_time_in_ms - TODO
+    philo->last_meal_time = ft_get_current_time_in_ms();
     philo->meals_eaten++; 
     pthread_mutex_unlock(&philo->philo_mutex); 
     ft_write_status(philo, "is eating", DEBUG_MODE);
@@ -60,10 +60,10 @@ int check_if_philo_is_dead(t_philosopher *philo)
 	if (philo->program->is_dead)
 	{
 		pthread_mutex_unlock(&philo->program->dead_mutex);
-		return 1;
+		return (1);
 	}
 	pthread_mutex_unlock(&philo->program->dead_mutex);
-	return 0;
+	return (0);
 }
 
 void *ft_dinner(void *arg)
@@ -76,23 +76,22 @@ void *ft_dinner(void *arg)
 
     while (1)
     {
+        if (ft_check_philo_is_dead(philo))
+            break; 
 
-    // check philo died 
-        // break
-
-    if(philo->meals_eaten == philo->program->nb_limit_meals)
-        break; 
+        if(ft_check_philo_is_full(philo))
+            break; 
     
-    ft_philo_takes_forks(philo); 
-    ft_philo_eats(philo);
-    ft_philo_puts_forks(philo); 
+        ft_philo_takes_forks(philo); 
+        ft_philo_eats(philo);
+        ft_philo_puts_forks(philo); 
 
-    // check philo died 
-        // break
+        // check philo died 
+            // break
 
 
-    //philo sleep
-    //write status
+        //philo sleep
+        //write status
     }
     printf("Coucou\n");
     return NULL;

@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/27 17:56:44 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:37:20 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,25 +143,6 @@ void						ft_parse_input(t_program *program, char **av);
 // Init
 int							ft_data_init(t_program *program);
 
-// Protect
-void						*ft_safe_malloc(size_t bytes);
-void						ft_mutex_error_handle(int status, t_opcode opcode);
-void						ft_safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
-void						ft_thread_error_handle(int status, t_opcode opcode);
-void						ft_safe_thread_handle(pthread_t *thread,
-								void *(*foo)(void *), void *data,
-								t_opcode opcode);
-
-// Getters and Setters
-void						ft_set_bool(t_mtx *mutex, bool *dest, bool value);
-bool						ft_get_bool(t_mtx *mutex, bool *value);
-void						ft_set_long(t_mtx *mutex, long *dest, long value);
-long						ft_get_long(t_mtx *mutex, long *value);
-bool						ft_simulation_finished(t_program *program);
-
-// Synchro Utils
-bool						ft_all_threads_are_running(t_mtx *mutex, long *threads, long philo_nbr);
-
 // Simulation
 void						*ft_simulation(void *data);
 void						ft_simulation_start(t_program *program);
@@ -174,8 +155,10 @@ void						*ft_dinner(void *arg);
 // Utils
 long						ft_atol(const char *str);
 int							ft_length_of_char_array(char **av);
-long						ft_get_time(int time_code);
-void						ft_precise_usleep(long usec, t_program *program);
+long						ft_get_current_time_in_ms(void); 
+int							ft_check_philo_is_full(t_philosopher *philo); 
+int							ft_check_philo_is_dead(t_philosopher *philo); 
+// void						ft_precise_usleep(long usec, t_program *program);
 
 // Clean
 void						ft_clean_program(t_program *program);
@@ -188,7 +171,6 @@ void						ft_write_status_debug(t_philo_status status,
 								t_philosopher *philo, long elapsed);
 
 // Making a more fair system
-void						ft_thinking(t_philosopher *philo,
-								bool pre_simulation);
+void						ft_thinking(t_philosopher *philo, bool pre_simulation);
 
 #endif

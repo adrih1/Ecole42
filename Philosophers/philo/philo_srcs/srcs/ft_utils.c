@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/08/27 15:39:48 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:39:01 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,60 +22,57 @@ int	ft_length_of_char_array(char **av)
 	return (length);
 }
 
-long	ft_get_time(int time_code)
-{
-	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
-		ft_error_exit("Get time of day failed.\n");
-	if (MILISECOND == time_code)
-		return (tv.tv_sec * 1e3 + tv.tv_usec / 1e3);
-	else if (MICROSECOND == time_code)
-		return (tv.tv_sec * 1e6 + tv.tv_usec);
-	else if (SECOND == time_code)
-		return (tv.tv_sec + tv.tv_usec / 1e6);
-	else
-		ft_error_exit("Wrong input to gettime:"
-			"use <MILLISECOND> <MICROSECOND> <SECONDS>");
-	return (1337);
+long ft_get_current_time_in_ms(void)
+{
+	struct timeval current_time;
+	
+	gettimeofday(&current_time, NULL);
+	return (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 }
 
-// void	ft_precise_usleep(long usec, t_program *program)
-// {
-// 	long	start;
-// 	long	elapsed;
-// 	long	rem;
 
-// 	start = ft_get_time(MICROSECOND);
-// 	while (ft_get_time(MICROSECOND) - start < usec)
-// 	{
-// 		if (ft_simulation_finished(program))
-// 			break ;
-// 		elapsed = ft_get_time(MICROSECOND) - start;
-// 		rem = usec - elapsed;
-// 		if (rem > 1e4)
-// 			usleep(rem / 2);
-// 		else
-// 		{
-// 			while (ft_get_time(MICROSECOND) - start < usec)
-// 				;
-// 		}
-// 	}
-// }
+int	ft_check_philo_is_dead(t_philosopher *philo)
+{
+
+	pthread_mutex_lock(&philo->program->dead_mutex);
+	if (philo->program->is_dead)
+	{
+		pthread_mutex_unlock(&philo->program->dead_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->program->dead_mutex);
+	return (0);
+}
+
+
+
+int	ft_check_philo_is_full(t_philosopher *philo)
+{
+	if(philo->program->nb_limit_meals != -1 && (philo->meals_eaten >= philo->program->nb_limit_meals))
+	{
+		ft_write_status(philo, "is full", DEBUG_MODE);
+		pthread_mutex_lock(&philo->philo_mutex);
+		philo->full = true;
+		pthread_mutex_unlock(&philo->philo_mutex);
+		return (1);
+	}
+	return (0); 
+}
 
 void	ft_clean_program(t_program *program)
 {
 	t_philosopher	*philo;
 	int				i;
 
-	i = -1;
-	while (++i < program->philo_nbr)
+	i = 0;
+	while (i < program->philo_nbr)
 	{
 		philo = program->philos + i;
 		ft_safe_mutex_handle(&philo->philo_mutex, DESTROY);
 	}
 	pthread_mutex_destroy(&program->write_mutex);
-	pthread_mutex_destroy(&program->dead_philo);
+	pthread_mutex_destroy(&program->dead_mutex);
 	free(program->forks);
 	free(program->philos);
 }
