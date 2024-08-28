@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:37:20 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:49:52 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,8 @@ void						ft_clean_program(t_program *program);
 
 // Display
 int							ft_error_exit(const char *error);
-void						ft_write_status(t_philo_status status,
-								t_philosopher *philo, bool debug);
-void						ft_write_status_debug(t_philo_status status,
-								t_philosopher *philo, long elapsed);
+void						ft_write_status(t_philo_status status, t_philosopher *philo, bool debug);
+void						ft_write_status_debug(t_philo_status status, t_philosopher *philo, long elapsed);
 
 // Making a more fair system
 void						ft_thinking(t_philosopher *philo, bool pre_simulation);

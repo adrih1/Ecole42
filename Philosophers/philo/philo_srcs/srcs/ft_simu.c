@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:38:12 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:52:39 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    ft_philo_takes_forks(t_philosopher *philo)
 		pthread_mutex_lock(&philo->first_fork->fork);
 		pthread_mutex_lock(&philo->second_fork->fork);
 	}
-	write_status(philo, "has taken a fork");
+	ft_write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
 }
 
 void    ft_philo_puts_forks(t_philosopher *philo)
@@ -40,7 +40,7 @@ void    ft_philo_puts_forks(t_philosopher *philo)
 		pthread_mutex_unlock(&philo->second_fork->fork);
 		pthread_mutex_unlock(&philo->first_fork->fork);
 	}
-	write_status(philo, "has taken a fork");
+
 }
 
 
@@ -50,21 +50,16 @@ void    ft_philo_eats(t_philosopher *philo)
     philo->last_meal_time = ft_get_current_time_in_ms();
     philo->meals_eaten++; 
     pthread_mutex_unlock(&philo->philo_mutex); 
-    ft_write_status(philo, "is eating", DEBUG_MODE);
+    ft_write_status(EATING, philo, DEBUG_MODE);
     usleep(philo->program->time_to_eat); 
 }
 
-int check_if_philo_is_dead(t_philosopher *philo)
+void    ft_philo_sleeps(t_philosopher *philo)
 {
-	pthread_mutex_lock(&philo->program->dead_mutex);
-	if (philo->program->is_dead)
-	{
-		pthread_mutex_unlock(&philo->program->dead_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->program->dead_mutex);
-	return (0);
+    usleep(philo->program->time_to_sleep); 
+    ft_write_status(SLEEPING, philo, DEBUG_MODE); 
 }
+
 
 void *ft_dinner(void *arg)
 {
@@ -86,13 +81,10 @@ void *ft_dinner(void *arg)
         ft_philo_eats(philo);
         ft_philo_puts_forks(philo); 
 
-        // check philo died 
-            // break
-
-
-        //philo sleep
-        //write status
+       if (ft_check_philo_is_dead(philo))
+            break; 
+        ft_philo_sleep(philo); 
+        ft_write_status(THINKING, philo, DEBUG_MODE); 
     }
-    printf("Coucou\n");
     return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/08/28 14:39:01 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/28 14:51:37 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ int	ft_check_philo_is_dead(t_philosopher *philo)
 }
 
 
-
 int	ft_check_philo_is_full(t_philosopher *philo)
 {
 	if(philo->program->nb_limit_meals != -1 && (philo->meals_eaten >= philo->program->nb_limit_meals))
 	{
-		ft_write_status(philo, "is full", DEBUG_MODE);
+		ft_write_status("is full", philo, DEBUG_MODE);
 		pthread_mutex_lock(&philo->philo_mutex);
 		philo->full = true;
 		pthread_mutex_unlock(&philo->philo_mutex);
