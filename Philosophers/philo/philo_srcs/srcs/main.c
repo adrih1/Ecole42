@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/26 16:57:51 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/29 12:34:38 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	main(int ac, char **av)
 	else
 	{
 		ft_parse_input(&program, av);
-		ft_data_init(&program);
-		// ft_simulation_start(&program);
+		if (ft_data_init(&program) != 0)
+			ft_error_exit("There was an issue while initializing data");
+		
 		// ft_clean_program(&program);
 	}
 	return (0);

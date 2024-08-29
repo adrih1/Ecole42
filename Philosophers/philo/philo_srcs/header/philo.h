@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:49:52 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/29 15:05:53 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef struct s_philosopher
 {
 	int						id;
 	long					meals_eaten;
-	bool					full;
+	bool					is_full;
 	long					last_meal_time;
 	t_fork					*first_fork;
 	t_fork					*second_fork;
@@ -116,7 +116,7 @@ typedef struct s_program
 	long					time_to_sleep;
 	long					nb_limit_meals;
 	long					start_simulation;
-	bool					is_dead; 
+	bool					is_dead;
 	pthread_t				monitor;
 	t_mtx					write_mutex;
 	t_mtx					dead_mutex;
@@ -144,8 +144,7 @@ void						ft_parse_input(t_program *program, char **av);
 int							ft_data_init(t_program *program);
 
 // Simulation
-void						*ft_simulation(void *data);
-void						ft_simulation_start(t_program *program);
+void 						*ft_dinner(void *arg); 
 void						*ft_monitor_simulation(void *data);
 
 // NEW VERSION
@@ -158,15 +157,15 @@ int							ft_length_of_char_array(char **av);
 long						ft_get_current_time_in_ms(void); 
 int							ft_check_philo_is_full(t_philosopher *philo); 
 int							ft_check_philo_is_dead(t_philosopher *philo); 
-// void						ft_precise_usleep(long usec, t_program *program);
+void 						ft_usleep(long time_in_ms); 
 
 // Clean
 void						ft_clean_program(t_program *program);
 
 // Display
 int							ft_error_exit(const char *error);
-void						ft_write_status(t_philo_status status, t_philosopher *philo, bool debug);
-void						ft_write_status_debug(t_philo_status status, t_philosopher *philo, long elapsed);
+void						ft_write_status(t_philosopher *philo, const char *status); 
+
 
 // Making a more fair system
 void						ft_thinking(t_philosopher *philo, bool pre_simulation);

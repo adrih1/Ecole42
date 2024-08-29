@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:29:22 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/08/29 15:15:41 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	ft_init_philosophers(t_philosopher *philos, t_fork *forks, t_program *progr
 	int				i;
 
 	i = 0;
+	program->start_simulation = ft_get_current_time_in_ms();
 	while (i < program->philo_nbr)
 	{
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
+		philos[i].is_full = false;
 		philos[i].last_meal_time = ft_get_current_time_in_ms();
 		philos[i].first_fork = &forks[i];
 		philos[i].second_fork = &forks[(i + 1) % program->philo_nbr];
@@ -57,10 +59,10 @@ int ft_create_philosopher_threads(t_philosopher *philos, int nb_philo)
 	while (i < nb_philo)
 	{
 		if (pthread_create(&philos[i].thread_id, NULL, ft_dinner, &philos[i]) != 0)
-			return ft_error_exit("creating thread for philosopher");
+			return ft_error_exit("Creating thread for philosopher");
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
  
@@ -87,7 +89,7 @@ int	ft_data_init(t_program *program)
 	ft_init_philosophers(program->philos, program->forks, program);
 	if (program->philo_nbr == 1)
 	{
-		// ft_single_philosopher_simulation(&table->philos[0]); -- TODO 
+		// ft_single_philosopher_simulation(&table->philos[0]); //TODO
 		return (0);
 	}
 	if (ft_create_philosopher_threads(program->philos, program->philo_nbr) != 0)
