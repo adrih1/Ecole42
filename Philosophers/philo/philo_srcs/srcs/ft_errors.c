@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:03:30 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:31:45 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:35:23 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int	ft_check_args(char **av)
 	while (i < len)
 	{
 		if (!ft_is_digit(av[i]) || !ft_is_valid_arg(av[i]))
-			return (0);
+			return (1);
 		i++;
 	}
 	if (!ft_is_valid_nb_meals(av, 5))
-		return (0);
+		return (1);
 	if (!ft_is_valid_range(av, len))
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }

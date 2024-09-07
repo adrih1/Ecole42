@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/08/29 15:07:27 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:31:11 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void ft_usleep(long time_in_ms)
 }
 
 
-
 int	ft_check_philo_is_dead(t_philosopher *philo)
 {
 
@@ -52,7 +51,6 @@ int	ft_check_philo_is_dead(t_philosopher *philo)
 	pthread_mutex_unlock(&philo->program->dead_mutex);
 	return (0);
 }
-
 
 int	ft_check_philo_is_full(t_philosopher *philo)
 {

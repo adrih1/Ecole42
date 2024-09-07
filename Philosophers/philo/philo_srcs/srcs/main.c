@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/29 12:34:38 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:38:03 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,18 @@ int	main(int ac, char **av)
 			"nb_philosophers t_to_die t_to_eat t_to_sleep nb_meals");
 	else
 	{
-		ft_parse_input(&program, av);
+		if (ft_parse_input(&program, av) != 0)
+		{
+			ft_error_exit("There was an issue while parsing data");
+			return (1); 
+		}
 		if (ft_data_init(&program) != 0)
+		{
 			ft_error_exit("There was an issue while initializing data");
-		
+			return (1); 
+		}
+		if (program.philo_nbr != 1)
+			ft_monitor(&program);
 		// ft_clean_program(&program);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/29 15:05:53 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:38:15 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_program
 }							t_program;
 
 /*
----------------------------------------------------------------------------------
+---------------------------------------------------------------------------------m
 |                                    FONCTIONS                                  |
 ---------------------------------------------------------------------------------
 */
@@ -138,7 +138,7 @@ int							ft_is_valid_range(char **av, int len);
 int							ft_check_args(char **av);
 
 // Parsing
-void						ft_parse_input(t_program *program, char **av);
+int						ft_parse_input(t_program *program, char **av);
 
 // Init
 int							ft_data_init(t_program *program);

@@ -6,9 +6,13 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:06:56 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/28 14:50:13 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:38:12 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
+void    ft_monitor(t_program *program)
+{
+    
+}

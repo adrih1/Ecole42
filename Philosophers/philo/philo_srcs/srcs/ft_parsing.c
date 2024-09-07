@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:03 by ahors             #+#    #+#             */
-/*   Updated: 2024/08/29 15:07:37 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:35:36 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_printf_args(t_program *program)
 	printf("Time to sleep: %ld\n", program->time_to_sleep); 
 }
 
-void	ft_parse_input(t_program *program, char **av)
+int	ft_parse_input(t_program *program, char **av)
 {
-	if (ft_check_args(av))
+	if (ft_check_args(av) != 0)
 	{
 		program->philo_nbr = ft_atol(av[1]);
 		program->time_to_die = ft_atol(av[2]);
@@ -38,5 +38,6 @@ void	ft_parse_input(t_program *program, char **av)
 	}
 	else
 		ft_error_exit("Some arguments were incorrect, please check everything");
-	// ft_printf_args(program);
+		return (1); 
+	return (0); 
 }
