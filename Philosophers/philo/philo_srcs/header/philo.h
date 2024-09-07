@@ -6,7 +6,7 @@
 /*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/07 18:38:15 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/07 18:54:30 by adrienhors       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_program
 	long					time_to_sleep;
 	long					nb_limit_meals;
 	long					start_simulation;
+	long					philos_full; 
 	bool					is_dead;
 	pthread_t				monitor;
 	t_mtx					write_mutex;
@@ -145,10 +146,8 @@ int							ft_data_init(t_program *program);
 
 // Simulation
 void 						*ft_dinner(void *arg); 
-void						*ft_monitor_simulation(void *data);
+void						ft_monitor(t_program *program); 
 
-// NEW VERSION
-void						*ft_dinner(void *arg); 
 
 
 // Utils
@@ -165,9 +164,5 @@ void						ft_clean_program(t_program *program);
 // Display
 int							ft_error_exit(const char *error);
 void						ft_write_status(t_philosopher *philo, const char *status); 
-
-
-// Making a more fair system
-void						ft_thinking(t_philosopher *philo, bool pre_simulation);
 
 #endif
