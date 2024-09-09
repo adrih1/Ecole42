@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_simu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/06 16:38:05 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/09 10:31:06 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ void *ft_dinner(void *arg)
 
     while (1)
     {
+        printf("ici\n");
         if (ft_check_philo_is_dead(philo))
         {
-            printf("Je suis aller là\n"); 
             break; 
         }
 
         if(ft_check_philo_is_full(philo))
         {
-            printf("Je suis aller ici\n"); 
             break; 
         }
         ft_philo_takes_forks(philo); 
@@ -91,6 +90,5 @@ void *ft_dinner(void *arg)
         ft_philo_sleeps(philo); 
         ft_write_status(philo, "is thinking");
     }
-    printf("Coucou\n");
     return NULL;
 }
