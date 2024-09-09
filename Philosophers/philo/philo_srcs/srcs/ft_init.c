@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:41:33 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 14:49:31 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	ft_init_philosophers(t_philosopher *philos, t_fork *forks,
 	int	i;
 
 	i = 0;
+	program->philos_full = 0;
 	program->start_simulation = ft_get_current_time_in_ms();
+	program->is_dead = false;
 	while (i < program->philo_nbr)
 	{
 		philos[i].id = i + 1;
@@ -63,6 +65,7 @@ int	ft_create_philosopher_threads(t_philosopher *philos, int nb_philo)
 				&philos[i]) != 0)
 			return (ft_error_exit("Creating thread for philosopher"));
 		i++;
+		ft_usleep(100);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:45:37 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 14:34:39 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 		}
 		if (program.philo_nbr != 1)
 			ft_monitor(&program);
-		// ft_clean_program(&program);
+		ft_clean_program(&program);
 	}
 	return (0);
 }

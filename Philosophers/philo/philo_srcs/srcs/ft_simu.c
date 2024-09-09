@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:44:41 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:01:38 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ void	ft_philo_takes_forks(t_philosopher *philo)
 	if (philo->first_fork->fork_id > philo->second_fork->fork_id)
 	{
 		pthread_mutex_lock(&philo->second_fork->fork);
+		ft_write_status(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->first_fork->fork);
+		ft_write_status(philo, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->first_fork->fork);
+		ft_write_status(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->second_fork->fork);
+		ft_write_status(philo, "has taken a fork");
 	}
-	ft_write_status(philo, "takes a fork");
 }
 
 void	ft_philo_puts_forks(t_philosopher *philo)
@@ -39,7 +42,6 @@ void	ft_philo_puts_forks(t_philosopher *philo)
 		pthread_mutex_unlock(&philo->second_fork->fork);
 		pthread_mutex_unlock(&philo->first_fork->fork);
 	}
-	ft_write_status(philo, "has put a fork");
 }
 
 void	ft_philo_eats(t_philosopher *philo)
@@ -67,15 +69,10 @@ void	*ft_dinner(void *arg)
 		ft_usleep(10);
 	while (1)
 	{
-		printf("ici\n");
 		if (ft_check_philo_is_dead(philo))
-		{
-			break ;
-		}
+			break ;                  
 		if (ft_check_philo_is_full(philo))
-		{
-			break ;
-		}
+			break ;      
 		ft_philo_takes_forks(philo);
 		ft_philo_eats(philo);
 		ft_philo_puts_forks(philo);
