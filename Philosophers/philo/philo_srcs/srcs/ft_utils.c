@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/09/07 18:31:11 by adrienhors       ###   ########.fr       */
+/*   Updated: 2024/09/09 10:49:17 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,27 @@ int	ft_length_of_char_array(char **av)
 	return (length);
 }
 
-long ft_get_current_time_in_ms(void)
+long	ft_get_current_time_in_ms(void)
 {
-	struct timeval current_time;
-	
+	struct timeval	current_time;
+
 	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
 
-void ft_usleep(long time_in_ms)
+void	ft_usleep(long time_in_ms)
 {
-	long start_time = ft_get_current_time_in_ms();
-	long end_time = start_time + time_in_ms;
+	long	start_time;
+	long	end_time;
+
+	start_time = ft_get_current_time_in_ms();
+	end_time = start_time + time_in_ms;
 	while (ft_get_current_time_in_ms() < end_time)
 		usleep(100);
 }
 
-
 int	ft_check_philo_is_dead(t_philosopher *philo)
 {
-
 	pthread_mutex_lock(&philo->program->dead_mutex);
 	if (philo->program->is_dead)
 	{
@@ -54,7 +55,8 @@ int	ft_check_philo_is_dead(t_philosopher *philo)
 
 int	ft_check_philo_is_full(t_philosopher *philo)
 {
-	if(philo->program->nb_limit_meals != -1 && (philo->meals_eaten >= philo->program->nb_limit_meals))
+	if (philo->program->nb_limit_meals != -1
+		&& (philo->meals_eaten >= philo->program->nb_limit_meals))
 	{
 		ft_write_status(philo, "is full");
 		pthread_mutex_lock(&philo->philo_mutex);
@@ -62,22 +64,5 @@ int	ft_check_philo_is_full(t_philosopher *philo)
 		pthread_mutex_unlock(&philo->philo_mutex);
 		return (1);
 	}
-	return (0); 
-}
-
-void	ft_clean_program(t_program *program)
-{
-	t_philosopher	*philo;
-	int				i;
-
-	i = 0;
-	while (i < program->philo_nbr)
-	{
-		philo = program->philos + i;
-		pthread_mutex_destroy(&philo->philo_mutex); 
-	}
-	pthread_mutex_destroy(&program->write_mutex);
-	pthread_mutex_destroy(&program->dead_mutex);
-	free(program->forks);
-	free(program->philos);
+	return (0);
 }

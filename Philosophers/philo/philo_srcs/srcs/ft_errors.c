@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:03:30 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:35:44 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 10:42:00 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,12 @@ int	ft_is_valid_range(char **av, int len)
 	return (1);
 }
 
-int ft_is_valid_timestamp(char **av)
+int	ft_is_valid_timestamp(char **av)
 {
 	if (ft_atol(av[2]) < 60 || ft_atol(av[3]) < 60 || ft_atol(av[4]) < 60)
 	{
 		ft_error_exit("Use timestamps superior than 60ms");
 		return (1);
 	}
-	return (0);
-		
-}
-
-int	ft_check_args(char **av)
-{
-	int	len;
-	int	i;
-
-	len = ft_length_of_char_array(av);
-	i = 1;
-	while (i < len)
-	{
-		if (!ft_is_digit(av[i]) || !ft_is_valid_arg(av[i]) || ft_is_valid_timestamp(av))
-			return (1);
-		i++;
-	}
-	if (!ft_is_valid_nb_meals(av, 5))
-		return (1);
-	if (!ft_is_valid_range(av, len))
-		return (1);
 	return (0);
 }

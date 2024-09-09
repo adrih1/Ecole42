@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:03 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:36:54 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 10:44:28 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,26 @@ void	ft_printf_args(t_program *program)
 	printf("Time to sleep: %ld\n", program->time_to_sleep);
 }
 
+int	ft_check_args(char **av)
+{
+	int	len;
+	int	i;
 
+	len = ft_length_of_char_array(av);
+	i = 1;
+	while (i < len)
+	{
+		if (!ft_is_digit(av[i]) || !ft_is_valid_arg(av[i])
+			|| ft_is_valid_timestamp(av))
+			return (1);
+		i++;
+	}
+	if (!ft_is_valid_nb_meals(av, 5))
+		return (1);
+	if (!ft_is_valid_range(av, len))
+		return (1);
+	return (0);
+}
 
 int	ft_parse_input(t_program *program, char **av)
 {

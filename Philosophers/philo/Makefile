@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrienhors <adrienhors@student.42.fr>      +#+  +:+       +#+         #
+#    By: ahors <ahors@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 10:19:44 by ahors             #+#    #+#              #
-#    Updated: 2024/08/28 14:53:21 by adrienhors       ###   ########.fr        #
+#    Updated: 2024/09/09 10:47:25 by ahors            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./philo_srcs/srcs
 SRCS =	$(SRC_DIR)/ft_atol.c \
+		$(SRC_DIR)/ft_clean.c \
 		$(SRC_DIR)/ft_display.c \
 		$(SRC_DIR)/ft_errors.c \
 		$(SRC_DIR)/ft_init.c \

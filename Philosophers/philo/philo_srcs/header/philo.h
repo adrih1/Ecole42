@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:58:14 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:31:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 10:40:49 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_program
 	long					time_to_sleep;
 	long					nb_limit_meals;
 	long					start_simulation;
-	long					philos_full; 
+	long					philos_full;
 	bool					is_dead;
 	pthread_t				monitor;
 	t_mtx					write_mutex;
@@ -126,9 +126,9 @@ typedef struct s_program
 }							t_program;
 
 /*
----------------------------------------------------------------------------------m
+--------------------------------------------------------------------------------
 |                                    FONCTIONS                                  |
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 */
 
 // Errors Checks
@@ -136,33 +136,33 @@ int							ft_is_digit(char *str);
 int							ft_is_valid_arg(char *arg);
 int							ft_is_valid_nb_meals(char **av, int index);
 int							ft_is_valid_range(char **av, int len);
+int							ft_is_valid_timestamp(char **av);
 int							ft_check_args(char **av);
 
 // Parsing
-int						ft_parse_input(t_program *program, char **av);
+int							ft_parse_input(t_program *program, char **av);
 
 // Init
 int							ft_data_init(t_program *program);
 
 // Simulation
-void 						*ft_dinner(void *arg); 
-void						ft_monitor(t_program *program); 
-
-
+void						*ft_dinner(void *arg);
+void						ft_monitor(t_program *program);
 
 // Utils
 long						ft_atol(const char *str);
 int							ft_length_of_char_array(char **av);
-long						ft_get_current_time_in_ms(void); 
-int							ft_check_philo_is_full(t_philosopher *philo); 
-int							ft_check_philo_is_dead(t_philosopher *philo); 
-void 						ft_usleep(long time_in_ms); 
+long						ft_get_current_time_in_ms(void);
+int							ft_check_philo_is_full(t_philosopher *philo);
+int							ft_check_philo_is_dead(t_philosopher *philo);
+void						ft_usleep(long time_in_ms);
 
 // Clean
 void						ft_clean_program(t_program *program);
 
 // Display
 int							ft_error_exit(const char *error);
-void						ft_write_status(t_philosopher *philo, const char *status); 
+void						ft_write_status(t_philosopher *philo,
+								const char *status);
 
 #endif

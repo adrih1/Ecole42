@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:24:32 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 10:45:37 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 		if (ft_data_init(&program) != 0)
 		{
 			ft_error_exit("There was an issue while initializing data");
-			return (1); 
+			return (1);
 		}
 		if (program.philo_nbr != 1)
 			ft_monitor(&program);
