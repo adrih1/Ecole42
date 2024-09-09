@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:06:56 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 15:00:00 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:05:15 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_monitor_check_philo_dead(t_philosopher *philo)
 void	ft_monitor(t_program *program)
 {
 	int	i;
-	
+
 	while (1)
 	{
 		i = 0;
@@ -41,13 +41,12 @@ void	ft_monitor(t_program *program)
 				return ;
 			pthread_mutex_lock(&program->philos[i].philo_mutex);
 			if (program->philos[i].is_full)
-				program->philos_full++;				
+				program->philos_full++;
 			if (program->philo_nbr == program->philos_full)
-				return ;			
+				return ;
 			pthread_mutex_unlock(&program->philos[i].philo_mutex);
 			i++;
 		}
-		
 		ft_usleep(2000);
 	}
 }

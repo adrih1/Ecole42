@@ -6,11 +6,20 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 14:49:31 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:20:09 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+void	ft_single_philosopher_simulation(t_philosopher *philo)
+{
+	pthread_mutex_lock(&philo->first_fork->fork);
+	ft_write_status(philo, "has taken a fork");
+	ft_usleep(philo->program->time_to_die);
+	ft_write_status(philo, "died");
+	pthread_mutex_unlock(&philo->first_fork->fork);
+}
 
 int	ft_init_forks(t_fork *forks, int nb_philo)
 {
@@ -29,8 +38,6 @@ int	ft_init_forks(t_fork *forks, int nb_philo)
 	return (0);
 }
 
-// Si philo impair --> first fork is the left
-// Si philo pair --> first fork is the right
 void	ft_init_philosophers(t_philosopher *philos, t_fork *forks,
 		t_program *program)
 {
@@ -87,7 +94,7 @@ int	ft_data_init(t_program *program)
 	ft_init_philosophers(program->philos, program->forks, program);
 	if (program->philo_nbr == 1)
 	{
-		// ft_single_philosopher_simulation(&table->philos[0]); //TODO
+		ft_single_philosopher_simulation(&program->philos[0]);
 		return (0);
 	}
 	if (ft_create_philosopher_threads(program->philos, program->philo_nbr) != 0)

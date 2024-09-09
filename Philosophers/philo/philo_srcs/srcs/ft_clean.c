@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 10:46:10 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 14:32:14 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:30:26 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_join_threads(t_program *program)
 {
-	int i; 
+	int	i;
 
 	i = 0;
 	while (i < program->philo_nbr)
@@ -22,16 +22,14 @@ void	ft_join_threads(t_program *program)
 		if (program->philos[i].thread_id)
 		{
 			pthread_join(program->philos[i].thread_id, NULL);
-		
 		}
 		i++;
 	}
-	
 }
 
 void	ft_destroy_mutex(t_program *program)
 {
-	int				i;
+	int	i;
 
 	i = 0;
 	while (i < program->philo_nbr)
@@ -49,10 +47,10 @@ void	ft_destroy_mutex(t_program *program)
 	pthread_mutex_destroy(&program->dead_mutex);
 }
 
-
 void	ft_clean_program(t_program *program)
 {
-	ft_join_threads(program);
+	if (program->philo_nbr != 1)
+		ft_join_threads(program);
 	ft_destroy_mutex(program);
 	free(program->forks);
 	free(program->philos);
