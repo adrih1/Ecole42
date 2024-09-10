@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 15:05:20 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/10 13:18:44 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,9 @@ void	*ft_dinner(void *arg)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)arg;
-	if (philo->id % 2 == 0)
-		ft_usleep(10);
 	while (1)
 	{
-		if (ft_check_philo_is_dead(philo))
-			break ;
-		if (ft_check_philo_is_full(philo))
+		if (ft_check_philo_is_dead(philo) || ft_check_philo_is_full(philo))
 			break ;
 		ft_philo_takes_forks(philo);
 		ft_philo_eats(philo);

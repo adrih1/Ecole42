@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:03:30 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 10:42:00 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:34:40 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_is_digit(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			printf(RED "Only use digits.\n" RESET);
+			printf(RED "Only use positive numbers and digits.\n" RESET);
 			return (0);
 		}
 		i++;
