@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:08:45 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/09 15:20:09 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/10 15:18:34 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	ft_create_philosopher_threads(t_philosopher *philos, int nb_philo)
 				&philos[i]) != 0)
 			return (ft_error_exit("Creating thread for philosopher"));
 		i++;
-		ft_usleep(100);
 	}
 	return (0);
 }

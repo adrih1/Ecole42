@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:06:56 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/10 13:41:01 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/10 15:18:40 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	ft_monitor(t_program *program)
 			pthread_mutex_unlock(&program->philos[i].philo_mutex);
 			i++;
 		}
-		ft_usleep(2000);
 	}
 }
