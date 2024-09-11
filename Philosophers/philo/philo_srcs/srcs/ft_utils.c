@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:49:52 by adrienhors        #+#    #+#             */
-/*   Updated: 2024/09/10 15:18:56 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/11 13:38:22 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_check_philo_is_full(t_philosopher *philo)
 		ft_write_status(philo, "is full");
 		pthread_mutex_lock(&philo->philo_mutex);
 		philo->is_full = true;
+		philo->program->philos_full++;
 		pthread_mutex_unlock(&philo->philo_mutex);
 		return (1);
 	}

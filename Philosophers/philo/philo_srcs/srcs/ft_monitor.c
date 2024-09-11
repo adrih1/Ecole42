@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:06:56 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/10 15:18:40 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/11 13:39:17 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	ft_monitor(t_program *program)
 			if (ft_monitor_check_philo_dead(&program->philos[i]))
 				return ;
 			pthread_mutex_lock(&program->philos[i].philo_mutex);
-			if (program->philos[i].is_full)
-				program->philos_full++;
 			if (program->philo_nbr == program->philos_full)
 			{
 				pthread_mutex_unlock(&program->philos[i].philo_mutex);
