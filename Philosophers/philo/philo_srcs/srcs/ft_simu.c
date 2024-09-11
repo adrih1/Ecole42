@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/11 13:48:36 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:05:55 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*ft_dinner(void *arg)
 		ft_philo_takes_forks(philo);
 		ft_philo_eats(philo);
 		ft_philo_puts_forks(philo);
-		if (ft_check_philo_is_dead(philo) || ft_check_philo_is_full(philo))
+		if (ft_check_philo_is_dead(philo))
 			break ;
 		ft_philo_sleeps(philo);
 		ft_write_status(philo, "is thinking");
