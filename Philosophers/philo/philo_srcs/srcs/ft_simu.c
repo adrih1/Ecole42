@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/11 14:05:55 by ahors            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:19:51 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*ft_dinner(void *arg)
 
 	philo = (t_philosopher *)arg;
 	if (philo->id % 2 == 0)
-        ft_usleep(1);
+        ft_philo_sleeps(philo);
 	while (1)
 	{
 		if (ft_check_philo_is_dead(philo) || ft_check_philo_is_full(philo))
