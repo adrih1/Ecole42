@@ -6,20 +6,27 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:01:47 by ahors             #+#    #+#             */
-/*   Updated: 2024/10/24 10:47:39 by ahors            ###   ########.fr       */
+/*   Updated: 2024/10/24 11:39:34 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+static int	ft_wrong_nb_args(int ac)
+{
+	if (ac != 5 && ac != 6)
+		return (ft_error_exit("Wrong Input.\nInputs should be:"
+				"nb_philosophers t_to_die t_to_eat t_to_sleep nb_meals"));
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
 	t_program	program;
 	pthread_t	monitor;
 
-	if (ac != 5 && ac != 6)
-		ft_error_exit("Wrong Input.\nInputs should be:"
-						"nb_philosophers t_to_die t_to_eat t_to_sleep nb_meals");
+	if (ft_wrong_nb_args(ac))
+		return (1);
 	else
 	{
 		if (ft_parse_input(&program, av) != 0)

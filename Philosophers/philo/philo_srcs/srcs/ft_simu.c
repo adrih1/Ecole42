@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:09:16 by ahors             #+#    #+#             */
-/*   Updated: 2024/10/24 10:36:17 by ahors            ###   ########.fr       */
+/*   Updated: 2024/10/24 11:35:35 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	ft_philo_takes_forks(t_philosopher *philo)
 {
-		pthread_mutex_lock(&philo->second_fork->fork);
-		pthread_mutex_lock(&philo->first_fork->fork);
-		ft_write_status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->second_fork->fork);
+	pthread_mutex_lock(&philo->first_fork->fork);
+	ft_write_status(philo, "has taken a fork");
 }
 
 void	ft_philo_puts_forks(t_philosopher *philo)
 {
-
-		pthread_mutex_unlock(&philo->first_fork->fork);
-		pthread_mutex_unlock(&philo->second_fork->fork);
+	pthread_mutex_unlock(&philo->first_fork->fork);
+	pthread_mutex_unlock(&philo->second_fork->fork);
 }
 
 void	ft_philo_eats(t_philosopher *philo)

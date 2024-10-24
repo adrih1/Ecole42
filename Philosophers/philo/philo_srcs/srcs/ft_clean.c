@@ -6,7 +6,7 @@
 /*   By: ahors <ahors@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 10:46:10 by ahors             #+#    #+#             */
-/*   Updated: 2024/09/11 13:53:24 by ahors            ###   ########.fr       */
+/*   Updated: 2024/10/24 11:35:29 by ahors            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	ft_print_meals_eaten(t_program *program)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < program->philo_nbr)
+	while (i < program->philo_nbr)
 	{
-		printf("Philo %d has eaten %ld meals\n", program->philos[i].id, program->philos[i].meals_eaten);
+		printf("Philo %d has eaten %ld meals\n", program->philos[i].id,
+			program->philos[i].meals_eaten);
 		i++;
 	}
 }
@@ -61,7 +62,6 @@ void	ft_destroy_mutex(t_program *program)
 
 void	ft_clean_program(t_program *program)
 {
-	// ft_print_meals_eaten(program);
 	if (program->philo_nbr != 1)
 		ft_join_threads(program);
 	ft_destroy_mutex(program);
