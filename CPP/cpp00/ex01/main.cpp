@@ -66,7 +66,10 @@ int main() {
     while (true) {
         std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
-
+        if (std::cin.eof()) {
+            std::cout << "\nExiting PhoneBook. All contacts will be lost.\n";
+            break;
+        }
         if (command == "ADD") {
             addContact(phoneBook);
         } 
