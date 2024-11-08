@@ -1,10 +1,9 @@
 #include "Fixed.hpp"
 
-#include "Fixed.hpp"
-
 const int Fixed::fractionalBits = 8;
 
-Fixed::Fixed() : nbDecimal(0) {
+Fixed::Fixed() : nbDecimal(0) 
+{
     cout << "Default constructor called" << endl;
 }
 
@@ -12,15 +11,17 @@ Fixed::~Fixed() {
     cout << "Destructor called" << endl;
 }
 
-Fixed::Fixed(const Fixed& autre) : nbDecimal(autre.nbDecimal) {
+Fixed::Fixed(const Fixed& autre) {
     cout << "Copy constructor called" << endl;
+    *this = autre;
+
 }
 
-Fixed& Fixed::operator=(const Fixed& autre) {
-    if (this != &autre) {
-        nbDecimal = autre.nbDecimal;
-        cout << "Copy assignement operator called." << endl;
-    }
+Fixed& Fixed::operator=(const Fixed& autre) 
+{
+    cout << "Copy assignement operator called." << endl;
+    if (this != &autre)
+        this->nbDecimal = autre.getRawBits();
     return *this;
 }
 
@@ -28,11 +29,11 @@ Fixed& Fixed::operator=(const Fixed& autre) {
 // Fonction membre getRawBits
 int Fixed::getRawBits() const {
     cout << "getRawBits member function called" << endl;
-    return nbDecimal;
+    return this->nbDecimal;
 }
 
 // Fonction membre setRawBits
 void Fixed::setRawBits(int const raw) {
-    nbDecimal = raw;
     cout << "setRawBits member function called" << endl;
+    this->nbDecimal = raw;
 }

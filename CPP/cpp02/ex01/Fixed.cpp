@@ -17,9 +17,9 @@ Fixed::Fixed(const Fixed& autre) : nbDecimal(autre.nbDecimal) {
 }
 
 Fixed& Fixed::operator=(const Fixed& autre) {
+    cout << "Copy assignement operator called." << endl;
     if (this != &autre) {
         nbDecimal = autre.nbDecimal;
-        cout << "Copy assignement operator called." << endl;
     }
     return *this;
 }
