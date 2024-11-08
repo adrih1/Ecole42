@@ -23,7 +23,7 @@ void PhoneBook::displayContacts() const {
                     << std::setw(10) << "First Name" << " | "
                     << std::setw(10) << "Last Name" << " | "
                     << std::setw(10) << "NickName" << std::endl;
-        std::cout << "---------------------------------------------" << std::endl;
+        std::cout << "-------------------------------------------------" << std::endl;
     }
 
     for (int i = 0; i < contactCount; i++) {

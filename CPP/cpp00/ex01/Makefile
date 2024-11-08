@@ -3,7 +3,7 @@ NAME = ex01
 
 # Compilateur et options
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Fichiers source et fichiers objets
 SRCS = 	main.cpp \

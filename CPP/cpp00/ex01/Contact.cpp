@@ -38,3 +38,12 @@ void Contact::displayContactSummary(int index) const {
               << std::setw(10) << (lastName.length() > 9 ? lastName.substr(0, 9) + "." : lastName) << " | "
               << std::setw(10) << (nickName.length() > 9 ? nickName.substr(0, 9) + "." : nickName) << std::endl;
 }
+
+void Contact::displayContact(int index) const {
+    std::cout << "Index: " << index << std::endl
+              << "First Name: " << (firstName) << std::endl
+              << "Last Name: " << (lastName) << std::endl
+              << "Nickname: " << (nickName) << std::endl
+              << "Phone Number: " << (phoneNumber) << std::endl
+              << "Darkest secret: " << (darkestSecret) << std::endl;
+}

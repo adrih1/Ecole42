@@ -52,7 +52,7 @@ void searchContacts(const PhoneBook& phoneBook) {
     std::cin.ignore();
 
     try {
-        phoneBook.getContact(index - 1).displayContactSummary(index);
+        phoneBook.getContact(index - 1).displayContact(index);
     } catch (const std::out_of_range&) {
         std::cout << "Error: No contact found at that index.\n";
     }

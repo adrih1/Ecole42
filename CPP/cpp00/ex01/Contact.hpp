@@ -29,6 +29,8 @@ public:
 
     // Méthode d'affichage
     void displayContactSummary(int index) const; 
+    void displayContact(int index) const; 
+
 };
 
 #endif
