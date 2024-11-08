@@ -12,15 +12,15 @@ Fixed::~Fixed() {
     cout << "Destructor called" << endl;
 }
 
-Fixed::Fixed(const Fixed& autre) : nbDecimal(autre.nbDecimal) {
+Fixed::Fixed(const Fixed& autre) {
     cout << "Copy constructor called" << endl;
+    *this = autre;
 }
 
 Fixed& Fixed::operator=(const Fixed& autre) {
     cout << "Copy assignement operator called." << endl;
-    if (this != &autre) {
-        nbDecimal = autre.nbDecimal;
-    }
+    if (this != &autre)
+        this->nbDecimal = autre.nbDecimal;
     return *this;
 }
 
@@ -40,8 +40,7 @@ int Fixed::toInt() const {
     return nbDecimal / (1 << fractionalBits);
 }
 
-// Surcharge de l'opérateur << pour afficher un objet Fixed
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
-    out << fixed.toFloat();  // Affiche la valeur flottante de Fixed
+    out << fixed.toFloat();
     return out;
 }
