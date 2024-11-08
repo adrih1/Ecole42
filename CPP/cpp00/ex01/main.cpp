@@ -7,7 +7,6 @@
 void addContact(PhoneBook& phoneBook) {
     std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 
-    // Demander chaque champ à l'utilisateur
     std::cout << "Enter First Name: ";
     std::getline(std::cin, firstName);
     std::cout << "Enter Last Name: ";
@@ -19,14 +18,12 @@ void addContact(PhoneBook& phoneBook) {
     std::cout << "Enter Darkest Secret: ";
     std::getline(std::cin, darkestSecret);
 
-    // Vérifier que tous les champs sont remplis
     if (firstName.empty() || lastName.empty() || nickName.empty() ||
         phoneNumber.empty() || darkestSecret.empty()) {
         std::cout << "Error: All fields must be filled.\n";
         return;
     }
 
-    // Ajouter le contact au répertoire
     phoneBook.addContact(Contact(firstName, lastName, nickName, phoneNumber, darkestSecret));
     std::cout << "Contact added successfully!\n";
 }
@@ -34,12 +31,10 @@ void addContact(PhoneBook& phoneBook) {
 void searchContacts(const PhoneBook& phoneBook) {
     
     phoneBook.displayContacts();
-    // Vérifie si le répertoire est vide
     if (phoneBook.getContactCount() < 1) {
         std::cout << "Please create a contact before searching for one.\n";
-        return; // Sort de la fonction sans rien faire d'autre
+        return;
     }
-
 
     std::cout << "Enter the index of the contact to view details: ";
     int index;
