@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="./so_long_cover.png" alt="So_long Logo" width="80%"/>
+</p>
 # So_long
 
 ## Description
