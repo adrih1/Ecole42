@@ -14,7 +14,6 @@ Fixed::~Fixed() {
 Fixed::Fixed(const Fixed& autre) {
     cout << "Copy constructor called" << endl;
     *this = autre;
-
 }
 
 Fixed& Fixed::operator=(const Fixed& autre) 

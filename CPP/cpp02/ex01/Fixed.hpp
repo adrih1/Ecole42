@@ -18,8 +18,8 @@ class Fixed
 	Fixed(const Fixed &autre);
 	Fixed &operator=(const Fixed &autre);
 
-	Fixed(int const raw);
-	Fixed(float const raw);
+	Fixed(int const value);
+	Fixed(float const value);
 
 	float toFloat(void) const;
 	int toInt(void) const;

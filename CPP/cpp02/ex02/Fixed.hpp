@@ -16,6 +16,7 @@ class Fixed
 	Fixed();
 	~Fixed();
 	Fixed(const Fixed &autre);
+
 	// Operateurs arithmetiques
 	Fixed &operator=(const Fixed &autre);
 	Fixed operator+(const Fixed &autre) const;
@@ -36,26 +37,21 @@ class Fixed
 	Fixed operator++(int);     
 	Fixed &operator--();       
 	Fixed operator--(int);     
-	
-
-
 
 	Fixed(int const raw);
 	Fixed(float const raw);
 
 	// Methodes de classe
 	static Fixed &min(Fixed &a, Fixed &b); 
-	static const Fixed &min(const Fixed &a, const Fixed &b); // version const 
+	static const Fixed &minConst(const Fixed &a, const Fixed &b); 
 
 	static Fixed &max(Fixed &a, Fixed &b); 
-	static const Fixed &max(const Fixed &a, const Fixed &b); // version const 
-
+	static const Fixed &max(const Fixed &a, const Fixed &b); 
 
 	float toFloat(void) const;
 	int toInt(void) const;
 };
 
-// Surcharge de l'opérateur << pour afficher un objet Fixed
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif

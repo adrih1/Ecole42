@@ -1,7 +1,5 @@
 #include "Fixed.hpp"
 
-#include "Fixed.hpp"
-
 const int Fixed::fractionalBits = 8;
 
 Fixed::Fixed() : nbDecimal(0) {
@@ -24,20 +22,23 @@ Fixed& Fixed::operator=(const Fixed& autre) {
     return *this;
 }
 
-Fixed::Fixed(int const raw) : nbDecimal(raw * (1 << fractionalBits)) {
-    cout << "Int constructor called" << endl;
+Fixed::Fixed(const int value)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->nbDecimal = value << Fixed::fractionalBits;
 }
 
-Fixed::Fixed(float const raw) : nbDecimal(std::round(raw * (1 << fractionalBits))) {
-    cout << "Float constructor called" << endl;
+Fixed::Fixed(const float value)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->nbDecimal = (int)roundf(value * (1 << Fixed::fractionalBits));
 }
-
 float Fixed::toFloat() const {
-    return static_cast<float>(nbDecimal) / (1 << fractionalBits);
+    return static_cast<float>(this->nbDecimal) / (1 << fractionalBits);
 }
 
 int Fixed::toInt() const {
-    return nbDecimal / (1 << fractionalBits);
+    return this->nbDecimal >> fractionalBits;
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
