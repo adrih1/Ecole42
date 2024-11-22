@@ -17,7 +17,7 @@ Fixed::Fixed(float const raw) : nbDecimal(static_cast<int>(raw * (1 << fractiona
 
 //Destructor
 Fixed::~Fixed() {
-    cout << "Destructor called" << endl;
+    // cout << "Destructor called" << endl;
 }
 
 // Constructor copy
@@ -26,7 +26,6 @@ Fixed::Fixed(const Fixed& autre) {
     *this = autre;
 }
 
-// Operateurs arithmetiques
 Fixed& Fixed::operator=(const Fixed& autre) {
     // cout << "Copy assignement operator called." << endl;
     if (this != &autre)
@@ -34,6 +33,7 @@ Fixed& Fixed::operator=(const Fixed& autre) {
     return *this;
 }
 
+// Operateurs arithmetiques
 Fixed Fixed::operator+(const Fixed &autre) const {
     return Fixed(this->toFloat() + autre.toFloat());
 }
@@ -54,7 +54,7 @@ Fixed Fixed::operator/(const Fixed &autre) const {
     return Fixed(this->toFloat() / autre.toFloat());
 }
 
-// Operateurs logique
+// Operateurs de comparaison
 bool Fixed::operator>(const Fixed &autre) const {
     return this->nbDecimal > autre.nbDecimal;
 }

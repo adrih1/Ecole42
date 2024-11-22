@@ -15,20 +15,16 @@ static Fixed crossProduct(Point const a, Point const b, Point const p)
 
 
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
-    // On calcule les produits vectoriels pour chaque côté du triangle
-    Fixed crossAB = crossProduct(a, b, point);  // Produit vectoriel de (AB) et (AP)
-    Fixed crossBC = crossProduct(b, c, point);  // Produit vectoriel de (BC) et (BP)
-    Fixed crossCA = crossProduct(c, a, point);  // Produit vectoriel de (CA) et (CP)
+    // Produits vectoriels pour chaque côté du triangle
+    Fixed crossAB = crossProduct(a, b, point);  
+    Fixed crossBC = crossProduct(b, c, point);
+    Fixed crossCA = crossProduct(c, a, point);
 
-    // Vérification que les produits vectoriels ont tous le même signe
     // Si tous les signes sont positifs ou tous négatifs, le point est à l'intérieur
     bool isInside = (crossAB > Fixed(0) && crossBC > Fixed(0) && crossCA > Fixed(0)) ||
                     (crossAB < Fixed(0) && crossBC < Fixed(0) && crossCA < Fixed(0));
-
-    // Si le point est sur un bord, il retourne false
     if (crossAB == Fixed(0) || crossBC == Fixed(0) || crossCA == Fixed(0)) {
         return false;
     }
-
     return isInside;
 }
