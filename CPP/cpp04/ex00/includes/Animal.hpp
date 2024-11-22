@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
 
 
 class Animal {
@@ -14,10 +13,13 @@ public:
     Animal();
     Animal(std::string type); 
     Animal(const Animal& autre);
-    ~Animal();
+
     Animal& operator=(const Animal& autre);
 
-    void makeSound(std::string type);
+    virtual ~Animal();
+    virtual void makeSound() const;
+
+    std::string getType() const;
 };
 
 #endif
