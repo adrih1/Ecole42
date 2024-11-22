@@ -3,30 +3,20 @@
 const int Fixed::fractionalBits = 8;
 
 //Constructeurs
-Fixed::Fixed() : nbDecimal(0) {
-    // cout << "Default constructor called" << endl;
-}
+Fixed::Fixed() : nbDecimal(0) {}
 
-Fixed::Fixed(int const raw) : nbDecimal(raw * (1 << fractionalBits)) {
-    // cout << "Int constructor called" << endl;
-}
+Fixed::Fixed(int const raw) : nbDecimal(raw * (1 << fractionalBits)) {}
 
-Fixed::Fixed(float const raw) : nbDecimal(static_cast<int>(raw * (1 << fractionalBits) + 0.5f)) {
-    // std::cout << "Float constructor called" << std::endl;
-}
+Fixed::Fixed(float const raw) : nbDecimal(static_cast<int>(raw * (1 << fractionalBits) + 0.5f)) {}
 
-//Destructor
 Fixed::~Fixed(){}
 
-// Constructor copy
 Fixed::Fixed(const Fixed& autre) {
-    // cout << "Copy constructor called" << endl;
     *this = autre;
 }
 
 // Operateurs arithmetiques
 Fixed& Fixed::operator=(const Fixed& autre) {
-    // cout << "Copy assignement operator called." << endl;
     if (this != &autre)
         this->nbDecimal = autre.nbDecimal;
     return *this;
