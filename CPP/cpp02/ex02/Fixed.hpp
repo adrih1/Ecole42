@@ -4,7 +4,6 @@
 # include <iostream>
 # include <string>
 #include <cmath>
-using namespace	std;
 
 class Fixed
 {
@@ -43,7 +42,7 @@ class Fixed
 
 	// Methodes de classe
 	static Fixed &min(Fixed &a, Fixed &b); 
-	static const Fixed &minConst(const Fixed &a, const Fixed &b); 
+	static const Fixed &min(const Fixed &a, const Fixed &b); 
 
 	static Fixed &max(Fixed &a, Fixed &b); 
 	static const Fixed &max(const Fixed &a, const Fixed &b); 

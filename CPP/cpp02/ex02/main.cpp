@@ -65,8 +65,8 @@ void testMin() {
 
     const Fixed &minConstFixed = Fixed::min(a, b);
 
-    std::cout << "min(a, b) : " << min(a, b) << " (devrait être environ 3.14)\n";
-    std::cout << "min(a, b) pour les const : " << minConstFixed << " (devrait être environ 3.14)\n\n";
+    std::cout << "min(a, b) : " << Fixed::min(a, b) << " (devrait être environ 3.14)\n";
+    std::cout << "min(a, b) pour les const : " << minConstFixed << " (devrait être environ 3.14)\n";
 }
 
 // Test de la méthode min
@@ -77,7 +77,7 @@ void testMax() {
 
     const Fixed &maxConstFixed = Fixed::max(a, b);
 
-    std::cout << "min(a, b) : " << max(a, b) << " (devrait être 10)\n";
+    std::cout << "min(a, b) : " << Fixed::max(a, b) << " (devrait être 10)\n";
     std::cout << "min(a, b) pour les const : " << maxConstFixed << " (devrait être environ 10)\n\n";
 }
 
