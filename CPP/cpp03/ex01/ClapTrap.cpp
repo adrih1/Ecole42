@@ -51,19 +51,19 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << name << " is already destroyed and cannot take more damage!" << std::endl;
+		std::cout << name << " is already destroyed and cannot take more damage!" << std::endl;
 		return;
 	}
 	if (amount >= this->hitPoints)
 	{
 		this->hitPoints = 0;
-		std::cout << "ClapTrap " << name << " takes " << amount << " points of damage!" << std::endl;
-		std::cout << "ClapTrap " << name << " is destroyed!" << std::endl;
+		std::cout << name << " takes " << amount << " points of damage!" << std::endl;
+		std::cout << name << " is destroyed!" << std::endl;
 	}
 	else
 	{
 		this->hitPoints -= amount;
-		std::cout << "ClapTrap " << name << " takes " << amount << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << name << " takes " << amount << " points of damage! Remaining HP: " << this->hitPoints << std::endl;
 	}
 }
 

@@ -35,16 +35,16 @@ void ClapTrap::attack(std::string const &target)
 {
     if (this->hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << name << " has no hit points left and cannot attack!" << std::endl;
+		std::cout << name << " has no hit points left and cannot attack!" << std::endl;
 		return;
 	}
 	if (this->energyPoints == 0)
 	{
-		std::cout << "ClapTrap " << name << " has no energy points left and cannot attack!" << std::endl;
+		std::cout << name << " has no energy points left and cannot attack!" << std::endl;
 		return;
 	}
 	this->energyPoints -= 1;
-    std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
+    std::cout << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)

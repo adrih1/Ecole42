@@ -26,7 +26,7 @@ int main() {
     }
 
     std::cout << "\n--- Clap1 tries to repair ---" << std::endl;
-    clap1.beRepaired(5);
+    clap1.beRepaired(3);
 
     std::cout << "\n--- End of Test ---" << std::endl;
     return 0;
