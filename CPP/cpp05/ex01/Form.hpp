@@ -3,6 +3,8 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 private:
@@ -12,8 +14,8 @@ private:
     const int _gradeToExecute; 
 public :
     Form(std::string name, int gradeToSign, int gradeToExecute);
-    Form(const Form& form);
-    Form& operator=(const Form& form);
+    Form(const Form& other);
+    Form& operator=(const Form& other);
     ~Form();
 
 
@@ -33,7 +35,7 @@ public :
 
     //Getters
     std::string getName() const;
-    bool getSigned() const;
+    bool getIsSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
     
@@ -41,6 +43,6 @@ public :
     void beSigned(Bureaucrat &bureaucrat); 
 
 };
-
+std::ostream &operator<<(std::ostream &os, const Form &form);
 
 #endif

@@ -12,7 +12,8 @@ const char *Form::GradeTooLowException::what() const throw()
 }
 
 
-Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
+Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute) 
+    : _name(name),_signed(false),  _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
     if (_gradeToSign < 1 || _gradeToExecute < 1)
         throw GradeTooHighException();
@@ -20,16 +21,15 @@ Form::Form(const std::string name, const int gradeToSign, const int gradeToExecu
         throw GradeTooLowException();
 }
 
-Form::Form(const Form& form) : _name(form._name), _gradeToSign(form._gradeToSign), _gradeToExecute(form._gradeToExecute)
-{
-    *this = form;
-}
 
-Form &Form::operator=(const Form &form)
+Form::Form(const Form& other) : _name(other._name), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {};
+
+
+Form &Form::operator=(const Form &other)
 {
-    if (this != &form)
+    if (this != &other)
     {
-        this->_signed = form._signed;
+        this->_signed = other._signed;
     }
     return *this;
 }
@@ -39,27 +39,36 @@ Form::~Form() {}
 //Getters
 std::string Form::getName() const
 {
-    return _name;
+    return this->_name;
 }
 
-bool Form::getSigned() const
+bool Form::getIsSigned() const
 {
-    return _signed;
+    return this->_signed;
 }
 
 int Form::getGradeToSign() const
 {
-    return _gradeToSign;
+    return this->_gradeToSign;
 }
 
 int Form::getGradeToExecute() const
 {
-    return _gradeToExecute;
+    return this->_gradeToExecute;
 }
 
 void Form::beSigned(Bureaucrat &bureaucrat)
 {
-    if (bureaucrat.getGrade() > _gradeToSign && bureaucrat.getGrade() < 1)
+    if (bureaucrat.getGrade() > _gradeToSign || bureaucrat.getGrade() < 1)
         throw GradeTooLowException();
     _signed = true;
+}
+
+std::ostream &operator<<(std::ostream &os, const Form &form)
+{
+	os << form.getName()
+		<< " [Signed: " << (form.getIsSigned() ? "Yes" : "No")
+		<< ", Grade to sign: " << form.getGradeToSign()
+		<< ", Grade to execute: " << form.getGradeToExecute() << "]";
+	return os;
 }

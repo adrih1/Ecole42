@@ -36,6 +36,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 Bureaucrat::~Bureaucrat() {}
 
 
+
 //Getters
 const std::string& Bureaucrat::getName() const {
     return this->_name;
@@ -58,8 +59,14 @@ void Bureaucrat::decrementGrade() {
     this->_grade++;
 }
 
-//TODO - Implelement signForm
-
+void Bureaucrat::signForm(Form &form) {
+    try {
+        form.beSigned(*this);
+        std::cout << this->_name << " signed " << form.getName() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << this->_name << " couldn’t sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
 
 
 //Surcharge de l'operateur

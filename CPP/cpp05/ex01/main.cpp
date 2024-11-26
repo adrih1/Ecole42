@@ -1,61 +1,45 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-void testCreationInvalidGrade() {
-    std::cout << "Test 1: Invalid Bureaucrat Creation\n";
+void testFunctionalForm() {
+    std::cout << "Test 1: Functional Form\n";
     try {
-        Bureaucrat Alice("Alice", 0); // Devrait lancer GradeTooHighException
-    } catch (const Bureaucrat::GradeTooHighException& e) {
-        std::cerr << e.what() << std::endl;
-    }
-
-    try {
-        Bureaucrat Charlie("Charlie", 151); // Devrait lancer GradeTooLowException
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
-}
-
-void testDecrementAtMinimum() {
-    std::cout << "\nTest 2: Decrementing Bureaucrat at Minimum Grade\n";
-    try {
-        Bureaucrat Gustavo("Gustavo", 150);
+        Form Form1("Form1", 5, 100);
+        std::cout << Form1 << std::endl;
+        std::cout << "Creating Bureaucrat who can sign" << std::endl;
+        Bureaucrat Gustavo("Gustavo", 3);
         std::cout << Gustavo << std::endl;
-        std::cout << Gustavo.getName() << " gets decremented" << std::endl;
-        Gustavo.decrementGrade(); // Devrait lancer GradeTooLowException
-    } catch (const std::exception& e) {
+
+        std::cout << "Trying to sign " << Form1.getName() << std::endl;
+        Gustavo.signForm(Form1);
+
+        std::cout << Form1 << std::endl;
+    } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
 }
 
-void testIncrementAtMaximum() {
-    std::cout << "\nTest 3: Incrementing Bureaucrat at Maximum Grade\n";
+void testUnauthorizedForm()
+{
+    std::cout << "\nTest 2: Unauthorized Form\n";
     try {
-        Bureaucrat Skyler("Skyler", 1);
-        std::cout << Skyler << std::endl;
-        std::cout << Skyler.getName() << " gets decremented" << std::endl;
-        Skyler.incrementGrade(); // Devrait lancer GradeTooHighException
-    } catch (const std::exception& e) {
+        Form Form2("Form2", 5, 100);
+        std::cout << Form2 << std::endl;
+        std::cout << "Creating Bureaucrat who can't sign" << std::endl;
+        Bureaucrat Walter("Walter", 134 );
+        std::cout << Walter << std::endl;
+
+        std::cout << "Trying to sign " << Form2.getName() << std::endl;
+        Walter.signForm(Form2);
+
+        std::cout << Form2 << std::endl;
+    } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
-}
-
-void testfunctionalBureaucrat() {
-    std::cout << "\nTest 4: Functional Bureaucrat\n";
-    Bureaucrat Walter("Walter", 75);
-    std::cout << Walter << std::endl;
-    std::cout << Walter.getName() << " gets decremented" << std::endl;
-    Walter.decrementGrade();
-    std::cout << Walter << std::endl;
-    std::cout << Walter.getName() << " gets incremented two times" << std::endl;
-    Walter.incrementGrade();
-    Walter.incrementGrade();
-    std::cout << Walter << std::endl;
 }
 
 int main() {
-    testCreationInvalidGrade();
-    testDecrementAtMinimum();
-    testIncrementAtMaximum();
-    testfunctionalBureaucrat();
+    testFunctionalForm();
+    testUnauthorizedForm();
     return 0;
 }
