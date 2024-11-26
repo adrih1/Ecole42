@@ -1,4 +1,4 @@
-NAME = ex01
+NAME = ex02
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
@@ -11,7 +11,6 @@ SRCS =	main.cpp \
 		src/WrongAnimal.cpp \
 		src/WrongCat.cpp 
 
-		
 OBJS = $(SRCS:.cpp=.o)
 
 RM = rm -f

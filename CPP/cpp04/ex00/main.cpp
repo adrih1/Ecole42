@@ -2,7 +2,7 @@
 #include "includes/Cat.hpp"
 #include "includes/WrongCat.hpp"
 
-// Explication de  l'interet de virtual 
+// Explication de  l'interet de virtual - L'appel de fonction devient dynamique
 // int main()
 // {
 //     const Animal* meta = new Animal();
@@ -15,7 +15,6 @@
 //     delete j;
 //     return 0;
 // }
-
 
 int main()
 {
