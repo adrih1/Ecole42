@@ -4,6 +4,11 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS =	main.cpp \
+		src/AMateria.cpp \
+		src/Character.cpp \
+		src/Cure.cpp \
+		src/Ice.cpp \
+		src/MateriaSource.cpp
 		
 
 OBJS = $(SRCS:.cpp=.o)

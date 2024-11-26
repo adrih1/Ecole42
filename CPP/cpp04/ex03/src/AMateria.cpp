@@ -1,5 +1,4 @@
-#include "Ice.hpp"
-#include "Cure.hpp"
+#include "../includes/AMateria.hpp"
 
 // Constructor
 AMateria::AMateria(std::string const & type) : _type(type) {}
