@@ -10,6 +10,13 @@ const std::string BLUE    = "\033[34m";
 const std::string CYAN    = "\033[36m";
 const std::string BOLD_CYAN    = "\033[1;36m";
 
+void testSubject()
+{
+    std::cout << BLUE << "Test Subject" << RESET << std::endl;
+    Intern someRandomIntern;
+    AForm* rrf;
+    rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
+}
 
 void testInterWorks() {
     std::cout << BLUE << "Test: Intern Creates Forms" << RESET << std::endl;
@@ -33,5 +40,6 @@ void testInterWorks() {
 int main ()
 {
     testInterWorks();   
+    testSubject();
     return 0;
 }
