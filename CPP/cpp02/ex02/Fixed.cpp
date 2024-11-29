@@ -3,37 +3,27 @@
 const int Fixed::fractionalBits = 8;
 
 //Constructeurs
-Fixed::Fixed() : nbDecimal(0) {
-    // cout << "Default constructor called" << endl;
-}
+Fixed::Fixed() : nbDecimal(0) {}
 
-Fixed::Fixed(int const raw) : nbDecimal(raw * (1 << fractionalBits)) {
-    // cout << "Int constructor called" << endl;
-}
+Fixed::Fixed(int const raw) : nbDecimal(raw * (1 << fractionalBits)) {}
 
-Fixed::Fixed(float const raw) : nbDecimal(static_cast<int>(raw * (1 << fractionalBits) + 0.5f)) {
-    // std::cout << "Float constructor called" << std::endl;
-}
+Fixed::Fixed(float const raw) : nbDecimal(static_cast<int>(raw * (1 << fractionalBits) + 0.5f)) {}
 
 //Destructor
-Fixed::~Fixed() {
-    cout << "Destructor called" << endl;
-}
+Fixed::~Fixed() {}
 
 // Constructor copy
 Fixed::Fixed(const Fixed& autre) {
-    // cout << "Copy constructor called" << endl;
     *this = autre;
 }
 
-// Operateurs arithmetiques
 Fixed& Fixed::operator=(const Fixed& autre) {
-    // cout << "Copy assignement operator called." << endl;
     if (this != &autre)
         this->nbDecimal = autre.nbDecimal;
     return *this;
 }
 
+// Operateurs arithmetiques
 Fixed Fixed::operator+(const Fixed &autre) const {
     return Fixed(this->toFloat() + autre.toFloat());
 }
@@ -54,7 +44,7 @@ Fixed Fixed::operator/(const Fixed &autre) const {
     return Fixed(this->toFloat() / autre.toFloat());
 }
 
-// Operateurs logique
+// Operateurs de comparaison
 bool Fixed::operator>(const Fixed &autre) const {
     return this->nbDecimal > autre.nbDecimal;
 }
@@ -116,19 +106,19 @@ int Fixed::toInt() const {
 
 
 Fixed &Fixed::min(Fixed &a, Fixed &b) {
-    return (a.nbDecimal < b.nbDecimal) ? a : b;
+    return (a < b) ? a : b;
 }
 
-const Fixed &Fixed::minConst(const Fixed &a, const Fixed &b) {
-    return (a.nbDecimal < b.nbDecimal) ? a : b;
+const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
+{
+	return a < b ? a : b;
 }
-
 Fixed &Fixed::max(Fixed &a, Fixed &b) {
-    return (a.nbDecimal < b.nbDecimal) ? b : a;
+    return (a < b) ? b : a;
 }
 
 const Fixed &Fixed::max(const Fixed &a, const Fixed &b) {
-    return (a.nbDecimal < b.nbDecimal) ? b : a;
+    return (a < b) ? b : a;
 }
 
 

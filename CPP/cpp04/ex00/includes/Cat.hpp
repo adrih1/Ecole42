@@ -3,16 +3,19 @@
 
 #include "Animal.hpp"
 
-class Cat : public Animal
+
+class Cat  : public Animal
 {
-  public:
-	Cat();
-	Cat(const std::string type);
-	Cat(const Cat &src);
+public:
+    Cat();
+    Cat(std::string name); 
+    Cat(const Cat& autre);
+    Cat& operator=(const Cat& autre);
 
-	Cat &operator=(const Cat &src);
+    ~Cat();
 
-	~Cat();
+    void makeSound() const;
 
-	void makeSound() const;
 };
+
+#endif
