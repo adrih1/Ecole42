@@ -4,7 +4,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS =	main.cpp \
-		src/Animal.cpp \
+		src/AAnimal.cpp \
 		src/Dog.cpp \
 		src/Cat.cpp \
 		src/Brain.cpp \

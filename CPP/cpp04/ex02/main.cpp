@@ -1,39 +1,58 @@
 #include "./includes/Brain.hpp"
 #include "./includes/Dog.hpp"
 #include "./includes/Cat.hpp"
+#include "includes/WrongCat.hpp"
+
+#define RESET "\033[0m"
+#define GREEN "\033[32m"
+#define CYAN "\033[36m"
+#define YELLOW "\033[33m"
+#define BOLD_CYAN "\033[1;36m"
 
 
-//Main pour expliquer la classe abstraite 
-// int main()
-// {
-// 	Animal *animal = new Animal();
-// 	Animal *animal = new Dog();
-
-// 	return (0);
-// }
-
-
-int main ()
+// Test de l'abstraction
+void testAbstrcatClass()
 {
-	const int NUM_ANIMALS = 100;
-    Animal *animals[NUM_ANIMALS];
+	// AAnimal *animal = new AAnimal();
+	// AAnimal *animal = new Dog();
 
-	std::cout << "Creating Animals" << std::endl;
-	for (int i = 0; i < NUM_ANIMALS; i++)
-	{
-		if(i % 2 == 0)
-			animals[i] = new Dog();
-		else 
-			animals[i] = new Cat();
-	}
+}
 
-	std::cout << "\nAnimals making sound" << std::endl;
-	for (int i = 0; i < NUM_ANIMALS; i++)
-		animals[i]->makeSound();
-	
-	std::cout << "\nDeleting Animals" << std::endl;
-	for (int i = 0; i < NUM_ANIMALS; i++)
-		delete animals[i];
 
-	return (0);
+void testAnimals()
+{
+    std::cout << BOLD_CYAN << "TEST ANIMALS" << RESET << std::endl;
+    std::cout << GREEN << "Creating an animal, two dogs and two cats" << RESET << std::endl;
+    const AAnimal* anonymousdog = new Dog();
+    const AAnimal* rufus = new Dog("Rufus");
+    const AAnimal* anonymouscat = new Cat();
+    const AAnimal* norminet = new Cat("Norminet");
+
+    std::cout << CYAN << "Checking types" << RESET << std::endl;
+    std::cout << anonymousdog->getType() << " " << std::endl; 
+    std::cout << rufus->getType() << " " << std::endl; 
+    std::cout << anonymouscat->getType() << " " << std::endl; 
+    std::cout << norminet->getType() << " " << std::endl; 
+
+    std::cout << CYAN << "Testing 'makeSound' method" << RESET << std::endl;
+    anonymousdog->makeSound();
+    rufus->makeSound();
+    anonymouscat->makeSound();
+    norminet->makeSound();
+
+
+    std::cout << CYAN << "Destroying class instances" << RESET << std::endl;
+    delete anonymousdog;
+    delete rufus;
+    delete anonymouscat;
+    delete norminet;
+    std::cout << BOLD_CYAN << "End of test" << RESET << std::endl;
+}
+
+
+int main()
+{
+	// testAbstrcatClass();
+    testAnimals();
+    return (0);
 }
