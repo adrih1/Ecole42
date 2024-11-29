@@ -2,13 +2,10 @@
 
 WrongAnimal::WrongAnimal() : type("WrongAnimal")
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "Wrong Animal constructed" << std::endl;
 };
 
-WrongAnimal::WrongAnimal(std::string type) : type(type)
-{
-    std::cout << "WrongAnimal of type " << type << " constructed" << std::endl;
-};
+WrongAnimal::WrongAnimal(std::string type) : type(type) {};
 
 WrongAnimal::WrongAnimal(const WrongAnimal &src) : type(src.type)
 {
