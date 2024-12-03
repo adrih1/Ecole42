@@ -17,14 +17,19 @@ private:
     
     ~ScalarConverter();
 
-    // Méthodes d'aide pour les conversions spécifiques
+    static bool isChar(const std::string& literal);
+    static bool isInt(const std::string& literal);
+    static bool isFloat(const std::string& literal);
+    static bool isDouble(const std::string& literal);
+
+    static bool isPseudoLiteral(const std::string &literal);
+
+
     static void printChar(double value);
     static void printInt(double value);
     static void printFloat(double value);
     static void printDouble(double value);
 
-    // Méthode utilitaire pour vérifier si une chaîne est un pseudo littéral
-    static bool isPseudoLiteral(const std::string &literal);
 
 public:
     static void convert(const std::string &literal);
