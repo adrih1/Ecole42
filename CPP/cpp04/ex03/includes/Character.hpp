@@ -6,8 +6,8 @@
 
 class Character : public ICharacter {
 private:
-    std::string name;
-    AMateria* inventory[4];
+    std::string _name;
+    AMateria* _inventory[4];
 
 public:
     Character();
