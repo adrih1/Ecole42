@@ -4,14 +4,14 @@
 #include "includes/PresidentialPardonForm.hpp"
 #include "includes/RobotomyRequestForm.hpp"
 
-const std::string RESET   = "\033[0m";  
-const std::string BLUE    = "\033[34m";
-const std::string CYAN    = "\033[36m";
-const std::string BOLD_CYAN    = "\033[1;36m";
+#define RESET "\033[0m"
+#define BLUE "\033[34m"
+#define YELLOW "\033[33m"
+
 
 void testPresidentialPardonForm() {
     std::cout << BLUE << "Test: PresidentialPardonForm Form" << RESET << std::endl;
-    std::cout << CYAN << "Valid Test" << RESET << std::endl;
+    std::cout << YELLOW << "Valid Test" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 1);
         PresidentialPardonForm f1("Target 1");
@@ -22,7 +22,7 @@ void testPresidentialPardonForm() {
     } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
-    std::cout << CYAN << "Error Test" << RESET << std::endl;
+    std::cout << YELLOW << "Error Test" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 30);
         PresidentialPardonForm f1("Target 1");
@@ -38,7 +38,7 @@ void testPresidentialPardonForm() {
 
 void testRobotomyPardonForm() {
     std::cout << BLUE << "\nTest : Robotomy Form" << RESET << std::endl;
-    std::cout << CYAN << "Valid Test" << RESET << std::endl;
+    std::cout << YELLOW << "Valid Test" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 1);
         RobotomyRequestForm f1("Target 1");
@@ -49,7 +49,7 @@ void testRobotomyPardonForm() {
     } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
-    std::cout << CYAN << "Error Test" << RESET << std::endl;
+    std::cout << YELLOW << "Error Test" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 73);
         RobotomyRequestForm f1("Target 1");
@@ -65,7 +65,7 @@ void testRobotomyPardonForm() {
 
 void testShruberryPardonForm() {
     std::cout << BLUE << "\nTest : Shruberry Form" << RESET << std::endl;
-    std::cout << CYAN << "Valid Test" << RESET << std::endl;
+    std::cout << YELLOW << "Valid Test" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 1);
         ShrubberyCreationForm f1("Target 1");
@@ -76,7 +76,7 @@ void testShruberryPardonForm() {
     } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
-    std::cout << CYAN << "Error Test" << RESET << std::endl;
+    std::cout << YELLOW << "Error Test" << RESET << std::endl;
      try {
         Bureaucrat Gustavo("Gustavo", 146);
         ShrubberyCreationForm f1("Target 1");
