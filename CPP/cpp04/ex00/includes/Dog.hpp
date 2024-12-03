@@ -4,8 +4,8 @@
 #include "Animal.hpp"
 
 
-class Dog  : public Animal{
-
+class Dog  : public Animal
+{
 public:
     Dog();
     Dog(std::string name); 
