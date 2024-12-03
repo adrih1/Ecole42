@@ -1,7 +1,13 @@
 #include "Bureaucrat.hpp"
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define ORANGE "\033[36m"
+#define YELLOW "\033[33m"
+
 void testCreationInvalidGrade() {
-    std::cout << "Test 1: Invalid Bureaucrat Creation\n";
+    std::cout << GREEN << "Test 1: Invalid Bureaucrat Creation" << RESET << std::endl;
     try {
         Bureaucrat Alice("Alice", 0); // Devrait lancer GradeTooHighException
     } catch (const Bureaucrat::GradeTooHighException& e) {
@@ -16,7 +22,8 @@ void testCreationInvalidGrade() {
 }
 
 void testDecrementAtMinimum() {
-    std::cout << "\nTest 2: Decrementing Bureaucrat at Minimum Grade\n";
+
+    std::cout << GREEN << "\nTest 2: Decrementing Bureaucrat at Minimum Grade" << RESET << std::endl;
     try {
         Bureaucrat Gustavo("Gustavo", 150);
         std::cout << Gustavo << std::endl;
@@ -28,7 +35,7 @@ void testDecrementAtMinimum() {
 }
 
 void testIncrementAtMaximum() {
-    std::cout << "\nTest 3: Incrementing Bureaucrat at Maximum Grade\n";
+    std::cout << GREEN << "\nTest 3: Incrementing Bureaucrat at Maximum Grade" << RESET << std::endl;
     try {
         Bureaucrat Skyler("Skyler", 1);
         std::cout << Skyler << std::endl;
@@ -40,7 +47,7 @@ void testIncrementAtMaximum() {
 }
 
 void testfunctionalBureaucrat() {
-    std::cout << "\nTest 4: Functional Bureaucrat\n";
+    std::cout << GREEN << "\nTest 4: Functional Bureaucrat" << RESET << std::endl;  
     Bureaucrat Walter("Walter", 75);
     std::cout << Walter << std::endl;
     std::cout << Walter.getName() << " gets decremented" << std::endl;
