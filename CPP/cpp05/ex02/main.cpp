@@ -17,6 +17,7 @@ void testPresidentialPardonForm() {
         PresidentialPardonForm f1("Target 1");
         std::cout << Gustavo << std::endl;
         std::cout << f1 << std::endl;
+        Gustavo.executeForm(f1);
         Gustavo.signForm(f1);
         Gustavo.executeForm(f1);
     } catch (const std::exception & e) {
@@ -44,6 +45,7 @@ void testRobotomyPardonForm() {
         RobotomyRequestForm f1("Target 1");
         std::cout << Gustavo << std::endl;
         std::cout << f1 << std::endl;
+        Gustavo.executeForm(f1);
         Gustavo.signForm(f1);
         Gustavo.executeForm(f1);
     } catch (const std::exception & e) {
@@ -55,8 +57,8 @@ void testRobotomyPardonForm() {
         RobotomyRequestForm f1("Target 1");
         std::cout << Gustavo << std::endl;
         std::cout << f1 << std::endl;
-        Gustavo.signForm(f1);
         Gustavo.executeForm(f1);
+        Gustavo.signForm(f1);
     } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
@@ -71,6 +73,7 @@ void testShruberryPardonForm() {
         ShrubberyCreationForm f1("Target 1");
         std::cout << Gustavo << std::endl;
         std::cout << f1 << std::endl;
+        Gustavo.executeForm(f1);
         Gustavo.signForm(f1);
         Gustavo.executeForm(f1);
     } catch (const std::exception & e) {
@@ -82,8 +85,8 @@ void testShruberryPardonForm() {
         ShrubberyCreationForm f1("Target 1");
         std::cout << Gustavo << std::endl;
         std::cout << f1 << std::endl;
-        Gustavo.signForm(f1);
         Gustavo.executeForm(f1);
+        Gustavo.signForm(f1);
     } catch (const std::exception & e) {
         std::cerr << e.what() << std::endl;
     }
