@@ -11,9 +11,8 @@ Cure::~Cure() {}
 
 // Assignment operator
 Cure &Cure::operator=(const Cure &other) {
-    if (this != &other) {
+    if (this != &other) 
         AMateria::operator=(other);
-    }
     return *this;
 }
 
@@ -23,6 +22,7 @@ AMateria* Cure::clone() const {
 }
 
 // Use method
-void Cure::use(ICharacter &target) {
+void Cure::use(ICharacter &target) 
+{
     std::cout << "* heals" << target.getName() << "'s wounds *" << std::endl;
 }

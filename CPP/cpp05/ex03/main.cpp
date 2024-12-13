@@ -5,10 +5,9 @@
 #include "includes/RobotomyRequestForm.hpp"
 #include "includes/Intern.hpp"
 
-const std::string RESET   = "\033[0m";  
-const std::string BLUE    = "\033[34m";
-const std::string CYAN    = "\033[36m";
-const std::string BOLD_CYAN    = "\033[1;36m";
+#define RESET "\033[0m"
+#define BLUE "\033[34m"
+#define YELLOW "\033[33m"
 
 void testSubject()
 {
@@ -16,10 +15,12 @@ void testSubject()
     Intern someRandomIntern;
     AForm* rrf;
     rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
+    
+    delete rrf;
 }
 
 void testInterWorks() {
-    std::cout << BLUE << "Test: Intern Creates Forms" << RESET << std::endl;
+    std::cout << BLUE << "\nTest: Intern Creates Forms" << RESET << std::endl;
     try {
         Intern intern;
 
@@ -39,7 +40,7 @@ void testInterWorks() {
 
 int main ()
 {
-    testInterWorks();   
     testSubject();
+    testInterWorks();   
     return 0;
 }

@@ -6,6 +6,12 @@
 #include "includes/Ice.hpp"
 #include "includes/Cure.hpp"
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define ORANGE "\033[36m"
+#define YELLOW "\033[33m"
+
 // Main du sujet 
 // int main()
 // {
@@ -32,7 +38,6 @@
     
 //     return 0;
 // }
-
 
 int main()
 {
