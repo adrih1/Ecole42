@@ -5,8 +5,18 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
-#include <limits>
+#include <climits>
 #include <cmath>
+
+enum DataCategory
+{
+    CATEGORY_ERROR, 
+    CATEGORY_CHARACTER, 
+    CATEGORY_INTEGER, 
+    CATEGORY_FLOATING, 
+    CATEGORY_DOUBLE_PRECISION, 
+    CATEGORY_INFINITY
+};
 
 class ScalarConverter
 {
@@ -17,24 +27,25 @@ private:
     
     ~ScalarConverter();
 
-    static bool isChar(const std::string& literal);
-    static bool isInt(const std::string& literal);
-    static bool isFloat(const std::string& literal);
-    static bool isDouble(const std::string& literal);
+    static bool isCharacter(const std::string& input);
+    static bool isInteger(const std::string& input);
+    static bool isFloat(const std::string& input);
+    static bool isDouble(const std::string& input);
+    static bool isPseudoLiteral(const std::string &input);
 
-    static bool isPseudoLiteral(const std::string &literal);
+
+    static void processChar(const std::string &input);
+    static void processInt(const std::string &input);
+    static void processFloat(const std::string &input);
+    static void processDouble(const std::string &input);
+    static void processInfinity(const std::string &input);
 
 
-    static void printChar(double value);
-    static void printInt(double value);
-    static void printFloat(double value);
-    static void printDouble(double value);
+    static void handleInvalidInput();
 
 
 public:
-    static void convert(const std::string &literal);
-    
-
+    static void convert(const std::string &input);
 };
 
 #endif
