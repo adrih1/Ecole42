@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <cctype>
+#include <cerrno>
 #include <climits>
 #include <cmath>
 

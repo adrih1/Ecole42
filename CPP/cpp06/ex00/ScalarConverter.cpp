@@ -137,7 +137,7 @@ void ScalarConverter::processDouble(const std::string &input)
 	else 
 		std::cout << "char: impossible" << std::endl;
 
-		if (d >= static_cast<double>(INT_MIN) && d <= static_cast<double>(INT_MAX) && !std::isnan(d) && !std::isinf(d))
+	if (d >= static_cast<double>(INT_MIN) && d <= static_cast<double>(INT_MAX) && !std::isnan(d) && !std::isinf(d))
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
