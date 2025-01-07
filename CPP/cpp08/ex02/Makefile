@@ -3,8 +3,7 @@ NAME = ex02
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS =	main.cpp \
-		Span.cpp
+SRCS =	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

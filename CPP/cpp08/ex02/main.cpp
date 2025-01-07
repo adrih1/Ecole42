@@ -1,6 +1,7 @@
-#include "MutantStack.hpp"
 #include <iostream>
 #include <vector>
+#include "MutantStack.hpp"
+
 
 int main() {
     // Utilisation avec le conteneur par défaut (std::deque)

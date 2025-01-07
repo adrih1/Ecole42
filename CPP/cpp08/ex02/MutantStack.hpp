@@ -4,6 +4,7 @@
 #include <stack>
 #include <iterator>
 
+
 template <typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container>
 {
@@ -15,17 +16,18 @@ public:
 
     // Constructors
     MutantStack() : std::stack<T, Container>() {}
-    MutantStack(const MutantStack &other) : std::stack<T, Container>(other) {}
+    MutantStack(const MutantStack<T, Container> &other) : std::stack<T, Container>(other) {}
 
-    ~MutantStack();
 
-    MutantStack &operator=(const MutantStack &other)
+    MutantStack &operator=(const MutantStack<T, Container> &other)
     {
         if (this != other){
-            std::stack<t, Container>::operator=(other);
+            std::stack<T, Container>::operator=(other);
         }
         return *this;
     }
+
+    ~MutantStack() {};
 
     //Iteraor methods
     iterator begin(){
@@ -52,11 +54,11 @@ public:
         return this->c.rend();
     }
 
-    const_reverse_iterator rbegin() {
+    const_reverse_iterator rbegin() const {
         return this->c.rbegin();
     }
 
-    const_reverse_iterator rend() {
+    const_reverse_iterator rend() const {
         return this->c.rend();
     }
 };
