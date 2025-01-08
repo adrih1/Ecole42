@@ -16,7 +16,7 @@ public:
     void loadDatabase(const std::string &filename);
     double processQuery(const std::string &date, double amount);
     bool isValidDate(const std::string &date);
-    bool isValidAmount(double amount);
+    void isValidAmount(double amount);
 
 };
 

@@ -31,10 +31,6 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
             // Nettoyage de priceStr pour enlever les espaces ou caractères invisibles
             priceStr.erase(priceStr.find_last_not_of(" \t\r\n") + 1);
             priceStr.erase(0, priceStr.find_first_not_of(" \t\r\n"));
-
-            std::cout << "Attempting to convert price: " << priceStr << std::endl;
-
-            
             try
             {
                 // Utiliser std::stod pour convertir priceStr en double
@@ -63,8 +59,8 @@ double BitcoinExchange::processQuery(const std::string &date, double amount)
 {
     if (!isValidDate(date))
         throw std::invalid_argument("Error : Invalid date format");
-    if (!isValidAmount(amount))
-        throw std::invalid_argument("Error : Invalid amount");
+
+    isValidAmount(amount); 
 
     std::map<std::string, double>::iterator it = _priceData.lower_bound(date); // Spécification explicite du type
     if (it == _priceData.end() || it->first != date) // Date plus grande que toutes celles de la map | Date n'existe pas
@@ -77,34 +73,59 @@ double BitcoinExchange::processQuery(const std::string &date, double amount)
 }
 
 
-bool BitcoinExchange::isValidDate(const std::string &date)
-{
-    if (date.length() != 10 || date[4] != '-' || date[7] != '-')
+bool BitcoinExchange::isValidDate(const std::string& date) {
+    if (date.length() != 10 || date[4] != '-' || date[7] != '-') {
+        std::cout << "Date format incorrect: Length (" << date.length() 
+                  << ") or '-' positions are invalid." << std::endl;
         return false;
+    }
+
     std::istringstream ss(date);
     int year, month, day;
     char dash1, dash2;
 
     ss >> year >> dash1 >> month >> dash2 >> day;
-    if(ss.fail() || dash1 != '-' || dash2 != '-')
-        return false; 
-    
-    if (month < 1 || month > 12 || day < 1 || day > 31)
-        return false; 
-
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
-        return false; 
-    
-    if (month == 2)
-    {
-        bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-        if (day > (isLeap ? 29 : 28))
-            return false; 
+    if (ss.fail()) {
+        std::cout << "Date parsing failed. Ensure year, month, and day are valid integers." << std::endl;
+        return false;
     }
-    return true; 
+    if (dash1 != '-' || dash2 != '-') {
+        std::cout << "Dashes in date are incorrect. Found: '" << dash1 << "' and '" << dash2 << "'" << std::endl;
+        return false;
+    }
+    if (month < 1 || month > 12) {
+        std::cout << "Month out of range: " << month << std::endl;
+        return false;
+    }
+
+    if (day < 1 || day > 31) {
+        std::cout << "Day out of range: " << day << std::endl;
+        return false;
+    }
+
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+        std::cout << "Day out of range for month with 30 days: Month = " << month << ", Day = " << day << std::endl;
+        return false;
+    }
+
+    if (month == 2) {
+        bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        if (day > (isLeap ? 29 : 28)) {
+            std::cout << "Day out of range for February: Year = " << year
+                      << (isLeap ? " (Leap Year)" : " (Non-Leap Year)")
+                      << ", Day = " << day << std::endl;
+            return false;
+        }
+    }
+    return true;
 }
 
-bool BitcoinExchange::isValidAmount(double amount)
+
+
+void BitcoinExchange::isValidAmount(double amount)
 {
-    return amount > 0;
+   if (amount <= 0)
+        throw std::invalid_argument("Error: not a positive number.");
+    if (amount >= 2147483648)
+        throw std::invalid_argument("Error: too large a number.");
 }
