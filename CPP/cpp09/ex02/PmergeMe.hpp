@@ -8,6 +8,7 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include <vector>
 #include <deque>
@@ -20,14 +21,20 @@ public:
     PmergeMe(const PmergeMe& other);
     PmergeMe& operator=(const PmergeMe& other);
 
-    void setData(const std::vector<int> &data); 
-    void setData(const std::deque<int> &data); 
-    std::vector<int> & getData(); 
-    std::deque<int> & getDeq(); 
+    bool parseInput (int ac, char **av);
+    void printBefore() const;
+    void printAfter() const;
+    void sortContainers();
+    void printTimes();
 
 private: 
-    std::vector<int> m_data; 
-    std::deque<int> m_deq; 
+    std::vector<int> vec; 
+    std::deque<int> deq; 
+
+	double vecTime;
+	double deqTime;
+
+
 }; 
 
 #endif 
