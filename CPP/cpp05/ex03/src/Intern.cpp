@@ -5,6 +5,10 @@
 
 Intern::Intern() {}
 
+Intern::Intern(const Intern& other) {
+    (void)other;
+}
+
 Intern &Intern::operator=(const Intern &intern) {
     if (this != &intern) {
          *this = intern;

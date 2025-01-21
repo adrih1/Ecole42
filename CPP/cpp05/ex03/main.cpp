@@ -7,11 +7,14 @@
 
 #define RESET "\033[0m"
 #define BLUE "\033[34m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define ORANGE "\033[38;5;208m"
 #define YELLOW "\033[33m"
 
 void testSubject()
 {
-    std::cout << BLUE << "Test Subject" << RESET << std::endl;
+    std::cout << GREEN << "Test Subject" << RESET << std::endl;
     Intern someRandomIntern;
     AForm* rrf;
     rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
@@ -20,7 +23,7 @@ void testSubject()
 }
 
 void testInterWorks() {
-    std::cout << BLUE << "\nTest: Intern Creates Forms" << RESET << std::endl;
+    std::cout << GREEN << "\nTest: Intern Creates Forms" << RESET << std::endl;
     try {
         Intern intern;
 
