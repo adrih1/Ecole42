@@ -10,6 +10,20 @@ BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::~BitcoinExchange() {}
 
+// Convertir une chaîne en double pour C++98
+double stringToDouble(const std::string& str) {
+    std::stringstream ss(str);
+    double value;
+    ss >> value;
+
+    // Vérifier si la conversion a échoué ou si des caractères non numériques subsistent
+    if (ss.fail() || !ss.eof()) {
+        throw std::invalid_argument("Error: Invalid double: " + str);
+    }
+    return value;
+}
+
+
 void BitcoinExchange::loadDatabase(const std::string &filename)
 {
     std::ifstream file(filename.c_str());
@@ -34,7 +48,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
             try
             {
                 // Utiliser std::stod pour convertir priceStr en double
-                double price = std::stod(priceStr);
+                double price = stringToDouble(priceStr);
                 _priceData[date] = price;  // Ajouter le prix à la map
             }
             catch (const std::invalid_argument &)
