@@ -39,7 +39,7 @@ void testIncrementAtMaximum() {
     try {
         Bureaucrat Skyler("Skyler", 1);
         std::cout << Skyler << std::endl;
-        std::cout << Skyler.getName() << " gets decremented" << std::endl;
+        std::cout << Skyler.getName() << " gets incremented" << std::endl;
         Skyler.incrementGrade(); // Devrait lancer GradeTooHighException
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
