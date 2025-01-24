@@ -1,10 +1,11 @@
 # Use last stable version
-FROM alpine:3.17
+FROM debian:bullseye
 
 # Install dependencies for NGINX with TLS
-RUN apk update && apk add --no-cache \
+RUN apt-get update &&  apt-get upgrade && apt-get install -y \
     nginx \
     openssl \
+    && apt-get clean \
     && rm -rf /var/cache/apk/*
 
 # Create directories 
@@ -21,6 +22,6 @@ COPY certs/server.key /etc/nginx/certs
 EXPOSE 443
 
 # Launch NGINX  || Daemon.off means that nginx must not run in the background it stays in the foreground
-CMD ["nginx", "-g", "daemon.off"]
+CMD ["nginx", "-g", "daemon off;"]
 
 
