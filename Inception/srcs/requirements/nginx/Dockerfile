@@ -1,27 +1,27 @@
-# Use last stable version
+# Utiliser l'avant derniere version stable
 FROM debian:bullseye
 
-# Install dependencies for NGINX with TLS
-RUN apt-get update &&  apt-get upgrade && apt-get install -y \
-    nginx \
-    openssl \
-    && apt-get clean \
-    && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y nginx openssl && \
+    mkdir -p /var/run/nginx && \
+	mkdir -p /etc/nginx/certs && \
+    mkdir -p /var/www/html && \
+    chmod 755 /var/www/html && \
+    chown -R www-data:www-data /var/www/html
 
-# Create directories 
-RUN mkdir -p /run/nginx /etc/nginx/conf.d /etc/nginx/certs
 
-# Copy the config file 
-COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy the certifcates in the container
-COPY certs/server.crt /etc/nginx/certs
-COPY certs/server.key /etc/nginx/certs
+# Copier le fichier de configuration nginx
+COPY ./tools/conf/nginx.conf /etc/nginx/nginx.conf
 
-# Expose HTTPS port
+# Copier les fichiers du site (index.html et styles.css)
+COPY ./tools/html /var/www/html
+
+# Copier les certificats SSL
+COPY ./tools/certs/server.crt /etc/nginx/certs
+COPY ./tools/certs/server.key /etc/nginx/certs
+
+# Exposer le port HTTPS
 EXPOSE 443
 
-# Launch NGINX  || Daemon.off means that nginx must not run in the background it stays in the foreground
+# Lancer nginx en avant-plan
 CMD ["nginx", "-g", "daemon off;"]
-
-
