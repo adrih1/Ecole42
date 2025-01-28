@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   nginx:
@@ -10,6 +10,22 @@ services:
       - ./requirements/nginx/tools/certs:/etc/nginx/certs
       - ./requirements/nginx/tools/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./requirements/nginx/tools/html:/var/www/html
+  
+  mariadb:
+    build:
+      context: ./requirements/mariadb/
+    ports:
+      - "3306:3306"
+    environment:
+      SQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      SQL_DATABASE: ${SQL_DATABASE}
+      SQL_USER:  ${SQL_USER}     
+      SQL_PASSWORD: ${SQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    
+
+
   # wordpress:
   #   build: 
   #     context: ./requirements/wordpress
