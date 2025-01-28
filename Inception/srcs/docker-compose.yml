@@ -21,8 +21,8 @@ services:
       SQL_DATABASE: ${SQL_DATABASE}
       SQL_USER:  ${SQL_USER}     
       SQL_PASSWORD: ${SQL_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
+    # volumes:
+    #   - db_data:/var/lib/mysql
     
 
 
