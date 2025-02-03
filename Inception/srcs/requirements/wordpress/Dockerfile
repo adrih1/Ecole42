@@ -2,21 +2,28 @@
 FROM debian:bullseye
 
 # Installer PHP, ses extensions nécessaires
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade && apt-get install -y \
     wget \
     php7.3 \
     php-fpm \
     php-mysql \ 
-    mariadb-client 
+    mariadb-client && rm -rf /var/lib/apt/lists/*
 
-# Télécharger Wordpress
-RUN wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www
+# Install wp_cli m| Pernmets d'eviter la page de config de Worpress
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
-# Extraire WordPress
-RUN cd /var/www && tar -xzf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
 
-# Donner les droits
-RUN		chown -R root:root /var/www/wordpress
+RUN mkdir -p /run/php  /var/www/html
 
-# Lancer PHP-FPM en mode foreground
-CMD ["php-fpm", "-F"]
+#Copy the script, asdd right to execute 
+COPY ./tools/conf/wordpress_conf.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/wordpress_conf.sh
+ENTRYPOINT ["/usr/local/bin/wordpress_conf.sh"]
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+ENTRYPOINT ["/usr/local/bin/wordpress_conf.sh"]
