@@ -22,9 +22,9 @@ if [ ! -f wp-config.php ] ; then
 	echo "Creating wp-config.php..."
 	wp config create \
 		--dbhost=$DB_HOST \
-		--dbname=$MYSQL_DATABASE \
-		--dbuser=$MYSQL_USER \
-		--dbpass=$MYSQL_PASSWORD \
+		--dbname=$SQL_DATABASE \
+		--dbuser=$SQL_USER \
+		--dbpass=$SQL_PASSWORD \
 		--dbprefix=wp_ \
 		--allow-root
 fi
