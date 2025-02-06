@@ -2,18 +2,20 @@
 
 services:
   nginx:
+    container_name: nginx
     build:
-      context: ./requirements/nginx
+      context: ./requirements/nginx/
     ports:
-      - "8443:443"
+      - "443:443"
     depends_on:
       - wordpress
     networks:
-      - app-network
+      - inception
     volumes:
-      - wp_data:/var/www/html
+      - wordpress:/var/www/html/wordpress
   
   mariadb:
+    container_name: mariadb
     build:
       context: ./requirements/mariadb/
     ports:
@@ -24,31 +26,32 @@ services:
       SQL_USER:  ${SQL_USER}     
       SQL_PASSWORD: ${SQL_PASSWORD}
     volumes:
-      - db_data:/var/lib/mysql
+      - db:/var/lib/mysql
     networks:
-      - app-network
+      - inception
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${SQL_ROOT_PASSWORD}" ]
       interval: 10s
-      timeout: 7s
-      retries: 10
+      timeout: 5s
+      retries: 20
       start_period: 20s 
 
 
 
   wordpress:
+    container_name: wordpress
     build: 
-      context: ./requirements/wordpress
+      context: ./requirements/wordpress/
     ports:
-      - "9000:9000"
+      - "9000"
     depends_on: 
       mariadb:
         condition: service_healthy
     networks:
-      - app-network
+      - inception
     environment:
       DB_HOST: ${DB_HOST}
-      DATABASE: ${SQL_DATABASE}
+      SQL__DATABASE: ${SQL_DATABASE}
       SQL_USER: ${SQL_USER}
       SQL_PASSWORD: ${SQL_PASSWORD}
       WP_ADMIN_USER: ${WP_ADMIN_USER}
@@ -58,12 +61,23 @@ services:
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
       WP_USER_EMAIL: ${WP_USER_EMAIL}
     volumes: 
-      - wp_data:/var/www/html
+      - wordpress:/var/www/html/wordpress
     restart: always
 
 volumes:
-  db_data:
-  wp_data:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ahors/data/wordpress
+      o: bind
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ahors/data/mariadb
+      o: bind
+    
 
 networks:
-  app-network:
+  inception:

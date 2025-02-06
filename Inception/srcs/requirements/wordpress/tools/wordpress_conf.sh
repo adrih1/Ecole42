@@ -32,13 +32,16 @@ fi
 if ! wp core is-installed --allow-root ; then
 	echo "Installing Wordpress..."
 	wp core install \
-		--url=localhost \
+		--url=ahors.42.fr \
 		--admin_email=$WP_ADMIN_EMAIL \
 		--title="Inception" \
 		--admin_user=$WP_ADMIN_USER \
 		--admin_password=$WP_ADMIN_PASSWORD \
 		--skip-email \
 		--allow-root
+	echo "updating website url and options..."
+	wp option update siteurl "https://ahors.42.fr" --path=/var/www/html/wordpress --allow-root  
+    wp option update home "https://ahors.42.fr" --path=/var/www/html/wordpress --allow-root
 	echo "Creating user $WP_USER..."
 	wp user create \
 		$WP_USER $WP_USER_EMAIL \

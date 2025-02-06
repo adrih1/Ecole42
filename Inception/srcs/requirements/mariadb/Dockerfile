@@ -10,6 +10,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 COPY ./tools/conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY ./tools/init-db.sh /init-db.sh
+RUN chmod +x /init-db.sh
 
 RUN mkdir -p /var/lib/mysql /var/run/mysqld && \
     chown -R mysql:mysql /var/lib/mysql /var/run/mysqld && \
@@ -19,4 +20,4 @@ RUN mariadb-install-db --user=mysql --datadir=/var/lib/mysql --basedir=/usr
 
 EXPOSE 3306
 
-ENTRYPOINT ["bash", "/init-db.sh"]
+ENTRYPOINT ["/init-db.sh"]

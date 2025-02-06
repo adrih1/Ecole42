@@ -1,22 +1,16 @@
-#!/bin/bash
+set -e
 
-set -e  # Arrête le script si une commande échoue
-
-# Vérifie si la base de données système MariaDB est initialisée
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing database..."
     
-    # Configure les permissions pour MariaDB
     chown -R mysql:mysql /var/lib/mysql
     chmod 750 /var/lib/mysql
 
-    # Initialise la base de données
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql --basedir=/usr
 
     echo "Database initialized."
 fi
 
-# Vérifie si la base de données utilisateur est créée
 if [ ! -d "/var/lib/mysql/${SQL_DATABASE}" ]; then
     echo "Setting up initial database..."
 
