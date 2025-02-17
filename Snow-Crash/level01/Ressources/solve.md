@@ -14,7 +14,7 @@ $ id
 uid=2001(level01) gid=2001(level01) groups=2001(level01),100(users)
 ```
 
-## Password config (though about it thanks to b2br)
+## Password config (thought about it thanks to b2br)
 
 ```bash
 $ cat /etc/passwd
@@ -23,7 +23,7 @@ flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
 I see that flag01 has a visible password
 
 ### Decrypting the code
-dcode identified it as base58 encrypted but it gave nothing that had sense. So I thought about the intra video which said we would need John The Ripper. 
+dcode identified it as base58 encrypted but it gave nothing that had sense. So I thought about the intra video which said that we would need John The Ripper. 
 
 I remembered that flag00 had a john executable
 ```bash
@@ -34,8 +34,7 @@ bash: /usr/sbin/john: Permission denied
 $ ls -la  /usr/sbin/john
 ----r--r-- 1 flag00 flag00 15 Mar  5  2016 /usr/sbin/john
 ```
-
-So I decided to do A VM with John, I didn't have enough storage so chatGPT adevised me to do a docker image.
+It gave nothing. So I decided to do a VM with John, I didn't have enough storage so chatGPT advised me to do a docker image.
 
 ### Installing John on a Docker Image
 ```bash
