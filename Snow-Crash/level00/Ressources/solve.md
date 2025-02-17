@@ -39,3 +39,7 @@ I wrote the text '`cdiiddwpgswtgt`' on the website [dcode.fr](https://www.dcode.
 ```plaintext
 nottoohardhere
 ```
+
+su flag00
+getflag
+'Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias'
