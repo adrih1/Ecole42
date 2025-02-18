@@ -3,9 +3,8 @@ FROM debian:bullseye
 # Mettre à jour le système et installer MariaDB Server
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     mariadb-server \
-    nano && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    libaio1 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ./tools/conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 

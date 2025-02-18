@@ -1,7 +1,7 @@
 # Utiliser une base Debian stable
 FROM debian:bullseye
 
-# ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Installer PHP, ses extensions nécessaires
 RUN apt-get update && apt-get upgrade && apt-get install -y \

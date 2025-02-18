@@ -50,12 +50,11 @@ if ! wp core is-installed --allow-root ; then
 		--allow-root
 fi
 
-# Установка и активация темы
 THEME_NAME="inspiro"
 if ! wp theme is-installed "$THEME_NAME" --allow-root; then
     echo "Installing theme $THEME_NAME..."
     wp theme install "$THEME_NAME" --activate --allow-root
-	 wp option update blogname "Inception from Edouard" --allow-root
+	 wp option update blogname "Inception by Adrien" --allow-root
     echo "Theme $THEME_NAME installed and activated successfully."
 fi
 

@@ -6,7 +6,7 @@ services:
     build:
       context: ./requirements/nginx/
     ports:
-      - "8443:443"
+      - "443:443"
     depends_on:
       - wordpress
     networks:
@@ -23,7 +23,7 @@ services:
     environment:
       SQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
       SQL_DATABASE: ${SQL_DATABASE}
-      SQL_USER:  ${SQL_USER}     
+      SQL_USER: ${SQL_USER}     
       SQL_PASSWORD: ${SQL_PASSWORD}
     volumes:
       - db:/var/lib/mysql
@@ -43,7 +43,7 @@ services:
     build: 
       context: ./requirements/wordpress/
     ports:
-      - "9000"
+      - "9000:90000"
     depends_on: 
       mariadb:
         condition: service_healthy
@@ -78,6 +78,5 @@ volumes:
       device: /home/ahors/data/mariadb
       o: bind
     
-
 networks:
   inception:
