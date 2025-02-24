@@ -4,7 +4,7 @@ FROM debian:bullseye
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Installer PHP, ses extensions nécessaires
-RUN apt-get update && apt-get upgrade && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     wget \
     php-fpm \
     php-mysql \ 
