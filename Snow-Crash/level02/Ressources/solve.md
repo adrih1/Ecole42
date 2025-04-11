@@ -1,5 +1,5 @@
 
-## Exploring the computer 
+## Exploring the exercice
 
 ```bash 
 $ ls -a
