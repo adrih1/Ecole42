@@ -21,7 +21,14 @@ $ ./level06
 PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
 ```
 
-Now let's see what is inside the php file.
+We see that he expects an argument. Let's try :
+```bash 
+$ ./level06 coucou
+PHP Warning:  file_get_contents(coucou): failed to open stream: No such file or directory in /home/user/level06/level06.php on line 4
+```
+
+Okay so it waits for a file.
+Let's look at the .php file itself.
 
 ```bash 
 $ cat level06.php 
@@ -33,8 +40,15 @@ $r = x($argv[1], $argv[2]); print $r;
 ?>
 ```
 
+This script reads a file, processes its content through string manipulations, and outputs the modified result.
+
+The  '/e' option in the preg_replace function, allows content  to be evalauted as code, allowing us to execute comnmands.
+
+Same as the previous exercice we are going to inject 'getflag' in script. Only the syntax will change but the principle stays the same.
 
 
-
+```bash 
+$ echo 
+?>
 
 
