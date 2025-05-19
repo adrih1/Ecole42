@@ -58,7 +58,10 @@ quif5eloekouj29ke0vouxean
 ```
 
 
-
-
-
-
+```bash 
+$ su flag08
+Password: 
+Don't forget to launch getflag !
+$ flag08@SnowCrash:~$ getflag
+Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
+```
