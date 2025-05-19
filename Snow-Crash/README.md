@@ -33,6 +33,12 @@ Le projet **Snow Crash** met à l’épreuve les compétences en sécurité info
 
 1. **Approfondissement des concepts de sécurité** :
    - Comprendre les vulnérabilités courantes comme les scripts SUID, ou encore les injections.
+   - Analyse de flux TCP
+   - Modification du PATH
+   - Exploit script perl
+   - Exploitation du CRON
+   - Injectuon via des variables d'environnements ou des fonctions
+   - Bypass grâce à un lien symbolique
 
 2. **Utilisation d'outils de pentesting** :
    - `ltrace` pour suivre les appels système.
