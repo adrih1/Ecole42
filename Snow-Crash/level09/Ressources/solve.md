@@ -33,27 +33,7 @@ Let's copy the token locally
 $ scp -P 4242 level09@192.168.1.75:/home/user/level09/token .
 ```
 
-Let's do a script to decode that encryption. [See script.c file]. 
-
-```bash 
-#include <stdio.h>
-
-int main(int ac, char **av) {
-
-        int i = 0;
-        char c;
-
-        while (av[1][i] != 0) {
-                c = av[1][i];
-                printf("%c", (c - i));
-                i++;
-        }
-        printf("\n");
-        return 0;
-}
-```
-
-And let's execute it on our token
+Let's do a script to decode that encryption. [See script.c file], and let's execute it on our token
 
 ```bash 
 chmod 777 script.py 
