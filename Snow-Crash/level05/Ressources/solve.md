@@ -79,15 +79,13 @@ $ /usr/sbin/openarenaserver
 -bash: /usr/sbin/openarenaserver: Permission denied
 ```
 
-We cannot excute the openarenaserver ourself, so a cron must be doing it. 
-In fact after a certain period of time our file is gone. 
+We cannot excute the openarenaserver ourself, but after a certain period of time our file is gone. Maybe a CRON executed it.
 
 ```bash
 $ ls /opt/openarenaserver/
 
 ```
 Let's right the output of getflag in a file so we can retrieve it after the cron executed it.
-
 
 ```bash
 $ echo "getflag > /tmp/flagg" > /opt/openarenaserver/script.sh 

@@ -6,7 +6,6 @@ $ ls -la
 ----r--r-- 1 flag09  level09   26 Mar  5  2016 token
 ```
 
-
 Let's do some tests
 
 ```bash 
@@ -33,7 +32,7 @@ Let's copy the token locally
 $ scp -P 4242 level09@192.168.1.75:/home/user/level09/token .
 ```
 
-Let's do a script to decode that encryption. [See script.c file], and let's execute it on our token
+Let's do a script to decode that encryption. [See script.c file], and let's execute it on our token.
 
 ```bash 
 chmod 777 script.py 

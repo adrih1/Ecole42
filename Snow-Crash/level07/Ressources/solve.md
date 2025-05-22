@@ -38,7 +38,7 @@ $ env | grep LOGNAME
 LOGNAME=level07
 ```
 
-So let's change that variable by our getflag. 
+Same principle as before we are going to inject getflag as a variable. 
 
 ```bash 
 $ export LOGNAME=\`getflag\`

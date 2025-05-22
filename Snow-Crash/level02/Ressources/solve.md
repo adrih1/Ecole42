@@ -5,7 +5,6 @@
 $ ls -a
 level02.pcap
 ```
-I try to read the file
 
 ```bash 
 $ cat level02.pcap
@@ -25,7 +24,7 @@ H��[f&NϑC'̊$E5�@@J";���;��ߙO/Y�����%�sk?
 
 ## Reading the file 
 
-After a few research about pcap, I see that wireshark is a package already installed allows us to read those files. 
+After a few research about pcap, I see that wireshark is a package already installed which allows us to read those files. 
 
 So I copy the file locally. 
 
@@ -57,7 +56,7 @@ wwwbugs login:
 
 Instinctively I take out the '.' so I get ft_wandrNDRelL0L but that does not work. 
 
-I check the ASCII table and see that '.' is 7F in hexadecimal which is the DEL key. 
+I go back and see that in the ASCII table '.' is 7F in hexadecimal which is the DEL key. 
 
 SO I delete a char before every '.' and get ft_waNDReL0L
 

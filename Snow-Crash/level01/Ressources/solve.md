@@ -34,7 +34,7 @@ bash: /usr/sbin/john: Permission denied
 $ ls -la  /usr/sbin/john
 ----r--r-- 1 flag00 flag00 15 Mar  5  2016 /usr/sbin/john
 ```
-It gave nothing. So I decided to do a VM with John, I didn't have enough storage so chatGPT advised me to do a docker image.
+It gave nothing. So I decided to do a docker image witth John The Ripper.
 
 ### Installing John on a Docker Image
 ```bash

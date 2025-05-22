@@ -16,6 +16,7 @@ PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level0
 ```
 
 We see that he expects an argument. Let's try :
+
 ```bash 
 $ ./level06 coucou
 PHP Warning:  file_get_contents(coucou): failed to open stream: No such file or directory in /home/user/level06/level06.php on line 4
