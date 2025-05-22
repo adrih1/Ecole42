@@ -1,4 +1,6 @@
 import sys
+import requests
+
 
 def parse_recursive_option(args, index):
     """Gère l'option -r."""
@@ -60,6 +62,17 @@ def parse_arguments(args):
         "url": url
     }
 
+def getImage(url):
+    # Effectuer une requête GET
+    response = requests.get(url)
+
+    # Vérifier si la requête a réussi
+    if response.status_code == 200:
+        # Afficher le contenu (par exemple, JSON ou texte brut)
+        print(response.json())  # ou response.text selon le format
+    else:
+        print(f"Erreur : {response.status_code}")
+
 def main():
     if len(sys.argv) < 2:
         print("Usage : ./spider [-rlp] URL")
@@ -72,6 +85,9 @@ def main():
         print(f"  Max Depth : {options['max_depth']}")
         print(f"  Save Path : {options['path']}")
         print(f"  URL       : {options['url']}")
+        
+        getImage(options['url'])
+    
     except ValueError as e:
         print(f"Erreur : {e}")
 
