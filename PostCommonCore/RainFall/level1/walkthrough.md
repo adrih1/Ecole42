@@ -57,6 +57,7 @@ We allocate 0x50 (80 in decimal) bytes on the stack with 'sub'.
 Then 'lea' and 'mov', calculate the address of the variable located at esp + 0x10 and puts that address as argument for the 'gets()' call. 
 
 ### Run
+
 ```bash
 Address	        Instruction	            Explanation
 0x08048444	    push %ebp	            Save base pointer
@@ -75,7 +76,7 @@ Executes a system command /bin/sh but it is never called in main
 
 ## Getting access to the shell 
 
-We are going to overflow the main, so that the return address is the address of the run which will call /bin/sh giving us access to a terminal where we will be able to call cat on the .passwd file. 
+We are going to do a [buffer overflow](https://www.youtube.com/watch?v=1S0aBV-Waeo) in the main, so that the return address is the address of the run which will call /bin/sh giving us access to a terminal where we will be able to call cat on the .passwd file. 
 
 
 ```bash 
