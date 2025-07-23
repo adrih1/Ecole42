@@ -1,14 +1,14 @@
 # Snow Crash
 
-Bienvenue dans le projet **Snow Crash**, un défi stimulant proposé par [42](https://www.42.fr/) qui m'a permis d'approfondir mes connaissances en cybersécurité, cryptographie et hacking.
+Welcome to the Snow Crash project, a challenging exercise proposed by 42 and led with [Edouard Baillot](https://github.com/Illouminus), which allowed us to deepen our knowledge in cybersecurity, cryptography, and hacking.
 
 ---
 
 ## Table des Matières
 
 - [Introduction](#introduction)
-- [Ce que j'ai fait](#ce-que-jai-fait)
-- [Ce que j'ai appris](#ce-que-jai-appris)
+- [What We Did](#what-we-did)
+- [What We Learned](#what-we-learned)
 - [Prérequis](#prérequis)
 - [Structure du Projet](#structure-du-projet)
 - [Ressources](#ressources)
