@@ -1,3 +1,5 @@
+# Level14
+
 ## Exploring the exercice
 
 ```bash 
@@ -34,7 +36,7 @@ $ (gdb) disas main
 ```
 
 We discover that there is a call to ptrace. 
-After a few research we discovered that ptrace allows a process to observe and control the execution of another process, so in our case check if getflag is being executed inside a debugger. 
+After a few research we discovered that ptrace allows a process to observe and control the execution of another process, so in our case, it checks if getflag is being executed inside a debugger. 
 
 So we looked for a way to bypasss that check and found this stack overflow : https://stackoverflow.com/questions/33646927/bypassing-ptrace-in-gdb. 
 
@@ -59,7 +61,7 @@ Check flag.Here is your token :
 Nope there is no token here for you sorry. Try again :)
 ```
 
-Okay we were able to execute getflag even if we are in the dbeugger but we are stil are missing something to get the right response from getflag. 
+Okay we were able to execute getflag even if we are in the debugger but we are stil are missing something to get the right response from getflag. 
 
 As we saw earlier the program also calls getuid, so we will have to act as if we are flag14. 
 
@@ -102,7 +104,7 @@ $1 = 2014
 (gdb) step
 Single stepping until exit from function main,
 which has no line number information.
-Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+Check flag.Here is your token : **********
 0xb7e454d3 in __libc_start_main () from /lib/i386-linux-gnu/libc.so.6
 ```
 

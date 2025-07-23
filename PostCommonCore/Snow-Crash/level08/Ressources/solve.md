@@ -1,4 +1,6 @@
-## Exploring the exercice
+# Level08
+
+## Exploring the computer
 
 ```bash 
 $ ls -la
@@ -8,7 +10,8 @@ $ ls -la
 
 We have a binary setuid/getuid and a file token.
 
-Let's do some tests
+
+## Inspecting the files
 
 ```bash 
 $ ./level08 
@@ -24,6 +27,7 @@ $ echo 'coucou' > /tmp/test.txt
 $ ./level08  /tmp/test.txt
 coucou
 ```
+
 So we have an executable which displays the content of the file. We cannot call it on token. 
 Let's see why : 
 
@@ -51,6 +55,8 @@ The strstr function is called, this function checks if the string "token" (secon
 
 Since the program checks only the filename but not the content we can create an alias file for token using a symbolic link (ln -s). 
 
+## Getting the flag
+
 ```bash 
 $ ln -s ~/token /tmp/new
 $ ./level08 /tmp/new
@@ -63,5 +69,5 @@ $ su flag08
 Password: 
 Don't forget to launch getflag !
 $ flag08@SnowCrash:~$ getflag
-Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
+Check flag.Here is your token : ************
 ```

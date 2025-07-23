@@ -1,45 +1,45 @@
-# Methodology
+# Level00 
 
 Thanks to the video, I discovered that the goal is to **'Find the first file who can run only as flag00'**.
 
 ---
 
-## Using the terminal
+## EXploring the computer
 
 1. I executed the following command to find the file:
 
    ```bash
-   find / -user flag00
+   find / -user flag00 2>/dev/null
    ```
 
 2. The output revealed:
 
    ```plaintext
    /usr/sbin/john
+   /rofs/usr/sbin/john
    ```
 
 3. I used `cat` to inspect the file:
 
    ```bash
-   cat /usr/sbin/john
-   ```
-
-4. The result was:
-
-   ```plaintext
+   $ cat /usr/sbin/john
    cdiiddwpgswtgt
    ```
 
-## Finding the encryption
-I asked ChatGPT what encryption was used for this text, and he responded that it was most likely Caesar code encryption.
+## Decrypting
 
-## Using dcode.fr
 I wrote the text '`cdiiddwpgswtgt`' on the website [dcode.fr](https://www.dcode.fr/), which sorted the most likely result as:
 
 ```plaintext
 nottoohardhere
 ```
 
-su flag00
-getflag
-'Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias'
+### Getting the flag
+
+```bash
+$ su flag00
+Password: 
+Don't forget to launch getflag !
+flag00@SnowCrash:~$ getflag
+Check flag.Here is your token : **************
+```

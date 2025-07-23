@@ -1,3 +1,5 @@
+# Level13
+
 ## Exploring the exercice
 
 ```bash 
@@ -6,6 +8,8 @@ $ ls -la
 ```
 
 We have a binary setuid/setgid
+
+## Inspecting the file
 
 ```bash 
 $ ./level13 
@@ -37,11 +41,11 @@ Breakpoint 1, 0xb7ee4cc0 in getuid () from /lib/i386-linux-gnu/libc.so.6
 Single stepping until exit from function getuid,
 which has no line number information.
 0x0804859a in main ()
-(gdb) p $eax # Here we display the eax, it is a versatile container the CPU uses for calculations and temporary storage 
+(gdb) p $eax # Here we display the eax, it is a container the CPU uses for calculations and temporary storage 
 $1 = 2013
 (gdb) set $eax=4242 #We change the UID value
 (gdb) step
 Single stepping until exit from function main,
 which has no line number information.
-your token is 2A31L79asukciNyi8uppkEuSx
+your token is ********
 ```

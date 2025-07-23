@@ -1,5 +1,6 @@
+# Level02
 
-## Exploring the exercice
+## Exploring the computer
 
 ```bash 
 $ ls -a
@@ -22,11 +23,14 @@ H��[f&NϑC'̊$E5�@@J";���;��ߙO/Y�����%�sk?
 ��I7[f&N�8	BB$E4Ծ@@y;���;���/Y�O��
 ```
 
-## Reading the file 
+## What is pcap ?
 
-After a few research about pcap, I see that wireshark is a package already installed which allows us to read those files. 
+PCAP (Packet Capture) is a file format used to record network traffic data captured by tools like Wireshark or tcpdump. It stores raw packet data, including headers and payloads, for analysis. Its main purpose is to help diagnose network issues, monitor traffic, or analyze security incidents.
 
-So I copy the file locally. 
+
+## Reading the file
+
+After a few research about pcap, we see that wireshark is a package already installed which allows us to read those files, so let's copy the file locally. 
 
 ```bash
 scp -P 12345 level02@localhost:level02.pcap .
@@ -34,9 +38,9 @@ scp -P 12345 level02@localhost:level02.pcap .
 wireshark level02.pcap
 ```
 
-I use the Follow utility to follow TCP packages and get this result
+I use the 'Follow' utility to follow the TCP exchaneg of packages that occured and get this result
 
-```bash
+```plaintext
 
 ..%..%..&..... ..#..'..$..&..... ..#..'..$.. .....#.....'........... .38400,38400....#.SodaCan:0....'..DISPLAY.SodaCan:0......xterm.........."........!........"..".....b........b....	B.
 ..............................1.......!.."......"......!..........."........"..".............	..
@@ -54,9 +58,19 @@ wwwbugs login:
 
 ## Cracking the code 
 
-Instinctively I take out the '.' so I get ft_wandrNDRelL0L but that does not work. 
+Instinctively we thought about taking out '.' so we get ft_wandrNDRelL0L but that does not work. 
 
-I go back and see that in the ASCII table '.' is 7F in hexadecimal which is the DEL key. 
+We go back and see that in the ASCII table '.' is 7F in hexadecimal which is the DEL key. 
 
-SO I delete a char before every '.' and get ft_waNDReL0L
+So if we delete a char before every '.' we get ft_waNDReL0L
 
+## Getting the flag 
+
+
+```bash
+$ su flag02
+Password: 
+Don't forget to launch getflag !
+flag02@SnowCrash:~$ getflag
+Check flag.Here is your token : **************
+```

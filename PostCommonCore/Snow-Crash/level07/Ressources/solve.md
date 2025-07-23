@@ -1,4 +1,6 @@
-## Exploring the exercice
+# Level07
+
+## Exploring the computer
 
 ```bash 
 $ ls -la
@@ -6,6 +8,8 @@ $ ls -la
 ```
 
 We have an executable. Since we can execute the level07 let's try it.
+
+## Inspecting the files
 
 ```bash 
 $ ./level07 
@@ -22,7 +26,6 @@ level07: setuid setgid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV),
 I thought about creating a custom 'echo' and adding it to the PATH like level03 but it wasn't that. 
 Instead let's look if the echo is done in any particular way. 
 
-
 ```bash 
 $ strings level07 
 [...]
@@ -37,6 +40,7 @@ Okay so we see that the echo depends on an env variable.
 $ env | grep LOGNAME 
 LOGNAME=level07
 ```
+## Getting the flag
 
 Same principle as before we are going to inject getflag as a variable. 
 
@@ -55,5 +59,5 @@ And let's execute the script
 
 ```bash 
 $ ./level07 
-Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
+Check flag.Here is your token : **********
 ```

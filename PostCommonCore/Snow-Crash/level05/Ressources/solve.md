@@ -1,4 +1,6 @@
-## Exploring the exercice
+# Level05
+
+## Exploring the computer
 
 ```bash 
 $ ls -la
@@ -36,6 +38,8 @@ $ ls -l /usr/sbin/openarenaserver
 ```
 
 The +1 informs us that an ACL(Access Control List) rule is defined, let's see what it allows us to do.
+
+## Learning more about the openarenaserver
 
 ```bash
 $ getfacl /usr/sbin/openarenaserver
@@ -85,6 +89,9 @@ We cannot excute the openarenaserver ourself, but after a certain period of time
 $ ls /opt/openarenaserver/
 
 ```
+
+## Getting the flag 
+
 Let's right the output of getflag in a file so we can retrieve it after the cron executed it.
 
 ```bash
@@ -93,7 +100,5 @@ $ echo "getflag > /tmp/flagg" > /opt/openarenaserver/script.sh
 
 ```bash
 $ cat /tmp/flagg
-Check flag.Here is your token : viuaaale9huek52boumoomioc
+Check flag.Here is your token : *******************
 ```
-
-We got our flag !

