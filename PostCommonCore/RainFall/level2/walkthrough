@@ -92,4 +92,18 @@ Due to this check we couldn't point the return address to the stack (0xbf000000 
 0x08048538 <+100>:   call   0x80483e0 <strdup@plt>
 ```
 
-We see in the program that the buffer is later copied inside a strdup. This function use malloc who store the memory in ... the heap.
+We see in the program that the buffer is later copied inside a strdup. 
+This function use malloc who store the memory in ... the heap.
+
+
+```bash
+ltrace ./level2 
+__libc_start_main(0x804853f, 1, 0xbffff7f4, 0x8048550, 0x80485c0 <unfinished ...>
+fflush(0xb7fd1a20)                              = 0
+gets(0xbffff6fc, 0, 0, 0xb7e5ec73, 0x80482b5)   = 0xbffff6fc
+puts("")                                        = 1
+strdup("")                                      = 0x0804a008
++++ exited (status 8) +++
+```
+
+We see that the malloc always returns the address '0x0804a008'
