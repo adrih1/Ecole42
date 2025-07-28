@@ -103,7 +103,7 @@ We can also see a call to printf() function wich is vulnerable to exploit.
 0x080484d5 <+49>:	call   0x8048390 <printf@plt>
 ```
 
-## Getting the pass
+## Getting access to the shell
 
 We are going to modify the value of the variable located at 0x804988c so that it equals 64, in order for the program to launch the system to ("bin/sh"). 
 
