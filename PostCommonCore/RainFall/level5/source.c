@@ -1,17 +1,23 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void n(void) 
+void o()
 {
-    char buffer[512];
-
-    fgets(buffer, 512, stdin);
-    printf(buffer);
-    exit(1);
+    system("/bin/sh"); 
+    _exit(1); // --> Direct exit (no emptying of the buffers)
 }
 
-int main()
+void n(void)
 {
-    n(); 
-    return(0); 
+    char buffer[512]; 
+
+    fgets(buffer, 512, stdin); 
+    printf(buffer); 
+    exit(1); // --> Empties buffers and exits
+}
+
+int main(void)
+{
+    n();
+    return (0); 
 }
