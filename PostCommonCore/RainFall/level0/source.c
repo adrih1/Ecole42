@@ -1,27 +1,31 @@
-#include "stdlib.h"
-#include "stdio.h"
-#include "unistd.h"
-#include "string.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
 #include <sys/types.h>
+#define _GNU_SOURCE
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
-    int number = atoi(av[1]);
-    char **args;
-    uid_t uid;
-    gid_t gid;
+	int		nb;
+	char	**cmd_args;
+	gid_t	gid;
+	uid_t	uid;
+	
+	nb = atoi(av[1]);
+	if (nb != 423)
+		fwrite("No !\n", 5, 1, stderr);
+	else
+	{
+		cmd_args[0] = strdup("/bin/sh");
+		cmd_args[1] = NULL;
 
-    if (number == 423)
-    {
-        tab[0] = strdup("/bin/sh");
-        tab[1] = 0;
-        gid = getgid();
-        uid = getuid();
-        setresgid(gid, gid, gid);
-        setresuid(uid, uid, uid);
-        execv("/bin/sh", args);
-    }
-    else
-        fwrite("No !\n", 1, 5, stderr);
-    return (0);
+		gid = getegid();
+		uid = geteuid();
+		setresgid(gid, gid, gid);
+		setresuid(uid, uid, uid);
+
+		execv("/bin/sh", cmd_args);
+	}
+	return (0);
 }
