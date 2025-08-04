@@ -42,8 +42,8 @@ int main(int ac, char **av)
     int r1 = a + b; 
     int r2 = a - b;
 
-    // Appel indirect simulé — en réalité dans le binaire, il se fait via EDX
-    // Ici, on ne peut pas le faire sans assembler ou hack, donc on s'arrête là.
-
+    // In the real program the call to our shellcode is made thorugh the EDX addres
+    // In C++ we cannot simulate that behavior without assembler code
+    // Which is why there isn't code corresponding to that
     return (0); 
 }
