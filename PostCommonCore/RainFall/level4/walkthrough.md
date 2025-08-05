@@ -63,7 +63,6 @@ End of assembler dump.
 
 The program compares the value of a global variable m at 0x8049810 to 0x1025544 (16930116 in dec).
 
-
 ```bash
 disas p
 Dump of assembler code for function p:
@@ -82,7 +81,7 @@ Once again we have "printf" that calls the argument, without formater --> Format
 
 ## Getting access to the shell
 
-Like in level3 our goal is to manipulate the printf() function into changing the value of the variable at the address 0x8049810 
+Like in level3 our goal is to manipulate the printf() function into changing the value of the variable at the address 0x8049810 so that it equals 16930116. 
 
 1. Print the memory until we reach the address of the variable we wish to modify
 
