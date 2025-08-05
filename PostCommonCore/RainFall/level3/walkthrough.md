@@ -28,7 +28,6 @@ The program displays the input
 
 ```bash
 (gdb) disas main
-(gdb) disas main
 Dump of assembler code for function main:
    0x0804851a <+0>:	push   %ebp
    0x0804851b <+1>:	mov    %esp,%ebp
@@ -83,6 +82,7 @@ This value is then compared to 64 (Ox40 in hexadecimal).
 ```
 
 Using gdb we can check the name of the variable at 0x804988c
+
 ```bash
 (gdb) info variables
 All defined variables:
@@ -95,7 +95,6 @@ If it corresponds to 64 a call to system is made.
 ```bash
 0x08048513 <+111>:	call   0x80483c0 <system@plt>
 ```
-
 
 We can also see a call to printf() function wich is vulnerable to exploit.
 
@@ -167,5 +166,5 @@ Wait what?!
 whoami 
 level4
 cat /home/user/level4/.pass
-b209ea91ad69ef36f2cf0fcbbc24c739fd10464cf545b20bea8572ebdc3c36fa
+***************************************
 ```
