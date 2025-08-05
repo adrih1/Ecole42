@@ -41,7 +41,8 @@ Dump of assembler code for function main:
 [...]
 ```
 
-As confirmed by gdb, the program takes an argument converts it. 
+As confirmed by gdb, the program takes an argument converts it with atoi.
+Then if atoi(argv[1]) != 423 (0x1a7 in decimal), we jump to an error else we continue. 
 
 ```bash
 [...]
@@ -50,14 +51,30 @@ As confirmed by gdb, the program takes an argument converts it.
 [...]
 ```
 
-Then if atoi(argv[1]) != 423, we jump to an error else we continue. 
-Alright let's try to execute the program with 423 as an argument ! 
+If that check is pass we see there is a call to execv :
+
+```bash
+0x08048f46 <+134>:	mov    %eax,0x4(%esp)
+0x08048f4a <+138>:	movl   $0x80c5348,(%esp)
+0x08048f51 <+145>:	call   0x8054640 <execv>
+```
+
+Let's check the value at 0x80c5348
+
+```bash
+$ x/s 0x80c5348
+0x80c5348:	 "/bin/sh"
+```
 
 ## Getting access to the shell
 
+Alright let's try to execute the program with 423 as an argument ! 
+
+
 ```bash
 ./level0 423
-$ 
+$ cat /home/user/level1/.pass
+***************************************
 ```
 
 We have access let's [script it](./Ressources/exploit.py)! 
