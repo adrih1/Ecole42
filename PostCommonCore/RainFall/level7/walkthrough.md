@@ -99,6 +99,7 @@ End of assembler dump.
 ```
 
 Juste before the call to fopen we have this 
+
 ```bash 
 (gdb) x/s 0x80486e9
 0x80486e9:	 "r"
@@ -128,6 +129,7 @@ Our observations :
 ```
 
 We see that there is an uncalled m function. 
+
 ```bash
 (gdb) disas m
 Dump of assembler code for function m:
@@ -155,8 +157,8 @@ $ x/s 0x8049960
 The m function : 
 
 ```plaintext
-    • Display the current time with time()
-    • Display the content of the global variable c, which contains the content of the .pass file 
+    • Displays the current time with time()
+    • Displays the content of the global variable c, which contains the content of the .pass file 
 ```
 
 
