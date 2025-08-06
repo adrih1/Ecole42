@@ -175,10 +175,10 @@ End of assembler dump.
 
 
 What we learned : 
-``plaintext
-    • The program increases the size of 2 globals variable : auth and service, using malloc 10 by 10, if the input is "auth" or service
-    • If the input is login, the program checks memore on auth+32, if the memory is not 0 the function "system" is called. 
-``
+```plaintext
+    • The program increases the size of 2 globals variable : auth and service, using malloc 10 by 10, if the input is "auth" or "service".
+    • If the input is login, the program checks memory on auth+32, if the memory is not 0 the function "system" is called. 
+```
 
 ## Getting access to the pass
 
