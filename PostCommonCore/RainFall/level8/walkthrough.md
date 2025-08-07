@@ -176,6 +176,7 @@ End of assembler dump.
 
 What we learned : 
 ```plaintext
+    . 2 global variables : 0x8049ab0, 0x8049aac
     • The program increases the size of 2 globals variable : auth and service, using malloc 10 by 10, if the input is "auth" or "service".
     • If the input is login, the program checks memory on auth+32, if the memory is not 0 the function "system" is called. 
 ```
@@ -187,7 +188,7 @@ We want to increase the service variable so that it writes at auth+32, therefore
 
 ```bash
 ./level8 
-auth 
+auth
 0x804a008, (nil) 
 service
 0x804a008, 0x804a018 
@@ -196,6 +197,7 @@ Password:
 0x804a008, 0x804a018 
 service
 0x804a008, 0x804a028 
+$
 ```
 
 Here is 0x804a028 is equal to auth + 0x20, so we can try the login input. 
