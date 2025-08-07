@@ -109,7 +109,7 @@ The program dereference (reads it) EAX 2 times at main+136 and there is a call o
 ## Getting acces to the pass
 
 Our goal : 
-1. Overflow of the buffer in setAnnotation → overwriting in the objects memory
+1. Overflow of the buffer in setAnnotation
 2. EAX now points to that object. 
 3. The programm does a double dereference on EAX to retrive the pointer of a function
 4. Thanks to the overflow, this pointer is replaced by the address of our shellcode which we injected in the buffer
@@ -138,17 +138,31 @@ So our offet is :
 
    1.2 Finding where is our buffer in eax
 
-The program uses the N object allocated on the stack at the address esp + 0x10. 
-It is at that place, that is stored a pointed which will be derefenced twice to retrieve the function that is called. 
-Therefore we must overwrite that value so that in points to our buffer (which contains the shellcode). However since there is a double dereference (*(*(...))), the value we put at esp + 0x10 must be an address that points to another address that points to the shellcode. 
+This is the part that is interesting for us :
 
-
-So schematise here is what will happen 
-```plaintext
-[esp+0x10] = ptr1 (adresse)         |           eax = [esp+0x10]    // eax = ptr1
-*ptr1 = ptr2 (adresse)              |           eax = *eax          // eax = ptr2
-*ptr2 = shellcode                   |           call *eax           // appel vers shellcode
+```bash
+mov eax, [esp+0x10]   ; EAX = ptr_B
+mov eax, [eax]        ; EAX = *(ptr_B) → vtable pointer
+mov edx, [eax]        ; EDX = *(vtable) → virtual method ptr
+call edx              ; Appel indirect
 ```
+
+What is stored at [esp + 0x10] is taken and put into EAX, therefore EAX holds B address (a pointer to an object).
+
+On the second step we read what is in EAX and put it into EAX. EAX holds B address, a pointer to the start of an object with virtual methods, therefore it points to a vtable. 
+So EAX = vtable of B
+
+On the third step we read the content of EAX (now the vtable) and store it into EDX. So EDX now has the virtual method to be called. 
+
+So schematise here is what will happen : 
+
+```plaintext
+[esp+0x10]              || 0x804a060 (adresse de B, pointer to an object)
+*ptrB = ptrB (adresse)  || 0x804a060    → 0x804a100 (pointeur vtable)         
+*ptrB= vtable           || 0x804a100    → 0xdeadbeef (adresse fonction virtuelle)              
+``` 
+
+So our goal is going to make the vtable address point towards a shellcode
 
 
 ```bash 
