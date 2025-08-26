@@ -1,21 +1,20 @@
-NAME = libasm
+NAME = hello
 
-CC = nasm
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+ASM = nasm
+ASMFLAGS = -f elf64
 
-SRCS =	ft_strlen.s \	
-
-OBJS = $(SRCS:.cpp=.o)
+SRCS = ft_strlen.s
+OBJS = $(SRCS:.s=.o)
 
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	gcc -no-pie -o $(NAME) $(OBJS) 
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.s
+	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
 	$(RM) $(OBJS)
