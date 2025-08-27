@@ -91,10 +91,11 @@ Dump of assembler code for function n:
    0x08048467 <+19>:	ret    
 End of assembler dump.
 ```
+
 We see that n calls system(), so our goal is going to be to use the function m so that it calls n().
 
 
-## Gettingn acces to the pass
+## Getting acces to the pass
 
 In the main we see that there is a call to strcpy, let's find the offset to do a buffer overflow.
 
