@@ -1,6 +1,7 @@
 # Level0
 
-## Basic Info
+## What we have
+
 ```bash
 GCC stack protector support:            Enabled
 Strict user copy checks:                Disabled
@@ -51,7 +52,7 @@ Then if atoi(argv[1]) != 423 (0x1a7 in decimal), we jump to an error else we con
 [...]
 ```
 
-If that check is pass we see there is a call to execv :
+If we validate that check, the program then does a call to execv :
 
 ```bash
 0x08048f46 <+134>:	mov    %eax,0x4(%esp)
@@ -69,7 +70,6 @@ $ x/s 0x80c5348
 ## Getting access to the shell
 
 Alright let's try to execute the program with 423 as an argument ! 
-
 
 ```bash
 ./level0 423

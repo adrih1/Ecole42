@@ -1,6 +1,5 @@
 # Level 6
 
-
 ## Testing the program 
 
 ```bash

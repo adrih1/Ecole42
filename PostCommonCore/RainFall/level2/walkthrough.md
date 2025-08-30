@@ -1,5 +1,7 @@
 # Level 2
 
+## What we have
+
 ```bash 
 GCC stack protector support:            Enabled
 Strict user copy checks:                Disabled

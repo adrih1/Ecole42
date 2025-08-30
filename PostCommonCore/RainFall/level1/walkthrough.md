@@ -1,6 +1,6 @@
 # Level1
 
-## Basic Info
+## What we have
 ```bash
 GCC stack protector support:            Enabled
 Strict user copy checks:                Disabled

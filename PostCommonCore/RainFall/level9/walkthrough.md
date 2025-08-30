@@ -1,5 +1,6 @@
 # Level 9
 
+## What we have
 ```bash
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/user/level9/level9

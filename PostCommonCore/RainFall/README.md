@@ -51,13 +51,12 @@ Login: level0
 Password: level0
 
 To move on to the next level, you must read the .pass file of the upper level.
-For level0, the goal is to execute this:
+So for every level the final goal is to execute something like this:
 
 ```bash
 $ cat /home/user/level1/.pass
 ```
 
-### 🔍 Start hacking !!
 
 
 ## 👥 The Team 
@@ -74,5 +73,7 @@ $ cat /home/user/level1/.pass
     <sub><b>Edouard Baillot</b></sub>
   </a>
 </div>
+
+For each level, you will find the different steps we did in order to go onto the next level.
 
 
