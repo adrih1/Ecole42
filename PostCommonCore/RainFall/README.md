@@ -2,34 +2,34 @@
 
 ## 📌 Description
 
-**Rainfall** est un projet d'introduction à l'exploitation de binaires de type **ELF-like**.  
-Ce projet met l'accent sur la compréhension et l'exploitation de failles simples dans des exécutables Linux, à travers une approche progressive et pédagogique.
+**Rainfall** is an introductory project on exploiting ELF-like binaries.
+This project focuses on understanding and exploiting simple vulnerabilities in Linux executables, through a progressive and educational approach.
 
-## 🧰 Technologies utilisées
+## 🧰 Technologies used
 
-- **C** – Langage principal utilisé pour la compilation des binaires vulnérables.
-- **Python** – Scripts d'automatisation, d'exploitation ou d'analyse.
-- **GDB** – Débogueur utilisé pour l’analyse dynamique des binaires.
+- **C** – Main language used to compile vulnerable binaries.
+- **Python** – Automation, exploitation, or analysis scripts.
+- **GDB** – Debugger used for dynamic binary analysis.
 
-## 🎯 Objectifs pédagogiques
 
-- Apprendre à analyser un binaire ELF sous Linux.
-- S'initier à l'exploitation de failles telles que les **buffer overflows**.
-- Comprendre le fonctionnement de la **pile**, des **registres**, et des protections comme **ASLR** ou **NX**.
-- Utiliser des outils tels que **GDB**, **pwndbg**, ou **Python scripts** pour l'exploitation.
+## 🎯 Learning Objectives
 
-## 🧑‍💻 Prérequis
+- Learn how to analyze an ELF binary on Linux.
+- Get started with exploiting vulnerabilities such as **buffer overflows**.
+- Understand how the **stack**, **registers**, and protections like **ASLR** or **NX** work.
+- Use tools such as **GDB**, or **Python scripts** for exploitation.
 
-- Connaissances de base en langage C.
-- Environnement Linux (ou VM).
+## 🧑‍💻 Prerequisites
+
+- Basic knowledge of C language. 
+- Linux environment (or VM).
 - GDB
-- Python 3 installé.
-- Virtual Box installé
+- VirtualBox installed
 
-## 🚀 Démarrage rapide
+## 🚀 Quickstart
 
 
-### Cloner le repo
+### Clone the repo
 
 ```bash
 git clone https://github.com/ton-utilisateur/rainfall.git
@@ -37,21 +37,22 @@ cd rainfall
 ```
 ### Virtual Box
 
-2. Creer une VM avec le fichier .iso de Rainfall, garder tous les parametres par defaut
+2. Create a VM with the Rainfall .iso file, keeping all default parameters.
 
 ![image info](./assets/VirtualBox.png)
 
-Puis lancer la VM, si tout fonctionne vous devriez voir ceci :
+Then launch the VM, if everything works you should see this:
 
 ![image info](./assets/RainfallHome.png)
 
-### Connecter vous au level0
+### Connect to level0
 
 Login: level0
-Mot de passe: level0
+Password: level0
 
-Pour passer chaque level vous devez lire le fichier .pass du level au dessus.
-Pour le level0, le but est donc d'executer ceci:
+To move on to the next level, you must read the .pass file of the upper level.
+For level0, the goal is to execute this:
+
 ```bash
 $ cat /home/user/level1/.pass
 ```
