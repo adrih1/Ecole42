@@ -2,8 +2,13 @@ NAME = hello
 
 ASM = nasm
 ASMFLAGS = -f elf64
-
-SRCS = ft_strlen.s main.s
+		
+SRCS =	ft_read.s \
+		ft_strcmp.s \
+		ft_strcpy.s \
+		ft_strlen.s \
+		ft_write.s \
+		main.s
 OBJS = $(SRCS:.s=.o)
 
 RM = rm -f
