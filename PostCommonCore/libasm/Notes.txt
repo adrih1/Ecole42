@@ -1,0 +1,5 @@
+RDI : convention d’appel System V AMD64 → le premier argument est toujours dans RDI. Donc c’est obligatoire si on veut écrire une fonction standard.
+
+RAX : dans la convention d’appel, la valeur de retour est toujours dans RAX.
+
+On incrémente RAX pour compter, car à la fin on veut longueur → RAX.
