@@ -23,7 +23,7 @@ $(NAME): $(OBJS)
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(filter %.o,$(OBJS)) 
 
 fclean: clean
 	$(RM) $(NAME)
