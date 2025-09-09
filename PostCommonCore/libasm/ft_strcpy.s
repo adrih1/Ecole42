@@ -2,13 +2,13 @@ global ft_strcpy
 
 ft_strcpy:
     ; RDI = dest, RSI = src
+    xor rcx, rcx
     mov rax, rdi
 
 .loop
-    mov dl, BYTE[rsi]
-    mov BYTE[rdi], dl
-    inc rsi
-    inc rdi
-    test dl, dl
-    jnz .loop  ; jump if non zero, name is counterintuitive it actually doesn't jump if ZF = 1
+    mov al, BYTE[rsi + rcx]
+    mov BYTE[rdi + rcx], al
+    inc rcx
+    cmp al, 0
+    jne .loop
     ret
