@@ -12,9 +12,7 @@ ft_read:
 error:
     neg rax                 ; RAX = erno positif
     mov rdi, rax            ; rdi serves as a bufer because rax will take the return of erno location
-    sub rsp, 8              ; Aligning the stack
     call __errno_location   ; returns a pointer to erno
-    add rsp, 8                 
     mov [rax], rdi          ; rax holds the adres of erno so we are putting rdi in erno
     mov rax, -1             ; putting the correct value oif -1 in a write return
     ret
