@@ -12,9 +12,9 @@ ft_strdup:
     call malloc     ; malloc reads the len from rdi, returns a pointer in rax
     cmp rax, 0      ; check rax to see if malloc fails
     jz error        ; if fail we jump to exit
-    mov rdi, rax    ; we store rax in rdi because strcpy uses rdi as its dest
-    pop rsi         ; we know that strcpy takes rsi as a src, so we put *s into rsi 
-    call ft_strcpy  ; 
+    mov rdi, rax    ; we store rax in rdi because strcpy uses rdi as its *dest
+    pop rsi         ; we know that strcpy takes rsi as the *src string, so we put *s into rsi 
+    call ft_strcpy
     ret
 
 error:
