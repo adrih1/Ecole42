@@ -4,8 +4,8 @@ ft_strcmp:
     ; RAX return value
     ; RDI = 1st argument , RSI = 2e argmuent
 .loop
-    mov al, byte[rdi]
-    mov bl, byte[rsi]
+    mov al, BYTE[rdi]
+    mov bl, BYTE[rsi]
     cmp al, bl
     jne .diff ; if different calculate difference
     test al, al ; check if end of string

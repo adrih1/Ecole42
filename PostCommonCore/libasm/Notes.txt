@@ -1,5 +1,21 @@
 RDI : convention d’appel System V AMD64 → le premier argument est toujours dans RDI. Donc c’est obligatoire si on veut écrire une fonction standard.
-
 RAX : dans la convention d’appel, la valeur de retour est toujours dans RAX.
 
-On incrémente RAX pour compter, car à la fin on veut longueur → RAX.
+Les Sections en Assemnbly :
+.text --> le code executable
+.data --> data initialisee 
+.bss --> donnees non initialisees
+
+Les Registres en 64 bits:
+
+Argument	                Registre
+1er argument	            RDI
+2e argument	                RSI
+3e argument	                RDX
+4e argument	                RCX --> Used to counter in loops
+5e argument	                R8
+6e argument	                R9
+Valeur de retour	        RAX
+Used to store base pointer  RBP
+Used to store the stack pointer RSP
+After 6 args --> goes on the stack. In 32 bits all arguments are on the stack. Return value is EAX. 

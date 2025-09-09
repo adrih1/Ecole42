@@ -1,15 +1,14 @@
-
 global ft_strlen
 
 ft_strlen:
-    xor rax, rax ; We can also do mov rax, 0  but xor is shorter to encode
-    jmp loop_count
+    xor rcx, rcx ; We can also do mov rax, 0  but xor is shorter to encode
 
-loop_count:
-    cmp BYTE[rdi + rax], 0;
-    je exit 
-    inc rax
-    jmp loop_count
+.loop
+    cmp BYTE[rdi + rcx], 0;
+    je .done 
+    inc rcx
+    jmp .loop
 
-exit:
+.done:
+    mov rax, rcx
     ret
