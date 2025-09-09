@@ -12,6 +12,7 @@ ssize_t ft_write(int fd, const void *buf, size_t count);
 int main(void)
 {
     char buffer[100];
+    char buffer2[100];
     const char *str1 = "Hello, world!";
     const char *str2 = "Hello, world!";
     const char *str3 = "Hello, 42!";
@@ -22,7 +23,9 @@ int main(void)
 
     printf("=== Testing ft_strcpy ===\n");
     ft_strcpy(buffer, str1);
-    printf("ft_strcpy result: %s\n\n", buffer);
+    strcpy(buffer2, str1);   
+    printf("ft_strcpy result: %s\n", buffer);
+    printf("strcpy result: %s\n\n", buffer2);
 
     printf("=== Testing ft_strcmp ===\n");
     printf("ft_strcmp(\"%s\", \"%s\") = %d\n", str1, str2, ft_strcmp(str1, str2));
