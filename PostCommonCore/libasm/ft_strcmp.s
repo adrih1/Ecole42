@@ -8,7 +8,7 @@ ft_strcmp:
     mov bl, BYTE[rsi]
     cmp al, bl
     jne .diff ; if different calculate difference
-    test al, al ; check if end of string
+    cmp al, 0 ; check if end of string
     je equal ; si "\0" s1 == s2
     inc rdi
     inc rsi
@@ -24,7 +24,3 @@ ft_strcmp:
 .equal
     xor rax,rax
     ret
-
-    ;   • a negative value if s1 is less than s2;
-    ;   • a positive value if s1 is greater than s2.
-
