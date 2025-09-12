@@ -1,8 +1,7 @@
 global ft_strcmp
 
+; RDI = 1st argument , RSI = 2e argmuent
 ft_strcmp:
-    ; RAX return value
-    ; RDI = 1st argument , RSI = 2e argmuent
 
 .loop:
     mov al, BYTE[rdi]

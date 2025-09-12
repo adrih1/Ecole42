@@ -2,6 +2,7 @@ import sys
 import os           # Handle files and directories
 import requests     # Donwloading pages and images
 import re           # Extract URL from images
+from urllib.parse import urljoin, urlparse
 
 
 DEFAULT_DEPTH = 5
@@ -49,10 +50,32 @@ def parse_args(args):
 
     return options
 
-def request(url):
-    r = requests.get(url)
-    print(r.content)
+# Extract all images URL from the HTML text
+def extract_images(html, base_url):
+    # Find all <img> tags and gets the src
+    img_urls = re.findall(r'<img [^>]*src="([^"]+)"', html, re.IGNORECASE)
     
+    # Keep only images with our extensions | base_url is to transform a relative url into an absolute one
+    img_urls = [urljoin(base_url, url) for url in img_urls if any(url.lower().endswith(ext) for ext in EXTENSIONS)]
+    for url in img_urls:
+        print({url})
+    return img_urls
+
+
+
+def fetch_page(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            extract_images(response.text, url)
+            return response.text
+        else:
+            print(f"Error {response.status_code} while retrieving {url}")
+            return None
+    except Exception as e:
+        print(f"Error while request {url} : {e}")    
+        return None
+
 
 def main():
     # Display Usage Methods
@@ -71,7 +94,7 @@ def main():
     print(f" - Path      : {options['path']}")
     print(f" - URL       : {options['url']}")
 
-    request(options['url'])
+    fetch_page(options['url'])
 
 
 if __name__ == "__main__":
