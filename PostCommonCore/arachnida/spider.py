@@ -1,95 +1,101 @@
 import sys
-import requests
+import os           # Handle files and directories
+import requests     # Donwloading pages and images
+import re           # Extract URL from images
+from urllib.parse import urljoin, urlparse
 
 
-def parse_recursive_option(args, index):
-    """Gère l'option -r."""
-    return True, index
+DEFAULT_DEPTH = 5
+DEFAULT_PATH = './data'
+EXTENSIONS = ['.jpg', '.jpeg', '.gif', '.bmp']
 
-def parse_depth_option(args, index):
-    """Gère l'option -l et retourne la profondeur."""
-    if index + 1 < len(args):
-        try:
-            return int(args[index + 1]), index + 1
-        except ValueError:
-            raise ValueError("La profondeur (-l) doit être un entier.")
-    else:
-        raise ValueError("Aucun niveau de profondeur spécifié après -l.")
-
-def parse_path_option(args, index):
-    """Gère l'option -p et retourne le chemin."""
-    if index + 1 < len(args):
-        return args[index + 1], index + 1
-    else:
-        raise ValueError("Aucun chemin spécifié après -p.")
-
-def parse_url(args, index, current_url):
-    """Gère l'URL."""
-    if current_url is not None:
-        raise ValueError("Plusieurs URL spécifiées.")
-    return args[index]
-
-def parse_arguments(args):
-    """
-    Analyse les arguments et retourne les options configurées.
-    """
-    # Initialisation des paramètres par défaut
-    recursive = False
-    max_depth = 5
-    path = "./data/"
-    url = None
+def parse_args(args):
+    # Valeurs par défaut
+    options = {
+        "recursive": False,
+        "max_depth": DEFAULT_DEPTH,
+        "path": DEFAULT_PATH,
+        "url": None
+    }
 
     i = 0
     while i < len(args):
         if args[i] == "-r":
-            recursive, i = parse_recursive_option(args, i)
+            options["recursive"] = True
+            i += 1
         elif args[i] == "-l":
-            max_depth, i = parse_depth_option(args, i)
+            if i + 1 < len(args) and args[i+1].isdigit():
+                options["max_depth"] = int(args[i+1])
+                i += 2
+            else:
+                print("Erreur: -l doit être suivi d'un nombre")
+                sys.exit(1)
         elif args[i] == "-p":
-            path, i = parse_path_option(args, i)
+            if i + 1 < len(args):
+                options["path"] = args[i+1]
+                i += 2
+            else:
+                print("Erreur: -p doit être suivi d'un chemin")
+                sys.exit(1)
         else:
-            url = parse_url(args, i, url)
-        i += 1
+            options["url"] = args[i]
+            i += 1
 
-    # Vérifier que l'URL est définie
-    if url is None:
-        raise ValueError("Aucune URL spécifiée.")
+    if options["url"] is None:
+        print("Erreur: URL manquante")
+        sys.exit(1)
 
-    return {
-        "recursive": recursive,
-        "max_depth": max_depth,
-        "path": path,
-        "url": url
-    }
+    if not os.path.exists(options["path"]):
+        os.makedirs(options["path"])
 
-def getImage(url):
-    # Effectuer une requête GET
-    response = requests.get(url)
+    return options
 
-    # Vérifier si la requête a réussi
-    if response.status_code == 200:
-        # Afficher le contenu (par exemple, JSON ou texte brut)
-        print(response.json())  # ou response.text selon le format
-    else:
-        print(f"Erreur : {response.status_code}")
+# Extract all images URL from the HTML text
+def extract_images(html, base_url):
+    # Find all <img> tags and gets the src
+    img_urls = re.findall(r'<img [^>]*src="([^"]+)"', html, re.IGNORECASE)
+    
+    # Keep only images with our extensions | base_url is to transform a relative url into an absolute one
+    img_urls = [urljoin(base_url, url) for url in img_urls if any(url.lower().endswith(ext) for ext in EXTENSIONS)]
+    for url in img_urls:
+        print({url})
+    return img_urls
+
+
+
+def fetch_page(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            extract_images(response.text, url)
+            return response.text
+        else:
+            print(f"Error {response.status_code} while retrieving {url}")
+            return None
+    except Exception as e:
+        print(f"Error while request {url} : {e}")    
+        return None
+
 
 def main():
+    # Display Usage Methods
     if len(sys.argv) < 2:
-        print("Usage : ./spider [-rlp] URL")
-        return
+        print("Usage: python spider.py [-r] [-l N] [-p PATH] URL")
+        sys.exit(1)
 
-    try:
-        options = parse_arguments(sys.argv[1:])
-        print(f"Options configurées :")
-        print(f"  Recursive : {options['recursive']}")
-        print(f"  Max Depth : {options['max_depth']}")
-        print(f"  Save Path : {options['path']}")
-        print(f"  URL       : {options['url']}")
-        
-        getImage(options['url'])
-    
-    except ValueError as e:
-        print(f"Erreur : {e}")
+    args = sys.argv[1:]
+    # Parse Args
+    options = parse_args(args)
+
+    # Result of the parsing
+    print("Options récupérées :")
+    print(f" - Recursive : {options['recursive']}")
+    print(f" - Max depth : {options['max_depth']}")
+    print(f" - Path      : {options['path']}")
+    print(f" - URL       : {options['url']}")
+
+    fetch_page(options['url'])
+
 
 if __name__ == "__main__":
     main()

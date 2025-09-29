@@ -64,15 +64,12 @@ $ cat /home/user/level1/.pass
 <div style="display: flex; gap: 40px; justify-content: flex-start; align-items: center;">
   <a href="https://github.com/adrih1" style="text-align: center; text-decoration: none; color: inherit;">
     <img src="https://github.com/adrih1.png" width="80" style="border-radius: 50%;" alt="Adrien Hors"/>
-    <br/>
-    <sub><b>Adrien Hors</b></sub>
   </a>
   <a href="https://github.com/Illouminus" style="text-align: center; text-decoration: none; color: inherit;">
     <img src="https://github.com/Illouminus.png" width="80" style="border-radius: 50%;" alt="Edouard Baillot"/>
-    <br/>
-    <sub><b>Edouard Baillot</b></sub>
   </a>
 </div>
+<br>
 
 For each level, you will find the different steps we did in order to go onto the next level.
 
