@@ -36,16 +36,18 @@ COPY config/sshd_config /etc/ssh/sshd_config
 
 # Créer un utilisateur pour test connexion ssh
 RUN useradd -m ahors \
+    && mkdir -p /home/ahors/.ssh \
+    && chmod 700 /home/ahors/.ssh \
     && echo "ahors:ftonion" | chpasswd \
     && usermod -aG sudo ahors
 
+COPY config/ft_onion_ahors.pub /home/ahors/.ssh/authorized_keys
+RUN chmod 600 /home/ahors/.ssh/authorized_keys \
+    && chown -R ahors:ahors /home/ahors/.ssh
 
 # --- Configurer torrc ---
 RUN cp /etc/tor/torrc /etc/tor/torrc.default
 COPY config/torrc /etc/tor/torrc
-
-# --- Informer le correcteur où se trouve l'addresse du service caché ---
-RUN echo "Le hostname du service caché sera généré dans /var/lib/tor/hidden_service/hostname après le premier run du container"
 
 # --- Exposer le port web ---
 EXPOSE 80 4242
