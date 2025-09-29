@@ -1,0 +1,10 @@
+services:
+  tor-nginx:
+    build: .
+    container_name: tor-nginx
+    volumes:
+      - ./html:/var/www/html                             # <-- mount du dossier local pour les pages web
+    ports:
+      - "8080:80"
+      - "4242:4242"
+
