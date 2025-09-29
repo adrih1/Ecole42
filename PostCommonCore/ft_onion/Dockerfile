@@ -33,21 +33,10 @@ RUN echo "Créaton d'un volume qui lie le dossier local .html à var/www/html"
 
 
 # --- Configurer Nginx ---
-RUN echo 'server { \
-    listen 80 default_server; \
-    listen [::]:80 default_server; \
-    root /var/www/html; \
-    index index.html; \
-    server_name _; \
-    charset utf-8; \
-}' > /etc/nginx/sites-available/default
+COPY config/nginx.conf /etc/nginx/sites-available/default
 
 # --- Configurer SSH ---
-RUN mkdir -p /var/run/sshd \
-    # Configurer SSH pour écouter sur le port 4242
-    && sed -i 's/#Port 22/Port 4242/' /etc/ssh/sshd_config \
-    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+COPY config/sshd_config /etc/ssh/sshd_config
 
 # Créer un utilisateur pour test connexion ssh
 RUN useradd -m ahors \
