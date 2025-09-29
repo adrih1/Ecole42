@@ -28,10 +28,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# --- Informations sur l'origin des pages webs ---
-RUN echo "Créaton d'un volume qui lie le dossier local .html à var/www/html"
-
-
 # --- Configurer Nginx ---
 COPY config/nginx.conf /etc/nginx/sites-available/default
 
@@ -44,11 +40,9 @@ RUN useradd -m ahors \
     && usermod -aG sudo ahors
 
 
-
-# --- Ajouter la configuration du service caché dans torrc ---
-RUN echo "HiddenServiceDir /var/lib/tor/hidden_service" >> /etc/tor/torrc \
-    && echo "HiddenServicePort 4242 127.0.0.1:4242" >> /etc/tor/torrc \
-    && echo "HiddenServicePort 80 127.0.0.1:80" >> /etc/tor/torrc
+# --- Configurer torrc ---
+RUN cp /etc/tor/torrc /etc/tor/torrc.default
+COPY config/torrc /etc/tor/torrc
 
 # --- Informer le correcteur où se trouve l'addresse du service caché ---
 RUN echo "Le hostname du service caché sera généré dans /var/lib/tor/hidden_service/hostname après le premier run du container"

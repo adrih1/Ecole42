@@ -6,7 +6,8 @@ services:
       - ./html:/var/www/html
       - ./config/nginx.conf:/etc/nginx/sites-available/default
       - ./config/sshd_config:/etc/ssh/sshd_config
+      - ./config/torrc:/etc/tor/torrc
     ports:
       - "8080:80"
-      - "4242:4242"
+      - "1234:4242"
 
