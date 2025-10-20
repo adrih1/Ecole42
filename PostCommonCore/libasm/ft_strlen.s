@@ -1,7 +1,6 @@
 global ft_strlen
 
 ft_strlen:
-<<<<<<< HEAD
     mov rax, 0  ; init rax to 0
     jmp loop_count ; jump to loop_countfunction
 
@@ -27,4 +26,3 @@ exit:
 .done:
     mov rax, rcx
     ret
->>>>>>> bddaf86f4d1ae193b831aac560c77cc1c1fc1cd0
