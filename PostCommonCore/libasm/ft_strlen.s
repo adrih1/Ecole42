@@ -1,4 +1,4 @@
-global ft_strlen
+global ft_strlen;
 
 ft_strlen:
     mov rax, 0  ; init rax to 0
@@ -12,9 +12,6 @@ loop_count:
 
 exit: 
     ret                     ; return rax
-
-
-=======
     xor rcx, rcx ; We can also do mov rax, 0  but xor is shorter to encode
 
 .loop
