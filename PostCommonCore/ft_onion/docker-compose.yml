@@ -10,3 +10,26 @@ services:
     ports:
       - "8080:80"
       - "1234:4242"
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    user: "106118:4316"  # adapte si ton utilisateur local a un autre UID:GID (commande `id`)
+    ports:
+      - "8096:8096/tcp"
+      - "7359:7359/udp"
+    volumes:
+      - ./config/jellyfin/config:/config
+      - ./config/jellyfin/cache:/cache
+      - ./media:/media
+      - ./media2:/media2:ro
+      - ./config/fonts:/usr/local/share/fonts/custom:ro
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://localhost:8096
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    depends_on:
+      - tor-nginx
+
