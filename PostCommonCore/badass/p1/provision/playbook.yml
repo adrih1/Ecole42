@@ -1,0 +1,98 @@
+---
+- name: Install Docker and GNS3
+  hosts: all
+  become: yes
+
+  tasks:
+
+    #######################################################
+    #                   UPDATE APT                        #
+    #######################################################
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    #######################################################
+    #                   INSTALL DOCKER                    #
+    #######################################################
+    - name: Install docker dependencies
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Add Docker APT repo
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable"
+        state: present
+        filename: docker
+
+    - name: Install Docker engine
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        update_cache: yes
+
+    - name: Enable and start Docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add vagrant user to docker group
+      user:
+        name: "vagrant"
+        groups: docker
+        append: yes
+
+    #######################################################
+    #                INSTALL GNS3 (pipx)                 #
+    #######################################################
+    - name: Install GNS3 system dependencies
+      apt:
+        name:
+          - python3
+          - python3-pip
+          - pipx
+          - python3-pyqt5
+          - python3-pyqt5.qtwebsockets
+          - python3-pyqt5.qtsvg
+          - ca-certificates
+          - curl
+          - gnupg2
+        state: present
+
+    - name: Add pipx to PATH for vagrant user
+      lineinfile:
+        path: /home/vagrant/.profile
+        line: 'export PATH="$HOME/.local/bin:$PATH"'
+        create: yes
+
+    - name: Install gns3-server with pipx
+      become: yes
+      become_user: vagrant
+      command: pipx install gns3-server
+
+    - name: Install gns3-gui with pipx
+      become: yes
+      become_user: vagrant
+      command: pipx install gns3-gui
+
+    - name: Inject gns3-server into gns3-gui environment
+      become: yes
+      become_user: vagrant
+      command: pipx inject gns3-gui gns3-server PyQt5
+
+
+      
