@@ -4,22 +4,36 @@ Les Sections en Assemnbly :
 .bss --> donnees non initialisees
 
 Les Registres en 64 bits:
-Argument	                Registre
-1er argument	            RDI
-2e argument	                RSI
-3e argument	                RDX
-4e argument	                RCX --> Used to count in loops
-5e argument	                R8
-6e argument	                R9
+RAX, RBX, RCX, RDX
+RSI, RDI, RBP, RSP
+R8, R9, R10, R11
+R12, R13, R14, R15
 
-Valeur de retour	        RAX
-Used to store base pointer  RBP
+Conventions d’appel (calling conventions)
+En 32 bits :
+
+Les paramètres sont passés sur la pile
+
+En 64 bits :
+Les premiers paramètres sont passés dans les registres
+Linux : RDI, RSI, RDX, RCX, R8, R9
+Windows : RCX, RDX, R8, R9
+
+➡️ Moins d’accès mémoire → appels de fonctions plus rapides.
+
+Valeur de retour	            RAX
+Used to store base pointer      RBP
 Used to store the stack pointer RSP
 After 6 args --> goes on the stack. In 32 bits all arguments are on the stack. Return value is EAX.
 
 
+The stack
+ESP --> Top
+EBP --> Bottom
 
-The erno variable will hol da value based on what went wrong during a system call.
+
+
+The erno variable will hold the value based on what went wrong during a system call.
 EBADF → bad file descriptor
 EFAULT → invalid pointer
 EAGAIN → ressource not available

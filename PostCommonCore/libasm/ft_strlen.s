@@ -5,7 +5,7 @@ ft_strlen:
     jmp loop_count ; jump to loop_countfunction
 
 loop_count:
-    cmp BYTE [rdi + rax], 0 ;
+    cmp BYTE [rdi + rax], 0
     je  exit                ; je = rdi[rax] == 0- -> exit
     inc rax                 ; increment 
     jmp loop_count

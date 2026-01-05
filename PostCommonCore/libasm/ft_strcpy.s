@@ -2,13 +2,12 @@ global ft_strcpy
 
 ft_strcpy:
     ; RDI = dest, RSI = src
-    xor rcx, rcx
-    mov rax, rdi
-
-.loop
-    mov al, BYTE[rsi + rcx]
-    mov BYTE[rdi + rcx], al
-    inc rcx
-    cmp al, 0
+    mov rax, rdi        ; sauvegarder dest pour le retour
+.loop:
+    mov bl, BYTE [rsi]  ; lire un octet de src
+    mov BYTE [rdi], bl  ; copier dans dest
+    inc rsi
+    inc rdi
+    cmp bl, 0
     jne .loop
-    ret
+    ret                  ; rax contient toujours dest

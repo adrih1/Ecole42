@@ -6,7 +6,7 @@ ft_write:
     mov rax, 1; syscall is 1 for write in 64 bits
     syscall
     cmp rax, 0
-    jl error
+    js error
     ret
 
 error:
