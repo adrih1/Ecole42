@@ -12,7 +12,7 @@ char    *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
 ssize_t ft_write(int fd, const void *buf, size_t count);
 char    *ft_strdup(const char *s);
-
+void test_ft_read(void);
 
 void display_test_name(char *s)
 {
@@ -84,7 +84,8 @@ void test_ft_strcpy(void)
         {"chaine simple", "Hello"},
         {"chaine avec espaces", "Bonjour le monde"},
         {"chaine avec caracteres speciaux", "123!@#abcXYZ"},
-        {"chaine longue", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+        {"chaine longue", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
+        {"chaine avec un backslash 0", "Chaine\0 et la ca continue"}
     };
 
     size_t n_tests = sizeof(tests) / sizeof(tests[0]);
@@ -251,6 +252,7 @@ int main(void)
     test_ft_strcpy();
     test_ft_strcmp();
     test_write();
+    test_ft_read();
 
     return 0;
 }

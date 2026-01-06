@@ -9,6 +9,7 @@ SRCS =	ft_read.s \
 		ft_strdup.s \
 		ft_strlen.s \
 		ft_write.s \
+		test_ft_read.c \
 		main.c
 
 OBJS = $(SRCS:.s=.o)
