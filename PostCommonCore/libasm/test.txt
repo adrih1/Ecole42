@@ -1,5 +1,5 @@
-coucou
+chaine1
 
-salut
-et toi
-tu vas
+chaine2unpeuplusongue
+charspeciaux @@*@&@)@*!*_!
+fin du fichier

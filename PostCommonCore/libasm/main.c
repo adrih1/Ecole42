@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-
-// Déclarations des fonctions assembleur
+// Functions
 size_t  ft_strlen(const char *s);
 char    *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
@@ -239,6 +238,55 @@ void test_write()
 }
 
 
+void test_ft_strdup(void)
+{
+    const char *tests[] = {
+        "Hello, world!",
+        "",
+        "A very very long string to test ft_strdup function for long inputs in C.",
+        NULL
+    };
+
+    size_t n_tests = sizeof(tests) / sizeof(tests[0]);
+
+    display_test_name("STRDUP");
+
+    for (size_t i = 0; i < n_tests; i++)
+    {
+        const char *s = tests[i];
+
+        printf("\nTest %zu: \"%s\"\n", i + 1, s ? s : "NULL");
+
+        char *std_dup = NULL;
+        char *ft_dup = NULL;
+
+        if (s != NULL)
+            std_dup = strdup(s);
+
+        if (s != NULL)
+            ft_dup = ft_strdup(s);
+
+        if (s == NULL)
+        {
+            printf("Skipping standard strdup (NULL input)\n");
+            printf("ft_strdup returned: %p\n", (void *)ft_dup);
+        }
+        else
+        {
+            printf("strdup   : \"%s\"\n", std_dup);
+            printf("ft_strdup: \"%s\"\n", ft_dup);
+
+            if (std_dup && ft_dup && strcmp(std_dup, ft_dup) == 0)
+                printf("✅ OK\n");
+            else
+                printf("❌ FAIL\n");
+        }
+        free(std_dup);
+        free(ft_dup);
+    }
+
+}
+
 
 int main(void)
 {
@@ -252,7 +300,9 @@ int main(void)
     test_ft_strcpy();
     test_ft_strcmp();
     test_write();
+    display_test_name("READ");
     test_ft_read();
+    test_ft_strdup();
 
     return 0;
 }

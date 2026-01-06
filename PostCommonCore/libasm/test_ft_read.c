@@ -116,12 +116,8 @@ static void test_stdin(void)
 
 void test_ft_read(void)
 {
-	printf("\n========== FT_READ TESTS ==========\n");
-
 	test_file();
 	test_empty_and_zero();
 	test_invalid_fd();
 	// test_stdin();
-
-	printf("\n===================================\n");
 }
