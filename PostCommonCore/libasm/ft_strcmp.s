@@ -1,5 +1,6 @@
 global ft_strcmp
 
+; RDI = 1st arg | RSI = 2nd arg
 ft_strcmp:
 .loop:
     mov al, [rdi]      ; byte from s1
