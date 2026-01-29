@@ -75,55 +75,50 @@ void test_ft_strlen(void)
 
 void test_ft_strcpy(void)
 {
-    struct test_case {
-        const char *dest;
-        const char *src;
-    } tests[] = {
-        {"chaine vide", ""},
-        {"chaine simple", "Hello"},
-        {"chaine avec espaces", "Bonjour le monde"},
-        {"chaine avec caracteres speciaux", "123!@#abcXYZ"},
-        {"chaine longue", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-        {"chaine avec un backslash 0", "Chaine\0 et la ca continue"}
+    const char *tests[] = {
+        "",
+        "Hello",
+        "Bonjour le monde",
+        "123!@#abcXYZ",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Chaine\0 avec un nul interne"
     };
 
     size_t n_tests = sizeof(tests) / sizeof(tests[0]);
 
     display_test_name("STRCPY");
+
     for (size_t i = 0; i < n_tests; i++)
     {
-        const char *src = tests[i].src;
+        const char *src = tests[i];
         size_t len = strlen(src) + 1;
 
         char *dest_ft = malloc(len);
         char *dest_lib = malloc(len);
 
         if (!dest_ft || !dest_lib) {
-            printf("Erreur malloc\n");
-            return;
+            fprintf(stderr, "Erreur malloc\n");
+            free(dest_ft);
+            free(dest_lib);
+            continue;
         }
 
-        /* Copie avec ft_strcpy et strcpy */
         char *ret_ft = ft_strcpy(dest_ft, src);
         char *ret_lib = strcpy(dest_lib, src);
 
         printf("\nTest %zu : \n", i + 1);
-        printf("Source: \"%s\"\n", src);
-        printf("ft_strcpy: \"%s\"\n", dest_ft);
-        printf("strcpy    : \"%s\"\n", dest_lib);
+        printf("  Source    : \"%s\"\n", src);
+        printf("  ft_strcpy : \"%s\"\n", dest_ft);
 
-        /* Vérification du contenu */
-        if (strcmp(dest_ft, dest_lib) == 0)
-            printf("✅ Contenu OK\n");
+        /* Vérification contenu ET pointeur de retour */
+        if (strcmp(dest_ft, dest_lib) == 0 && ret_ft == dest_ft)
+            printf("✅ OK\n");
         else
-            printf("❌ Contenu KO\n");
-
-        /* Vérification du retour de ft_strcpy */
-        if (ret_ft == ret_lib)
-            printf("✅ Retour OK\n");
-
-        else
-            printf("❌ Retour KO\n");
+        {
+            printf("❌ KO\n");
+            if (ret_ft != dest_ft)
+                printf("Bad return value (rax)\n");
+        }
 
         free(dest_ft);
         free(dest_lib);
