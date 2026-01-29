@@ -14,8 +14,9 @@ ft_strcmp:
     jmp .loop
 
 .diff:
-    movsx rax, al      ; signed extend s1
-    movsx rdx, dl      ; signed extend s2
+    ; movsx fills the empty bits with bit signed so that rax only contains the relevant 8 bits of al 
+    movsx rax, al      ; move with sign extension s1 
+    movsx rdx, dl      ; move with sign extension s2
     sub rax, rdx       ; rax = s1 - s2
     ret
 

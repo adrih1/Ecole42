@@ -12,17 +12,17 @@ ft_strdup:
     inc rax         ; +1 for "\0"
     mov rdi, rax    ; store the len that was in rax into rdi
     call malloc     ; malloc reads the len from rdi, returns a pointer in rax
-    cmp rax, 0      ; check rax to see if malloc fails
+    test rax, rax      ; check rax to see if malloc fails
     jz error        ; if fail we jump to exit
-    mov rdi, rax    ; we store rax in rdi because strcpy uses rdi as its *dest
-    pop rsi         ; we know that strcpy takes rsi as the *src string, so we put *s into rsi 
+    mov rdi, rax    ; we store rax in rdi because ft_strcpy uses rdi as its *dest
+    pop rsi         ; reads stack top value (=*s), writes it in RSI 
     call ft_strcpy
     ret
 
 error:
-    pop rsi                 ; restore original s
+    pop rsi                 ; clean stack
     mov rdi, ENOMEM         ; errno code
     call __errno_location   ; returns a pointer to erno
     mov [rax], rdi          ; rax holds the adres of erno so we are putting rdi in erno
-    mov rax, -1             ; putting the correct value of -1 in a write return
+    xor rax, rax
     ret

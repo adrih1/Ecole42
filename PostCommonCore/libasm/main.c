@@ -107,7 +107,7 @@ void test_ft_strcpy(void)
         char *ret_ft = ft_strcpy(dest_ft, src);
         char *ret_lib = strcpy(dest_lib, src);
 
-        printf("\nTest %zu : %s\n", i + 1, tests[i].dest);
+        printf("\nTest %zu : \n", i + 1);
         printf("Source: \"%s\"\n", src);
         printf("ft_strcpy: \"%s\"\n", dest_ft);
         printf("strcpy    : \"%s\"\n", dest_lib);
@@ -162,7 +162,7 @@ void test_ft_strcmp(void)
                  (ret_ft < 0 && ret_lib < 0) ||
                  (ret_ft > 0 && ret_lib > 0);
 
-        printf("\nTest %zu : %s\n", i + 1, tests[i].desc);
+        printf("\nTest %zu :\n", i + 1);
         printf("s1: \"%s\"\n", tests[i].s1);
         printf("s2: \"%s\"\n", tests[i].s2);
         printf("ft_strcmp : %d\n", ret_ft);
@@ -188,6 +188,8 @@ void test_write()
         {"!@#$%^&*()_+-=", 1},            // caractères spéciaux
         {"test stderr", 2},               // écriture sur stderr
         {NULL, 1},                        // pointeur NULL (doit fail)
+        {"test ceci", -1},
+        {"test ceci", 8},
     };
 
 
@@ -290,12 +292,6 @@ void test_ft_strdup(void)
 
 int main(void)
 {
-    char buffer[100];
-    char buffer2[100];
-    const char *str1 = "Hello, world!";
-    const char *str2 = "Hello, world!";
-    const char *str3 = "Hello, 42!";
-
     test_ft_strlen();
     test_ft_strcpy();
     test_ft_strcmp();
