@@ -119,7 +119,7 @@ void test_ft_strcpy(void)
             printf("❌ Contenu KO\n");
 
         /* Vérification du retour de ft_strcpy */
-        if (ret_ft == dest_ft)
+        if (ret_ft == ret_lib)
             printf("✅ Retour OK\n");
 
         else

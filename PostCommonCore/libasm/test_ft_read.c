@@ -92,27 +92,27 @@ static void test_invalid_fd(void)
 	compare_read(9999, 9999, 10, "FD NON EXISTANT");
 }
 
-static void test_stdin(void)
-{
-	char	buf1[100];
-	char	buf2[100];
-	ssize_t	r1;
-	ssize_t	r2;
+// static void test_stdin(void)
+// {
+// 	char	buf1[100];
+// 	char	buf2[100];
+// 	ssize_t	r1;
+// 	ssize_t	r2;
 
-	memset(buf1, 0, 100);
-	memset(buf2, 0, 100);
+// 	memset(buf1, 0, 100);
+// 	memset(buf2, 0, 100);
 
-	printf("\n[STDIN]\nType something then press ENTER:\n");
+// 	printf("\n[STDIN]\nType something then press ENTER:\n");
 
-	errno = 0;
-	r1 = read(0, buf1, 99);
-	printf("read    : ret=%zd buf=\"%s\"\n", r1, buf1);
+// 	errno = 0;
+// 	r1 = read(0, buf1, 99);
+// 	printf("read    : ret=%zd buf=\"%s\"\n", r1, buf1);
 
-	printf("Type the SAME thing again:\n");
-	errno = 0;
-	r2 = ft_read(0, buf2, 99);
-	printf("ft_read : ret=%zd buf=\"%s\"\n", r2, buf2);
-}
+// 	printf("Type the SAME thing again:\n");
+// 	errno = 0;
+// 	r2 = ft_read(0, buf2, 99);
+// 	printf("ft_read : ret=%zd buf=\"%s\"\n", r2, buf2);
+// }
 
 void test_ft_read(void)
 {

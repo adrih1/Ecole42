@@ -1,31 +1,29 @@
-NAME = libasm.a
+NAME        = libasm.a
+AS          = nasm
+ASFLAGS     = -f elf64
+SRCS        = ft_strlen.s \
+              ft_strcpy.s \
+              ft_strcmp.s \
+              ft_write.s  \
+              ft_read.s   \
+              ft_strdup.s
 
-ASM = nasm
-ASMFLAGS = -f elf64
-		
-SRCS =	ft_read.s \
-		ft_strcmp.s \
-		ft_strcpy.s \
-		ft_strdup.s \
-		ft_strlen.s \
-		ft_write.s \
-		test_ft_read.c \
-		main.c
-
-OBJS = $(SRCS:.s=.o)
-
-RM = rm -f
+OBJS        = $(SRCS:.s=.o)
+RM          = rm -f
+AR          = ar rcs
+GREEN       = \033[0;32m
+RESET       = \033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc -no-pie -o $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
 %.o: %.s
-	$(ASM) $(ASMFLAGS) $< -o $@
+	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	$(RM) $(filter %.o,$(OBJS)) 
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
