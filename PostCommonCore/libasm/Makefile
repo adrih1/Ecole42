@@ -30,4 +30,7 @@ fclean: clean
 
 re: fclean all
 
+test: all
+	cc -Wall -Werror -Wextra main.c test_ft_read.c -L. -lasm && ./a.out
+
 .PHONY: all clean fclean re

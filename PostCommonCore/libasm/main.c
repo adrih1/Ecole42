@@ -94,34 +94,30 @@ void test_ft_strcpy(void)
         size_t len = strlen(src) + 1;
 
         char *dest_ft = malloc(len);
-        char *dest_lib = malloc(len);
+        if (!dest_ft) continue;
 
-        if (!dest_ft || !dest_lib) {
-            fprintf(stderr, "Erreur malloc\n");
-            free(dest_ft);
-            free(dest_lib);
-            continue;
-        }
+        // Initialize with 'X' to check that ft_strcpy puts the  \0 at the end
+        memset(dest_ft, 'X', len);
 
         char *ret_ft = ft_strcpy(dest_ft, src);
-        char *ret_lib = strcpy(dest_lib, src);
 
         printf("\nTest %zu : \n", i + 1);
         printf("  Source    : \"%s\"\n", src);
         printf("  ft_strcpy : \"%s\"\n", dest_ft);
 
-        /* Vérification contenu ET pointeur de retour */
-        if (strcmp(dest_ft, dest_lib) == 0 && ret_ft == dest_ft)
+        // Correction : On compare dest_ft avec src
+        if (strcmp(dest_ft, src) == 0 && ret_ft == dest_ft)
             printf("✅ OK\n");
         else
         {
             printf("❌ KO\n");
             if (ret_ft != dest_ft)
-                printf("Bad return value (rax)\n");
+                printf("  Erreur : Bad return value (rax)\n");
+            if (strcmp(dest_ft, src) != 0)
+                printf("  Erreur : Incorrect  destionation content\n");
         }
 
         free(dest_ft);
-        free(dest_lib);
     }
 }
 
