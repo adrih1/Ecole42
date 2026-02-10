@@ -26,11 +26,12 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) test_libasm
 
 re: fclean all
 
 test: all
-	cc -Wall -Werror -Wextra main.c test_ft_read.c -L. -lasm && ./a.out
+	cc -Wall -Werror -Wextra main.c test_ft_read.c -L. -lasm -o test_libasm
+	./test_libasm
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
