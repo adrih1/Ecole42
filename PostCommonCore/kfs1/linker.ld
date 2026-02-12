@@ -1,32 +1,17 @@
-/* We define the entry point for the binary. */
-/* It corresponds to the '_start' label we declared in boot.s */
-ENTRY(_start)
+ENTRY(_start)                /* Définit le point de départ du programme. */
 
 SECTIONS
 {
-    /* 1. Loading address */
-    /* We start at 1 Mo (0x100000). Standard for x86 kernels */
-    /* to avoid memory adresses saved for BIOS below. */
+    /* On commence à 1 Mo. C'est le standard pour éviter les zones BIOS. */
     . = 1M;
 
     .text BLOCK(4K) : ALIGN(4K)
     {
-        /* The header Multiboot must be at the very beginning */
-        /* so that GRUB can find itr in the first 8Ko. */
-        *(.multiboot)
-        *(.text)
+        *(.multiboot)       /* On place le Header Multiboot TOUT EN HAUT. */
+        *(.text)            /* Puis tout le code. */
     }
 
-    /* 3. Initialised data (ex: global variables) */
-    .data BLOCK(4K) : ALIGN(4K)
-    {
-        *(.data)
-    }
-
-    /* 4. Uninitialized data (ex: our stack) */
-    .bss BLOCK(4K) : ALIGN(4K)
-    {
-        *(COMMON)
-        *(.bss)
-    }
+    .rodata BLOCK(4K) : ALIGN(4K) { *(.rodata) } /* Données en lecture seule. */
+    .data   BLOCK(4K) : ALIGN(4K) { *(.data)   } /* Données initialisées. */
+    .bss    BLOCK(4K) : ALIGN(4K) { *(.bss) *(COMMON) } /* Données non-initialisées. */
 }

@@ -1,55 +1,61 @@
 NAME        = kfs.bin
 
-# COMPILERS
+# Chemins
+SRCDIR      = src
+INCDIR      = includes
+OBJDIR      = objs
+
+# Liste des fichiers
+SRC_C       = kernel.c terminal.c
+SRC_S       = boot.s io.s
+OBJS        = $(addprefix $(OBJDIR)/, $(SRC_C:.c=.o) $(SRC_S:.s=.o))
+
+# Compilateurs & Linker
 CC          = gcc
 AS          = nasm
 LD          = ld
 
-# FLAGS
-# -m32 : 32 bits code 
-# -fno-builtin : No use of libc functions
-# -nostdlib -nodefaultlibs : Start from zero, no standard library
-CFLAGS      = -m32 -fno-builtin -fno-stack-protector \
-            -nostdlib -nodefaultlibs -Wall -Wextra -Werror
+# Flags
+# -m32 : architecture x86 32 bits
+# -fno-builtin : évite l'optimisation avec des fonctions libc que nous n'avons pas
+# -I$(INCDIR) : pour trouver tes headers
+CFLAGS      = -m32 -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs \
+              -Wall -Wextra -Werror -I$(INCDIR)
 
-# Assembly flags (format ELF 32 bits)
 ASFLAGS     = -f elf32
 
-# Linker
-# -T linker.ld : Utilise notre script de lien personnalisé
+# -T linker.ld : utilise ton script de lien pour organiser les sections
 LDFLAGS     = -m elf_i386 -T linker.ld
-
-
-# FILES
-SRCS_ASM    = boot.s
-SRCS_C      = kernel.c
-
-OBJS        = $(SRCS_ASM:.s=.o) $(SRCS_C:.c=.o)
-
 
 all: $(NAME)
 
+# Lien final des objets pour créer le binaire du Kernel
 $(NAME): $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(NAME)
+	@echo "Lien terminé : $(NAME)"
 
-%.o: %.c
+# Compilation des fichiers C
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-%.o: %.s
+# Compilation des fichiers ASM
+$(OBJDIR)/%.o: $(SRCDIR)/%.s
+	@mkdir -p $(OBJDIR)
 	$(AS) $(ASFLAGS) $< -o $@
 
+# Test direct avec QEMU (pas besoin d'ISO ici)
+test: $(NAME)
+	qemu-system-i386 -kernel $(NAME)
+
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
+	@echo "Objets nettoyés."
 
 fclean: clean
 	rm -f $(NAME)
+	@echo "Binaire supprimé."
 
 re: fclean all
 
-# Une règle pratique pour tester rapidement
-test: all
-	qemu-system-i386 -kernel $(NAME)
-
 .PHONY: all clean fclean re test
-
-
