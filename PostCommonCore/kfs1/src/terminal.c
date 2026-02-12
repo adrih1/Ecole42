@@ -1,59 +1,91 @@
 #include "terminal.h"
 #include <stdarg.h>
 
-#define VGA_WIDTH 80
+/* --- CONFIGURATION MATÉRIELLE VGA --- */
+#define VGA_WIDTH  80
 #define VGA_HEIGHT 25
-#define VGA_BUF 0xB8000
+#define VGA_BUF    0xB8000
 
+/* État interne du terminal */
 static size_t   g_x = 0;
 static size_t   g_y = 0;
 static uint8_t  g_color;
 
-/* Helper pour générer l'octet de couleur (4 bits fond, 4 bits texte) */
+/* Prototype de la fonction d'entrée/sortie ASM (io.s) */
+extern void outb(uint16_t port, uint8_t data);
+
+/* Prototypes des fonctions utilitaires internes */
+void terminal_putnbr_base(uint32_t n, int base);
+size_t strlen(const char* str);
+
+
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
-    return fg | bg << 4;
+    return fg | (bg << 4);
 }
 
-/* Helper pour générer l'entrée complète de 16 bits (Caractère + Couleur) */
 static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
     return (uint16_t) uc | (uint16_t) color << 8;
 }
 
+/**
+ * Defines current display color
+ */
 void terminal_setcolor(enum vga_color fg, enum vga_color bg) {
     g_color = vga_entry_color(fg, bg);
 }
 
-void terminal_initialize(void) {
-    g_x = 0;
-    g_y = 0;
-    terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
-    uint16_t *buffer = (uint16_t*)VGA_BUF;
-    for (size_t i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
-        buffer[i] = vga_entry(' ', g_color);
-    }
-}
 
-size_t strlen(const char* str) {
-    size_t len = 0;
-    while (str[len]) len++;
-    return len;
-}
-
-// Prototype de la fonction ASM
-extern void outb(uint16_t port, uint8_t data);
-
+/**
+ * Communicates with the CRT controller to move the blinking cursor.
+ * Uses I/O ports 0x3D4 (index) and 0x3D5 (data).
+ */
 void terminal_update_cursor(void) {
     uint16_t pos = g_y * VGA_WIDTH + g_x;
 
-    // On dit au contrôleur VGA qu'on va envoyer l'octet bas (0x0F) (Index)
     outb(0x3D4, 0x0F);
     outb(0x3D5, (uint8_t)(pos & 0xFF));
     
-    // On dit au contrôleur VGA qu'on va envoyer l'octet haut (0x0E) (Valeur)
     outb(0x3D4, 0x0E);
     outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
 }
 
+/**
+ * Moves all screen 1 row up if we go beyond height.
+ * Cleans last line with empty spaces.
+ */
+static void terminal_scroll(void) {
+    uint16_t *buffer = (uint16_t*)VGA_BUF;
+
+    // Move line 0 to 24 up, deletes line 0
+    for (size_t i = 0; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++) {
+        buffer[i] = buffer[i + VGA_WIDTH];
+    }
+
+    // Empty last line (line 24)
+    for (size_t i = (VGA_HEIGHT - 1) * VGA_WIDTH; i < VGA_HEIGHT * VGA_WIDTH; i++) {
+        buffer[i] = vga_entry(' ', g_color);
+    }
+}
+
+/**
+ * Initialize screen: empty VGA memory and reset cursor.
+ */
+void terminal_initialize(void) {
+    g_x = 0;
+    g_y = 0;
+    terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+    
+    uint16_t *buffer = (uint16_t*)VGA_BUF;
+    for (size_t i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        buffer[i] = vga_entry(' ', g_color);
+    }
+    terminal_update_cursor();
+}
+
+
+/**
+ * Display one char (handle '\n' and overlay)
+ */
 void terminal_putchar(char c) {
     uint16_t *buffer = (uint16_t*)VGA_BUF;
 
@@ -68,14 +100,12 @@ void terminal_putchar(char c) {
         }
     }
 
-    /* Logique de Scroll */
+    // Handling screen overlay
     if (g_y >= VGA_HEIGHT) {
-        for (size_t i = 0; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++)
-            buffer[i] = buffer[i + VGA_WIDTH];
-        for (size_t i = (VGA_HEIGHT - 1) * VGA_WIDTH; i < VGA_HEIGHT * VGA_WIDTH; i++)
-            buffer[i] = vga_entry(' ', g_color);
+        terminal_scroll();
         g_y = VGA_HEIGHT - 1;
     }
+
     terminal_update_cursor();
 }
 
@@ -85,9 +115,40 @@ void terminal_putstr(const char* data) {
     }
 }
 
-#include <stdarg.h>
+/**
+ * Fromat and display complex messages.
+ */
+void printk(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
 
-// Helper pour convertir un nombre en chaîne (Base 10 ou 16)
+    for (size_t i = 0; format[i] != '\0'; i++) {
+        if (format[i] == '%') {
+            i++;
+            switch (format[i]) {
+                case 's': terminal_putstr(va_arg(args, char *)); break;
+                case 'c': terminal_putchar((char)va_arg(args, int)); break;
+                case 'x': 
+                    terminal_putstr("0x"); 
+                    terminal_putnbr_base(va_arg(args, uint32_t), 16); 
+                    break;
+                case 'd': {
+                    int d = va_arg(args, int);
+                    if (d < 0) { terminal_putchar('-'); d = -d; }
+                    terminal_putnbr_base((uint32_t)d, 10);
+                    break;
+                }
+                case '%': terminal_putchar('%'); break;
+            }
+        } else {
+            terminal_putchar(format[i]);
+        }
+    }
+    va_end(args);
+}
+
+/* --- UTILITIES --- */
+
 void terminal_putnbr_base(uint32_t n, int base) {
     char *digits = "0123456789abcdef";
     if (n >= (uint32_t)base)
@@ -95,53 +156,8 @@ void terminal_putnbr_base(uint32_t n, int base) {
     terminal_putchar(digits[n % base]);
 }
 
-void printk(const char *format, ...) {
-    va_list args;
-    va_start(args, format);
-
-    for (size_t i = 0; format[i] != '\0'; i++) {
-        if (format[i] == '%') {
-            i++; // On regarde le caractère après le '%'
-            
-            switch (format[i]) {
-                case 's': { // String
-                    char *s = va_arg(args, char *);
-                    if (!s) s = "(null)";
-                    terminal_putstr(s);
-                    break;
-                }
-                case 'd': { // Decimal (signé)
-                    int d = va_arg(args, int);
-                    if (d < 0) {
-                        terminal_putchar('-');
-                        d = -d;
-                    }
-                    terminal_putnbr_base((uint32_t)d, 10);
-                    break;
-                }
-                case 'x': { // Hexadecimal
-                    uint32_t x = va_arg(args, uint32_t);
-                    terminal_putstr("0x");
-                    terminal_putnbr_base(x, 16);
-                    break;
-                }
-                case 'c': { // Character
-                    char c = (char)va_arg(args, int);
-                    terminal_putchar(c);
-                    break;
-                }
-                case '%': { // Le signe % lui-même
-                    terminal_putchar('%');
-                    break;
-                }
-                default: // Si on ne connaît pas, on affiche tel quel
-                    terminal_putchar('%');
-                    terminal_putchar(format[i]);
-                    break;
-            }
-        } else {
-            terminal_putchar(format[i]);
-        }
-    }
-    va_end(args);
+size_t strlen(const char* str) {
+    size_t len = 0;
+    while (str[len]) len++;
+    return len;
 }
