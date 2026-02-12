@@ -7,19 +7,36 @@
 
 static size_t   g_x = 0;
 static size_t   g_y = 0;
-static uint8_t  g_color = 0x07; // Gris clair sur noir
+static uint8_t  g_color;
+
+/* Helper pour générer l'octet de couleur (4 bits fond, 4 bits texte) */
+static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
+    return fg | bg << 4;
+}
+
+/* Helper pour générer l'entrée complète de 16 bits (Caractère + Couleur) */
+static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
+    return (uint16_t) uc | (uint16_t) color << 8;
+}
+
+void terminal_setcolor(enum vga_color fg, enum vga_color bg) {
+    g_color = vga_entry_color(fg, bg);
+}
+
+void terminal_initialize(void) {
+    g_x = 0;
+    g_y = 0;
+    terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+    uint16_t *buffer = (uint16_t*)VGA_BUF;
+    for (size_t i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        buffer[i] = vga_entry(' ', g_color);
+    }
+}
 
 size_t strlen(const char* str) {
     size_t len = 0;
     while (str[len]) len++;
     return len;
-}
-
-void terminal_initialize(void) {
-    uint16_t *buffer = (uint16_t*)VGA_BUF;
-    for (size_t i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
-        buffer[i] = (uint16_t)' ' | (uint16_t)g_color << 8;
-    }
 }
 
 // Prototype de la fonction ASM
@@ -44,7 +61,7 @@ void terminal_putchar(char c) {
         g_x = 0;
         g_y++;
     } else {
-        buffer[g_y * VGA_WIDTH + g_x] = (uint16_t)c | (uint16_t)g_color << 8;
+        buffer[g_y * VGA_WIDTH + g_x] = vga_entry(c, g_color);
         if (++g_x == VGA_WIDTH) {
             g_x = 0;
             g_y++;
@@ -56,7 +73,7 @@ void terminal_putchar(char c) {
         for (size_t i = 0; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++)
             buffer[i] = buffer[i + VGA_WIDTH];
         for (size_t i = (VGA_HEIGHT - 1) * VGA_WIDTH; i < VGA_HEIGHT * VGA_WIDTH; i++)
-            buffer[i] = (uint16_t)' ' | (uint16_t)g_color << 8;
+            buffer[i] = vga_entry(' ', g_color);
         g_y = VGA_HEIGHT - 1;
     }
     terminal_update_cursor();

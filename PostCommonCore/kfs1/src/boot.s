@@ -1,9 +1,9 @@
 ; --- CONSTANTES MULTIBOOT ---
 ; Ces valeurs sont définies par le standard Multiboot pour que GRUB nous reconnaisse.
-MAGIC       equ 0x1BADB002        ; Le "Magic Number" que GRUB cherche.
-ALIGN_PAGE  equ 1 << 0            ; Demande à GRUB d'aligner notre kernel en RAM.
-MEM_INFO    equ 1 << 1            ; Demande à GRUB de nous donner une carte de la RAM.
-FLAGS       equ ALIGN_PAGE | MEM_INFO ; On combine les options.
+MAGIC       equ 0x1BADB002       ; Le "Magic Number" que GRUB cherche.
+ALIGN_PAGE       equ 1 << 0            ; Demande à GRUB d'aligner notre kernel en RAM.
+MEMINFO     equ 1 << 1            ; Demande à GRUB de nous donner une carte de la RAM.
+FLAGS       equ ALIGN_PAGE | MEMINFO ; On combine les options.
 CHECKSUM    equ -(MAGIC + FLAGS)  ; La somme MAGIC+FLAGS+CHECKSUM doit valoir 0.
 
 ; --- SECTION MULTIBOOT ---
