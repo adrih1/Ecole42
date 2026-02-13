@@ -24,11 +24,18 @@ enum vga_color {
     VGA_COLOR_WHITE = 15,
 };
 
+/* Scancode -> ASCII (QWERTY) */
+extern const unsigned char g_kbd_qwerty[128];
+
 void terminal_initialize(void);
 void terminal_putchar(char c);
 void terminal_putstr(const char* data);
+void terminal_putnbr_base(uint32_t n, int base);
 void terminal_setcolor(enum vga_color fg, enum vga_color bg);
 void printk(const char *format, ...);
 size_t strlen(const char* str);
+extern void outb(uint16_t port, uint8_t data);
+extern uint8_t inb(uint8_t data);
+
 
 #endif

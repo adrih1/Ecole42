@@ -11,13 +11,6 @@ static size_t   g_x = 0;
 static size_t   g_y = 0;
 static uint8_t  g_color;
 
-/* Prototype de la fonction d'entrée/sortie ASM (io.s) */
-extern void outb(uint16_t port, uint8_t data);
-
-/* Prototypes des fonctions utilitaires internes */
-void terminal_putnbr_base(uint32_t n, int base);
-size_t strlen(const char* str);
-
 
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
     return fg | (bg << 4);

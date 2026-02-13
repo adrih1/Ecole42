@@ -8,7 +8,7 @@ CHECKSUM    equ -(MAGIC + FLAGS)
 
 ; --- SECTION MULTIBOOT ---
 section .multiboot
-    align 4            ; Header must be aligned on 32 bits.
+    align 4         ; Header must be aligned on 32 bits.
     dd MAGIC
     dd FLAGS
     dd CHECKSUM
