@@ -1,7 +1,7 @@
 ; --- MULTIBOOT ---
 ; Values feined by the standard Multiboot so GRUB recognizes this as a boot.
 MAGIC       equ 0x1BADB002
-ALIGN_PAGE       equ 1 << 0     
+ALIGN_PAGE  equ 1 << 0     
 MEMINFO     equ 1 << 1           
 FLAGS       equ ALIGN_PAGE | MEMINFO 
 CHECKSUM    equ -(MAGIC + FLAGS) 

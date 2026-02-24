@@ -1,12 +1,7 @@
 #include "terminal.h"
 #include <stdarg.h>
 
-/* --- CONFIGURATION MATÉRIELLE VGA --- */
-#define VGA_WIDTH  80
-#define VGA_HEIGHT 25
-#define VGA_BUF    0xB8000
-
-/* État interne du terminal */
+/* State of terminal */
 static size_t   g_x = 0;
 static size_t   g_y = 0;
 static uint8_t  g_color;
@@ -140,8 +135,6 @@ void printk(const char *format, ...) {
     va_end(args);
 }
 
-/* --- UTILITIES --- */
-
 void terminal_putnbr_base(uint32_t n, int base) {
     char *digits = "0123456789abcdef";
     if (n >= (uint32_t)base)
@@ -154,3 +147,6 @@ size_t strlen(const char* str) {
     while (str[len]) len++;
     return len;
 }
+
+
+

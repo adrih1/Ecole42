@@ -26,8 +26,7 @@ void kernel_main(void) {
     while (1) {
         if (inb(0x64) & 0x01) {
             uint8_t scancode = inb(0x60);
-
-            // On ne traite que l'appui (Key Press), pas le relâchement
+            
             if (scancode < 128) {
                 char c = g_kbd_qwerty[scancode];
                 if (c > 0) {
