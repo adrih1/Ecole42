@@ -1,0 +1,21 @@
+Section                 Contenu                     Usage 
+Header ELF              La Carte d'identité         Contient l'adresse du ENTRY(_start).
+Section .multiboot      Le Header Multiboot         Doit être dans les 8 premiers Ko pour que GRUB le voit.
+Section .text           Les instructions (code)     Ton assembleur et ton C compilé.
+Section .rodata         Tes strings (ex: "42")      Read-Only Data, pour ne pas gâcher la RAM.
+Section .data           Variables globales          Celles qui ont déjà une valeur.
+Section .bss            La pile (Stack)             Pas d'espace dans le fichier (juste une taille réservée).
+
+
+DISQUE (kfs.bin)          RAM (Adresse 1Mo)           CPU (Registres)
++----------------+       +-------------------+       +-------------------+
+| ELF Header     | ----> | (Metadata only)   |       | EIP = 0x100000    | (Saut vers _start)
++----------------+       +-------------------+       +-------------------+
+| .multiboot     | ----> | [ MAGIC ]         |       | ESP = stack_top   | (Init Pile)
++----------------+       +-------------------+       +-------------------+
+| .text (Code)   | ----> | [ mov esp, ... ]  |       | EAX = 0x2BADB002  | (Info Multiboot)
++----------------+       +-------------------+       +-------------------+
+| .rodata ("42") | ----> | [ "42" ]          |       
++----------------+       +-------------------+
+| .bss (Stack)   | ----> | [ [ 16 KB VIDE ] ]| 
++----------------+       +-------------------+
