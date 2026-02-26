@@ -3,16 +3,17 @@ extern __errno_location
 
 ft_read:
     ; RDI = fd, RSI = buffer, RDX = count
-    mov rax, 0; syscall is 0 for read in 64 bits
-    syscall ; if syscall succeeds, rax will hold the number of bytes read, if not it will hold -erno
+    mov rax, 0              ; syscall is 0 for read in 64 bits
+    syscall                 ; if syscall succeeds, rax will hold the number of bytes read, if not it will hold -erno
     cmp rax, 0
-    jl error ; jump if less than 0 
+    jl error                ; jump if less than 0 
     ret
 
 error:
     neg rax                 ; transforming negative rax (-erno) value into positive
-    mov rdi, rax            ; rdi serves as a bufer because rax will take the return of erno location
+    push rax
     call __errno_location   ; rax = &errno
-    mov [rax], rdi          ; rax holds the adres of erno so we are putting rdi at the adrdess pointed by rax which is errno
+    pop rdi
+    mov [rax], rdi
     mov rax, -1             ; return -1 if error occured in rax
     ret

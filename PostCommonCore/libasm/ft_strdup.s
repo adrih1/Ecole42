@@ -2,27 +2,26 @@ extern malloc
 extern ft_strcpy
 extern ft_strlen
 extern __errno_location
-%define ENOMEM 12
 
 global ft_strdup
 
+; RDI = source string
 ft_strdup:
-    call ft_strlen  ; rax = ft_strlen(s)
-    push rdi        ; rdi contains *s so push to stack to use it later
-    inc rax         ; +1 for "\0"
-    mov rdi, rax    ; store the len that was in rax into rdi
-    call malloc     ; malloc reads the len from rdi, returns a pointer in rax
-    test rax, rax      ; check rax to see if malloc fails
-    jz error        ; if fail we jump to exit
-    mov rdi, rax    ; we store rax in rdi because ft_strcpy uses rdi as its *dest
-    pop rsi         ; reads stack top value (=*s), writes it in RSI 
-    call ft_strcpy
-    ret
+    push r12                ; Align stack   
+    mov r12, rdi            ; Save source string because strlen can erase RDI
+    call ft_strlen          ; RAX = strlen(src)    
+    inc rax                 ; +1 for '\0'    
+    mov rdi, rax            ; RDI = size for malloc 
+    call malloc            
+    test rax, rax
+    jz .error    
+    mov rdi, rax            ; DEST (return malloc)
+    mov rsi, r12            ; SRC =  saved in r12
+    call ft_strcpy          ; strcpy's return is the dest pointer in rax
+    pop r12                 ; restore r12
+    ret                     ; RAX holds the pointer to new string
 
-error:
-    pop rsi                 ; clean stack
-    mov rdi, ENOMEM         ; errno code
-    call __errno_location   ; returns a pointer to erno
-    mov [rax], rdi          ; rax holds the adres of erno so we are putting rdi in erno
+.error:
+    pop r12
     xor rax, rax
     ret

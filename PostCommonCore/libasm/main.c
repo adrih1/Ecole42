@@ -136,7 +136,9 @@ void test_ft_strcmp(void)
         {"différence à la fin", "abcdx", "abcdz"},
         {"différence au début", "xbc", "abc"},
         {"longue chaîne identique", "Super longue chaine qui ne devrait pas casser normalement si tout se passe bien", "Super longue chaine qui ne devrait pas casser normalement si tout se passe bien"},
-        {"longue chaîne différente", "Lorem ipsum dolor", "Lorem ipsum dolor sit a"}
+        {"longue chaîne différente", "Lorem ipsum dolor", "Lorem ipsum dolor sit a"}, 
+        {"sign extension", "\xff\xff\xff\xff", "\xff\xff\xff\x01"},
+        {"sign extension", "\x80", "\x01"}
     };
 
     size_t n_tests = sizeof(tests) / sizeof(tests[0]);
