@@ -14,6 +14,6 @@ error:
     push rax
     call __errno_location   ; returns a pointer to erno in rax 
     pop rdi
-    mov [rax], rdi          ; rax holds the address of erno so we are putting rdi in erno
+    mov [rax], edi          ; rax holds the address of erno so we are putting rdi in erno
     mov rax, -1             ; putting the correct value oif -1 in a write return
     ret

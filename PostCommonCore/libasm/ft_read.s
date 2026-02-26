@@ -14,6 +14,6 @@ error:
     push rax
     call __errno_location   ; rax = &errno
     pop rdi
-    mov [rax], rdi
+    mov [rax], edi
     mov rax, -1             ; return -1 if error occured in rax
     ret
