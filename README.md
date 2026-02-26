@@ -1,5 +1,4 @@
 # Ecole 42
-> "42 is not just a school, it's a way of learning how to learn."
 
 Welcome to my main repository for my journey at **42 Paris**.
 
