@@ -8,7 +8,7 @@ OBJDIR      = objs
 ISODIR      = isodir
 
 # Liste des fichiers
-SRC_C       = kernel.c terminal.c keymap.c
+SRC_C       = kernel.c terminal.c keymap.c tty.c
 SRC_S       = boot.s io.s
 OBJS        = $(addprefix $(OBJDIR)/, $(SRC_C:.c=.o) $(SRC_S:.s=.o))
 

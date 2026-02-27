@@ -2,9 +2,9 @@
 #include <stdarg.h>
 
 /* State of terminal */
-static size_t   g_x = 0;
-static size_t   g_y = 0;
-static uint8_t  g_color;
+size_t   g_x = 0;
+size_t   g_y = 0;
+uint8_t  g_color;
 
 
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {

@@ -15,7 +15,7 @@ section .multiboot
 
 ; --- STACK ---
 section .bss
-    align 16            ; Stack must be aligned on 16 bytes for standard x86.
+    align 16            ; Stack must be aligned on 16 bytes for standard ABI V SYstem on x86.
 stack_bottom:
     resb 16384          ; Save 16 Ko for stack.
 stack_top:

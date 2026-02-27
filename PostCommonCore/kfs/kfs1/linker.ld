@@ -11,7 +11,7 @@ SECTIONS
         *(.text)
     }
 
-    .rodata BLOCK(4K) : ALIGN(4K) { *(.rodata) } /* REad-only data. */
+    .rodata BLOCK(4K) : ALIGN(4K) { *(.rodata) } /* Read-only data. */
     .data   BLOCK(4K) : ALIGN(4K) { *(.data)   } /* Initialized data. */
     .bss    BLOCK(4K) : ALIGN(4K) { *(.bss) *(COMMON) } /* Uninitialized data. */
 }

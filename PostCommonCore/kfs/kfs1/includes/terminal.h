@@ -34,6 +34,7 @@ enum vga_color {
 extern const unsigned char g_kbd_qwerty[128];
 
 void terminal_initialize(void);
+void terminal_update_cursor(void) ;
 void terminal_putchar(char c);
 void terminal_putstr(const char* data);
 void terminal_putnbr_base(uint32_t n, int base);
