@@ -15,7 +15,11 @@ void kernel_main(void) {
     printk("Kernel Loaded. Use F1, F2, F3 to switch screens.\n");
    
     while (1) {
-        if (inb(0x64) & 0x01) {
+
+        // 0x64 is the status
+        // 0x60 is the data port 
+        if (inb(0x64) & 0x01) // receive a byte --> & 0x01 looks at the Bit 0 (output buffer full --> A key has been pressed) 
+        { 
             uint8_t scancode = inb(0x60);
             
             if (scancode == 0x3B) 
