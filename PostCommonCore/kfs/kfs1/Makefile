@@ -35,7 +35,7 @@ $(NAME): $(BIN)
 
 # Launch QEMU
 boot: $(NAME)
-	qemu-system-i386 -cdrom $(NAME)
+	qemu-system-i386 -enable-kvm -cdrom $(NAME) 
 
 clean:
 	$(RM) $(OBJ_DIR)
