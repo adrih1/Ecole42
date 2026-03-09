@@ -1,77 +1,49 @@
-NAME        = kfs.bin
-ISO         = kfs.iso
-
-# Paths
-SRCDIR      = src
-INCDIR      = includes
-OBJDIR      = objs
-ISODIR      = isodir
-
-# File list (N'oublie pas d'ajouter gdt.c et gdt_load.s ici quand tu les créeras)
-SRC_C       = kernel.c terminal.c keymap.c tty.c
-SRC_S       = boot.s io.s
-OBJS        = $(addprefix $(OBJDIR)/, $(SRC_C:.c=.o) $(SRC_S:.s=.o))
-
-# Compilers & Linker
+NAME        = kfs.iso
+BIN         = kfs.bin
 CC          = gcc
-AS          = nasm
-LD          = ld
+SRC_DIR     = src
+OBJ_DIR     = .obj
+CFLAGS      = -m32 -std=gnu99 -ffreestanding -Wall -Wextra -Werror -nostdlib -fno-builtin -fno-exceptions -fno-stack-protector -nodefaultlibs -Iincludes
+ASFLAGS     = -f elf32 
 
-# Flags
-# -ffreestanding : indispensable pour ne pas dépendre de la libc hôte
-CFLAGS      = -m32 -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs \
-              -ffreestanding -Wall -Wextra -Werror -I$(INCDIR)
+SRCS_C      = kernel.c terminal.c keymap.c tty.c
+SRCS_S      = boot.s io.s
 
-ASFLAGS     = -f elf32
-LDFLAGS     = -m elf_i386 -T linker.ld
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS_C:.c=.o) $(SRCS_S:.s=.o))
+RM          = rm -rf
 
 all: $(NAME)
 
-# Lien du binaire kernel
-$(NAME): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $(NAME)
-	@echo "Lien terminé : $(NAME)"
-
-# Création de l'ISO (Règle unique et propre)
-$(ISO): $(NAME)
-	@mkdir -p $(ISODIR)/boot/grub
-	@cp $(NAME) $(ISODIR)/boot/$(NAME)
-	@echo 'set timeout=0' > $(ISODIR)/boot/grub/grub.cfg
-	@echo 'set default=0' >> $(ISODIR)/boot/grub/grub.cfg
-	@echo 'menuentry "kfs" {' >> $(ISODIR)/boot/grub/grub.cfg
-	@echo '    multiboot /boot/$(NAME)' >> $(ISODIR)/boot/grub/grub.cfg
-	@echo '    boot' >> $(ISODIR)/boot/grub/grub.cfg
-	@echo '}' >> $(ISODIR)/boot/grub/grub.cfg
-	grub-mkrescue -o $(ISO) $(ISODIR)
-	@echo "ISO créée : $(ISO)"
-
-# Compilation C
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
+# C files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Compilation ASM
-$(OBJDIR)/%.o: $(SRCDIR)/%.s
-	@mkdir -p $(OBJDIR)
-	$(AS) $(ASFLAGS) $< -o $@
+#ASM files 
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
+	@mkdir -p $(OBJ_DIR)
+	@nasm $(ASFLAGS) $< -o $@
 
-# TEST Rapide : Charge le binaire directement (sans ISO)
-test: $(NAME)
-	qemu-system-i386 -kernel $(NAME)
+# Create binary in obj for Dockerfile
+$(BIN): $(OBJS)
+	gcc -m32 -T $(SRC_DIR)/linker.ld -o $(OBJ_DIR)/$(BIN) -ffreestanding -nostdlib $(OBJS)
 
-# TEST Réel : Boot l'ISO avec accélération KVM
-# On ajoute -vga std pour être sûr que l'affichage VGA fonctionne bien
-run_iso: $(ISO)
-	qemu-system-i386 -enable-kvm -cdrom $(ISO) -vga std
+# ISO creation with Docker 
+$(NAME): $(BIN)
+	@docker build -t iso_gen $(SRC_DIR)
+	@docker run --rm -v "$$(pwd)":/os iso_gen
+
+# Launch QEMU
+boot: $(NAME)
+	qemu-system-i386 -cdrom $(NAME)
 
 clean:
-	rm -rf $(OBJDIR) $(ISODIR)
-	@echo "Objets et isodir nettoyés."
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME) $(ISO)
-	@echo "Binaire et ISO supprimés."
+	$(RM) $(NAME)
+	docker system prune -a --volumes -f
 
 re: fclean all
 
-.PHONY: all clean fclean re test run_iso
+.PHONY: all clean fclean re boot
