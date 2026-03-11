@@ -1,0 +1,7 @@
+// Find Available sapce Between LOAD which has R E and the next page 
+// Open sample file than use nmap() to get the binary in a pointer
+// Check that pointer starts with magic bytes of an ELF (Ox7f)
+// Go through the program headers to find Load 
+// inject shellcode at address ptr + ptr_offset + filesize
+// Save old entry, update to new entry
+// Update fileSize and memz
