@@ -3,7 +3,7 @@
 static tty_t g_ttys[MAX_TTY];
 static int    g_current_tty = 0;
 
-/* Import des variables globales de terminal.c pour les synchroniser */
+/* Import global variables terminal.c to synchronize */
 extern size_t g_x;
 extern size_t g_y;
 extern uint8_t g_color;
