@@ -1,7 +1,24 @@
-// Find Available sapce Between LOAD which has R E and the next page 
-// Open sample file than use nmap() to get the binary in a pointer
-// Check that pointer starts with magic bytes of an ELF (Ox7f)
-// Go through the program headers to find Load 
+// Check if file is an ELF64
+
+// Itirate to find LOAD header with RE (RX)
+
+// Find Available sapce Between LOAD and the next header
+
 // inject shellcode at address ptr + ptr_offset + filesize
+
 // Save old entry, update to new entry
+
 // Update fileSize and memz
+
+
+------------
+
+
+Elf64_Ehdr
+
+e_ident : Le tableau de 16 octets contenant les Magic Bytes (que tu as déjà vérifiés) et la classe (32 ou 64 bits).
+e_entry : L'adresse virtuelle du point d'entrée actuel (ex: 0x401040). C'est cette valeur que tu devras sauvegarder puis modifier.
+e_phoff (Program Header Offset) : L'endroit exact dans le fichier où commence la table des segments.
+e_phnum : Le nombre d'entrées dans cette table (ton nombre d'itérations pour la boucle).
+e_phentsize : La taille d'une entrée dans la table (64 octets en général pour de l'ELF64).
+e_shoff / e_shnum : Idem, mais pour la table des Sections (utile si tu veux localiser précisément .text).
