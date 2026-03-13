@@ -43,6 +43,18 @@ int createWoodyFile(void *ptr, size_t size)
     return (0);
 }
 
+void patchSegment(Elf64_Phdr *phdr, size_t payloadSize)
+{
+    phdr->p_filesz += payloadSize;
+    phdr->p_memsz += payloadSize;
+
+}
+
+void patchEntryPoint(Elf64_Ehdr *header, t_woody *data)
+{
+    header->e_entry = data->cave_vaddr;
+}
+
 int prepareHeader(Elf64_Ehdr *header, t_woody *data)
 {
     Elf64_Phdr *phdr = (Elf64_Phdr *)((char *)header + header->e_phoff);  // Cast char to force byte by byte calculation 
@@ -65,32 +77,32 @@ int prepareHeader(Elf64_Ehdr *header, t_woody *data)
                 data->cave_size = phdr[i + 1].p_offset - data->cave_offset;
             if (data->cave_size < sizeof(g_shellcode))
                 return (-1);
-            
-            patchSegment(phdr[i], sizeof(g_shellcode));
+           
+            // Adapt Size for futute injection of shellcode in cave
+            patchSegment(&phdr[i], sizeof(g_shellcode));
+
+            // Save entry point and edit to new one
             patchEntryPoint(header, data);
-            printf("Cave found at Offset: 0x%lx, VirtAddr: 0x%lx\n", data->cave_offset, data->cave_vaddr);
             return (0);
         }
     }
     return (1);
 }
 
-void patchSegment(Elf64_Phdr *phdr, size_t payloadSize)
-{
-    phdr->p_filesz += payloadSize;
-    phdr->p_memsz += payloadSize;
-
-}
-
-void patchEntryPoint(Elf64_Ehdr *header, t_woody *data)
-{
-    header->e_entry = data->cave_vaddr;
-}
-
-
 void injectPayload(void *ptr, t_woody *data)
 {
+    // Copy shellcode in cave
     ft_memcpy((char *)ptr + data->cave_offset,g_shellcode ,sizeof(g_shellcode));
+
+    // Calculate offset for jump
+    uint32_t jmp_offset = (uint32_t)(data->old_entry - (data->cave_vaddr + sizeof(g_shellcode) - 14));
+
+    // Create pointer that targets 4 last elements of our shellcode
+    uint32_t *jmp_ptr = (uint32_t *)((char *)ptr + data->cave_offset + sizeof(g_shellcode) - 18);
+
+    // Writing distance to jump  at the end of our shellcode 
+    *jmp_ptr = jmp_offset;
+
 }
 
 
@@ -124,6 +136,8 @@ int main(int ac, char **av)
         return (1);
 
     }
+    
+    injectPayload(ptr, &data);
 
     if (createWoodyFile(ptr, st.st_size) != 0)
     {
