@@ -30,7 +30,9 @@ int main(int ac, char **av)
         return (1);
 
     }
-    
+    findTextSection(ptr, (Elf64_Ehdr *)ptr, &data) ;
+    generate_key(&data);
+    rc4_cipher(ptr, &data);
     injectPayload(ptr, &data);
 
     if (createWoodyFile(ptr, st.st_size) != 0)

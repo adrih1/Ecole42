@@ -45,3 +45,28 @@ int prepareHeader(Elf64_Ehdr *header, t_woody *data)
     }
     return (1);
 }
+
+int findTextSection(void *ptr, Elf64_Ehdr *header, t_woody *data)
+{
+    // Section Headers
+    Elf64_Shdr *shdr = (Elf64_Shdr *)((char *)ptr + header->e_shoff);
+
+    // Shdr[i] doesn't show section name we have to get the string table which itself is a section
+    // String Table (dictionnary of names)
+    char *strtab = (char *)ptr + shdr[header->e_shstrndx].sh_offset; // shstrdnx (Section Header String Table Index)
+
+    // Loop on all sections
+    for (int i = 0; i < header->e_shnum; i++)
+    {
+        if (ft_strcmp(&strtab[shdr[i].sh_name], ".text") == 0)
+        {
+            data->text_offset = shdr[i].sh_offset;
+            data->text_vaddr = shdr[i].sh_addr;
+            data->text_size = shdr[i].sh_size; 
+
+            printf("Section .text found ! Offset: 0x%lx, Vaddr: 0x%lx, Taille: 0x%lx bytes\n", data->text_offset, data->text_vaddr, data->text_size);
+            return (0);
+        }
+    }
+    return (-1);
+}

@@ -17,7 +17,8 @@ SRC_FILES   = main.c \
               elf_patcher.c \
               injector.c \
               create_file.c \
-			  payload.c
+			  payload.c \
+			  crypto.c
 
 # Magie de Makefile : On ajoute le préfixe src/ et obj/ automatiquement
 SRCS        = $(addprefix $(SRCDIR), $(SRC_FILES))
