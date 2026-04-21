@@ -10,6 +10,9 @@ SRCS_C      = kernel.c terminal.c keymap.c tty.c
 SRCS_S      = boot.s io.s
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS_C:.c=.o) $(SRCS_S:.s=.o))
+
+CONTAINER_ENGINE = podman
+
 RM          = rm -rf
 
 all: $(NAME)
@@ -30,8 +33,8 @@ $(BIN): $(OBJS)
 
 # ISO creation with Docker 
 $(NAME): $(BIN)
-	@docker build -t iso_gen $(SRC_DIR)
-	@docker run --rm -v "$$(pwd)":/os iso_gen
+	@$(CONTAINER_ENGINE) build -t iso_gen $(SRC_DIR)
+	@$(CONTAINER_ENGINE) run --rm -v "$$(pwd)":/os:Z iso_gen
 
 # Launch QEMU
 boot: $(NAME)
@@ -42,7 +45,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	docker system prune -a --volumes -f
+	$(CONTAINER_ENGINE) system prune -a --volumes -f
 
 re: fclean all
 
