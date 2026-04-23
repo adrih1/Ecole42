@@ -3,7 +3,7 @@
 static tty_t g_ttys[MAX_TTY];
 static int    g_current_tty = 0;
 
-/* Import des variables globales de terminal.c pour les synchroniser */
+/* Import global variables from terminal.c to synchronize */
 extern size_t g_x;
 extern size_t g_y;
 extern uint8_t g_color;
@@ -31,7 +31,7 @@ void tty_switch(int new_tty) {
 
     uint16_t *vga = (uint16_t*)VGA_BUF;
 
-    // 1. Save current TTY state
+    // Save current TTY state
     g_ttys[g_current_tty].x = g_x;
     g_ttys[g_current_tty].y = g_y;
     g_ttys[g_current_tty].color = g_color;
@@ -39,10 +39,10 @@ void tty_switch(int new_tty) {
         g_ttys[g_current_tty].buffer[i] = vga[i];
     }
 
-    // 2. Change of index
+    // Change of index
     g_current_tty = new_tty;
 
-    // 3. Restore new TTY
+    // Restore new TTY
     g_x = g_ttys[g_current_tty].x;
     g_y = g_ttys[g_current_tty].y;
     g_color = g_ttys[g_current_tty].color;
@@ -50,7 +50,7 @@ void tty_switch(int new_tty) {
         vga[i] = g_ttys[g_current_tty].buffer[i];
     }
 
-    // 4. Update the hardware cursor
+    // Update the hardware cursor
     terminal_update_cursor();
 }
 

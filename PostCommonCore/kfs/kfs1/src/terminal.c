@@ -6,7 +6,6 @@ size_t   g_x = 0;
 size_t   g_y = 0;
 uint8_t  g_color;
 
-
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
     return fg | (bg << 4);
 }
@@ -26,6 +25,7 @@ void terminal_setcolor(enum vga_color fg, enum vga_color bg) {
 /**
  * Communicates with the CRT controller to move the blinking cursor.
  * Uses I/O ports 0x3D4 (index) and 0x3D5 (data).
+ * We say where we ant to write and then what we want to write
  */
 void terminal_update_cursor(void) {
     uint16_t pos = g_y * VGA_WIDTH + g_x;

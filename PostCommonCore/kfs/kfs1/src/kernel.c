@@ -3,7 +3,7 @@
 
 void kernel_main(void) {
     terminal_initialize();
-    tty_init(); // Initialise les buffers des écrans virtuels
+    tty_init(); // Initiliaze buffer of others screens
 
     terminal_setcolor(VGA_COLOR_CYAN, VGA_COLOR_BLACK);
     printk("KFS-1 Kernel loaded successfully !\n");
