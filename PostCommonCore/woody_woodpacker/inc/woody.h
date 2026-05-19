@@ -22,7 +22,7 @@ typedef struct s_woody {
     uint8_t  key[8];
 } t_woody;
 
-// Shellcode defined in pyaload.c
+// Shellcode defined in payload.c
 extern const unsigned char g_shellcode[];
 extern const size_t g_shellcode_size;
 

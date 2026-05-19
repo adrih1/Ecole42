@@ -10,7 +10,7 @@ int main(int ac, char **av)
     struct stat st; // Defined in sys/stat (holds the meta data of a file)
     fstat(fd, &st); // Fills st with file info from read file
 
-    void *ptr = mmap(NULL, st.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0); // Links memory zone directly to file content
+    void *ptr = mmap(NULL, st.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0); // ptr holds a copy of the file
     if (ptr == MAP_FAILED) return (close(fd), 1);
 
     if(check_elf((Elf64_Ehdr *)ptr) != 0)
