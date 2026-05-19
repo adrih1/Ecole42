@@ -33,3 +33,4 @@ _start:
     cli                 ; Remove interruptions.
     hlt                 ; Process is paused.
     jmp .halt           ; Safety loop.
+	 
