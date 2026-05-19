@@ -62,7 +62,9 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf woody
+	@rm -rf a.out
 	@echo "$(RED)[FCLEAN]$(RESET) Binary removed."
+
 
 re: fclean all
 
