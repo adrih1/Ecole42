@@ -1,6 +1,5 @@
 # Cookie In Clear
 
-
 ## Vulnerability
 
 There was an intriguing cookie :
@@ -18,11 +17,7 @@ b326b5062b2f0e69046810717534cb09
 Changing the cookie value in the inspector tool in the storage section and the modal with the flag appeared. 
 
 ## Solution 
-
 Do not store roles ou privileges on the client side.
 Used signed tokens or ciphered ones (JWT, or a simple ID session but the check is done on the back-end server side)
 Do not trust static hashes like MD5 (easy to reverse)
 All verificatrions must be done on the server side with a secure database. 
-
-
-
