@@ -75,58 +75,49 @@ void test_ft_strlen(void)
 
 void test_ft_strcpy(void)
 {
-    struct test_case {
-        const char *dest;
-        const char *src;
-    } tests[] = {
-        {"chaine vide", ""},
-        {"chaine simple", "Hello"},
-        {"chaine avec espaces", "Bonjour le monde"},
-        {"chaine avec caracteres speciaux", "123!@#abcXYZ"},
-        {"chaine longue", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-        {"chaine avec un backslash 0", "Chaine\0 et la ca continue"}
+    const char *tests[] = {
+        "",
+        "Hello",
+        "Bonjour le monde",
+        "123!@#abcXYZ",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Chaine\0 avec un nul interne"
     };
 
     size_t n_tests = sizeof(tests) / sizeof(tests[0]);
 
     display_test_name("STRCPY");
+
     for (size_t i = 0; i < n_tests; i++)
     {
-        const char *src = tests[i].src;
+        const char *src = tests[i];
         size_t len = strlen(src) + 1;
 
         char *dest_ft = malloc(len);
-        char *dest_lib = malloc(len);
+        if (!dest_ft) continue;
 
-        if (!dest_ft || !dest_lib) {
-            printf("Erreur malloc\n");
-            return;
+        // Initialize with 'X' to check that ft_strcpy puts the  \0 at the end
+        memset(dest_ft, 'X', len);
+
+        char *ret_ft = ft_strcpy(dest_ft, src);
+
+        printf("\nTest %zu : \n", i + 1);
+        printf("  Source    : \"%s\"\n", src);
+        printf("  ft_strcpy : \"%s\"\n", dest_ft);
+
+        // Correction : On compare dest_ft avec src
+        if (strcmp(dest_ft, src) == 0 && ret_ft == dest_ft)
+            printf("✅ OK\n");
+        else
+        {
+            printf("❌ KO\n");
+            if (ret_ft != dest_ft)
+                printf("  Erreur : Bad return value (rax)\n");
+            if (strcmp(dest_ft, src) != 0)
+                printf("  Erreur : Incorrect  destionation content\n");
         }
 
-        /* Copie avec ft_strcpy et strcpy */
-        char *ret_ft = ft_strcpy(dest_ft, src);
-        char *ret_lib = strcpy(dest_lib, src);
-
-        printf("\nTest %zu : %s\n", i + 1, tests[i].dest);
-        printf("Source: \"%s\"\n", src);
-        printf("ft_strcpy: \"%s\"\n", dest_ft);
-        printf("strcpy    : \"%s\"\n", dest_lib);
-
-        /* Vérification du contenu */
-        if (strcmp(dest_ft, dest_lib) == 0)
-            printf("✅ Contenu OK\n");
-        else
-            printf("❌ Contenu KO\n");
-
-        /* Vérification du retour de ft_strcpy */
-        if (ret_ft == dest_ft)
-            printf("✅ Retour OK\n");
-
-        else
-            printf("❌ Retour KO\n");
-
         free(dest_ft);
-        free(dest_lib);
     }
 }
 
@@ -145,7 +136,9 @@ void test_ft_strcmp(void)
         {"différence à la fin", "abcdx", "abcdz"},
         {"différence au début", "xbc", "abc"},
         {"longue chaîne identique", "Super longue chaine qui ne devrait pas casser normalement si tout se passe bien", "Super longue chaine qui ne devrait pas casser normalement si tout se passe bien"},
-        {"longue chaîne différente", "Lorem ipsum dolor", "Lorem ipsum dolor sit a"}
+        {"longue chaîne différente", "Lorem ipsum dolor", "Lorem ipsum dolor sit a"}, 
+        {"sign extension", "\xff\xff\xff\xff", "\xff\xff\xff\x01"},
+        {"sign extension", "\x80", "\x01"}
     };
 
     size_t n_tests = sizeof(tests) / sizeof(tests[0]);
@@ -162,7 +155,7 @@ void test_ft_strcmp(void)
                  (ret_ft < 0 && ret_lib < 0) ||
                  (ret_ft > 0 && ret_lib > 0);
 
-        printf("\nTest %zu : %s\n", i + 1, tests[i].desc);
+        printf("\nTest %zu :\n", i + 1);
         printf("s1: \"%s\"\n", tests[i].s1);
         printf("s2: \"%s\"\n", tests[i].s2);
         printf("ft_strcmp : %d\n", ret_ft);
@@ -188,6 +181,8 @@ void test_write()
         {"!@#$%^&*()_+-=", 1},            // caractères spéciaux
         {"test stderr", 2},               // écriture sur stderr
         {NULL, 1},                        // pointeur NULL (doit fail)
+        {"test ceci", -1},
+        {"test ceci", 8},
     };
 
 
@@ -290,12 +285,6 @@ void test_ft_strdup(void)
 
 int main(void)
 {
-    char buffer[100];
-    char buffer2[100];
-    const char *str1 = "Hello, world!";
-    const char *str2 = "Hello, world!";
-    const char *str3 = "Hello, 42!";
-
     test_ft_strlen();
     test_ft_strcpy();
     test_ft_strcmp();

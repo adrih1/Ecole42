@@ -1,0 +1,16 @@
+// 1. Check if the file is a valid ELF64
+// 2. Iterate to find the PT_LOAD segment with RX (Read/Execute) rights
+// 3. Find the available space (cave) between this LOAD segment and the next one to ensure the shellcode fits
+// 4. Update the LOAD segment's p_filesz and p_memsz (to trick the OS into loading our shellcode into RAM)
+// 5. Inject the shellcode into the cave and patch the JMP offset to return to the original execution flow
+
+------------
+
+Workflow of woody_woodpacker.c
+
+1. mmap           : Creates a working copy of the binary in RAM (MAP_PRIVATE).
+2. prepareHeader  : Finds the executable PT_LOAD segment, calculates the cave offset/vaddr, and checks available size.
+3. patchSegment   : Increases the segment size to accommodate g_shellcode.
+4. patchEntryPoint: Saves the old entry point, then overwrites the ELF e_entry with our cave's virtual address.
+5. injectPayload  : Copies the assembly into the cave AND calculates/writes the relative JMP offset to the old entry point.
+6. createWoodyFile: Dumps all the modified memory (ptr) into the final "woody" file.

@@ -2,21 +2,22 @@ global ft_strcmp
 
 ; RDI = 1st arg | RSI = 2nd arg
 ft_strcmp:
+
 .loop:
-    mov al, [rdi]      ; byte from s1
-    mov dl, [rsi]      ; byte from s2 (caller-saved)
+    mov al, [rdi]
+    mov dl, [rsi]
     cmp al, dl
     jne .diff
-    cmp al, 0
-    je .equal
+    test al,al
+    jz .equal
     inc rdi
     inc rsi
     jmp .loop
 
 .diff:
-    movzx rax, al      ; signed extend s1
-    movzx rdx, dl      ; signed extend s2
-    sub rax, rdx       ; rax = s1 - s2
+    movzx rax, al      
+    movzx rdx, dl
+    sub rax, rdx
     ret
 
 .equal:

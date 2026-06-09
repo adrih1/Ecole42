@@ -1,0 +1,17 @@
+GDT Scheme : https://thejat.in/storage/image-229.png
+
+GDT Entry Example :
+
+Limit Low  : 0xFFFF       ; Segment limit (16-bit, maximum)
+Base Low   : 0x0000       ; Base address (low 16 bits)
+Base Middle: 0x0000       ; Base address (middle 8 bits)
+Access Byte: 0x9A         ; P=1, DPL=0, S=1, Type=0x2 (Code Segment, Read/Execute)
+Flags      : 0xCF         ; G=1 (4 KB granularity), Size=1 (32-bit)
+Base High  : 0x00         ; Base address (high 8 bits)
+
+The segment limit is set to 0xFFFF, indicating a segment size of 64 KB.
+The base address is set to 0x00000000.
+The access byte (0x9A) indicates that the segment is present (P=1), accessible from privilege level 0 (DPL=0), and is a code segment (S=1, Type=0x2).
+The flags (0xCF) specify 4 KB granularity (G=1) and a 32-bit segment (Size=1).
+The base address high is 0x00, completing the 32-bit base address.
+
