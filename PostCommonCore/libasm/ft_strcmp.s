@@ -14,8 +14,8 @@ ft_strcmp:
     jmp .loop
 
 .diff:
-    movsx rax, al      ; signed extend s1
-    movsx rdx, dl      ; signed extend s2
+    movzx rax, al      ; signed extend s1
+    movzx rdx, dl      ; signed extend s2
     sub rax, rdx       ; rax = s1 - s2
     ret
 
