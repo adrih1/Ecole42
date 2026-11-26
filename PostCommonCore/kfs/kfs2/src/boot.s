@@ -23,6 +23,7 @@ stack_top:
 ; --- CODE ---
 section .text
 global _start           ; Entry point for the linker.
+global stack_top        ; Used by print_kernel_stack (kernel.c)
 extern kernel_main
 
 _start:

@@ -42,7 +42,7 @@ void terminal_setcolor(enum vga_color fg, enum vga_color bg);
 void printk(const char *format, ...);
 size_t strlen(const char* str);
 extern void outb(uint16_t port, uint8_t data);
-extern uint8_t inb(uint8_t data);
+extern uint8_t inb(uint16_t port);
 
 
 #endif

@@ -1,17 +1,14 @@
 GDT Scheme : https://thejat.in/storage/image-229.png
 
-GDT Entry Example :
+GDT Entry Example (kernel code, flat model) = 0x00CF9A000000FFFF :
 
-Limit Low  : 0xFFFF       ; Segment limit (16-bit, maximum)
-Base Low   : 0x0000       ; Base address (low 16 bits)
-Base Middle: 0x0000       ; Base address (middle 8 bits)
-Access Byte: 0x9A         ; P=1, DPL=0, S=1, Type=0x2 (Code Segment, Read/Execute)
-Flags      : 0xCF         ; G=1 (4 KB granularity), Size=1 (32-bit)
-Base High  : 0x00         ; Base address (high 8 bits)
+Limit Low  : 0xFFFF       ; Limit bits 0-15
+Base Low   : 0x0000       ; Base bits 0-15
+Base Middle: 0x00         ; Base bits 16-23
+Access Byte: 0x9A         ; P=1, DPL=0, S=1, Type=0xA (code, execute/read)
+Granularity: 0xCF         ; Flags 0xC (G=1 4 KB pages, D=1 32-bit) + limit bits 16-19 = 0xF
+Base High  : 0x00         ; Base bits 24-31
 
-The segment limit is set to 0xFFFF, indicating a segment size of 64 KB.
-The base address is set to 0x00000000.
-The access byte (0x9A) indicates that the segment is present (P=1), accessible from privilege level 0 (DPL=0), and is a code segment (S=1, Type=0x2).
-The flags (0xCF) specify 4 KB granularity (G=1) and a 32-bit segment (Size=1).
-The base address high is 0x00, completing the 32-bit base address.
-
+Base  = 0x00000000
+Limit = 0xFFFFF (20 bits). With G=1 it counts 4 KB pages: 0xFFFFF * 4 KB = 4 GB.
+So the segment covers the whole 32-bit address space.

@@ -1,12 +1,12 @@
 NAME        = kfs.iso
-BIN         = kfs.bin
+BIN         = $(OBJ_DIR)/kfs.bin
 CC          = gcc
 SRC_DIR     = src
 OBJ_DIR     = .obj
-CFLAGS      = -m32 -std=gnu99 -ffreestanding -Wall -Wextra -Werror -nostdlib -fno-builtin -fno-exceptions -fno-stack-protector -nodefaultlibs -Iincludes
+CFLAGS      = -m32 -std=gnu99 -ffreestanding -fno-pie -Wall -Wextra -Werror -nostdlib -fno-builtin -fno-exceptions -fno-stack-protector -nodefaultlibs -Iincludes
 ASFLAGS     = -f elf32 
 
-SRCS_C      = kernel.c terminal.c keymap.c tty.c
+SRCS_C      = kernel.c terminal.c keymap.c tty.c gdt.c
 SRCS_S      = boot.s io.s
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS_C:.c=.o) $(SRCS_S:.s=.o))
@@ -25,11 +25,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
 	@nasm $(ASFLAGS) $< -o $@
 
 # Create binary in obj for Dockerfile
-$(BIN): $(OBJS)
-	gcc -m32 -T $(SRC_DIR)/linker.ld -o $(OBJ_DIR)/$(BIN) -ffreestanding -nostdlib $(OBJS)
+$(BIN): $(OBJS) $(SRC_DIR)/linker.ld
+	gcc -m32 -no-pie -Wl,--build-id=none -T $(SRC_DIR)/linker.ld -o $(BIN) -ffreestanding -nostdlib $(OBJS)
 
 # ISO creation with Docker 
-$(NAME): $(BIN)
+$(NAME): $(BIN) $(SRC_DIR)/grub.cfg
 	@docker build -t iso_gen $(SRC_DIR)
 	@docker run --rm -v "$$(pwd)":/os iso_gen
 
@@ -42,7 +42,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	docker system prune -a --volumes -f
+	@docker rmi -f iso_gen 2>/dev/null || true
 
 re: fclean all
 
